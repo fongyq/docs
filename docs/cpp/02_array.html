@@ -232,8 +232,9 @@ da[0][3]与da[1][0]地址不连续；
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>指针的地址和指针的值不能混淆，我们讲da[0]、da[1]、da[2]的地址是连续的，但是他们本身的值没有关系，即 <code class="docutils literal notranslate"><span class="pre">da[0]</span> <span class="pre">+</span> <span class="pre">sizeof(da[0])</span> <span class="pre">!=</span> <span class="pre">da[1]</span></code> 。
+<p class="last">指针的地址和指针的值不能混淆，我们讲da[0]、da[1]、da[2]的地址是连续的，但是他们本身的值没有关系，即 <code class="docutils literal notranslate"><span class="pre">da[0]</span> <span class="pre">+</span> <span class="pre">sizeof(da[0])</span> <span class="pre">!=</span> <span class="pre">da[1]</span></code> 。
 注意有没有 <code class="docutils literal notranslate"><span class="pre">&amp;</span></code> 的区别。</p>
+</div>
 <p>如果想要定义连续内存空间的动态数组，可以按如下方式进行：</p>
 <div class="highlight-cpp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -247,7 +248,7 @@ da[0][3]与da[1][0]地址不连续；
 10
 11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// int** f; // f的声明</span>
 <span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
-<span class="kt">void</span> <span class="n">Init2Darray</span><span class="p">(</span><span class="n">T</span><span class="o">**</span> <span class="o">&amp;</span><span class="n">f</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">row</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">col</span><span class="p">)</span>
+<span class="kt">void</span> <span class="n">Init2DArray</span><span class="p">(</span><span class="n">T</span><span class="o">**</span> <span class="o">&amp;</span><span class="n">f</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">row</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">col</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="n">f</span> <span class="o">=</span> <span class="k">new</span> <span class="n">T</span><span class="o">*</span><span class="p">[</span><span class="n">row</span><span class="p">];</span>
     <span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="k">new</span> <span class="n">T</span><span class="p">[</span><span class="n">row</span> <span class="o">*</span> <span class="n">col</span><span class="p">];</span>
@@ -288,11 +289,10 @@ da[0][3]与da[1][0]地址不连续；
 <span class="p">}</span>
 </pre></div>
 </td></tr></table></div>
-<p>上面的 <code class="docutils literal notranslate"><span class="pre">Init2Darray</span></code> 在申请内存的时候，建立了row x col的二维动态数组。实际上，二维动态数组不强求列对齐，即各行的长度可以不一样，
-因此可以下面这样定义:</p>
-<div class="last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">offset_i</span><span class="p">;</span> <span class="o">//</span> <span class="n">offset_i是第i行首地址相对于第0行首地址的偏移量</span>
+<p>上面的 <code class="docutils literal notranslate"><span class="pre">Init2DArray</span></code> 在申请内存的时候，建立了row x col的二维动态数组。实际上，二维动态数组不强求列对齐，即各行的长度可以不一样，
+因此可以下面像这样定义:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">offset_i</span><span class="p">;</span> <span class="o">//</span> <span class="n">offset_i是第i行首地址相对于第0行首地址的偏移量</span>
 </pre></div>
-</div>
 </div>
 </div>
 <div class="section" id="id3">
