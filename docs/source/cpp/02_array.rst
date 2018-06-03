@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 数组
 ========
 
@@ -162,3 +163,28 @@ malloc/free与new/delete的异同
 3. malloc/free与new/delete的区别：
 
   https://blog.csdn.net/hackbuteer1/article/details/6789164
+=======
+数组
+========
+
+动态数组
+----------
+
+地址
+^^^^^
+
+声明与定义一个动态数组的格式一般如下：
+
+.. code-block:: cpp
+    :linenos:
+
+    int** da = new int[r];
+    for(int i = 0; i < r; ++i)
+    {
+        da[i] = new int[c];
+    }
+
+假如我们已经得到一个3x4的动态数组，其指针关系如下：
+
+.. image:: 02_dynamicArray.emf
+>>>>>>> 2a6bfa2938c5b105a09798ad1324d68282990339
