@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 数组
 ========
 
@@ -61,6 +60,48 @@
    指针的地址和指针的值不能混淆，我们讲da[0]、da[1]、da[2]的地址是连续的，但是他们本身的值没有关系，即 ``da[0] + sizeof(da[0]) != da[1]`` 。
    注意有没有 ``&`` 的区别。
 
+   如果想要定义连续内存空间的动态数组，可以按如下方式进行：
+
+   .. code-block:: cpp
+       :linenos:
+
+       // int** f; // f的声明
+       template<typename T>
+       void Init2Darray(T** &f, const int row, const int col)
+       {
+           f = new T*[row];
+           f[0] = new T[row * col];
+           for(int i = 1; i < col; ++i)
+           {
+               f[i] = f[0] + col * i;
+           }
+       }
+
+   内存释放方式如下：
+
+   .. code-block:: cpp
+       :linenos:
+
+       template<typename T>
+       void Delete2DArray(T** &f)
+       {
+           if(f != nullptr)
+           {
+               if(f[0] != nullptr)
+               {
+                   delete[] f[0];
+                   f[0] = nullptr;
+               }
+               delete[] f;
+               f = nullptr;
+           }
+       }
+
+   上面的 ``Init2Darray`` 在申请内存的时候，建立了row x col的二维动态数组。实际上，二维动态数组不强求列对齐，即各行的长度可以不一样，
+   因此可以下面这样定义::
+
+     f[i] = f[0] + offset_i; // offset_i是第i行首地址相对于第0行首地址的偏移量
+
 
 另类的数组表达
 -----------------------
@@ -87,11 +128,11 @@
 
   b[0][1] = *(b[0] + 1) = *(1 + b[0]) = 1[b[0]]
   b[0][1] = *(*(b+0) + 1) = *(*(0+b) + 1) = *(0[b] + 1) = 0[b][1]
-  b[0][1] = *(*(b+0) + 1) = *(1 + *(b+0)) = 1[0[b]]
+  b[0][1] = *(*(b+0) + 1) = *(1 + *(0+b)) = 1[0[b]]
 
 
-malloc/free与new/delete的异同
----------------------------------------
+malloc/free与new/delete
+--------------------------------
 
 相同点
 ^^^^^^^^^
@@ -163,28 +204,3 @@ malloc/free与new/delete的异同
 3. malloc/free与new/delete的区别：
 
   https://blog.csdn.net/hackbuteer1/article/details/6789164
-=======
-数组
-========
-
-动态数组
-----------
-
-地址
-^^^^^
-
-声明与定义一个动态数组的格式一般如下：
-
-.. code-block:: cpp
-    :linenos:
-
-    int** da = new int[r];
-    for(int i = 0; i < r; ++i)
-    {
-        da[i] = new int[c];
-    }
-
-假如我们已经得到一个3x4的动态数组，其指针关系如下：
-
-.. image:: 02_dynamicArray.emf
->>>>>>> 2a6bfa2938c5b105a09798ad1324d68282990339

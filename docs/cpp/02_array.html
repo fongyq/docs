@@ -93,7 +93,7 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">2. 数组</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#id2">2.1. 动态数组</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id3">2.2. 另类的数组表达</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#malloc-freenew-delete">2.3. malloc/free与new/delete的异同</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#malloc-freenew-delete">2.3. malloc/free与new/delete</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#id4">相同点</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#id5">不同点</a></li>
 </ul>
@@ -232,8 +232,67 @@ da[0][3]与da[1][0]地址不连续；
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">指针的地址和指针的值不能混淆，我们讲da[0]、da[1]、da[2]的地址是连续的，但是他们本身的值没有关系，即 <code class="docutils literal notranslate"><span class="pre">da[0]</span> <span class="pre">+</span> <span class="pre">sizeof(da[0])</span> <span class="pre">!=</span> <span class="pre">da[1]</span></code> 。
+<p>指针的地址和指针的值不能混淆，我们讲da[0]、da[1]、da[2]的地址是连续的，但是他们本身的值没有关系，即 <code class="docutils literal notranslate"><span class="pre">da[0]</span> <span class="pre">+</span> <span class="pre">sizeof(da[0])</span> <span class="pre">!=</span> <span class="pre">da[1]</span></code> 。
 注意有没有 <code class="docutils literal notranslate"><span class="pre">&amp;</span></code> 的区别。</p>
+<p>如果想要定义连续内存空间的动态数组，可以按如下方式进行：</p>
+<div class="highlight-cpp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// int** f; // f的声明</span>
+<span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">Init2Darray</span><span class="p">(</span><span class="n">T</span><span class="o">**</span> <span class="o">&amp;</span><span class="n">f</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">row</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">col</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="k">new</span> <span class="n">T</span><span class="o">*</span><span class="p">[</span><span class="n">row</span><span class="p">];</span>
+    <span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="k">new</span> <span class="n">T</span><span class="p">[</span><span class="n">row</span> <span class="o">*</span> <span class="n">col</span><span class="p">];</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">col</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">col</span> <span class="o">*</span> <span class="n">i</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>内存释放方式如下：</p>
+<div class="highlight-cpp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">Delete2DArray</span><span class="p">(</span><span class="n">T</span><span class="o">**</span> <span class="o">&amp;</span><span class="n">f</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">f</span> <span class="o">!=</span> <span class="k">nullptr</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="k">nullptr</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">delete</span><span class="p">[]</span> <span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+            <span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">delete</span><span class="p">[]</span> <span class="n">f</span><span class="p">;</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>上面的 <code class="docutils literal notranslate"><span class="pre">Init2Darray</span></code> 在申请内存的时候，建立了row x col的二维动态数组。实际上，二维动态数组不强求列对齐，即各行的长度可以不一样，
+因此可以下面这样定义:</p>
+<div class="last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">offset_i</span><span class="p">;</span> <span class="o">//</span> <span class="n">offset_i是第i行首地址相对于第0行首地址的偏移量</span>
+</pre></div>
+</div>
 </div>
 </div>
 <div class="section" id="id3">
@@ -263,12 +322,12 @@ da[0][3]与da[1][0]地址不连续；
 <p>所以可以推出二维表达式:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">*</span><span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="o">*</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">=</span> <span class="mi">1</span><span class="p">[</span><span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
 <span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">*</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">b</span><span class="o">+</span><span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="o">*</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="mi">0</span><span class="o">+</span><span class="n">b</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="o">*</span><span class="p">(</span><span class="mi">0</span><span class="p">[</span><span class="n">b</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">[</span><span class="n">b</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
-<span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">*</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">b</span><span class="o">+</span><span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="o">*</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="o">*</span><span class="p">(</span><span class="n">b</span><span class="o">+</span><span class="mi">0</span><span class="p">))</span> <span class="o">=</span> <span class="mi">1</span><span class="p">[</span><span class="mi">0</span><span class="p">[</span><span class="n">b</span><span class="p">]]</span>
+<span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">*</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">b</span><span class="o">+</span><span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="o">*</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="o">*</span><span class="p">(</span><span class="mi">0</span><span class="o">+</span><span class="n">b</span><span class="p">))</span> <span class="o">=</span> <span class="mi">1</span><span class="p">[</span><span class="mi">0</span><span class="p">[</span><span class="n">b</span><span class="p">]]</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="malloc-freenew-delete">
-<h2>2.3. malloc/free与new/delete的异同<a class="headerlink" href="#malloc-freenew-delete" title="Permalink to this headline">¶</a></h2>
+<h2>2.3. malloc/free与new/delete<a class="headerlink" href="#malloc-freenew-delete" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="id4">
 <h3>相同点<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
 <p>都可用于申请动态内存和释放内存。</p>
