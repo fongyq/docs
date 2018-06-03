@@ -7,3 +7,4 @@ C/C++
 
     01_main.rst
     02_array.rst
+    03_typeSize.rst
