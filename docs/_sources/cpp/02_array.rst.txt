@@ -174,7 +174,7 @@ malloc/free与new/delete
 
 3. 分配失败
 
-    new内存分配失败时，会抛出 ``bac_alloc`` 异常；malloc分配内存失败时返回 ``NULL`` 。
+    new内存分配失败时，会抛出 ``bad_alloc`` 异常；malloc分配内存失败时返回 ``NULL`` 。
 
 4. 功能
 
