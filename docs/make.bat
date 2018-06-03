@@ -3,12 +3,14 @@
 pushd %~dp0
 
 REM Command file for Sphinx documentation
+REM set BUILDDIR=build
 
 if "%SPHINXBUILD%" == "" (
 	set SPHINXBUILD=sphinx-build
 )
 set SOURCEDIR=source
-set BUILDDIR=build
+#set BUILDDIR=build
+set BUILDDIR=..
 set SPHINXPROJ=fong
 
 if "%1" == "" goto help
