@@ -9,7 +9,7 @@
 .. code-block:: cpp
     :linenos:
 
-    int** da = new int[r];
+    int** da = new int*[r];
     for(int i = 0; i < r; ++i)
     {
         da[i] = new int[c];
