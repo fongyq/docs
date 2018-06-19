@@ -23,7 +23,7 @@ pytorch的多GPU模式
     # 相比于'model.attribute'多了'module'。
     model.module.attribute
 
-比如，:meth:~model.module.classifier.parameters()。
+比如，``model.module.classifier.parameters()`` 。
 
 
 网络内指定
