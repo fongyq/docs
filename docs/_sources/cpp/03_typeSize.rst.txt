@@ -87,8 +87,8 @@ sizeof与strlen
 
 1. 数据类型的数值范围
 
-    https://blog.csdn.net/qianbitou000/article/details/51939055/
+  https://blog.csdn.net/qianbitou000/article/details/51939055/
 
 2. 关于strlen与sizeof的区别
 
-    https://blog.csdn.net/zhengqijun\_/article/details/51815081
+  https://blog.csdn.net/zhengqijun\_/article/details/51815081
