@@ -7,7 +7,7 @@
 ========
 .. note::
 
-    **文中可能存在错误，欢迎 PR。**
+    **文中可能存在错误，欢迎 PR。https://github.com/fongyk**
 
 .. toctree::
    :maxdepth: 1

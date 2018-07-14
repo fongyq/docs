@@ -6,3 +6,4 @@
     :numbered: 2
 
     01_dataParallel.rst
+    02_activationFunction.rst
