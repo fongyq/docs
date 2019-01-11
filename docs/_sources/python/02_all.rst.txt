@@ -6,7 +6,20 @@ __all__ 的使用
 
 ``__init__.py`` 的 **作用一** ：package的标识
 
-    在每一个package文件夹中都会有一个__init__.py文件。
+    在每一个package文件夹中都会有一个__init__.py文件。我们倒入一个包时，实际上是导入了它的__init__.py文件。因此我们可以在__init__.py文件中批量导入所需的模块，
+    而不需要再一个一个地倒入。
+
+    .. code-block:: python
+
+        ### package
+        ## __init__.py
+        import sys
+        import os
+        import math
+
+        ## test.py 
+        import package
+        print package.math.sqrt(2)
 
 ``__init__.py`` 的 **作用二** ：定义该package的 ``__all__`` ，用以模糊导入
 
@@ -39,10 +52,14 @@ __all__ 的使用
 .. code-block:: python
     :linenos:
 
+    import sys
+    import os
+    import math
+
     from func import x, foo
     # 假设x是一个变量，foo是一个函数
 
-    __all__ = ['x', 'foo']
+    __all__ = ['x', 'foo', 'math', 'os', 'sys']
 
 **test.py** 中的内容如下：
 
@@ -54,6 +71,8 @@ __all__ 的使用
     print x
 
     foo()
+
+    print math.sqrt(2)
 
 参考资料
 ------------
