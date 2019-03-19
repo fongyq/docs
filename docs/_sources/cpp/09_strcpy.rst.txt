@@ -1,10 +1,12 @@
 strcpy函数
 =============
 
-.. code-block: cpp
+函数定义：
+
+.. code-block:: cpp
     :linenos:
 
-    char* strcpy(char * dst, const char * src)
+    char* strcpy(char* dst, const char* src)
     {
         char* cp = dst; 
         while( *cp++ = *src++ );  /* Copy src over dst */ 
@@ -20,10 +22,10 @@ strcpy函数
 
 形参 ``src`` 定义为  ``const`` ，防止函数对其进行修改。
 
-额外指针p
+额外指针cp
 -------------------------
 
- ``cp++`` 导致复制结束时， ``cp`` 指向的是 ``dst`` 绑定的字符串的尾部，因此不能直接返回 ``cp`` 。
+``cp++`` 导致复制结束时， ``cp`` 指向的是 ``dst`` 绑定的字符串的尾部，因此不能直接返回 ``cp`` 。
 
 
 返回值
