@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>C/C++ &mdash; fong alpha documentation</title>
+  <title>5. 交换函数swap() &mdash; fong alpha documentation</title>
   
 
   
@@ -29,8 +29,8 @@
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="1. main函数" href="01_main.html" />
-    <link rel="prev" title="文档" href="../index.html" /> 
+    <link rel="next" title="6. 数组形参" href="06_arrayArg.html" />
+    <link rel="prev" title="4. 类的大小" href="04_classSize.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -88,12 +88,12 @@
             
               <p class="caption"><span class="caption-text">目录</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">C/C++</a><ul>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">C/C++</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="01_main.html">1. main函数</a></li>
 <li class="toctree-l2"><a class="reference internal" href="02_array.html">2. 数组</a></li>
 <li class="toctree-l2"><a class="reference internal" href="03_typeSize.html">3. 数据类型</a></li>
 <li class="toctree-l2"><a class="reference internal" href="04_classSize.html">4. 类的大小</a></li>
-<li class="toctree-l2"><a class="reference internal" href="05_swap.html">5. 交换函数swap()</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">5. 交换函数swap()</a></li>
 <li class="toctree-l2"><a class="reference internal" href="06_arrayArg.html">6. 数组形参</a></li>
 <li class="toctree-l2"><a class="reference internal" href="07_pointerReference.html">7. 指针与引用</a></li>
 <li class="toctree-l2"><a class="reference internal" href="08_overload.html">8. 重载，覆盖，隐藏</a></li>
@@ -152,13 +152,15 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-      <li>C/C++</li>
+          <li><a href="index.html">C/C++</a> &raquo;</li>
+        
+      <li>5. 交换函数swap()</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../_sources/cpp/index.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/cpp/05_swap.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -171,65 +173,59 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="c-c">
-<h1>C/C++<a class="headerlink" href="#c-c" title="Permalink to this headline">¶</a></h1>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="01_main.html">1. main函数</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="01_main.html#id1">1.1. 返回值</a></li>
-<li class="toctree-l2"><a class="reference internal" href="01_main.html#id2">1.2. 处理命令行选项</a></li>
-<li class="toctree-l2"><a class="reference internal" href="01_main.html#id3">1.3. 参考资料</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="02_array.html">2. 数组</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="02_array.html#id2">2.1. 动态数组</a></li>
-<li class="toctree-l2"><a class="reference internal" href="02_array.html#id3">2.2. 另类的数组表达</a></li>
-<li class="toctree-l2"><a class="reference internal" href="02_array.html#id4">2.3. 数组实参</a></li>
-<li class="toctree-l2"><a class="reference internal" href="02_array.html#id5">2.4. 数组地址与加法</a></li>
-<li class="toctree-l2"><a class="reference internal" href="02_array.html#malloc-freenew-delete">2.5. malloc/free与new/delete</a></li>
-<li class="toctree-l2"><a class="reference internal" href="02_array.html#id8">2.6. 参考资料</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="03_typeSize.html">3. 数据类型</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="03_typeSize.html#id2">3.1. 常用内置数据类型的大小</a></li>
-<li class="toctree-l2"><a class="reference internal" href="03_typeSize.html#sizeofstrlen">3.2. sizeof与strlen</a></li>
-<li class="toctree-l2"><a class="reference internal" href="03_typeSize.html#id3">3.3. 参考资料</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="04_classSize.html">4. 类的大小</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="04_classSize.html#id2">4.1. 空类</a></li>
-<li class="toctree-l2"><a class="reference internal" href="04_classSize.html#id3">4.2. 普通数据成员</a></li>
-<li class="toctree-l2"><a class="reference internal" href="04_classSize.html#id4">4.3. 普通继承</a></li>
-<li class="toctree-l2"><a class="reference internal" href="04_classSize.html#id7">4.4. 虚函数与继承</a></li>
-<li class="toctree-l2"><a class="reference internal" href="04_classSize.html#id10">4.5. 虚继承</a></li>
-<li class="toctree-l2"><a class="reference internal" href="04_classSize.html#id11">4.6. 内存对齐</a></li>
-<li class="toctree-l2"><a class="reference internal" href="04_classSize.html#id12">4.7. 位域</a></li>
-<li class="toctree-l2"><a class="reference internal" href="04_classSize.html#id13">4.8. 参考资料</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="05_swap.html">5. 交换函数swap()</a></li>
-<li class="toctree-l1"><a class="reference internal" href="06_arrayArg.html">6. 数组形参</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="06_arrayArg.html#id2">6.1. 非引用</a></li>
-<li class="toctree-l2"><a class="reference internal" href="06_arrayArg.html#id3">6.2. 引用</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="07_pointerReference.html">7. 指针与引用</a></li>
-<li class="toctree-l1"><a class="reference internal" href="08_overload.html">8. 重载，覆盖，隐藏</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="08_overload.html#id2">8.1. 重载</a></li>
-<li class="toctree-l2"><a class="reference internal" href="08_overload.html#id3">8.2. 覆盖</a></li>
-<li class="toctree-l2"><a class="reference internal" href="08_overload.html#id4">8.3. 隐藏</a></li>
-<li class="toctree-l2"><a class="reference internal" href="08_overload.html#id5">8.4. 参考资料</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="09_strcpy.html">9. strcpy函数</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="09_strcpy.html#src">9.1. 形参 <code class="docutils literal notranslate"><span class="pre">src</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="09_strcpy.html#cp">9.2. 额外指针 <code class="docutils literal notranslate"><span class="pre">cp</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="09_strcpy.html#id1">9.3. 返回值</a></li>
-<li class="toctree-l2"><a class="reference internal" href="09_strcpy.html#id2">9.4. 参考资料</a></li>
-</ul>
-</li>
-</ul>
-</div>
+  <div class="section" id="swap">
+<h1>5. 交换函数swap()<a class="headerlink" href="#swap" title="Permalink to this headline">¶</a></h1>
+<p><strong>1</strong>. 库函数，包含在头文件 <code class="docutils literal notranslate"><span class="pre">&lt;algorithm&gt;</span></code> 中。</p>
+<p><strong>2</strong>. 指针。</p>
+<div class="highlight-cpp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">templtate</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">swap</span><span class="p">(</span><span class="n">T</span> <span class="o">*</span><span class="n">x</span><span class="p">,</span> <span class="n">T</span> <span class="o">*</span><span class="n">y</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">T</span> <span class="n">tmp</span> <span class="o">=</span> <span class="o">*</span><span class="n">x</span><span class="p">;</span>
+    <span class="o">*</span><span class="n">x</span> <span class="o">=</span> <span class="o">*</span><span class="n">y</span><span class="p">;</span>
+    <span class="o">*</span><span class="n">y</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<p><strong>3</strong>. 引用。</p>
+<div class="highlight-cpp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">templtate</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">swap</span><span class="p">(</span><span class="n">T</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">,</span> <span class="n">T</span> <span class="o">&amp;</span><span class="n">y</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">T</span> <span class="n">tmp</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">y</span><span class="p">;</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<p><strong>4</strong>. 异或。适用于整型/字符/枚举类型，浮点型不适用。 <code class="docutils literal notranslate"><span class="pre">swap(a,</span> <span class="pre">a)</span></code> 会导致 <code class="docutils literal notranslate"><span class="pre">a=0</span></code> 。</p>
+<p><strong>4</strong>. 赋值。受编译器影响，先执行 <code class="docutils literal notranslate"><span class="pre">a+b</span></code> 还是先执行 <code class="docutils literal notranslate"><span class="pre">b=a</span></code> 。</p>
+<p><strong>5</strong>. 加减。无需申请额外空间。</p>
+<div class="highlight-cpp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">templtate</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">swap</span><span class="p">(</span><span class="n">T</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">,</span> <span class="n">T</span> <span class="o">&amp;</span><span class="n">y</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">;</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="p">;</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
 </div>
 
 
@@ -240,10 +236,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="01_main.html" class="btn btn-neutral float-right" title="1. main函数" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="06_arrayArg.html" class="btn btn-neutral float-right" title="6. 数组形参" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../index.html" class="btn btn-neutral" title="文档" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="04_classSize.html" class="btn btn-neutral" title="4. 类的大小" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
