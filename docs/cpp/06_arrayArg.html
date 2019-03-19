@@ -182,10 +182,68 @@
 <div class="section" id="id2">
 <h2>6.1. 非引用<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <p>当数组以 <strong>非引用</strong> 类型传递，数组会悄悄退化为指针，形参复制的是这个指针的值（指向数组第一个元素）。通过该形参做的任何改变都是在修改数组元素本身。</p>
+<div class="highlight-cpp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">func1</span><span class="p">(</span><span class="kt">int</span> <span class="n">arr</span><span class="p">[</span><span class="mi">100</span><span class="p">])</span>
+<span class="p">{</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> <span class="c1">// 指针的大小为4（32位编译器）</span>
+    <span class="cm">/*</span>
+<span class="cm">        function body</span>
+<span class="cm">    */</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">func2</span><span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="n">arr</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> <span class="c1">// 指针的大小为4（32位编译器）</span>
+    <span class="cm">/*</span>
+<span class="cm">        function body</span>
+<span class="cm">    */</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="n">a</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">};</span>
+<span class="n">func2</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
+</pre></div>
+</td></tr></table></div>
 </div>
 <div class="section" id="id3">
 <h2>6.2. 引用<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
 <p>如果形参是数组的 <strong>引用</strong> ，编译器不会将数组实参转化为指针，而是传递数组的引用本身。编译器会检查数组实参的大小与形参是否匹配。</p>
+<div class="highlight-cpp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">func1</span><span class="p">(</span><span class="kt">int</span> <span class="p">(</span><span class="o">&amp;</span><span class="n">arr</span><span class="p">)[</span><span class="mi">10</span><span class="p">])</span>
+<span class="p">{</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> <span class="c1">// 大小为4*10=40（32位编译器）</span>
+    <span class="cm">/*</span>
+<span class="cm">        function body</span>
+<span class="cm">    */</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="n">a</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">};</span>
+<span class="n">func2</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
+</pre></div>
+</td></tr></table></div>
 </div>
 </div>
 

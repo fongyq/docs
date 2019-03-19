@@ -28,7 +28,7 @@ None
 --------
 
 与 ``None`` 比较是 ``is None`` 而不是 ``== None`` 。
-这是因为 ``None`` 在Python里是个单例对象（sigleton）：一个变量如果是 ``None`` ，它一定和 ``None`` 指向同一个内存地址。
+这是因为 ``None`` 在Python里是个单例对象（singleton）：一个变量如果是 ``None`` ，它一定和 ``None`` 指向同一个内存地址。
 而 ``== None`` 背后调用的是 ``__eq__ `` ，而 ``__eq__`` 可以被重载，下面是一个 ``is not None`` 但 ``== None`` 的例子。
 
 .. code-block:: python

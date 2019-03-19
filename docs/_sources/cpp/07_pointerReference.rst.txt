@@ -28,4 +28,4 @@
     string& rs = s1;
     string* ps = &s2;
     rs = s2; // rs仍指向s1，但是s1值变为"candy"。
-    ps = $s2; // ps指向s2，s1无变化
+    ps = &s2; // ps指向s2，s1无变化

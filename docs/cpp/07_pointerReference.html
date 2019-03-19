@@ -202,12 +202,12 @@
 3
 4
 5
-6</pre></div></td><td class="code"><div class="highlight"><pre><span></span>string s1(&quot;nancy&quot;);
-string s2(&quot;candy&quot;);
-string&amp; rs = s1;
-string* ps = &amp;s2;
-rs = s2; // rs仍指向s1，但是s1值变为&quot;candy&quot;。
-ps = $s2; // ps指向s2，s1无变化
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">string</span> <span class="nf">s1</span><span class="p">(</span><span class="s">&quot;nancy&quot;</span><span class="p">);</span>
+<span class="n">string</span> <span class="nf">s2</span><span class="p">(</span><span class="s">&quot;candy&quot;</span><span class="p">);</span>
+<span class="n">string</span><span class="o">&amp;</span> <span class="n">rs</span> <span class="o">=</span> <span class="n">s1</span><span class="p">;</span>
+<span class="n">string</span><span class="o">*</span> <span class="n">ps</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">s2</span><span class="p">;</span>
+<span class="n">rs</span> <span class="o">=</span> <span class="n">s2</span><span class="p">;</span> <span class="c1">// rs仍指向s1，但是s1值变为&quot;candy&quot;。</span>
+<span class="n">ps</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">s2</span><span class="p">;</span> <span class="c1">// ps指向s2，s1无变化</span>
 </pre></div>
 </td></tr></table></div>
 </div>

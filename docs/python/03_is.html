@@ -208,7 +208,7 @@
 <div class="section" id="none">
 <h2>3.2. None<a class="headerlink" href="#none" title="Permalink to this headline">¶</a></h2>
 <p>与 <code class="docutils literal notranslate"><span class="pre">None</span></code> 比较是 <code class="docutils literal notranslate"><span class="pre">is</span> <span class="pre">None</span></code> 而不是 <code class="docutils literal notranslate"><span class="pre">==</span> <span class="pre">None</span></code> 。
-这是因为 <code class="docutils literal notranslate"><span class="pre">None</span></code> 在Python里是个单例对象（sigleton）：一个变量如果是 <code class="docutils literal notranslate"><span class="pre">None</span></code> ，它一定和 <code class="docutils literal notranslate"><span class="pre">None</span></code> 指向同一个内存地址。
+这是因为 <code class="docutils literal notranslate"><span class="pre">None</span></code> 在Python里是个单例对象（singleton）：一个变量如果是 <code class="docutils literal notranslate"><span class="pre">None</span></code> ，它一定和 <code class="docutils literal notranslate"><span class="pre">None</span></code> 指向同一个内存地址。
 而 <code class="docutils literal notranslate"><span class="pre">==</span> <span class="pre">None</span></code> 背后调用的是 <code class="docutils literal notranslate"><span class="pre">__eq__</span> <span class="pre">``</span> <span class="pre">，而</span> <span class="pre">``__eq__</span></code> 可以被重载，下面是一个 <code class="docutils literal notranslate"><span class="pre">is</span> <span class="pre">not</span> <span class="pre">None</span></code> 但 <code class="docutils literal notranslate"><span class="pre">==</span> <span class="pre">None</span></code> 的例子。</p>
 <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
