@@ -7,3 +7,5 @@
 
     01_dataParallel.rst
     02_activationFunction.rst
+    03_batchnorm.rst
+    04_overfit.rst

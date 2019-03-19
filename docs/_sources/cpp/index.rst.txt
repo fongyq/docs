@@ -14,4 +14,6 @@ C/C++
     07_pointerReference.rst
     08_overload.rst
     09_strcpy.rst
+    10_cast.rst
+    11_heapStack.rst
 
