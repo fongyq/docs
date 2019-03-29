@@ -1,7 +1,7 @@
 参数传递
 =============
 
-当形参是引用类型时，称对应实参被 **引用传递**（passed by reference）或者函数被 **传引用调用** （called by reference）。
+当形参是引用类型时，称对应实参被 **引用传递** （passed by reference）或者函数被 **传引用调用** （called by reference）。
 
 当实参的值被 **拷贝** 给形参时，形参和实参时两个相互独立的对象。这样的实参被 **值传递** （passed by value)或者函数被 **传值调用** （called by value）。
 
