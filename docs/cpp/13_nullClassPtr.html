@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>5. 交换函数swap &mdash; fong alpha documentation</title>
+  <title>13. 空类指针 &mdash; fong alpha documentation</title>
   
 
   
@@ -29,8 +29,8 @@
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="6. 数组形参" href="06_arrayArg.html" />
-    <link rel="prev" title="4. 类的大小" href="04_classSize.html" /> 
+    <link rel="next" title="Python" href="../python/index.html" />
+    <link rel="prev" title="12. 参数传递" href="12_argPass.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -93,7 +93,7 @@
 <li class="toctree-l2"><a class="reference internal" href="02_array.html">2. 数组</a></li>
 <li class="toctree-l2"><a class="reference internal" href="03_typeSize.html">3. 数据类型</a></li>
 <li class="toctree-l2"><a class="reference internal" href="04_classSize.html">4. 类的大小</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">5. 交换函数swap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_swap.html">5. 交换函数swap</a></li>
 <li class="toctree-l2"><a class="reference internal" href="06_arrayArg.html">6. 数组形参</a></li>
 <li class="toctree-l2"><a class="reference internal" href="07_pointerReference.html">7. 指针与引用</a></li>
 <li class="toctree-l2"><a class="reference internal" href="08_overload.html">8. 重载，覆盖，隐藏</a></li>
@@ -101,7 +101,11 @@
 <li class="toctree-l2"><a class="reference internal" href="10_cast.html">10. 强制类型转换</a></li>
 <li class="toctree-l2"><a class="reference internal" href="11_heapStack.html">11. 堆、栈</a></li>
 <li class="toctree-l2"><a class="reference internal" href="12_argPass.html">12. 参数传递</a></li>
-<li class="toctree-l2"><a class="reference internal" href="13_nullClassPtr.html">13. 空类指针</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">13. 空类指针</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">13.1. 空类指针调用成员函数</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">13.2. 参考资料</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../python/index.html">Python</a></li>
@@ -158,13 +162,13 @@
         
           <li><a href="index.html">C/C++</a> &raquo;</li>
         
-      <li>5. 交换函数swap</li>
+      <li>13. 空类指针</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../_sources/cpp/05_swap.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/cpp/13_nullClassPtr.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -177,68 +181,81 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="swap">
-<h1>5. 交换函数swap<a class="headerlink" href="#swap" title="Permalink to this headline">¶</a></h1>
-<p><strong>1</strong>. 库函数，包含在头文件 <code class="docutils literal notranslate"><span class="pre">&lt;algorithm&gt;</span></code> 中。</p>
-<div class="code cpp highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="p">::</span> <span class="n">swap</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
-</pre></div>
-</div>
-<p><strong>2</strong>. 指针。</p>
-<div class="highlight-cpp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">templtate</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="o">&gt;</span>
-<span class="kt">void</span> <span class="n">swap</span><span class="p">(</span><span class="n">T</span> <span class="o">*</span><span class="n">x</span><span class="p">,</span> <span class="n">T</span> <span class="o">*</span><span class="n">y</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="n">T</span> <span class="n">tmp</span> <span class="o">=</span> <span class="o">*</span><span class="n">x</span><span class="p">;</span>
-    <span class="o">*</span><span class="n">x</span> <span class="o">=</span> <span class="o">*</span><span class="n">y</span><span class="p">;</span>
-    <span class="o">*</span><span class="n">y</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
-<span class="p">}</span>
+  <div class="section" id="id1">
+<h1>13. 空类指针<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p>类的成员函数并不与特定对象绑定，所有成员函数共用一份成员函数体，当程序编译后，成员函数的地址即已经确定。
+那为什么同一个类的不同对象调用对应成员函数可以出现不同的结果呢？答案就是 <code class="docutils literal notranslate"><span class="pre">this</span></code> 指针。
+共有的成员函数体之所以能够把不同对象的数据区分开来，靠的是隐式传递给成员函数的 <code class="docutils literal notranslate"><span class="pre">this</span></code> 指针，
+成员函数中对成员变量的访问都是转化成 <strong>“this-&gt;数据成员”</strong> 的方式。
+因此，从这一角度说，成员函数与普通函数一样，只是多了一个隐式参数，即指向对象的 <code class="docutils literal notranslate"><span class="pre">this</span></code> 指针。</p>
+<div class="section" id="id2">
+<h2>13.1. 空类指针调用成员函数<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-cpp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">TestNullPtr</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+  <span class="kt">void</span> <span class="n">print</span><span class="p">()</span> <span class="p">{</span>
+      <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;print&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="n">getA</span><span class="p">()</span> <span class="p">{</span>
+      <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">a</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="n">setA</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">a</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">virtual</span> <span class="n">test</span><span class="p">()</span> <span class="p">{</span>
+      <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;test&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+  <span class="p">}</span>
+
+<span class="k">private</span><span class="o">:</span>
+  <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="n">TestNullPtr</span><span class="o">*</span> <span class="n">ptr</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span>
+<span class="n">ptr</span><span class="o">-&gt;</span><span class="n">print</span><span class="p">();</span> <span class="c1">// 运行成功</span>
+<span class="n">ptr</span><span class="o">-&gt;</span><span class="n">getA</span><span class="p">();</span> <span class="c1">// 编译成功，运行失败</span>
+<span class="n">ptr</span><span class="o">-&gt;</span><span class="n">setA</span><span class="p">();</span> <span class="c1">// 编译成功，运行失败</span>
+<span class="n">ptr</span><span class="o">-&gt;</span><span class="n">test</span><span class="p">();</span> <span class="c1">// 编译成功，运行失败</span>
 </pre></div>
 </td></tr></table></div>
-<p><strong>3</strong>. 引用。</p>
-<div class="highlight-cpp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">templtate</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="o">&gt;</span>
-<span class="kt">void</span> <span class="n">swap</span><span class="p">(</span><span class="n">T</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">,</span> <span class="n">T</span> <span class="o">&amp;</span><span class="n">y</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="n">T</span> <span class="n">tmp</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">y</span><span class="p">;</span>
-    <span class="n">y</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-</td></tr></table></div>
-<p><strong>4</strong>. 异或。适用于整型/字符/枚举类型，浮点型不适用。 <code class="docutils literal notranslate"><span class="pre">swap(a,</span> <span class="pre">a)</span></code> 会导致 <code class="docutils literal notranslate"><span class="pre">a=0</span></code> 。</p>
-<div class="code cpp highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#define swap(a, b) a^=b^=a^=b;</span>
-</pre></div>
+<p>上例中， <code class="docutils literal notranslate"><span class="pre">ptr-&gt;getA()</span></code> 和 <code class="docutils literal notranslate"><span class="pre">ptr-&gt;setA()</span></code> 都试图访问成员变量，然而 <code class="docutils literal notranslate"><span class="pre">this</span></code> 指针为空，导致运行失败。
+另外，虚函数的特性是动态绑定，运行时根据指针或引用绑定的对象是基类对象还是派生类对象调用相关函数，空指针显然会导致错误。</p>
 </div>
-<p><strong>4</strong>. 赋值。受编译器影响，先执行 <code class="docutils literal notranslate"><span class="pre">a+b</span></code> 还是先执行 <code class="docutils literal notranslate"><span class="pre">b=a</span></code> 。</p>
-<div class="code cpp highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#define swap(a, b) a=a+b-(b=a);</span>
-</pre></div>
+<div class="section" id="id3">
+<h2>13.2. 参考资料<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>C++空指针调用成员函数</li>
+</ol>
+<blockquote>
+<div><a class="reference external" href="https://www.jianshu.com/p/45cf10150e6b">https://www.jianshu.com/p/45cf10150e6b</a></div></blockquote>
 </div>
-<p><strong>5</strong>. 加减。无需申请额外空间。</p>
-<div class="highlight-cpp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">templtate</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="o">&gt;</span>
-<span class="kt">void</span> <span class="n">swap</span><span class="p">(</span><span class="n">T</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">,</span> <span class="n">T</span> <span class="o">&amp;</span><span class="n">y</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">;</span>
-    <span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="p">;</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-</td></tr></table></div>
 </div>
 
 
@@ -249,10 +266,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="06_arrayArg.html" class="btn btn-neutral float-right" title="6. 数组形参" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../python/index.html" class="btn btn-neutral float-right" title="Python" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="04_classSize.html" class="btn btn-neutral" title="4. 类的大小" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="12_argPass.html" class="btn btn-neutral" title="12. 参数传递" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

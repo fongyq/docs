@@ -17,3 +17,4 @@ C/C++
     10_cast.rst
     11_heapStack.rst
     12_argPass.rst
+    13_nullClassPtr.rst
