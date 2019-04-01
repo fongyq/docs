@@ -18,3 +18,4 @@ C/C++
     11_heapStack.rst
     12_argPass.rst
     13_nullClassPtr.rst
+    14_staticExtern.rst

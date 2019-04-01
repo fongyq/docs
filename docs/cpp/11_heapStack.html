@@ -29,7 +29,7 @@
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Python" href="../python/index.html" />
+    <link rel="next" title="12. 参数传递" href="12_argPass.html" />
     <link rel="prev" title="10. 强制类型转换" href="10_cast.html" /> 
 
   
@@ -93,7 +93,7 @@
 <li class="toctree-l2"><a class="reference internal" href="02_array.html">2. 数组</a></li>
 <li class="toctree-l2"><a class="reference internal" href="03_typeSize.html">3. 数据类型</a></li>
 <li class="toctree-l2"><a class="reference internal" href="04_classSize.html">4. 类的大小</a></li>
-<li class="toctree-l2"><a class="reference internal" href="05_swap.html">5. 交换函数swap()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_swap.html">5. 交换函数swap</a></li>
 <li class="toctree-l2"><a class="reference internal" href="06_arrayArg.html">6. 数组形参</a></li>
 <li class="toctree-l2"><a class="reference internal" href="07_pointerReference.html">7. 指针与引用</a></li>
 <li class="toctree-l2"><a class="reference internal" href="08_overload.html">8. 重载，覆盖，隐藏</a></li>
@@ -106,9 +106,13 @@
 <li class="toctree-l3"><a class="reference internal" href="#id5">11.4. 生长方式</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id6">11.5. 分配效率</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id7">11.6. 存放内容</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id8">11.7. 参考资料</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">11.7. 附：五大内存分区</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">11.8. 参考资料</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="12_argPass.html">12. 参数传递</a></li>
+<li class="toctree-l2"><a class="reference internal" href="13_nullClassPtr.html">13. 空类指针</a></li>
+<li class="toctree-l2"><a class="reference internal" href="14_staticExtern.html">14. static和extern</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../python/index.html">Python</a></li>
@@ -222,7 +226,17 @@
 <p>堆：一般是在堆的头部用一个字节存放堆的大小。堆中的具体内容有程序员安排。</p>
 </div>
 <div class="section" id="id8">
-<h2>11.7. 参考资料<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h2>
+<h2>11.7. 附：五大内存分区<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h2>
+<p>在C++中，内存主要分为堆、栈、全局/静态存储区和常量存储区。</p>
+<ul class="simple">
+<li><strong>栈</strong> ：就是那些由编译器在需要的时候分配，在不需要的时候自动清除的变量的存储区。里面的变量通常是局部变量、函数参数等。</li>
+<li><strong>堆</strong> ：就是那些由new分配的内存块，他们的释放编译器不去管，由我们的应用程序去控制，一般一个new就要对应一个delete。如果程序员没有释放掉，那么在程序结束后，操作系统会自动回收。</li>
+<li><strong>全局/静态存储区</strong> ：全局变量和静态变量被分配到同一块内存中，在以前的C语言中，全局变量又分为初始化的和未初始化的，在C++里面没有这个区分了，他们共同占用同一块内存区。</li>
+<li><strong>常量存储区</strong> ：这是一块比较特殊的存储区，他们里面存放的是常量，不允许修改。</li>
+</ul>
+</div>
+<div class="section" id="id9">
+<h2>11.8. 参考资料<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
 <li>堆与栈的区别</li>
 </ol>
@@ -233,6 +247,11 @@
 </ol>
 <blockquote>
 <div><a class="reference external" href="https://blog.csdn.net/lovejay7/article/details/80662390">https://blog.csdn.net/lovejay7/article/details/80662390</a></div></blockquote>
+<ol class="arabic simple" start="3">
+<li>C++ 自由存储区是否等价于堆？</li>
+</ol>
+<blockquote>
+<div><a class="reference external" href="https://www.cnblogs.com/QG-whz/p/5060894.html">https://www.cnblogs.com/QG-whz/p/5060894.html</a></div></blockquote>
 </div>
 </div>
 
@@ -244,7 +263,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../python/index.html" class="btn btn-neutral float-right" title="Python" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="12_argPass.html" class="btn btn-neutral float-right" title="12. 参数传递" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="10_cast.html" class="btn btn-neutral" title="10. 强制类型转换" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
