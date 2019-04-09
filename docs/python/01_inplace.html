@@ -101,6 +101,8 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="02_all.html">2. __all__ 的使用</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_is.html">3. is和==</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_decorator.html">4. 装饰器</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../linux/index.html">Linux/Shell</a></li>
@@ -290,6 +292,11 @@ Inplace operator’s <code class="docutils literal notranslate"><span class="pre
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">b</span>
 <span class="go">[1, 2, 4, 5, 1, 2, 3]</span>
 </pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><strong>不可变目标</strong> （列表、字典）作为函数参数，相当于 <strong>值传递</strong> ，函数对实参进行拷贝。
+<strong>可变目标</strong> （数字、字符串、元组）作为函数参数，相当于 <strong>引用传递</strong> ，函数对实参的修改有效。</p>
 </div>
 </div>
 </div>

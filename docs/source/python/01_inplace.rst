@@ -50,14 +50,14 @@ add和iadd
 
 ``operator`` 包中有两个操作：``add`` 和 ``iadd`` 。``add`` 是正常加运算， ``iadd`` 是原位加运算。
 
-    ``_add_`` 
+    ``_add_``
         does simple addition, takes two arguments, returns the sum and stores it in other variable without modifying any of the argument.
         Normal operator’s ``add()`` method, implements **“a+b”** and stores the result in the mentioned variable.
 
     ``_iadd_``
         also takes two arguments, but it makes in-place change in 1st argument passed by storing the sum in it. As object mutation is needed in this process, immutable targets such as numbers, strings and tuples, shouldn’t have ``_iadd_`` method.
         Inplace operator’s ``iadd()`` method, implements **“a+=b”** if it exists (i.e in case of immutable targets, it doesn’t exist) and changes the value of passed argument. But if not, **“a+b”** is implemented.
-    
+
 分两种情况讨论。
 
 immutable targets
@@ -119,6 +119,12 @@ mutable targets
     [1, 2, 4, 5]
     >>> print b
     [1, 2, 4, 5, 1, 2, 3]
+
+.. note::
+
+  **不可变目标** （列表、字典）作为函数参数，相当于 **值传递** ，函数对实参进行拷贝。
+  **可变目标** （数字、字符串、元组）作为函数参数，相当于 **引用传递** ，函数对实参的修改有效。
+
 
 参考资料
 --------------
