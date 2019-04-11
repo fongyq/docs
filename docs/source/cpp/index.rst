@@ -19,3 +19,4 @@ C/C++
     12_argPass.rst
     13_nullClassPtr.rst
     14_staticExtern.rst
+    15_classAccess.rst
