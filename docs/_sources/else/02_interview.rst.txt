@@ -18,10 +18,12 @@
 1. 动态规划
 
   - 有面值1,5,10,20,50,100的人民币，求问10000有多少种组成方法？
-    https://www.zhihu.com/question/315108379
+
+      https://www.zhihu.com/question/315108379
 
   - 如何用最少的次数测出鸡蛋会在哪一层摔碎？
-    https://www.zhihu.com/question/19690210
+
+      https://www.zhihu.com/question/19690210
 
 2. 排序算法之桶排序
 
@@ -38,21 +40,26 @@
 5. 海量数据处理
 
   - 面试题集锦
-    https://blog.csdn.net/v_july_v/article/details/6685962
+
+      https://blog.csdn.net/v_july_v/article/details/6685962
 
   - 大文件中返回频数最高的100个词
-    https://blog.csdn.net/tiankong\_/article/details/77240283
+
+      https://blog.csdn.net/tiankong\_/article/details/77240283
 
 6. 链表
 
   - 求有环单链表中的环长、环起点、链表长
-    https://www.cnblogs.com/xudong-bupt/p/3667729.html
+
+      https://www.cnblogs.com/xudong-bupt/p/3667729.html
 
   - 判断两个链表是否相交并找出交点
-    https://blog.csdn.net/jiary5201314/article/details/50990349
+
+      https://blog.csdn.net/jiary5201314/article/details/50990349
 
   - 单链表O(1)时间删除给定节点
-    https://blog.csdn.net/qq_35546040/article/details/80341136
+
+      https://blog.csdn.net/qq_35546040/article/details/80341136
 
 7. 全排列的非递归和递归实现(含重复元素)
 
@@ -106,13 +113,16 @@ python
 3. 决策树
 
   - ID3、C4.5
-    https://www.cnblogs.com/coder2012/p/4508602.html
+
+      https://www.cnblogs.com/coder2012/p/4508602.html
 
   - 预剪枝与后剪枝
-    https://blog.csdn.net/zfan520/article/details/82454814
+
+      https://blog.csdn.net/zfan520/article/details/82454814
 
   - CART分类与回归树
-    https://www.jianshu.com/p/b90a9ce05b28
+
+      https://www.jianshu.com/p/b90a9ce05b28
 
 
 其他
