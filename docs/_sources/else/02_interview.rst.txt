@@ -102,15 +102,27 @@ python
 机器学习（深度学习）
 ---------------------------
 
-1. 正则化项L1和L2的区别
+1. 激活函数
+
+  https://fongyq.github.io/blog/deepLearning/02_activationFunction.html
+
+2. Batch Normalization
+
+  https://fongyq.github.io/blog/deepLearning/03_batchnorm.html
+
+3. 过拟合
+
+  https://fongyq.github.io/blog/deepLearning/03_batchnorm.html
+
+4. 正则化项L1和L2的区别
 
   https://www.cnblogs.com/lyr2015/p/8718104.html
 
-2. KMeans秘籍之如何确定K值
+5. KMeans秘籍之如何确定K值
 
   https://blog.csdn.net/alicelmx/article/details/80991870
 
-3. 决策树
+6. 决策树
 
   - ID3、C4.5
 
@@ -124,6 +136,17 @@ python
 
       https://www.jianshu.com/p/b90a9ce05b28
 
+7. Logistic Regression
+
+  https://fongyq.github.io/blog/machineLearning/01_lr.html
+
+8. Support Vector Machine
+
+  https://fongyq.github.io/blog/machineLearning/02_svm.html
+
+9. PCA
+
+  https://fongyq.github.io/blog/machineLearning/03_pca.html
 
 其他
 --------------

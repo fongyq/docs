@@ -141,3 +141,14 @@ command
     cd ..
 
 结束
+
+参考资料
+-----------------
+
+1. reStructuredText(rst)快速入门语法说明
+
+  https://www.jianshu.com/p/1885d5570b37
+
+2. RST 语法
+
+  https://3vshej.cn/rstSyntax/rstSyntax.html
