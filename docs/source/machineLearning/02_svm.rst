@@ -12,13 +12,13 @@
 .. math::
 
   \underset{w,b}{min} \  \frac{1}{2} \left \| w \right \|^2 \\
-  s.t. \  y_i(\|w^T x_i + b\|) \geqslant 1, i=1,2,...,m
+  s.t. \  y_i(w^T x + b) \geqslant 1, i=1,2,...,m
 
 拉格朗日函数：
 
 .. math::
 
-  L(w,b,\alpha) = \frac{1}{2}w^Tw + \sum_{i=1}^m \alpha_i(1 - y_i(\|w^T x_i + b\|)),\\
+  L(w,b,\alpha) = \frac{1}{2}w^Tw + \sum_{i=1}^m \alpha_i(1 - y_i(w^T x + b)),\\
   \underset{w,b}{min}(\underset{\alpha_i>0}{max}L(w,b,\alpha))
 
 对偶问题：
@@ -37,9 +37,9 @@ KKT条件：
 
 .. math::
 
-  y_i(\|w^T x_i + b \|) \geqslant 1, \\
+  y_i(w^T x + b) \geqslant 1, \\
   \sum_{i=1}^m \alpha_i y_i = 0,\\
-  \alpha_i (1 - y_i(\|w^T x_i + b\|)) = 0.
+  \alpha_i (1 - y_i(w^T x + b)) = 0.
 
 核函数
 ------------
