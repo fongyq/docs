@@ -235,7 +235,7 @@ g^\prime(z) = (1-g(z))g(z) \in [0, 0.25].\end{split}\]</div>
 </li>
 <li><p class="first">将极大似然取对数后就等同于对数损失函数，在LR模型中，这个损失函数使参数更新速度较快：</p>
 <div class="math notranslate nohighlight">
-\[\theta_j := \theta_j + \alpha \frac{1}{m} \sum_{i=1}^m (y^{(i)} - h_\theta(\mathbf{x}^{(i)}))\]</div>
+\[\theta_j := \theta_j + \alpha \frac{1}{m} \sum_{i=1}^m (y^{(i)} - h_\theta(\mathbf{x}^{(i)}))\mathbf{x}_j^{(i)}\]</div>
 <p>只与 <span class="math notranslate nohighlight">\(y^{(i)},\mathbf{x}^{(i)}\)</span> 有关，与 <span class="math notranslate nohighlight">\(h_\theta\)</span> 的梯度无关。</p>
 </li>
 <li><p class="first">为什么不用平方损失函数（多用于线性回归）？在线性回归中，前提假设是 <span class="math notranslate nohighlight">\(y\)</span> 服从正态分布，即 <span class="math notranslate nohighlight">\(y \sim \mathcal{N}(\mu, \sigma^2)\)</span> 。
