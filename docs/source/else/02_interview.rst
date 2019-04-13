@@ -65,6 +65,11 @@
 
   https://blog.csdn.net/so_geili/article/details/71078945
 
+8. 排列组合 "n个球放入m个盒子"问题
+
+  https://blog.csdn.net/qwb492859377/article/details/50654627?tdsourcetag=s_pctim_aiomsg
+
+
 c++
 ------------
 

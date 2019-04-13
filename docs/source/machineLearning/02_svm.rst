@@ -5,7 +5,7 @@
 
 .. math::
 
-  r = \frac{\|w^T x + b\|}{\left \| w \right \|}
+  r = \frac{|w^T x + b|}{\left \| w \right \|}
 
 原始问题：
 
