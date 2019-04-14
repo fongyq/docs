@@ -25,7 +25,7 @@
 
     for i in range(2): ## 迭代两次enumerate对象
         for x, y in a:
-            print(x,y)
+            print x, y
         print "========"
 
   结果是： ::
