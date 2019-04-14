@@ -180,7 +180,7 @@
 <div class="math notranslate nohighlight">
 \[\begin{split}h_\theta(\mathbf{x}) = g(\theta^\top \mathbf{x}),\\
 g(z) = \frac{1}{1+e^{-z}},\\
-g^\prime(z) = (1-g(z))g(z) \in [0, 0.25].\end{split}\]</div>
+g^\prime(z) = (1-g(z))g(z) \in (0, 0.25].\end{split}\]</div>
 <p>对数损失函数（极大似然）：</p>
 <div class="math notranslate nohighlight">
 \[\mathcal{l}_\theta = -\frac{1}{m} \sum_{i=1}^m y^{(i)}log\  h_\theta(\mathbf{x}^{(i)}) + (1 - y^{(i)})log(1 - h_\theta(\mathbf{x}^{(i)}))\]</div>
@@ -189,7 +189,7 @@ g^\prime(z) = (1-g(z))g(z) \in [0, 0.25].\end{split}\]</div>
 <h2>1.1. 基本假设<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
 <li>数据服从伯努利分布， <span class="math notranslate nohighlight">\(y \sim Bernoulli(\phi)\)</span></li>
-<li>样例为正例的概率 <span class="math notranslate nohighlight">\(\phi=h_\theta(\mathbf{x})\)</span></li>
+<li>样例为正例的概率为 <span class="math notranslate nohighlight">\(\phi=h_\theta(\mathbf{x})\)</span></li>
 </ol>
 </div>
 <div class="section" id="id2">

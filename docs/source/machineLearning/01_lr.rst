@@ -7,7 +7,7 @@ Logistic Regression
 
   h_\theta(\mathbf{x}) = g(\theta^\top \mathbf{x}),\\
   g(z) = \frac{1}{1+e^{-z}},\\
-  g^\prime(z) = (1-g(z))g(z) \in [0, 0.25].
+  g^\prime(z) = (1-g(z))g(z) \in (0, 0.25].
 
 对数损失函数（极大似然）：
 
@@ -22,7 +22,7 @@ Logistic Regression
 
 1. 数据服从伯努利分布， :math:`y \sim Bernoulli(\phi)`
 
-2. 样例为正例的概率 :math:`\phi=h_\theta(\mathbf{x})`
+2. 样例为正例的概率为 :math:`\phi=h_\theta(\mathbf{x})`
 
 求解方法
 ------------

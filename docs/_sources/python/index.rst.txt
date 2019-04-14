@@ -9,3 +9,5 @@ Python
     02_all.rst
     03_is.rst
     04_decorator.rst
+    05_iterator.rst
+    06_lambda.rst
