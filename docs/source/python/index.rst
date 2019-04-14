@@ -3,7 +3,7 @@ Python
 
 .. toctree::
     :maxdepth: 2
-    :numbered: 2
+    :numbered: 3
 
     01_inplace.rst
     02_all.rst

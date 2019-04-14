@@ -9,7 +9,7 @@
 迭代器（iterator）
 -------------------------
 特点：
-  - 迭代器是访问集合元素的一种方式，不能随机访问集合中的某个值，只能从头到尾依次访问（next()方法），访问到一半时不能往回退。
+  - 迭代器是访问集合元素的一种方式，不能随机访问集合中的某个值，只能从头到尾依次访问（ ``next()`` 方法），访问到一半时不能往回退。
 
   - 不需要事先准备好整个迭代过程中的所有元素。迭代器仅仅在迭代到某个元素时才计算该元素，而在这之前或之后，元素可以不存在或者被销毁。
 
@@ -23,10 +23,10 @@
     ## enumerate 返回迭代器
     a = enumerate(['a','b'])
 
-    for i in range(2):    #迭代两次enumerate对象
+    for i in range(2): ## 迭代两次enumerate对象
         for x, y in a:
             print(x,y)
-        print "===="
+        print "========"
 
   结果是： ::
 
@@ -40,7 +40,7 @@
 可迭代对象（iterable）
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-**可以直接作用于for循环的对象统称为可迭代对象(Iterable)** 。只要定义了可以返回一个迭代器的 ``__iter__()`` 方法，或者定义了可以支持下标索引的 ``__getitem__()`` 方法，那么它就是一个可迭代对象。
+**可以直接作用于for循环的对象统称为可迭代对象（Iterable）** 。只要定义了可以返回一个迭代器的 ``__iter__()`` 方法，或者定义了可以支持下标索引的 ``__getitem__()`` 方法，那么它就是一个可迭代对象。
 
 .. code-block:: python
   :linenos:
@@ -81,7 +81,7 @@
 
   - generator，包括生成器和带yield的generator function。
 
-**可以被next()函数调用并不断返回下一个值的对象称为迭代器(Iterator)** 。生成器都是Iterator对象，但list、dict、str虽然是Iterable，却不是Iterator。
+**可以被next()函数调用并不断返回下一个值的对象称为迭代器（Iterator）** 。生成器都是Iterator对象，但list、dict、str虽然是Iterable，却不是Iterator。
 
 **所有的Iterable均可以通过内置函数iter()来转变为Iterator** 。
 
@@ -95,15 +95,15 @@
   isinstance(a, Iterable) # True
 
   a = iter(a)
-  next(a) # 或a.next()，返回1
-  next(a) # 返回2
-  next(a) # 返回3
+  next(a) # 或 a.next()，返回 1
+  next(a) # 返回 2
+  next(a) # 返回 3
   next(a) # 抛出 StopIteration 异常
 
 一个可迭代对象是不能独立进行迭代的，Python中， 迭代是通过 ``for ... in`` 来完成的 。
-for循环会不断调用迭代器对象的 ``__next__()`` 方法（python3 __next__()；python2 next()），每次循环，都返回迭代器对象的下一个值，直到遇到 ``StopIteration`` 异常。
+for循环会不断调用迭代器对象的 ``__next__()`` 方法（python3  ``__next__()`` ；python2  ``next()`` ），每次循环，都返回迭代器对象的下一个值，直到遇到 ``StopIteration`` 异常。
 
-任何实现了 ``__iter__()`` 和 ``__next__()`` （python2中实现next()）方法的对象都是迭代器， ``__iter__()`` 返回迭代器自身， ``__next__()`` 返回容器中的下一个值 。
+任何实现了 ``__iter__()`` 和 ``__next__()`` （python2中实现 ``next()`` ）方法的对象都是迭代器， ``__iter__()`` 返回迭代器自身， ``__next__()`` 返回容器中的下一个值 。
 
 
 生成器（generator）
