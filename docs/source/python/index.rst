@@ -11,3 +11,4 @@ Python
     04_decorator.rst
     05_iterator.rst
     06_lambda.rst
+    07_arg.rst
