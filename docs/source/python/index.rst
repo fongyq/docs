@@ -12,3 +12,6 @@ Python
     05_iterator.rst
     06_lambda.rst
     07_arg.rst
+    08_basicType.rst
+    09_random.rst
+    10_normalize.rst
