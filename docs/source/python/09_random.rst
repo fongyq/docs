@@ -37,6 +37,8 @@ numpy.random
 
 - **numpy.random.permutation(arr)** ：返回一个随机排列。
 
+- **numpy.random.seed(n)** ：改变随机数生成器的种子。设置相同的seed，每次生成的随机数相同；如果不设置seed，则每次会生成不同的随机数。
+
 .. code-block:: python
   :linenos:
 
@@ -70,6 +72,15 @@ numpy.random
   [[3 4 5]
    [6 7 8]
    [0 1 2]]
+
+  >>> np.random.seed(1)
+  >>> np.random.random()
+  0.417022004702574
+  >>> np.random.seed(1)
+  >>> np.random.random()
+  0.417022004702574
+  >>> np.random.random()
+  0.7203244934421581
 
 参考资料
 -----------
