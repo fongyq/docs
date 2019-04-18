@@ -23,6 +23,10 @@ python自带的random库。 ::
 numpy.random
 --------------
 
+::
+
+  import numpy as np
+
 - **numpy.random.random([d0, d1, ..., dn])** ：生成0~1的随机浮点数，维度为 d0\*d1\* ...\*dn（缺省为1）。
 
 - **numpy.random.rand(d0, d1, ..., dn)** ：生成0~1的随机浮点数，维度为 d0\*d1\* ...\*dn（缺省为1）。
@@ -41,6 +45,8 @@ numpy.random
 
 .. code-block:: python
   :linenos:
+
+  ## 注：生成的数组都是 numpy array 类型
 
   >>> 2.5 * np.random.randn(2, 4) + 3
   [[-0.52410303  1.68461615 -0.04895917  2.81907944]
