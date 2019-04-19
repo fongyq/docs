@@ -9,3 +9,5 @@
     02_activationFunction.rst
     03_batchnorm.rst
     04_overfit.rst
+    05_modelSave.rst
+    06_cuda.rst

@@ -16,6 +16,8 @@
   mv src des
   rm -i -r -f folder
 
+  touch new ## 创建新文件或修改文件时间属性
+
   mkdir new
   rmdir new
 
