@@ -63,9 +63,29 @@ pytorch模型保存与读取
         # epoch, best_precision, loss_train
         return 1, 0, []
 
+load部分参数
+---------------
+
+当我们只需要从 ``state_dict()`` load部分模型参数是，可以采用如下方法：
+
+.. code-block:: python
+  :linenos:
+
+  # args has the model name, num classes and other irrelevant stuff
+  pretrained_state = model_zoo.load_url(model_names[args.arch])
+  model_state = my_model.state_dict()
+  pretrained_state = { k:v for k,v in pretrained_state.iteritems() if k in model_state and v.size() == model_state[k].size() }
+  model_state.update(pretrained_state)
+  my_model.load_state_dict(model_state)
+
+
 参考资料
 -------------
 
 1. Saving and loading a model in Pytorch?
 
   https://discuss.pytorch.org/t/saving-and-loading-a-model-in-pytorch/2610
+
+2. How to load part of pre trained model?
+
+  https://discuss.pytorch.org/t/how-to-load-part-of-pre-trained-model/1113/8
