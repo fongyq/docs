@@ -131,6 +131,23 @@
     >>> s1.update({'e','d'})
     set(['a', 'c', 'b', 'e', 'd'])
 
+.. note::
+
+  对于 ``切片（slice）`` 操作，下标越界 **不会** 报错，返回空。
+
+  对于 ``索引（index）`` 操作，下标越界 **会** 报错。
+
+::
+
+  s[i:j]
+
+  The slice of s from i to j is defined as the sequence of items with index k such that i <= k < j.
+
+  If i or j is greater than len(s), use len(s).
+  If i is omitted or None, use 0.
+  If j is omitted or None, use len(s).
+  If i is greater than or equal to j, the slice is empty.
+
 
 深复制和浅复制
 ----------------
@@ -214,14 +231,18 @@
 
   https://www.cnblogs.com/littlefivebolg/p/8982889.html
 
-2. python中defaultdict方法的使用
+2. 切片python字符串时 为何不会引起下标越界?
+
+  https://segmentfault.com/q/1010000011412371
+
+3. python中defaultdict方法的使用
 
   https://www.cnblogs.com/dancesir/p/8142775.html
 
-3. python的复制，深拷贝和浅拷贝的区别
+4. python的复制，深拷贝和浅拷贝的区别
 
   https://www.cnblogs.com/xueli/p/4952063.html
 
-4. Python学习日记之字典深复制与浅复制
+5. Python学习日记之字典深复制与浅复制
 
   https://www.cnblogs.com/mokero/p/6662202.html

@@ -335,6 +335,21 @@
 </td></tr></table></div>
 </li>
 </ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>对于 <code class="docutils literal notranslate"><span class="pre">切片（slice）</span></code> 操作，下标越界 <strong>不会</strong> 报错，返回空。</p>
+<p class="last">对于 <code class="docutils literal notranslate"><span class="pre">索引（index）</span></code> 操作，下标越界 <strong>会</strong> 报错。</p>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">j</span><span class="p">]</span>
+
+<span class="n">The</span> <span class="nb">slice</span> <span class="n">of</span> <span class="n">s</span> <span class="kn">from</span> <span class="nn">i</span> <span class="n">to</span> <span class="n">j</span> <span class="ow">is</span> <span class="n">defined</span> <span class="k">as</span> <span class="n">the</span> <span class="n">sequence</span> <span class="n">of</span> <span class="n">items</span> <span class="k">with</span> <span class="n">index</span> <span class="n">k</span> <span class="n">such</span> <span class="n">that</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">j</span><span class="o">.</span>
+
+<span class="n">If</span> <span class="n">i</span> <span class="ow">or</span> <span class="n">j</span> <span class="ow">is</span> <span class="n">greater</span> <span class="n">than</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="n">use</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">.</span>
+<span class="n">If</span> <span class="n">i</span> <span class="ow">is</span> <span class="n">omitted</span> <span class="ow">or</span> <span class="kc">None</span><span class="p">,</span> <span class="n">use</span> <span class="mf">0.</span>
+<span class="n">If</span> <span class="n">j</span> <span class="ow">is</span> <span class="n">omitted</span> <span class="ow">or</span> <span class="kc">None</span><span class="p">,</span> <span class="n">use</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">.</span>
+<span class="n">If</span> <span class="n">i</span> <span class="ow">is</span> <span class="n">greater</span> <span class="n">than</span> <span class="ow">or</span> <span class="n">equal</span> <span class="n">to</span> <span class="n">j</span><span class="p">,</span> <span class="n">the</span> <span class="nb">slice</span> <span class="ow">is</span> <span class="n">empty</span><span class="o">.</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="id3">
 <h2>8.2. 深复制和浅复制<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
@@ -466,16 +481,21 @@
 <blockquote>
 <div><a class="reference external" href="https://www.cnblogs.com/littlefivebolg/p/8982889.html">https://www.cnblogs.com/littlefivebolg/p/8982889.html</a></div></blockquote>
 <ol class="arabic simple" start="2">
+<li>切片python字符串时 为何不会引起下标越界?</li>
+</ol>
+<blockquote>
+<div><a class="reference external" href="https://segmentfault.com/q/1010000011412371">https://segmentfault.com/q/1010000011412371</a></div></blockquote>
+<ol class="arabic simple" start="3">
 <li>python中defaultdict方法的使用</li>
 </ol>
 <blockquote>
 <div><a class="reference external" href="https://www.cnblogs.com/dancesir/p/8142775.html">https://www.cnblogs.com/dancesir/p/8142775.html</a></div></blockquote>
-<ol class="arabic simple" start="3">
+<ol class="arabic simple" start="4">
 <li>python的复制，深拷贝和浅拷贝的区别</li>
 </ol>
 <blockquote>
 <div><a class="reference external" href="https://www.cnblogs.com/xueli/p/4952063.html">https://www.cnblogs.com/xueli/p/4952063.html</a></div></blockquote>
-<ol class="arabic simple" start="4">
+<ol class="arabic simple" start="5">
 <li>Python学习日记之字典深复制与浅复制</li>
 </ol>
 <blockquote>
