@@ -27,7 +27,7 @@
   tail log.txt
   head -5 log.txt
 
-  WC file -c -w -l
+  wc file -c -w -l
 
 
 磁盘空间

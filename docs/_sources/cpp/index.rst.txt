@@ -20,3 +20,5 @@ C/C++
     13_nullClassPtr.rst
     14_staticExtern.rst
     15_classAccess.rst
+    16_staticconst.rst
+    17_enum.rst
