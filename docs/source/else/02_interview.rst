@@ -69,6 +69,9 @@
 
   https://blog.csdn.net/qwb492859377/article/details/50654627?tdsourcetag=s_pctim_aiomsg
 
+9. Next Permutation 下一个排列
+
+  https://www.cnblogs.com/grandyang/p/4428207.html
 
 c++
 ------------

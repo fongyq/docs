@@ -20,7 +20,7 @@
 
   - 连接：join()，将字符串、元组、列表中的元素以指定的字符(分隔符)连接生成一个新的字符串。
 
-  - 分割：split()、partition()。
+  - 分割：split()、partition()。 **如果想把字符串分割成独立的字符，用 list(string)。**
 
   - 替代：replace()
 
