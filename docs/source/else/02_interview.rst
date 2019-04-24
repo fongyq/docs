@@ -25,6 +25,10 @@
 
       https://www.zhihu.com/question/19690210
 
+  - [LeetCode] Maximum Product Subarray 求连续子数组的最大乘积
+
+      https://blog.csdn.net/xblog\_/article/details/72872263
+
 2. 排序算法之桶排序
 
   https://blog.csdn.net/developer1024/article/details/79770240
