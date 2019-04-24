@@ -73,6 +73,10 @@
 
   https://www.cnblogs.com/grandyang/p/4428207.html
 
+10. LeetCode 75. Sort Colors（三颜色排序→K颜色排序）
+
+  https://blog.csdn.net/princexiexiaofeng/article/details/79645511
+
 c++
 ------------
 
