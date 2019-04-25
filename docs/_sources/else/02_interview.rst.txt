@@ -100,7 +100,7 @@
                 if(l>=r) break;
                 swap(nums[l], nums[r]);
                 l++;
-    		        r--;
+                r--;
             }
             swap(nums[i], nums[r]);
             return r;
