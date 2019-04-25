@@ -276,6 +276,9 @@
 <li><p class="first"><strong>dict</strong></p>
 <ul class="simple">
 <li>获取：keys()，values()，items()。</li>
+<li>清除：clear()</li>
+<li>访问：get(key)，不存在时返回None。</li>
+<li>更新：update(d)，把另一个字典d中的项添加到当前字典。</li>
 </ul>
 <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -287,7 +290,17 @@
  8
  9
 10
-11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">info</span> <span class="o">=</span><span class="p">{</span>
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">info</span> <span class="o">=</span><span class="p">{</span>
  <span class="s2">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;Tom&quot;</span><span class="p">,</span>
  <span class="s2">&quot;age&quot;</span><span class="p">:</span><span class="mi">25</span><span class="p">,</span>
  <span class="s2">&quot;sex&quot;</span><span class="p">:</span><span class="s2">&quot;man&quot;</span><span class="p">,</span>
@@ -298,10 +311,20 @@
 <span class="p">[</span><span class="mi">25</span><span class="p">,</span> <span class="s1">&#39;Tom&#39;</span><span class="p">,</span> <span class="s1">&#39;man&#39;</span><span class="p">]</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">info</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
 <span class="p">[(</span><span class="s1">&#39;age&#39;</span><span class="p">,</span> <span class="mi">25</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;Tom&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;sex&#39;</span><span class="p">,</span> <span class="s1">&#39;man&#39;</span><span class="p">)]</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">age</span><span class="p">)</span>
+<span class="mi">25</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">new</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;weight&quot;</span><span class="p">:</span> <span class="mi">60</span><span class="p">}</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">info</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">new</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">info</span>
+<span class="p">{</span><span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Tom&#39;</span><span class="p">,</span> <span class="s1">&#39;weight&#39;</span><span class="p">:</span> <span class="mi">60</span><span class="p">,</span> <span class="s1">&#39;sex&#39;</span><span class="p">:</span> <span class="s1">&#39;man&#39;</span><span class="p">}</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">info</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">info</span>
+<span class="p">{}</span>
 </pre></div>
 </td></tr></table></div>
 <ul class="simple">
-<li>collections.defaultdict：defaultdict类使用一种给定数据类型来初始化。当所访问的key不存在的时候，会实例化一个value作为默认值。</li>
+<li>collections.defaultdict：defaultdict类使用一种给定数据类型来初始化。当所访问的key不存在的时候，会实例化一个value作为默认值。因此，判断某个key是否存在，可使用get(key)。</li>
 </ul>
 <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2

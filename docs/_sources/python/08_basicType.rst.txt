@@ -86,6 +86,12 @@
 
   - 获取：keys()，values()，items()。
 
+  - 清除：clear()
+
+  - 访问：get(key)，不存在时返回None。
+
+  - 更新：update(d)，把另一个字典d中的项添加到当前字典。
+
   .. code-block:: python
     :linenos:
 
@@ -101,7 +107,17 @@
     >>> info.items()
     [('age', 25), ('name', 'Tom'), ('sex', 'man')]
 
-  - collections.defaultdict：defaultdict类使用一种给定数据类型来初始化。当所访问的key不存在的时候，会实例化一个value作为默认值。
+    >>> info.get(age)
+    25
+    >>> new = {"weight": 60}
+    >>> info.update(new)
+    >>> info
+    {'age': 25, 'name': 'Tom', 'weight': 60, 'sex': 'man'}
+    >>> info.clear()
+    >>> info
+    {}
+
+  - collections.defaultdict：defaultdict类使用一种给定数据类型来初始化。当所访问的key不存在的时候，会实例化一个value作为默认值。因此，判断某个key是否存在，可使用get(key)。
 
   .. code-block:: python
     :linenos:
