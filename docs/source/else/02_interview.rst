@@ -81,6 +81,43 @@
 
   https://blog.csdn.net/princexiexiaofeng/article/details/79645511
 
+11. 找到数组第k大的数（https://leetcode.com/problems/kth-largest-element-in-an-array/）
+
+  .. code-block:: cpp
+    :linenos:
+
+    class Solution {
+    public:
+        int partition(vector<int>& nums, int i, int j)
+        {
+            int pivot = nums[i];
+            int l = i+1;
+            int r = j;
+            while(true)
+            {
+                while(l<=j && nums[l]<pivot) l++;
+                while(r>i && nums[r]>pivot) r--;
+                if(l>=r) break;
+                swap(nums[l], nums[r]);
+                l++;
+    		    r--;
+            }
+            swap(nums[i], nums[r]);
+            return r;
+        }
+        int quicksort(vector<int>& nums, int a, int b, int k)
+        {
+            int p = partition(nums, a, b);
+            if(b - p + 1 == k) return p;
+            if(b - p + 1 < k) return quicksort(nums, a, p-1, k - (b - p + 1));
+            else return quicksort(nums, p+1, b, k);
+        }
+        int findKthLargest(vector<int>& nums, int k) {
+            int k_id = quicksort(nums, 0, nums.size()-1, k);
+            return nums[k_id];
+        }
+    };
+
 c++
 ------------
 
