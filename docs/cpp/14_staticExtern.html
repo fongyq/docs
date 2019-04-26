@@ -29,7 +29,7 @@
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Python" href="../python/index.html" />
+    <link rel="next" title="15. public、protected、private" href="15_classAccess.html" />
     <link rel="prev" title="13. 空类指针" href="13_nullClassPtr.html" /> 
 
   
@@ -116,6 +116,10 @@
 <li class="toctree-l3"><a class="reference internal" href="#id6">14.8. 参考资料</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="15_classAccess.html">15. public、protected、private</a></li>
+<li class="toctree-l2"><a class="reference internal" href="16_staticconst.html">16. 类的static const成员</a></li>
+<li class="toctree-l2"><a class="reference internal" href="17_enum.html">17. 枚举类型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="18_commonFunc.html">18. 常用函数</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../python/index.html">Python</a></li>
@@ -207,7 +211,7 @@
 </div>
 <div class="section" id="id1">
 <h2>14.2. static: 静态函数<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
-<p>在函数的返回类型前加上static关键字,函数即被定义为静态函数。
+<p>在函数的返回类型前加上static关键字，函数即被定义为静态函数。
 静态函数与普通函数不同，它 <strong>只能在声明它的文件当中可见</strong> ，不能被其它文件使用。
 其它文件中可以定义相同名字的函数，不会发生冲突。这点与静态全局变量相似。</p>
 </div>
@@ -254,11 +258,10 @@
 </div>
 <div class="section" id="id3">
 <h2>14.4. static: 静态成员变量<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
-<p>在类内数据成员的声明前加上关键字static，该数据成员就是类内的静态数据成员。
-特点：</p>
-<blockquote>
-<div><ul class="simple">
-<li>对于非静态数据成员，每个类对象都有自己的拷贝。而静态数据成员被当作是类的成员。无论这个类的对象被定义了多少个，静态数据成员在程序中也只有一份拷贝，由该类型的所有对象共享访问。在没有产生类的实例时，我们就可以操作它</li>
+<dl class="docutils">
+<dt>在类内数据成员的声明前加上关键字static，该数据成员就是类内的静态数据成员。</dt>
+<dd><ul class="first last simple">
+<li>对于非静态数据成员，每个类对象都有自己的拷贝。而静态数据成员被当作是类的成员。无论这个类的对象被定义了多少个，静态数据成员在程序中也只有一份拷贝，由该类型的所有对象共享访问。在没有产生类的实例时，我们就可以操作它；</li>
 <li>静态数据成员存储在全局数据区。静态数据成员定义时要分配空间，所以不能在类声明中定义；</li>
 <li>静态数据成员和普通数据成员一样遵从public，protected，private访问规则；</li>
 <li>（类定义体外部）静态数据成员初始化与一般数据成员初始化不同。静态数据成员初始化的格式为：
@@ -266,7 +269,8 @@
 <li>类的静态数据成员有两种访问形式：
 <code class="docutils literal notranslate"><span class="pre">＜类对象名＞.＜静态数据成员名＞</span> <span class="pre">或</span> <span class="pre">＜类类型名＞::＜静态数据成员名＞</span></code></li>
 </ul>
-</div></blockquote>
+</dd>
+</dl>
 </div>
 <div class="section" id="id4">
 <h2>14.5. static: 静态成员函数<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
@@ -326,8 +330,9 @@
 <div class="section" id="extern">
 <h2>14.6. extern: 修饰函数、变量<a class="headerlink" href="#extern" title="Permalink to this headline">¶</a></h2>
 <p>修饰符 <code class="docutils literal notranslate"><span class="pre">extern</span></code> 用在变量或者函数的声明前，用来说明 <strong>“此变量/函数是在别处定义的，要在此处引用”</strong> 。
-在file2中如果想调用file1中的变量a，只须用 <code class="docutils literal notranslate"><span class="pre">extern</span></code> 进行声明即可调用a:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">extern</span> <span class="nb">int</span> <span class="n">a</span><span class="p">;</span>
+在别的文件中如果想调用 <code class="docutils literal notranslate"><span class="pre">file1.c</span></code> 中的变量a，只须用 <code class="docutils literal notranslate"><span class="pre">extern</span></code> 进行声明即可调用a:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">extern</span> <span class="nb">int</span> <span class="n">a</span><span class="p">;</span> <span class="o">//</span> <span class="n">file2</span><span class="o">.</span><span class="n">c</span>
+<span class="n">extern</span> <span class="s2">&quot;C&quot;</span> <span class="nb">int</span> <span class="n">a</span><span class="p">;</span> <span class="o">//</span> <span class="n">file3</span><span class="o">.</span><span class="n">cpp</span>
 </pre></div>
 </div>
 <p>在这里要注意 <code class="docutils literal notranslate"><span class="pre">extern</span></code> 声明的位置对其作用域也有关系，如果是在main函数中进行声明的，则只能在main函数中调用，在其它函数中不能调用。
@@ -413,7 +418,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../python/index.html" class="btn btn-neutral float-right" title="Python" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="15_classAccess.html" class="btn btn-neutral float-right" title="15. public、protected、private" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="13_nullClassPtr.html" class="btn btn-neutral" title="13. 空类指针" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
