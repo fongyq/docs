@@ -224,9 +224,8 @@
 <li>该变量在全局数据区分配内存；</li>
 <li>静态局部变量在程序执行到该对象的声明处时被首次初始化，即 <strong>以后的函数调用不再进行初始化</strong> ；</li>
 <li>静态局部变量一般在声明处初始化，如果没有显式初始化，会被程序自动初始化为0；</li>
-<li>它始终驻留在全局数据区，其生命周期一直持续到整个程序执行结束。但其作用域仍为局部作用域，当定义它的函数或语句块结束时，其作用域随之结束。</li>
+<li>它始终驻留在全局数据区，其生命周期一直持续到整个程序执行结束。但其作用域仍为局部作用域，当定义它的函数或语句块结束时，其作用域随之结束。一般情况下，对于局部变量是存放在栈区的，并且局部变量的生命周期在该语句块执行结束时便结束了。</li>
 </ul>
-<p>一般情况下，对于局部变量是存放在栈区的，并且局部变量的生命周期在该语句块执行结束时便结束了。</p>
 </div></blockquote>
 <div class="highlight-cpp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -258,9 +257,10 @@
 </div>
 <div class="section" id="id3">
 <h2>14.4. static: 静态成员变量<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
-<dl class="docutils">
-<dt>在类内数据成员的声明前加上关键字static，该数据成员就是类内的静态数据成员。</dt>
-<dd><ul class="first last simple">
+<p>在类内数据成员的声明前加上关键字static，该数据成员就是类内的静态数据成员。
+特点：</p>
+<blockquote>
+<div><ul class="simple">
 <li>对于非静态数据成员，每个类对象都有自己的拷贝。而静态数据成员被当作是类的成员。无论这个类的对象被定义了多少个，静态数据成员在程序中也只有一份拷贝，由该类型的所有对象共享访问。在没有产生类的实例时，我们就可以操作它；</li>
 <li>静态数据成员存储在全局数据区。静态数据成员定义时要分配空间，所以不能在类声明中定义；</li>
 <li>静态数据成员和普通数据成员一样遵从public，protected，private访问规则；</li>
@@ -269,8 +269,7 @@
 <li>类的静态数据成员有两种访问形式：
 <code class="docutils literal notranslate"><span class="pre">＜类对象名＞.＜静态数据成员名＞</span> <span class="pre">或</span> <span class="pre">＜类类型名＞::＜静态数据成员名＞</span></code></li>
 </ul>
-</dd>
-</dl>
+</div></blockquote>
 </div>
 <div class="section" id="id4">
 <h2>14.5. static: 静态成员函数<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
