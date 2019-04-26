@@ -260,7 +260,7 @@ sort
 
 1. c++ reference
 
-  http://www.cplusplus.com/reference/algorithm/lower_bound/?kw=lower_bound
+  http://www.cplusplus.com/reference/algorithm/lower_bound/
 
   http://www.cplusplus.com/reference/algorithm/upper_bound/
 
