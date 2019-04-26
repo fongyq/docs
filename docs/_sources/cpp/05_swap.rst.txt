@@ -1,6 +1,8 @@
 交换函数swap
 =======================
 
+.. highlight:: cpp
+
 **1**. 库函数，包含在头文件 ``<algorithm>`` 中。
 
 .. code:: cpp

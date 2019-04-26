@@ -10,6 +10,8 @@
 初始化
 ----------
 
+.. highlight:: cpp
+
 默认情况下，每个枚举变量的值就是其序号，从0开始，依次加1。 ::
 
   enum Week {Sun, Mon, Tue, Wed, Thu, Fri, Sat};

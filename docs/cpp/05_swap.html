@@ -102,6 +102,11 @@
 <li class="toctree-l2"><a class="reference internal" href="11_heapStack.html">11. 堆、栈</a></li>
 <li class="toctree-l2"><a class="reference internal" href="12_argPass.html">12. 参数传递</a></li>
 <li class="toctree-l2"><a class="reference internal" href="13_nullClassPtr.html">13. 空类指针</a></li>
+<li class="toctree-l2"><a class="reference internal" href="14_staticExtern.html">14. static和extern</a></li>
+<li class="toctree-l2"><a class="reference internal" href="15_classAccess.html">15. public、protected、private</a></li>
+<li class="toctree-l2"><a class="reference internal" href="16_staticconst.html">16. 类的static const成员</a></li>
+<li class="toctree-l2"><a class="reference internal" href="17_enum.html">17. 枚举类型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="18_commonFunc.html">18. 常用函数</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../python/index.html">Python</a></li>
@@ -180,7 +185,7 @@
   <div class="section" id="swap">
 <h1>5. 交换函数swap<a class="headerlink" href="#swap" title="Permalink to this headline">¶</a></h1>
 <p><strong>1</strong>. 库函数，包含在头文件 <code class="docutils literal notranslate"><span class="pre">&lt;algorithm&gt;</span></code> 中。</p>
-<div class="code cpp highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="p">::</span> <span class="n">swap</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
+<div class="code cpp highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span> <span class="n">swap</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
 </pre></div>
 </div>
 <p><strong>2</strong>. 指针。</p>
@@ -216,11 +221,11 @@
 </pre></div>
 </td></tr></table></div>
 <p><strong>4</strong>. 异或。适用于整型/字符/枚举类型，浮点型不适用。 <code class="docutils literal notranslate"><span class="pre">swap(a,</span> <span class="pre">a)</span></code> 会导致 <code class="docutils literal notranslate"><span class="pre">a=0</span></code> 。</p>
-<div class="code cpp highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#define swap(a, b) a^=b^=a^=b;</span>
+<div class="code cpp highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#define swap(a, b) a^=b^=a^=b;</span>
 </pre></div>
 </div>
 <p><strong>4</strong>. 赋值。受编译器影响，先执行 <code class="docutils literal notranslate"><span class="pre">a+b</span></code> 还是先执行 <code class="docutils literal notranslate"><span class="pre">b=a</span></code> 。</p>
-<div class="code cpp highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#define swap(a, b) a=a+b-(b=a);</span>
+<div class="code cpp highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#define swap(a, b) a=a+b-(b=a);</span>
 </pre></div>
 </div>
 <p><strong>5</strong>. 加减。无需申请额外空间。</p>
