@@ -149,11 +149,11 @@ sort
 
   #include <algorithm>
 
-  default:
+  // default
   template <class RandomAccessIterator>
   void sort (RandomAccessIterator first, RandomAccessIterator last);
 
-  custom:
+  // custom
   template <class RandomAccessIterator, class Compare>
   void sort (RandomAccessIterator first, RandomAccessIterator last, Compare comp);
 
