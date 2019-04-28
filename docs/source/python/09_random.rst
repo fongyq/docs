@@ -7,17 +7,29 @@ python自带的random库。 ::
 
   import random
 
-- **random.random()** ：生成0~1的随机浮点数。
+- **random.random()**
 
-- **random.uniform(a,b)** ：生成指定范围的随机浮点数。
+  - 生成0~1的随机浮点数。
 
-- **random.randint(a,b)** ：生成指定范围的随机整数。
+- **random.uniform(a,b)**
 
-- **random.randrange(start,stop,step)** ：指定范围内，按step递增的集合中的随机数。
+  - 生成指定范围[a, b]内的随机浮点数。
 
-- **random.choice()** ：给定的集合中选择一个元素。
+- **random.randint(a,b)**
 
-- **random.shuffle(lst)** ：对一个序列或者元组随机打乱。
+  - 生成指定范围[a, b]内的随机整数。
+
+- **random.randrange(start,stop,step)**
+
+  - 指定范围内，按step递增的集合中的随机数。
+
+- **random.choice()**
+
+  - 给定的集合中选择一个元素。
+
+- **random.shuffle(lst)**
+
+  - 对一个序列或者元组随机打乱。
 
 
 numpy.random
@@ -27,21 +39,37 @@ numpy.random
 
   import numpy as np
 
-- **numpy.random.random([d0, d1, ..., dn])** ：生成0~1的随机浮点数，维度为 d0\*d1\* ...\*dn（缺省为1）。
+- **numpy.random.random([d0, d1, ..., dn])**
 
-- **numpy.random.rand(d0, d1, ..., dn)** ：生成0~1的随机浮点数，维度为 d0\*d1\* ...\*dn（缺省为1）。
+  - 生成0~1的随机浮点数，维度为 d0\*d1\* ...\*dn（缺省为1）。
 
-- **numpy.random.randn(d0, d1, ..., dn)** ：标准正态分布。
+- **numpy.random.rand(d0, d1, ..., dn)**
 
-- **numpy.random.randint(low, high=None, size=None, dtype='l')** ：返回随机的整数，位于半开区间 [low, high)。如果high=None，区间为[0, low)。
+  - 生成0~1的随机浮点数，维度为 d0\*d1\* ...\*dn（缺省为1）。
 
-- **numpy.random.choice(a, size=None, replace=True, p=None)** ：从一个给定的一维数组，按概率p抽样一定数量的元素，replace=True表示允许重复元素。
+- **numpy.random.randn(d0, d1, ..., dn)**
 
-- **numpy.random.shuffle(arr)** ：随机打乱arr。
+  - 标准正态分布。
 
-- **numpy.random.permutation(arr)** ：返回一个随机排列。
+- **numpy.random.randint(low, high=None, size=None, dtype='l')**
 
-- **numpy.random.seed(n)** ：改变随机数生成器的种子。设置相同的seed，每次生成的随机数相同；如果不设置seed，则每次会生成不同的随机数。
+  - 返回随机的整数，位于半开区间 [low, high)。如果high=None，区间为[0, low)。
+
+- **numpy.random.choice(a, size=None, replace=True, p=None)**
+
+  - 从一个给定的一维数组，按概率p抽样一定数量的元素，replace=True表示允许重复元素。
+
+- **numpy.random.shuffle(arr)**
+
+  - 随机打乱arr。
+
+- **numpy.random.permutation(arr)**
+
+  - 返回一个随机排列。
+
+- **numpy.random.seed(n)**
+
+  - 改变随机数生成器的种子。设置相同的seed，每次生成的随机数相同；如果不设置seed，则每次会生成不同的随机数。
 
 .. code-block:: python
   :linenos:

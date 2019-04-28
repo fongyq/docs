@@ -136,7 +136,7 @@ for循环会不断调用迭代器对象的 ``__next__()`` 方法（python3  ``__
   for item in gen:
     print item
 
-  ## finonacci 数列
+  ## fibonacci 数列
   def fibonacci(n):
     a, b = 0, 1
     while b <= n:

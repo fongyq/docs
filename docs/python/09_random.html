@@ -188,12 +188,30 @@
 </pre></div>
 </div>
 <ul class="simple">
-<li><strong>random.random()</strong> ：生成0~1的随机浮点数。</li>
-<li><strong>random.uniform(a,b)</strong> ：生成指定范围的随机浮点数。</li>
-<li><strong>random.randint(a,b)</strong> ：生成指定范围的随机整数。</li>
-<li><strong>random.randrange(start,stop,step)</strong> ：指定范围内，按step递增的集合中的随机数。</li>
-<li><strong>random.choice()</strong> ：给定的集合中选择一个元素。</li>
-<li><strong>random.shuffle(lst)</strong> ：对一个序列或者元组随机打乱。</li>
+<li><strong>random.random()</strong><ul>
+<li>生成0~1的随机浮点数。</li>
+</ul>
+</li>
+<li><strong>random.uniform(a,b)</strong><ul>
+<li>生成指定范围[a, b]内的随机浮点数。</li>
+</ul>
+</li>
+<li><strong>random.randint(a,b)</strong><ul>
+<li>生成指定范围[a, b]内的随机整数。</li>
+</ul>
+</li>
+<li><strong>random.randrange(start,stop,step)</strong><ul>
+<li>指定范围内，按step递增的集合中的随机数。</li>
+</ul>
+</li>
+<li><strong>random.choice()</strong><ul>
+<li>给定的集合中选择一个元素。</li>
+</ul>
+</li>
+<li><strong>random.shuffle(lst)</strong><ul>
+<li>对一个序列或者元组随机打乱。</li>
+</ul>
+</li>
 </ul>
 </div>
 <div class="section" id="numpy-random">
@@ -202,14 +220,38 @@
 </pre></div>
 </div>
 <ul class="simple">
-<li><strong>numpy.random.random([d0, d1, …, dn])</strong> ：生成0~1的随机浮点数，维度为 d0*d1* …*dn（缺省为1）。</li>
-<li><strong>numpy.random.rand(d0, d1, …, dn)</strong> ：生成0~1的随机浮点数，维度为 d0*d1* …*dn（缺省为1）。</li>
-<li><strong>numpy.random.randn(d0, d1, …, dn)</strong> ：标准正态分布。</li>
-<li><strong>numpy.random.randint(low, high=None, size=None, dtype=’l’)</strong> ：返回随机的整数，位于半开区间 [low, high)。如果high=None，区间为[0, low)。</li>
-<li><strong>numpy.random.choice(a, size=None, replace=True, p=None)</strong> ：从一个给定的一维数组，按概率p抽样一定数量的元素，replace=True表示允许重复元素。</li>
-<li><strong>numpy.random.shuffle(arr)</strong> ：随机打乱arr。</li>
-<li><strong>numpy.random.permutation(arr)</strong> ：返回一个随机排列。</li>
-<li><strong>numpy.random.seed(n)</strong> ：改变随机数生成器的种子。设置相同的seed，每次生成的随机数相同；如果不设置seed，则每次会生成不同的随机数。</li>
+<li><strong>numpy.random.random([d0, d1, …, dn])</strong><ul>
+<li>生成0~1的随机浮点数，维度为 d0*d1* …*dn（缺省为1）。</li>
+</ul>
+</li>
+<li><strong>numpy.random.rand(d0, d1, …, dn)</strong><ul>
+<li>生成0~1的随机浮点数，维度为 d0*d1* …*dn（缺省为1）。</li>
+</ul>
+</li>
+<li><strong>numpy.random.randn(d0, d1, …, dn)</strong><ul>
+<li>标准正态分布。</li>
+</ul>
+</li>
+<li><strong>numpy.random.randint(low, high=None, size=None, dtype=’l’)</strong><ul>
+<li>返回随机的整数，位于半开区间 [low, high)。如果high=None，区间为[0, low)。</li>
+</ul>
+</li>
+<li><strong>numpy.random.choice(a, size=None, replace=True, p=None)</strong><ul>
+<li>从一个给定的一维数组，按概率p抽样一定数量的元素，replace=True表示允许重复元素。</li>
+</ul>
+</li>
+<li><strong>numpy.random.shuffle(arr)</strong><ul>
+<li>随机打乱arr。</li>
+</ul>
+</li>
+<li><strong>numpy.random.permutation(arr)</strong><ul>
+<li>返回一个随机排列。</li>
+</ul>
+</li>
+<li><strong>numpy.random.seed(n)</strong><ul>
+<li>改变随机数生成器的种子。设置相同的seed，每次生成的随机数相同；如果不设置seed，则每次会生成不同的随机数。</li>
+</ul>
+</li>
 </ul>
 <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
