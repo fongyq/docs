@@ -240,7 +240,7 @@
   .. code-block:: python
     :linenos:
 
-    from copy import copy
+    from copy import deepcopy
     >>> alist = [1,2,3,['a','b']] ## ['a','b'] 是列表，是一个子对象
     >>> a_copy = deepcopy(alist)
     >>> alist[3].append('c') ## 子对象的修改

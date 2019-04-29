@@ -503,7 +503,7 @@
 10
 11
 12
-13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span>
+13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">alist</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">]]</span> <span class="c1">## [&#39;a&#39;,&#39;b&#39;] 是列表，是一个子对象</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">a_copy</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">alist</span><span class="p">)</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">alist</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;c&#39;</span><span class="p">)</span> <span class="c1">## 子对象的修改</span>
