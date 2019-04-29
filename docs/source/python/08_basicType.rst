@@ -31,15 +31,19 @@
 
     >>> s = "abcde"
     >>> "-".join(s)
+    >>> print s
     a-b-c-d-e
     >>> s = ['abc', 'def', 'ghi']
     >>> "-".join(s)
+    >>> print s
     abc_def_ghi
 
     >>> s = "a-b-c-d-e"
     >>> s.partion('-') ## 只能分割为3部分
+    >>> print s
     ('a', '-', 'b-c-d-e')
     >>> s.split('-')
+    >>> print s
     ['a', 'b', 'c', 'd', 'e']
 
 - **list**
@@ -52,7 +56,7 @@
 
   - 插入：insert()
 
-  - 弹出元素：pop()
+  - 弹出元素：pop()，默认弹出列表末尾的元素
 
   - 移除/删除元素：remove()，del()
 
@@ -63,22 +67,29 @@
 
     >>> a = [1,2,3]
     >>> a.append(4)
+    >>> print a
     [1, 2, 3, 4]
     >>> a.extend([10,20,30])
+    >>> print a
     [1, 2, 3, 4, 10, 20, 30]
 
     >>> a.insert(1, 5) ## 在第一个元素之后插入
+    >>> print a
     [1, 5, 2, 3, 4, 10, 20, 30]
 
     >>> a.remove(2)
+    >>> print a
     [1, 5, 3, 4, 10, 20, 30]
     >>> del a[3]
+    >>> print a
     [1, 5, 3, 10, 20, 30]
 
     >>> a.sort(reverse=True)
+    >>> print a
     [30, 20, 10, 5, 3, 1] ## 直接修改 a，无返回值。使用 sorted 返回排序后的副本。
 
     >>> a2 = a.pop(2)
+    >>> print a
     [1, 5, 10, 20, 30] ## a
 
 
@@ -91,6 +102,8 @@
   - 访问：get(key)，不存在时返回None。
 
   - 更新：update(d)，把另一个字典d中的项添加到当前字典。
+
+  - 浅复制：copy()
 
   .. code-block:: python
     :linenos:
@@ -145,6 +158,7 @@
 
     >>> s1 = {'a', 'b', 'c'} ## 或者 s1 = set(['a', 'b', 'c'])
     >>> s1.update({'e','d'})
+    >>> print s1
     set(['a', 'c', 'b', 'e', 'd'])
 
 .. note::
