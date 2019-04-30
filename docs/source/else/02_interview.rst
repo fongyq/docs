@@ -201,6 +201,31 @@ python
 
   https://fongyq.github.io/blog/machineLearning/03_pca.html
 
+论文相关
+-----------------
+
+1. CNN卷积神经网络\_ GoogLeNet 之 Inception(V1-V4)
+
+  https://www.cnblogs.com/haiyang21/p/7243200.html
+
+2. R-CNN系列
+
+  - 【RCNN系列】【超详细解析】
+
+      https://blog.csdn.net/amor_tila/article/details/78809791
+
+  - 实例分割模型Mask R-CNN详解：从R-CNN，Fast R-CNN，Faster R-CNN再到Mask R-CNN
+
+      https://blog.csdn.net/jiongnima/article/details/79094159
+
+  - RCNN（三）：Fast R-CNN
+
+      https://blog.csdn.net/u011587569/article/details/52151871
+
+3. CapsuleNet解读
+
+  https://blog.csdn.net/u013010889/article/details/78722140/
+
 其他
 --------------
 
