@@ -204,11 +204,15 @@ python
 论文相关
 -----------------
 
-1. CNN卷积神经网络\_ GoogLeNet 之 Inception(V1-V4)
+1. AlexNet/VGG/GoogleNet
+
+  https://blog.csdn.net/gdymind/article/details/83042729
+
+2. CNN卷积神经网络\_ GoogLeNet 之 Inception(V1-V4)
 
   https://www.cnblogs.com/haiyang21/p/7243200.html
 
-2. R-CNN系列
+3. R-CNN系列
 
   - 【RCNN系列】【超详细解析】
 
@@ -222,10 +226,11 @@ python
 
       https://blog.csdn.net/u011587569/article/details/52151871
 
-3. CapsuleNet解读
+4. CapsuleNet解读
 
   https://blog.csdn.net/u013010889/article/details/78722140/
 
+  
 其他
 --------------
 
