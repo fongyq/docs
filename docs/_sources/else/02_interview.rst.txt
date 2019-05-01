@@ -118,6 +118,30 @@
         }
     };
 
+12. [LeetCode] Best Time to Buy and Sell Stock 买卖股票的最佳时间
+
+  - 最多一次交易
+
+      http://www.cnblogs.com/grandyang/p/4280131.html
+
+  - 无限次交易
+
+      http://www.cnblogs.com/grandyang/p/4280803.html
+
+  - 最多两次交易
+
+      http://www.cnblogs.com/grandyang/p/4281975.html
+
+  - 最多k次交易
+
+      http://www.cnblogs.com/grandyang/p/4295761.html
+
+      https://blog.csdn.net/linhuanmars/article/details/23236995
+
+  - 交易冷却
+
+      https://www.cnblogs.com/grandyang/p/4997417.html
+
 c++
 ------------
 
@@ -230,7 +254,7 @@ python
 
   https://blog.csdn.net/u013010889/article/details/78722140/
 
-  
+
 其他
 --------------
 
