@@ -15,3 +15,4 @@ Python
     08_basicType.rst
     09_random.rst
     10_normalize.rst
+    11_dataStruct.rst
