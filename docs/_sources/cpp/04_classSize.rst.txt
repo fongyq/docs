@@ -318,15 +318,16 @@ C/C++中以一定区域内的位(bit)为单位来表示的数据成为位域，�
     :linenos:
 
     struct BitField
-     {
-        unsigned int a:4;  //占用4个二进制位;
-        unsigned int  :0;  //空位域,自动置0;
-        unsigned int b:4;  //占用4个二进制位,从第二个字节存储单元开始存放;
-        unsigned int c:4;  //占用4个二进制位;
-        unsigned int d:5;  //占用5个二进制位,剩余的3个bit不够存储4个bit的数据,从下一个存储单元开始存放;
-        unsigned int  :0;  //空位域,自动置0;
-        unsigned int e:4;  //占用4个二进制位,从第三个字节存储单元开始存放;
-     };
+    {
+      unsigned int a:4;  //占用4个二进制位
+      unsigned int  :0;  //空位域，自动置0，此时占满 1 个int存储单元，即 4 字节
+      unsigned int b:4;  //占用4个二进制位，从第二个字节存储单元开始存放
+      unsigned int c:4;  //占用4个二进制位
+      unsigned int d:5;  //占用5个二进制位，剩余的3个bit不够存储4个bit的数据，从下一个存储单元开始存放
+      unsigned int  :0;  //空位域，自动置0，此时占满 2 个int存储单元，即 8 字节
+      unsigned int e:4;  //占用4个二进制位，从第三个int存储单元开始存放
+    };
+    // sizeof(BitField) = 3 * 4 = 12
 
 2. 取地址操作符&不能应用在位域字段上
 3. 位域字段不能是类的静态成员

@@ -29,7 +29,7 @@
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="5. 交换函数swap()" href="05_swap.html" />
+    <link rel="next" title="5. 交换函数swap" href="05_swap.html" />
     <link rel="prev" title="3. 数据类型" href="03_typeSize.html" /> 
 
   
@@ -111,11 +111,20 @@
 <li class="toctree-l3"><a class="reference internal" href="#id13">4.8. 参考资料</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="05_swap.html">5. 交换函数swap()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_swap.html">5. 交换函数swap</a></li>
 <li class="toctree-l2"><a class="reference internal" href="06_arrayArg.html">6. 数组形参</a></li>
 <li class="toctree-l2"><a class="reference internal" href="07_pointerReference.html">7. 指针与引用</a></li>
 <li class="toctree-l2"><a class="reference internal" href="08_overload.html">8. 重载，覆盖，隐藏</a></li>
 <li class="toctree-l2"><a class="reference internal" href="09_strcpy.html">9. strcpy函数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="10_cast.html">10. 强制类型转换</a></li>
+<li class="toctree-l2"><a class="reference internal" href="11_heapStack.html">11. 堆、栈</a></li>
+<li class="toctree-l2"><a class="reference internal" href="12_argPass.html">12. 参数传递</a></li>
+<li class="toctree-l2"><a class="reference internal" href="13_nullClassPtr.html">13. 空类指针</a></li>
+<li class="toctree-l2"><a class="reference internal" href="14_staticExtern.html">14. static和extern</a></li>
+<li class="toctree-l2"><a class="reference internal" href="15_classAccess.html">15. public、protected、private</a></li>
+<li class="toctree-l2"><a class="reference internal" href="16_staticconst.html">16. 类的static const成员</a></li>
+<li class="toctree-l2"><a class="reference internal" href="17_enum.html">17. 枚举类型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="18_commonFunc.html">18. 常用函数</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../python/index.html">Python</a></li>
@@ -628,16 +637,18 @@
  7
  8
  9
-10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="n">BitField</span>
- <span class="p">{</span>
-    <span class="kt">unsigned</span> <span class="kt">int</span> <span class="nl">a</span><span class="p">:</span><span class="mi">4</span><span class="p">;</span>  <span class="c1">//占用4个二进制位;</span>
-    <span class="kt">unsigned</span> <span class="kt">int</span>  <span class="o">:</span><span class="mi">0</span><span class="p">;</span>  <span class="c1">//空位域,自动置0;</span>
-    <span class="kt">unsigned</span> <span class="kt">int</span> <span class="nl">b</span><span class="p">:</span><span class="mi">4</span><span class="p">;</span>  <span class="c1">//占用4个二进制位,从第二个字节存储单元开始存放;</span>
-    <span class="kt">unsigned</span> <span class="kt">int</span> <span class="nl">c</span><span class="p">:</span><span class="mi">4</span><span class="p">;</span>  <span class="c1">//占用4个二进制位;</span>
-    <span class="kt">unsigned</span> <span class="kt">int</span> <span class="nl">d</span><span class="p">:</span><span class="mi">5</span><span class="p">;</span>  <span class="c1">//占用5个二进制位,剩余的3个bit不够存储4个bit的数据,从下一个存储单元开始存放;</span>
-    <span class="kt">unsigned</span> <span class="kt">int</span>  <span class="o">:</span><span class="mi">0</span><span class="p">;</span>  <span class="c1">//空位域,自动置0;</span>
-    <span class="kt">unsigned</span> <span class="kt">int</span> <span class="nl">e</span><span class="p">:</span><span class="mi">4</span><span class="p">;</span>  <span class="c1">//占用4个二进制位,从第三个字节存储单元开始存放;</span>
- <span class="p">};</span>
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="n">BitField</span>
+<span class="p">{</span>
+  <span class="kt">unsigned</span> <span class="kt">int</span> <span class="nl">a</span><span class="p">:</span><span class="mi">4</span><span class="p">;</span>  <span class="c1">//占用4个二进制位</span>
+  <span class="kt">unsigned</span> <span class="kt">int</span>  <span class="o">:</span><span class="mi">0</span><span class="p">;</span>  <span class="c1">//空位域，自动置0，此时占满 1 个int存储单元，即 4 字节</span>
+  <span class="kt">unsigned</span> <span class="kt">int</span> <span class="nl">b</span><span class="p">:</span><span class="mi">4</span><span class="p">;</span>  <span class="c1">//占用4个二进制位，从第二个字节存储单元开始存放</span>
+  <span class="kt">unsigned</span> <span class="kt">int</span> <span class="nl">c</span><span class="p">:</span><span class="mi">4</span><span class="p">;</span>  <span class="c1">//占用4个二进制位</span>
+  <span class="kt">unsigned</span> <span class="kt">int</span> <span class="nl">d</span><span class="p">:</span><span class="mi">5</span><span class="p">;</span>  <span class="c1">//占用5个二进制位，剩余的3个bit不够存储4个bit的数据，从下一个存储单元开始存放</span>
+  <span class="kt">unsigned</span> <span class="kt">int</span>  <span class="o">:</span><span class="mi">0</span><span class="p">;</span>  <span class="c1">//空位域，自动置0，此时占满 2 个int存储单元，即 8 字节</span>
+  <span class="kt">unsigned</span> <span class="kt">int</span> <span class="nl">e</span><span class="p">:</span><span class="mi">4</span><span class="p">;</span>  <span class="c1">//占用4个二进制位，从第三个int存储单元开始存放</span>
+<span class="p">};</span>
+<span class="c1">// sizeof(BitField) = 3 * 4 = 12</span>
 </pre></div>
 </td></tr></table></div>
 </div></blockquote>
@@ -793,7 +804,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="05_swap.html" class="btn btn-neutral float-right" title="5. 交换函数swap()" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="05_swap.html" class="btn btn-neutral float-right" title="5. 交换函数swap" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="03_typeSize.html" class="btn btn-neutral" title="3. 数据类型" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
