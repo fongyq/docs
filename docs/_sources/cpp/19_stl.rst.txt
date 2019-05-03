@@ -1,0 +1,256 @@
+常用STL类及容器
+==================
+
+**STL: Standard Template Library** ，标准模板库。
+
+顺序容器
+  - array
+  - vector
+  - list
+  - deque
+  - string
+  - ...
+
+关联容器
+  - set
+  - map
+  - multiset
+  - multimap
+  - ...
+
+容器适配器
+  - stack
+  - queue
+  - priority_queue
+
+.. highlight:: cpp
+
+
+string
+-----------
+::
+
+  #include<string>
+
+- 长度：length()，size()，empty()
+- 访问：[pos]，at(pos)。at()返回位置pos处元素的引用，可能抛出out\_of\_range异常。
+- c_str()：返回指向C类型字符串的指针。
+- 子串
+  ::
+
+    string substr(size_t pos = 0, size_t len = npos) const
+
+
+vector
+------------
+::
+
+  #include<vector>
+
+**底层实现：顺序表（数组）。**
+
+- 元素个数：size()，empty()
+- 内存：vec.capcity()
+- 访问：[pos]，at(pos)
+- 尾部插入：push_back(x)
+- 迭代器插入：在position **之前** 插入元素。
+
+  ::
+
+    iterator insert (iterator position, const value_type& val)
+
+
+- 尾部删除：pop_back()
+- 申请空间：至少能容纳n个元素。
+
+  ::
+
+    void reserve (size_type n)
+
+
+- 赋值：
+
+  - 数组或其他向量区间[first,last)内的值赋给当前向量。
+
+    ::
+
+      template <class InputIterator>
+      void assign (InputIterator first, InputIterator last)
+
+
+  - 赋予n个val元素给当前向量。
+
+    ::
+
+      void assign (size_type n, const value_type& val)
+
+- 删除：删除一个元素之后，此位置之后所有元素往前移动。虽然当前迭代器没有+1，但是由于后续元素的前移，相当于迭代器自动指向了下一个元素。故删除了一个元素之后如果要访问下一个元素，不必执行it++。
+
+  ::
+
+    iterator erase (const_iterator position);
+    iterator erase (const_iterator first, const_iterator last); // 区间 [first,last)
+
+- 清除：
+
+  - ``vector< *TYPE* >().swap(myVec)``
+  - ``clear()`` 让size()为0，但是vec.capcity()不为0，调用 ``clear()`` 之后再调用 ``shrink_to_fit()`` 。
+
+
+
+list
+---------
+::
+
+  #include<list>
+
+**底层实现：双向链表。**
+
+- 元素个数：size()，empty()
+- 插入：push_front()，push_back()，emplace_front()，emplace_back()
+- 迭代器插入：在position **之前** 插入元素。
+
+  ::
+
+    iterator insert (iterator position, const value_type& val)
+
+
+- 删除：pop_front()，pop_back()
+
+deque
+---------
+::
+
+  #include<deque>
+
+**底层实现：循环队列。**
+
+- 元素个数：size()，empty()
+- 插入：push_front(x)，push_back(x)
+- 迭代器插入：在position **之前** 插入元素。
+
+  ::
+
+    iterator insert (iterator position, const value_type& val)
+
+- 删除：pop_front()，pop_back()
+
+
+pair
+---------
+::
+
+  #include<utility>
+
+- 构造
+
+  ::
+
+    template <class T1, class T2>
+    pair<T1,T2> make_pair (T1 x, T2 y);
+
+- 访问：成员first访问第一个元素，成员second访问第二个元素。
+
+
+map
+--------
+::
+
+  #include<map>
+
+**底层实现：红黑树。**
+
+``map<K，T>`` 容器，保存的是 ``pair<const K，T>`` 类型的元素。
+
+- 访问：[key]，at(key)
+  - [key]，key不存在，会创建新的键值对。
+  - at(key)，key不存在，抛出out\_of\_range异常。
+
+- 查找：找不到key则返回 ``map::end`` 。
+
+  ::
+
+    iterator find (const key_type& k);
+    const_iterator find (const key_type& k) const;
+
+- 插入：map的元素自动按照key升序排序，不能人为对map进行排序。
+
+  ::
+
+    pair<iterator,bool> insert (const value_type& val);
+
+- 删除：返回删除元素后的下一个元素的迭代器，当前迭代器失效。
+
+  ::
+
+    iterator  erase (const_iterator position);
+    size_type erase (const key_type& k);
+    iterator  erase (const_iterator first, const_iterator last);
+
+  ``it = myMap.erase(it)`` 等效为 ``myMap.erase(it++)`` 。
+
+
+stack
+---------
+::
+
+  #include<stack>
+
+- 大小：size()，empty()
+- 栈顶元素：top()
+- 入栈：push(x)
+- 出栈：pop()
+
+  ::
+
+    void pop();
+
+queue
+------------
+::
+
+  #include<queue>
+
+- 大小：size()，empty()
+- 队首元素：front()
+- 队尾元素：back()
+- 入队：push(x)
+- 出队：pop()
+
+  ::
+
+    void pop();
+
+
+
+参考资料
+------------
+
+1. C++ reference
+
+  http://www.cplusplus.com/reference/string/string
+
+  http://www.cplusplus.com/reference/vector/vector
+
+  http://www.cplusplus.com/reference/list/list
+
+  http://www.cplusplus.com/reference/deque/deque
+
+  http://www.cplusplus.com/reference/map/map
+
+  http://www.cplusplus.com/reference/stack/stack
+
+  http://www.cplusplus.com/reference/queue/queue
+
+
+2. C++ STL快速入门
+
+  https://www.cnblogs.com/skyfsm/p/6934246.html
+
+3. STL教程：C++ STL快速入门（非常详细）
+
+  http://c.biancheng.net/stl/
+
+4. 标准C++中的string类的用法总结（转）
+
+  https://www.cnblogs.com/aminxu/p/4686320.html

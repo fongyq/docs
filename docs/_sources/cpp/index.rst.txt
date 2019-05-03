@@ -23,3 +23,4 @@ C/C++
     16_staticconst.rst
     17_enum.rst
     18_commonFunc.rst
+    19_stl.rst
