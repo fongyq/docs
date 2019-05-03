@@ -85,6 +85,7 @@
 
   .. code-block:: cpp
     :linenos:
+    :emphasize-lines: 14,15
 
     class Solution {
     public:
@@ -141,6 +142,39 @@
   - 交易冷却
 
       https://www.cnblogs.com/grandyang/p/4997417.html
+
+13. [LeetCode] Partition Equal Subset Sum 数组分成两个子集，和相等
+
+  https://leetcode.com/problems/partition-equal-subset-sum/
+
+  .. code-block:: python
+    :linenos:
+    :emphasize-lines: 2,7,9,23
+
+    class Solution(object):
+    def backtrack(self, nums, sum_nums, sum_current, i): ## self
+        if sum_current == sum_nums/2:
+            return True
+        if i == len(nums):
+            return False
+        if self.backtrack(nums, sum_nums, sum_current+nums[i],i+1): ## self
+            return True
+        if self.backtrack(nums, sum_nums, sum_current, i+1): ## self
+            return True
+        return False
+
+    def canPartition(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: bool
+        """
+        if len(nums) <= 1:
+            return False
+        sum_nums = sum(nums)
+        if sum_nums % 2:
+            return False
+        return self.backtrack(nums, sum_nums, 0, 0) ## self
+      
 
 c++
 ------------
