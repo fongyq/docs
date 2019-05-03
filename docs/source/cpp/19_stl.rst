@@ -93,8 +93,8 @@ vector
 
 - 清除：
 
-  - ``vector< *TYPE* >().swap(myVec)``
-  - ``clear()`` 让size()为0，但是vec.capcity()不为0，调用 ``clear()`` 之后再调用 ``shrink_to_fit()`` 。
+  - ``vector< TYPE >().swap(myVec)``
+  - ``myVec.clear()`` 让myVec.size()为0，但是myVec.capcity()不为0，调用 ``myVec.clear()`` 之后再调用 ``myVec.shrink_to_fit()`` 。
 
 
 
