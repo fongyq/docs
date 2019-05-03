@@ -50,7 +50,7 @@ vector
 **底层实现：顺序表（数组）。**
 
 - 元素个数：size()，empty()
-- 内存：vec.capcity()
+- 内存：capcity()
 - 访问：[pos]，at(pos)
 - 尾部插入：push_back(x)
 - 迭代器插入：在position **之前** 插入元素。
@@ -68,9 +68,9 @@ vector
     void reserve (size_type n)
 
 
-- 赋值：
+- 赋值
 
-  - 数组或其他向量区间[first,last)内的值赋给当前向量。
+  - 数组或其他向量区间 [first,last) 内的值赋给当前向量。
 
     ::
 
@@ -108,14 +108,13 @@ list
 
 - 元素个数：size()，empty()
 - 插入：push_front()，push_back()，emplace_front()，emplace_back()
+- 删除：pop_front()，pop_back()
 - 迭代器插入：在position **之前** 插入元素。
 
   ::
 
     iterator insert (iterator position, const value_type& val)
 
-
-- 删除：pop_front()，pop_back()
 
 deque
 ---------
@@ -127,13 +126,12 @@ deque
 
 - 元素个数：size()，empty()
 - 插入：push_front(x)，push_back(x)
+- 删除：pop_front()，pop_back()
 - 迭代器插入：在position **之前** 插入元素。
 
   ::
 
     iterator insert (iterator position, const value_type& val)
-
-- 删除：pop_front()，pop_back()
 
 
 pair
@@ -149,7 +147,7 @@ pair
     template <class T1, class T2>
     pair<T1,T2> make_pair (T1 x, T2 y);
 
-- 访问：成员first访问第一个元素，成员second访问第二个元素。
+- 访问：成员 ``first`` 访问第一个元素，成员 ``second`` 访问第二个元素。
 
 
 map
@@ -162,8 +160,16 @@ map
 
 ``map<K，T>`` 容器，保存的是 ``pair<const K，T>`` 类型的元素。
 
+``map<K，T>::key_type`` ：键类型
+
+``map<K，T>::mapped_type`` ：值类型
+
+``map<K，T>::value_type`` ：pair类型， ``<map<K，T>::key_type, map<K，T>::mapped_type>``
+
 - 访问：[key]，at(key)
+
   - [key]，key不存在，会创建新的键值对。
+
   - at(key)，key不存在，抛出out\_of\_range异常。
 
 - 查找：找不到key则返回 ``map::end`` 。
@@ -173,11 +179,12 @@ map
     iterator find (const key_type& k);
     const_iterator find (const key_type& k) const;
 
-- 插入：map的元素自动按照key升序排序，不能人为对map进行排序。
+- 插入：如果key已经存在，则插入无效。map的元素自动按照key升序排序，不能人为对map进行排序。
 
   ::
 
     pair<iterator,bool> insert (const value_type& val);
+
 
 - 删除：返回删除元素后的下一个元素的迭代器，当前迭代器失效。
 
@@ -188,6 +195,35 @@ map
     iterator  erase (const_iterator first, const_iterator last);
 
   ``it = myMap.erase(it)`` 等效为 ``myMap.erase(it++)`` 。
+
+
+例子
+
+.. code-block:: cpp
+  :linenos:
+
+  #include <iostream>
+  #include <map>
+
+  int main ()
+  {
+    std::map<char,int> mymap;
+
+    // first insert function version (single parameter):
+    mymap.insert ( std::pair<char,int>('a',100) );
+    mymap.insert ( std::map<char,int>::value_type('z',200) );
+
+    std::pair<std::map<char,int>::iterator,bool> ret;
+    ret = mymap.insert ( std::pair<char,int>('z',500) );
+    if (ret.second==false)
+    {
+      std::cout << "element 'z' already existed";
+      std::cout << " with a value of " << ret.first->second << '\n';
+    }
+
+    return 0;
+  }
+
 
 
 stack

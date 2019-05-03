@@ -253,7 +253,7 @@
 <ul>
 <li><p class="first">元素个数：size()，empty()</p>
 </li>
-<li><p class="first">内存：vec.capcity()</p>
+<li><p class="first">内存：capcity()</p>
 </li>
 <li><p class="first">访问：[pos]，at(pos)</p>
 </li>
@@ -271,9 +271,9 @@
 </pre></div>
 </div>
 </li>
-<li><p class="first">赋值：</p>
+<li><p class="first">赋值</p>
 <ul>
-<li><p class="first">数组或其他向量区间[first,last)内的值赋给当前向量。</p>
+<li><p class="first">数组或其他向量区间 [first,last) 内的值赋给当前向量。</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">InputIterator</span><span class="o">&gt;</span>
 <span class="kt">void</span> <span class="n">assign</span> <span class="p">(</span><span class="n">InputIterator</span> <span class="n">first</span><span class="p">,</span> <span class="n">InputIterator</span> <span class="n">last</span><span class="p">)</span>
 </pre></div>
@@ -311,12 +311,12 @@
 </li>
 <li><p class="first">插入：push_front()，push_back()，emplace_front()，emplace_back()</p>
 </li>
+<li><p class="first">删除：pop_front()，pop_back()</p>
+</li>
 <li><p class="first">迭代器插入：在position <strong>之前</strong> 插入元素。</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">iterator</span> <span class="n">insert</span> <span class="p">(</span><span class="n">iterator</span> <span class="n">position</span><span class="p">,</span> <span class="k">const</span> <span class="n">value_type</span><span class="o">&amp;</span> <span class="n">val</span><span class="p">)</span>
 </pre></div>
 </div>
-</li>
-<li><p class="first">删除：pop_front()，pop_back()</p>
 </li>
 </ul>
 </div>
@@ -331,12 +331,12 @@
 </li>
 <li><p class="first">插入：push_front(x)，push_back(x)</p>
 </li>
+<li><p class="first">删除：pop_front()，pop_back()</p>
+</li>
 <li><p class="first">迭代器插入：在position <strong>之前</strong> 插入元素。</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">iterator</span> <span class="n">insert</span> <span class="p">(</span><span class="n">iterator</span> <span class="n">position</span><span class="p">,</span> <span class="k">const</span> <span class="n">value_type</span><span class="o">&amp;</span> <span class="n">val</span><span class="p">)</span>
 </pre></div>
 </div>
-</li>
-<li><p class="first">删除：pop_front()，pop_back()</p>
 </li>
 </ul>
 </div>
@@ -352,7 +352,7 @@
 </pre></div>
 </div>
 </li>
-<li><p class="first">访问：成员first访问第一个元素，成员second访问第二个元素。</p>
+<li><p class="first">访问：成员 <code class="docutils literal notranslate"><span class="pre">first</span></code> 访问第一个元素，成员 <code class="docutils literal notranslate"><span class="pre">second</span></code> 访问第二个元素。</p>
 </li>
 </ul>
 </div>
@@ -363,10 +363,15 @@
 </div>
 <p><strong>底层实现：红黑树。</strong></p>
 <p><code class="docutils literal notranslate"><span class="pre">map&lt;K，T&gt;</span></code> 容器，保存的是 <code class="docutils literal notranslate"><span class="pre">pair&lt;const</span> <span class="pre">K，T&gt;</span></code> 类型的元素。</p>
+<p><code class="docutils literal notranslate"><span class="pre">map&lt;K，T&gt;::key_type</span></code> ：键类型</p>
+<p><code class="docutils literal notranslate"><span class="pre">map&lt;K，T&gt;::mapped_type</span></code> ：值类型</p>
+<p><code class="docutils literal notranslate"><span class="pre">map&lt;K，T&gt;::value_type</span></code> ：pair类型， <code class="docutils literal notranslate"><span class="pre">&lt;map&lt;K，T&gt;::key_type,</span> <span class="pre">map&lt;K，T&gt;::mapped_type&gt;</span></code></p>
 <ul>
-<li><p class="first">访问：[key]，at(key)
-- [key]，key不存在，会创建新的键值对。
-- at(key)，key不存在，抛出out_of_range异常。</p>
+<li><p class="first">访问：[key]，at(key)</p>
+<ul class="simple">
+<li>[key]，key不存在，会创建新的键值对。</li>
+<li>at(key)，key不存在，抛出out_of_range异常。</li>
+</ul>
 </li>
 <li><p class="first">查找：找不到key则返回 <code class="docutils literal notranslate"><span class="pre">map::end</span></code> 。</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">iterator</span> <span class="nf">find</span> <span class="p">(</span><span class="k">const</span> <span class="n">key_type</span><span class="o">&amp;</span> <span class="n">k</span><span class="p">);</span>
@@ -374,7 +379,7 @@
 </pre></div>
 </div>
 </li>
-<li><p class="first">插入：map的元素自动按照key升序排序，不能人为对map进行排序。</p>
+<li><p class="first">插入：如果key已经存在，则插入无效。map的元素自动按照key升序排序，不能人为对map进行排序。</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">pair</span><span class="o">&lt;</span><span class="n">iterator</span><span class="p">,</span><span class="kt">bool</span><span class="o">&gt;</span> <span class="n">insert</span> <span class="p">(</span><span class="k">const</span> <span class="n">value_type</span><span class="o">&amp;</span> <span class="n">val</span><span class="p">);</span>
 </pre></div>
 </div>
@@ -388,6 +393,50 @@
 <p><code class="docutils literal notranslate"><span class="pre">it</span> <span class="pre">=</span> <span class="pre">myMap.erase(it)</span></code> 等效为 <code class="docutils literal notranslate"><span class="pre">myMap.erase(it++)</span></code> 。</p>
 </li>
 </ul>
+<p>例子</p>
+<div class="highlight-cpp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;map&gt;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">main</span> <span class="p">()</span>
+<span class="p">{</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="kt">char</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">mymap</span><span class="p">;</span>
+
+  <span class="c1">// first insert function version (single parameter):</span>
+  <span class="n">mymap</span><span class="p">.</span><span class="n">insert</span> <span class="p">(</span> <span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">char</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="sc">&#39;a&#39;</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span> <span class="p">);</span>
+  <span class="n">mymap</span><span class="p">.</span><span class="n">insert</span> <span class="p">(</span> <span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="kt">char</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;::</span><span class="n">value_type</span><span class="p">(</span><span class="sc">&#39;z&#39;</span><span class="p">,</span><span class="mi">200</span><span class="p">)</span> <span class="p">);</span>
+
+  <span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="kt">char</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;::</span><span class="n">iterator</span><span class="p">,</span><span class="kt">bool</span><span class="o">&gt;</span> <span class="n">ret</span><span class="p">;</span>
+  <span class="n">ret</span> <span class="o">=</span> <span class="n">mymap</span><span class="p">.</span><span class="n">insert</span> <span class="p">(</span> <span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">char</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="sc">&#39;z&#39;</span><span class="p">,</span><span class="mi">500</span><span class="p">)</span> <span class="p">);</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">ret</span><span class="p">.</span><span class="n">second</span><span class="o">==</span><span class="nb">false</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;element &#39;z&#39; already existed&quot;</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; with a value of &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">ret</span><span class="p">.</span><span class="n">first</span><span class="o">-&gt;</span><span class="n">second</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;\n&#39;</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
 </div>
 <div class="section" id="stack">
 <h2>19.7. stack<a class="headerlink" href="#stack" title="Permalink to this headline">¶</a></h2>
