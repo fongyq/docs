@@ -34,6 +34,8 @@ string
 
 - 长度：length()，size()，empty()
 - 访问：[pos]，at(pos)。at()返回位置pos处元素的引用，越界则抛出out\_of\_range异常。
+- 字典序比较：==，!=，<，<=，>，>=
+- 串接：+
 - c_str()：返回指向C类型字符串的指针。
 - 子串
   ::
@@ -50,6 +52,7 @@ vector
 **底层实现：顺序表（数组）。**
 
 - 元素个数：size()，empty()
+- 逐元素比较：==，!=，<，<=，>，>=
 - 内存空间：capcity()
 - 访问：[pos]，at(pos)
 - 尾部插入：push_back(x)

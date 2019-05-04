@@ -1,5 +1,5 @@
-面试笔试
-============
+测试
+=========
 
 汇总
 ----------
@@ -174,7 +174,38 @@
         if sum_nums % 2:
             return False
         return self.backtrack(nums, sum_nums, 0, 0) ## self
-      
+
+14. [LeetCode] Find All Anagrams in a String 统计变位词出现的位置。采用滑动窗口和 **计数器** 进行比较。
+
+  https://leetcode.com/problems/find-all-anagrams-in-a-string/
+
+  .. code-block:: cpp
+    :linenos:
+
+    /* https://leetcode.com/problems/find-all-anagrams-in-a-string/discuss/92027/C%2B%2B-O(n)-sliding-window-concise-solution-with-explanation */
+
+    class Solution {
+    public:
+        vector<int> findAnagrams(string s, string p) {
+            vector<int> vec;
+            if(s.size()<p.size() || (s.empty() && p.empty())) return vec;
+            vector<int> p_counter(26, 0), s_counter(26, 0);
+            for(int i = 0; i < p.size(); ++i)
+            {
+                ++ p_counter[p[i]-'a'];
+                ++ s_counter[s[i]-'a'];
+            }
+            if(p_counter == s_counter) vec.push_back(0);
+            for(int i = p.size(); i < s.size(); ++i)
+            {
+                -- s_counter[s[i-p.size()]-'a'];
+                ++ s_counter[s[i]-'a'];
+                if(s_counter == p_counter) vec.push_back(i-p.size()+1);
+            }
+            return vec;
+        }
+    };
+
 
 c++
 ------------
@@ -259,6 +290,7 @@ python
 
   https://fongyq.github.io/blog/machineLearning/03_pca.html
 
+
 论文相关
 -----------------
 
@@ -287,7 +319,6 @@ python
 4. CapsuleNet解读
 
   https://blog.csdn.net/u013010889/article/details/78722140/
-
 
 其他
 --------------
