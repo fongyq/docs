@@ -168,16 +168,6 @@ command
               return True
           return self.jump_from_i(nums, 0)
 
-代码显示与隐藏：
-
-.. toggle-header::
-   :header: Example 1 **Show/Hide Code**
-
-   .. code-block:: xml
-    :linenos:
-
-    from plone import api
-    ...
 
 参考资料
 -----------------
@@ -190,8 +180,24 @@ command
 
   https://3vshej.cn/rstSyntax/rstSyntax.html
 
-3. 代码隐藏
+3. 代码隐藏（自定义）
 
   http://cn.voidcc.com/question/p-pnfmhomd-v.html
 
   https://stackoverflow.com/questions/2454577/sphinx-restructuredtext-show-hide-code-snippets
+
+4. 代码隐藏（安装扩展）
+
+  https://sphinxcontrib-contentui.readthedocs.io/en/latest/installation.html
+
+  https://sphinxcontrib-contentui.readthedocs.io/en/latest/toggle.html
+
+5. Sphinx + Github Page + Read the Docs
+
+  https://kyzhang.me/2018/05/08/Sphinx-Readthedocs-GitHub2build-wiki/
+
+  https://www.jianshu.com/p/78e9e1b8553a
+
+  https://jamwheeler.com/college-productivity/how-to-write-beautiful-code-documentation/
+
+  https://daler.github.io/sphinxdoc-test/includeme.html

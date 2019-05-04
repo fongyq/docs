@@ -81,43 +81,10 @@
 
   https://blog.csdn.net/princexiexiaofeng/article/details/79645511
 
-11. 找到数组第k大的数（https://leetcode.com/problems/kth-largest-element-in-an-array/）
+11. 找到数组第k大的数（代码： `11-找到数组第k大的数`_ ）
 
-  .. code-block:: cpp
-    :linenos:
-    :emphasize-lines: 14,15
+  https://leetcode.com/problems/kth-largest-element-in-an-array/
 
-    class Solution {
-    public:
-        int partition(vector<int>& nums, int i, int j)
-        {
-            int pivot = nums[i];
-            int l = i+1;
-            int r = j;
-            while(true)
-            {
-                while(l<=j && nums[l]<pivot) l++;
-                while(r>i && nums[r]>pivot) r--;
-                if(l>=r) break;
-                swap(nums[l], nums[r]);
-                l++;
-                r--;
-            }
-            swap(nums[i], nums[r]);
-            return r;
-        }
-        int quicksort(vector<int>& nums, int a, int b, int k)
-        {
-            int p = partition(nums, a, b);
-            if(b - p + 1 == k) return p;
-            if(b - p + 1 < k) return quicksort(nums, a, p-1, k - (b - p + 1));
-            else return quicksort(nums, p+1, b, k);
-        }
-        int findKthLargest(vector<int>& nums, int k) {
-            int k_id = quicksort(nums, 0, nums.size()-1, k);
-            return nums[k_id];
-        }
-    };
 
 12. [LeetCode] Best Time to Buy and Sell Stock 买卖股票的最佳时间
 
@@ -143,68 +110,14 @@
 
       https://www.cnblogs.com/grandyang/p/4997417.html
 
-13. [LeetCode] Partition Equal Subset Sum 数组分成两个子集，和相等
+13. [LeetCode] Partition Equal Subset Sum 数组分成两个子集，和相等（代码： `13-数组分成两个子集`_ ）
 
   https://leetcode.com/problems/partition-equal-subset-sum/
 
-  .. code-block:: python
-    :linenos:
-    :emphasize-lines: 2,7,9,23
 
-    class Solution(object):
-    def backtrack(self, nums, sum_nums, sum_current, i): ## self
-        if sum_current == sum_nums/2:
-            return True
-        if i == len(nums):
-            return False
-        if self.backtrack(nums, sum_nums, sum_current+nums[i],i+1): ## self
-            return True
-        if self.backtrack(nums, sum_nums, sum_current, i+1): ## self
-            return True
-        return False
-
-    def canPartition(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: bool
-        """
-        if len(nums) <= 1:
-            return False
-        sum_nums = sum(nums)
-        if sum_nums % 2:
-            return False
-        return self.backtrack(nums, sum_nums, 0, 0) ## self
-
-14. [LeetCode] Find All Anagrams in a String 统计变位词出现的位置。采用滑动窗口和 **计数器** 进行比较。
+14. [LeetCode] Find All Anagrams in a String 统计变位词出现的位置。Hint：采用滑动窗口和 **计数器** 进行比较。（代码： `14-统计变位词`_ ）
 
   https://leetcode.com/problems/find-all-anagrams-in-a-string/
-
-  .. code-block:: cpp
-    :linenos:
-
-    /* https://leetcode.com/problems/find-all-anagrams-in-a-string/discuss/92027/C%2B%2B-O(n)-sliding-window-concise-solution-with-explanation */
-
-    class Solution {
-    public:
-        vector<int> findAnagrams(string s, string p) {
-            vector<int> vec;
-            if(s.size()<p.size() || (s.empty() && p.empty())) return vec;
-            vector<int> p_counter(26, 0), s_counter(26, 0);
-            for(int i = 0; i < p.size(); ++i)
-            {
-                ++ p_counter[p[i]-'a'];
-                ++ s_counter[s[i]-'a'];
-            }
-            if(p_counter == s_counter) vec.push_back(0);
-            for(int i = p.size(); i < s.size(); ++i)
-            {
-                -- s_counter[s[i-p.size()]-'a'];
-                ++ s_counter[s[i]-'a'];
-                if(s_counter == p_counter) vec.push_back(i-p.size()+1);
-            }
-            return vec;
-        }
-    };
 
 
 c++
@@ -320,9 +233,133 @@ python
 
   https://blog.csdn.net/u013010889/article/details/78722140/
 
+
 其他
 --------------
 
 1. 理解数据库的事务，ACID，CAP和一致性
 
   https://www.jianshu.com/p/2c30d1fe5c4e
+
+
+
+附：代码
+------------
+
+11-找到数组第k大的数
+^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: cpp
+  :linenos:
+  :emphasize-lines: 14,15,24,25,28,29
+
+  class Solution {
+  public:
+      int partition(vector<int>& nums, int i, int j)
+      {
+          int pivot = nums[i];
+          int l = i+1;
+          int r = j;
+          while(true)
+          {
+              while(l<=j && nums[l]<pivot) l++;
+              while(r>i && nums[r]>pivot) r--;
+              if(l>=r) break;
+              swap(nums[l], nums[r]);
+              l++;
+              r--;
+          }
+          swap(nums[i], nums[r]);
+          return r;
+      }
+      // partition 可用如下更简洁的形式
+      int partition(vector<int>& nums, int i, int j)
+      {
+          int pivot = nums[i];
+          int l = i;
+          int r = j+1;
+          while(true)
+          {
+              while(nums[++l]<pivot && l<j);
+              while(nums[--r]>pivot);
+              if(l>=r) break;
+              swap(nums[l], nums[r]);
+          }
+          swap(nums[i], nums[r]);
+          return r;
+      }
+
+
+      int quicksort(vector<int>& nums, int a, int b, int k)
+      {
+          int p = partition(nums, a, b);
+          if(b - p + 1 == k) return p;
+          if(b - p + 1 < k) return quicksort(nums, a, p-1, k - (b - p + 1));
+          else return quicksort(nums, p+1, b, k);
+      }
+      int findKthLargest(vector<int>& nums, int k) {
+          int k_id = quicksort(nums, 0, nums.size()-1, k);
+          return nums[k_id];
+      }
+  };
+
+
+13-数组分成两个子集
+^^^^^^^^^^^^^^^^^^^^^^^^^
+.. code-block:: python
+  :linenos:
+  :emphasize-lines: 2,7,9,23
+
+  class Solution(object):
+  def backtrack(self, nums, sum_nums, sum_current, i): ## self
+      if sum_current == sum_nums/2:
+          return True
+      if i == len(nums):
+          return False
+      if self.backtrack(nums, sum_nums, sum_current+nums[i],i+1): ## self
+          return True
+      if self.backtrack(nums, sum_nums, sum_current, i+1): ## self
+          return True
+      return False
+
+  def canPartition(self, nums):
+      """
+      :type nums: List[int]
+      :rtype: bool
+      """
+      if len(nums) <= 1:
+          return False
+      sum_nums = sum(nums)
+      if sum_nums % 2:
+          return False
+      return self.backtrack(nums, sum_nums, 0, 0) ## self
+
+
+14-统计变位词
+^^^^^^^^^^^^^^^
+.. code-block:: cpp
+  :linenos:
+
+  /* https://leetcode.com/problems/find-all-anagrams-in-a-string/discuss/92027/C%2B%2B-O(n)-sliding-window-concise-solution-with-explanation */
+
+  class Solution {
+  public:
+      vector<int> findAnagrams(string s, string p) {
+          vector<int> vec;
+          if(s.size()<p.size() || (s.empty() && p.empty())) return vec;
+          vector<int> p_counter(26, 0), s_counter(26, 0);
+          for(int i = 0; i < p.size(); ++i)
+          {
+              ++ p_counter[p[i]-'a'];
+              ++ s_counter[s[i]-'a'];
+          }
+          if(p_counter == s_counter) vec.push_back(0);
+          for(int i = p.size(); i < s.size(); ++i)
+          {
+              -- s_counter[s[i-p.size()]-'a'];
+              ++ s_counter[s[i]-'a'];
+              if(s_counter == p_counter) vec.push_back(i-p.size()+1);
+          }
+          return vec;
+      }
+  };
