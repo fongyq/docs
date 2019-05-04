@@ -119,8 +119,8 @@
 
   https://leetcode.com/problems/find-all-anagrams-in-a-string/
 
-15. [LeetCode] Find the Duplicate Number 寻找重复数 （Hint：把数组元素的值当做下标，由于元素存在重复，因此必然会 **重复多次访问同一个位置** 。
-从另一个角度讲，访问序列中存在“环”。哈希不满足空间复杂度为O(1)的要求）
+15. [LeetCode] Find the Duplicate Number 寻找重复数。Hint：把数组元素的值当做下标，由于元素存在重复，因此必然会 **重复多次访问同一个位置** 。
+从另一个角度讲，访问序列中存在“环”。哈希不满足空间复杂度为O(1)的要求。
 
   - 找到一个重复数字。（代码： `15-1-寻找一个重复数`_ ）
 
