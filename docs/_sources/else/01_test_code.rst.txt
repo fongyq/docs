@@ -122,11 +122,7 @@ command
           return "such color"
       }
 
-下面是 ``python`` (code-block)::
 
-  def foo():
-      print "Love Python, Love FreeDome"
-      print "E文标点,.0123456789,中文标点,. "
 
 下面是 ``bash`` :
 
@@ -172,6 +168,21 @@ command
               return True
           return self.jump_from_i(nums, 0)
 
+代码显示与隐藏：
+
+.. container:: toggle
+
+    .. container:: header
+
+     **Show/Hide**
+
+    .. code-block:: xml
+     :linenos:
+
+     from plone import api
+     ...
+
+
 参考资料
 -----------------
 
@@ -182,3 +193,7 @@ command
 2. RST 语法
 
   https://3vshej.cn/rstSyntax/rstSyntax.html
+
+3. 代码隐藏
+
+  http://cn.voidcc.com/question/p-pnfmhomd-v.html
