@@ -6,7 +6,7 @@
 
 - **str**
 
-  - 索引、切片：[]
+  - 索引、切片：[ind]，[first:last]获取区间 [first, last) 内的元素。
 
   - 长度：len()
 
@@ -48,7 +48,7 @@
 
 - **list**
 
-  - 索引、切片：[]
+  - 索引、切片：[ind]，[first:last]获取区间 [first, last) 内的元素。
 
   - 统计元素出现的次数：count()
 
