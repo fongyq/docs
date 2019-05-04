@@ -212,6 +212,13 @@ sort
     return 0;
   }
 
+
+**string** 类也是可以排序的，如 ::
+
+  string str;
+  sort(str.begin(), str.end());
+
+
 附：头文件
 ----------------
 
