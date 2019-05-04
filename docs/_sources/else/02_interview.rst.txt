@@ -447,20 +447,20 @@ python
       }
   };
 
-  // 解法二：不断交换位置使得 i == nums[i-1]
+  // 解法二：不断交换位置使得 i == nums[i]-1
   class Solution {
   public:
-      vector<int> findDuplicates(vector<int>& nums) {
-          vector<int> res;
-          for (int i = 0; i < nums.size(); ++i) {
-              if (nums[i] != nums[nums[i] - 1]) {
-                  swap(nums[i], nums[nums[i] - 1]);
-                  --i;
-              }
+      vector<int> findDisappearedNumbers(vector<int>& nums) {
+          vector<int> disappear;
+          if(nums.size()<=1) return disappear;
+          for(int k = 0; k < nums.size(); ++k)
+          {
+              while(nums[k] != nums[nums[k]-1]) swap(nums[k], nums[nums[k]-1]);
           }
-          for (int i = 0; i < nums.size(); ++i) {
-              if (nums[i] != i + 1) res.push_back(nums[i]);
+          for(int k = 0; k < nums.size(); ++k)
+          {
+              if(nums[k]-1 != k) disappear.push_back(nums[k]);
           }
-          return res;
+          return disappear;
       }
   };
