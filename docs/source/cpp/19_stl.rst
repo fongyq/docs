@@ -33,7 +33,7 @@ string
   #include<string>
 
 - 长度：length()，size()，empty()
-- 访问：[pos]，at(pos)。at()返回位置pos处元素的引用，可能抛出out\_of\_range异常。
+- 访问：[pos]，at(pos)。at()返回位置pos处元素的引用，越界则抛出out\_of\_range异常。
 - c_str()：返回指向C类型字符串的指针。
 - 子串
   ::
@@ -50,7 +50,7 @@ vector
 **底层实现：顺序表（数组）。**
 
 - 元素个数：size()，empty()
-- 内存：capcity()
+- 内存空间：capcity()
 - 访问：[pos]，at(pos)
 - 尾部插入：push_back(x)
 - 迭代器插入：在position **之前** 插入元素。
@@ -93,8 +93,8 @@ vector
 
 - 清除：
 
-  - ``vector< TYPE >().swap(myVec)``
-  - ``myVec.clear()`` 让myVec.size()为0，但是myVec.capcity()不为0，调用 ``myVec.clear()`` 之后再调用 ``myVec.shrink_to_fit()`` 。
+  - ``vector< value_type >().swap(myVec)``
+  - ``myVec.clear()`` 让myVec.size()为0，但是myVec.capcity()不为0，调用 ``myVec.clear()`` 之后再调用 ``myVec.shrink_to_fit()`` 。 ``shrink_to_fit()`` 的作用是减小capcity()以匹配size()。
 
 
 

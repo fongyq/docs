@@ -233,7 +233,7 @@
 <ul>
 <li><p class="first">长度：length()，size()，empty()</p>
 </li>
-<li><p class="first">访问：[pos]，at(pos)。at()返回位置pos处元素的引用，可能抛出out_of_range异常。</p>
+<li><p class="first">访问：[pos]，at(pos)。at()返回位置pos处元素的引用，越界则抛出out_of_range异常。</p>
 </li>
 <li><p class="first">c_str()：返回指向C类型字符串的指针。</p>
 </li>
@@ -253,7 +253,7 @@
 <ul>
 <li><p class="first">元素个数：size()，empty()</p>
 </li>
-<li><p class="first">内存：capcity()</p>
+<li><p class="first">内存空间：capcity()</p>
 </li>
 <li><p class="first">访问：[pos]，at(pos)</p>
 </li>
@@ -294,8 +294,8 @@
 </li>
 <li><p class="first">清除：</p>
 <ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">vector&lt;</span> <span class="pre">TYPE</span> <span class="pre">&gt;().swap(myVec)</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">myVec.clear()</span></code> 让myVec.size()为0，但是myVec.capcity()不为0，调用 <code class="docutils literal notranslate"><span class="pre">myVec.clear()</span></code> 之后再调用 <code class="docutils literal notranslate"><span class="pre">myVec.shrink_to_fit()</span></code> 。</li>
+<li><code class="docutils literal notranslate"><span class="pre">vector&lt;</span> <span class="pre">value_type</span> <span class="pre">&gt;().swap(myVec)</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">myVec.clear()</span></code> 让myVec.size()为0，但是myVec.capcity()不为0，调用 <code class="docutils literal notranslate"><span class="pre">myVec.clear()</span></code> 之后再调用 <code class="docutils literal notranslate"><span class="pre">myVec.shrink_to_fit()</span></code> 。 <code class="docutils literal notranslate"><span class="pre">shrink_to_fit()</span></code> 的作用是减小capcity()以匹配size()。</li>
 </ul>
 </li>
 </ul>
