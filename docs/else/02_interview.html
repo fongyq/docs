@@ -106,9 +106,10 @@
 <li class="toctree-l3"><a class="reference internal" href="#id5">2.6. 论文相关</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id6">2.7. 其他</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id7">2.8. 附：代码</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id8">9-下一个排列</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#k">11-找到数组第k大的数</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id8">13-数组分成两个子集</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id9">14-统计变位词</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id9">13-数组分成两个子集</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id10">14-统计变位词</a></li>
 </ul>
 </li>
 </ul>
@@ -279,7 +280,7 @@
 </ul>
 </div></blockquote>
 <ol class="arabic simple" start="7">
-<li>全排列的非递归和递归实现(含重复元素)</li>
+<li>全排列的非递归和递归实现（含重复元素）。Hint：在交换第i个元素与第j个元素之前，要求数组的[i, j)区间中的元素没有与第j个元素重复。</li>
 </ol>
 <blockquote>
 <div><a class="reference external" href="https://blog.csdn.net/so_geili/article/details/71078945">https://blog.csdn.net/so_geili/article/details/71078945</a></div></blockquote>
@@ -289,7 +290,7 @@
 <blockquote>
 <div><a class="reference external" href="https://blog.csdn.net/qwb492859377/article/details/50654627?tdsourcetag=s_pctim_aiomsg">https://blog.csdn.net/qwb492859377/article/details/50654627?tdsourcetag=s_pctim_aiomsg</a></div></blockquote>
 <ol class="arabic simple" start="9">
-<li>Next Permutation 下一个排列</li>
+<li>Next Permutation 下一个排列 （代码： <a class="reference internal" href="#id8">9-下一个排列</a> ）</li>
 </ol>
 <blockquote>
 <div><a class="reference external" href="https://www.cnblogs.com/grandyang/p/4428207.html">https://www.cnblogs.com/grandyang/p/4428207.html</a></div></blockquote>
@@ -337,12 +338,12 @@
 </ul>
 </div></blockquote>
 <ol class="arabic simple" start="13">
-<li>[LeetCode] Partition Equal Subset Sum 数组分成两个子集，和相等（代码： <a class="reference internal" href="#id8">13-数组分成两个子集</a> ）</li>
+<li>[LeetCode] Partition Equal Subset Sum 数组分成两个子集，和相等（代码： <a class="reference internal" href="#id9">13-数组分成两个子集</a> ）</li>
 </ol>
 <blockquote>
 <div><a class="reference external" href="https://leetcode.com/problems/partition-equal-subset-sum/">https://leetcode.com/problems/partition-equal-subset-sum/</a></div></blockquote>
 <ol class="arabic simple" start="14">
-<li>[LeetCode] Find All Anagrams in a String 统计变位词出现的位置。Hint：采用滑动窗口和 <strong>计数器</strong> 进行比较。（代码： <a class="reference internal" href="#id9">14-统计变位词</a> ）</li>
+<li>[LeetCode] Find All Anagrams in a String 统计变位词出现的位置。Hint：采用滑动窗口和 <strong>计数器</strong> 进行比较。（代码： <a class="reference internal" href="#id10">14-统计变位词</a> ）</li>
 </ol>
 <blockquote>
 <div><a class="reference external" href="https://leetcode.com/problems/find-all-anagrams-in-a-string/">https://leetcode.com/problems/find-all-anagrams-in-a-string/</a></div></blockquote>
@@ -503,6 +504,46 @@
 </div>
 <div class="section" id="id7">
 <h2>2.8. 附：代码<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id8">
+<h3>9-下一个排列<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-cpp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// 从后往前先找到第一个开始下降的数字x（下标i），再从后往前找到第一个比x大的数y（下标j）；交换x，y；翻转区间 [i+1, end)。</span>
+<span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="kt">void</span> <span class="n">nextPermutation</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">num</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">num</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">;</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">;</span> <span class="o">--</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">num</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">num</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="p">{</span>
+                <span class="k">for</span> <span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="n">j</span> <span class="o">&gt;</span> <span class="n">i</span><span class="p">;</span> <span class="o">--</span><span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">num</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">num</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="k">break</span><span class="p">;</span>
+                <span class="p">}</span>
+                <span class="n">swap</span><span class="p">(</span><span class="n">num</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">num</span><span class="p">[</span><span class="n">j</span><span class="p">]);</span>
+                <span class="n">reverse</span><span class="p">(</span><span class="n">num</span><span class="p">.</span><span class="n">begin</span><span class="p">()</span> <span class="o">+</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">num</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+                <span class="k">return</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="n">reverse</span><span class="p">(</span><span class="n">num</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">num</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</pre></div>
+</td></tr></table></div>
+</div>
 <div class="section" id="k">
 <h3>11-找到数组第k大的数<a class="headerlink" href="#k" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-cpp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -605,8 +646,8 @@
 </pre></div>
 </td></tr></table></div>
 </div>
-<div class="section" id="id8">
-<h3>13-数组分成两个子集<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id9">
+<h3>13-数组分成两个子集<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -655,8 +696,8 @@
 </span></pre></div>
 </td></tr></table></div>
 </div>
-<div class="section" id="id9">
-<h3>14-统计变位词<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id10">
+<h3>14-统计变位词<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-cpp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3

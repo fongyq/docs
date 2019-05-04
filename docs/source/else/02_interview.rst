@@ -65,7 +65,7 @@
 
       https://blog.csdn.net/qq_35546040/article/details/80341136
 
-7. 全排列的非递归和递归实现(含重复元素)
+7. 全排列的非递归和递归实现（含重复元素）。Hint：在交换第i个元素与第j个元素之前，要求数组的[i, j)区间中的元素没有与第j个元素重复。
 
   https://blog.csdn.net/so_geili/article/details/71078945
 
@@ -73,7 +73,7 @@
 
   https://blog.csdn.net/qwb492859377/article/details/50654627?tdsourcetag=s_pctim_aiomsg
 
-9. Next Permutation 下一个排列
+9. Next Permutation 下一个排列 （代码： `9-下一个排列`_ ）
 
   https://www.cnblogs.com/grandyang/p/4428207.html
 
@@ -245,6 +245,33 @@ python
 
 附：代码
 ------------
+
+9-下一个排列
+^^^^^^^^^^^^^^
+
+.. code-block:: cpp
+  :linenos:
+
+  // 从后往前先找到第一个开始下降的数字x（下标i），再从后往前找到第一个比x大的数y（下标j）；交换x，y；翻转区间 [i+1, end)。
+  class Solution {
+  public:
+      void nextPermutation(vector<int> &num) {
+          int i, j, n = num.size();
+          for (i = n - 2; i >= 0; --i) {
+              if (num[i + 1] > num[i]) {
+                  for (j = n - 1; j > i; --j) {
+                      if (num[j] > num[i]) break;
+                  }
+                  swap(num[i], num[j]);
+                  reverse(num.begin() + i + 1, num.end());
+                  return;
+              }
+          }
+          reverse(num.begin(), num.end());
+      }
+  };
+
+
 
 11-找到数组第k大的数
 ^^^^^^^^^^^^^^^^^^^^
