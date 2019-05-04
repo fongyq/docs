@@ -264,9 +264,11 @@ python
   :linenos:
 
   // 从后往前先找到第一个开始下降的数字x（下标i），再从后往前找到第一个比x大的数y（下标j）；交换x，y；翻转区间 [i+1, end)。
-  class Solution {
+  class Solution
+  {
   public:
-      void nextPermutation(vector<int> &num) {
+      void nextPermutation(vector<int> &num)
+      {
           int i, j, n = num.size();
           for (i = n - 2; i >= 0; --i)
           {
@@ -294,7 +296,8 @@ python
   :linenos:
   :emphasize-lines: 14,15,24,25,28,29
 
-  class Solution {
+  class Solution
+  {
   public:
       int partition(vector<int>& nums, int i, int j)
       {
@@ -338,7 +341,8 @@ python
           if(b - p + 1 < k) return quicksort(nums, a, p-1, k - (b - p + 1));
           else return quicksort(nums, p+1, b, k);
       }
-      int findKthLargest(vector<int>& nums, int k) {
+      int findKthLargest(vector<int>& nums, int k)
+      {
           int k_id = quicksort(nums, 0, nums.size()-1, k);
           return nums[k_id];
       }
@@ -383,9 +387,11 @@ python
 
   /* https://leetcode.com/problems/find-all-anagrams-in-a-string/discuss/92027/C%2B%2B-O(n)-sliding-window-concise-solution-with-explanation */
 
-  class Solution {
+  class Solution
+  {
   public:
-      vector<int> findAnagrams(string s, string p) {
+      vector<int> findAnagrams(string s, string p)
+      {
           vector<int> vec;
           if(s.size()<p.size() || (s.empty() && p.empty())) return vec;
           vector<int> p_counter(26, 0), s_counter(26, 0);
@@ -412,9 +418,11 @@ python
   :linenos:
 
   // 解法一：快慢指针，寻找某个“环”的入口
-  class Solution {
+  class Solution
+  {
   public:
-      int findDuplicate(vector<int>& nums) {
+      int findDuplicate(vector<int>& nums)
+      {
           int slow = 0, fast = 0, t = 0;
           while (true)
           {
@@ -433,9 +441,11 @@ python
   };
 
   // 解法二：不断交换位置，找到第一个重复访问的元素
-  class Solution {
+  class Solution
+  {
   public:
-      int findDuplicate(vector<int>& nums){
+      int findDuplicate(vector<int>& nums)
+      {
           int duplicate;
           for(int k = 0; k < nums.size(); ++k)
           {
@@ -454,17 +464,21 @@ python
   };
 
 
+
 15-2-寻找全部重复数
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 .. code-block:: cpp
   :linenos:
 
   // 解法一：将访问过的元素置为相反数（负数），如果下次访问到一个负数，说明这个元素被重复访问
-  class Solution {
+  class Solution
+  {
   public:
-      vector<int> findDuplicates(vector<int>& nums) {
+      vector<int> findDuplicates(vector<int>& nums)
+      {
           vector<int> res;
-          for (int i = 0; i < nums.size(); ++i) {
+          for (int i = 0; i < nums.size(); ++i)
+          {
               int idx = abs(nums[i]) - 1;
               if (nums[idx] < 0) res.push_back(idx + 1);
               nums[idx] = -nums[idx];
@@ -474,9 +488,11 @@ python
   };
 
   // 解法二：不断交换位置使得 i == nums[i]-1
-  class Solution {
+  class Solution
+  {
   public:
-      vector<int> findDisappearedNumbers(vector<int>& nums) {
+      vector<int> findDisappearedNumbers(vector<int>& nums)
+      {
           vector<int> disappear;
           if(nums.size()<=1) return disappear;
           for(int k = 0; k < nums.size(); ++k)
