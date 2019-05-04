@@ -183,3 +183,6 @@ texinfo_documents = [
      author, 'Fong', 'One line description of project.',
      'Miscellaneous'),
 ]
+
+def setup(app):
+    app.add_stylesheet('custom.css')

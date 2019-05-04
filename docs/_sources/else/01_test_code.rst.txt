@@ -197,3 +197,5 @@ command
 3. 代码隐藏
 
   http://cn.voidcc.com/question/p-pnfmhomd-v.html
+
+  https://stackoverflow.com/questions/2454577/sphinx-restructuredtext-show-hide-code-snippets
