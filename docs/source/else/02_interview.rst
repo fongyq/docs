@@ -119,6 +119,17 @@
 
   https://leetcode.com/problems/find-all-anagrams-in-a-string/
 
+15. [LeetCode] Find the Duplicate Number 寻找重复数 （Hint：把数组元素的值当做下标，由于元素存在重复，因此必然会 **重复多次访问同一个位置** 。
+从另一个角度讲，访问序列中存在“环”。哈希不满足空间复杂度为O(1)的要求）
+
+  - 找到一个重复数字。（代码： `15-1-寻找一个重复数`_ ）
+
+      http://www.cnblogs.com/grandyang/p/4843654.html
+
+  - 找到所有重复数字。（代码： `15-2-寻找全部重复数`_ ）
+
+      http://www.cnblogs.com/grandyang/p/6209746.html
+
 
 c++
 ------------
@@ -388,5 +399,68 @@ python
               if(s_counter == p_counter) vec.push_back(i-p.size()+1);
           }
           return vec;
+      }
+  };
+
+
+15-1-寻找一个重复数
+^^^^^^^^^^^^^^^^^^^^^^^^^
+.. code-block:: cpp
+  :linenos:
+
+  // 快慢指针，寻找某个“环”的入口
+  class Solution {
+  public:
+      int findDuplicate(vector<int>& nums) {
+          int slow = 0, fast = 0, t = 0;
+          while (true) {
+              slow = nums[slow];
+              fast = nums[nums[fast]];
+              if (slow == fast) break;
+          }
+          while (true) {
+              slow = nums[slow];
+              t = nums[t];
+              if (slow == t) break;
+          }
+          return slow;
+      }
+  };
+
+
+15-2-寻找全部重复数
+^^^^^^^^^^^^^^^^^^^^^^^^^
+.. code-block:: cpp
+  :linenos:
+
+  // 解法一：将访问过的元素置为相反数（负数），如果下次访问到一个负数，说明这个元素被重复访问
+  class Solution {
+  public:
+      vector<int> findDuplicates(vector<int>& nums) {
+          vector<int> res;
+          for (int i = 0; i < nums.size(); ++i) {
+              int idx = abs(nums[i]) - 1;
+              if (nums[idx] < 0) res.push_back(idx + 1);
+              nums[idx] = -nums[idx];
+          }
+          return res;
+      }
+  };
+
+  // 解法二：不断交换位置使得 i == nums[i-1]
+  class Solution {
+  public:
+      vector<int> findDuplicates(vector<int>& nums) {
+          vector<int> res;
+          for (int i = 0; i < nums.size(); ++i) {
+              if (nums[i] != nums[nums[i] - 1]) {
+                  swap(nums[i], nums[nums[i] - 1]);
+                  --i;
+              }
+          }
+          for (int i = 0; i < nums.size(); ++i) {
+              if (nums[i] != i + 1) res.push_back(nums[i]);
+          }
+          return res;
       }
   };
