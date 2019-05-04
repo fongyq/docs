@@ -408,22 +408,45 @@ python
 .. code-block:: cpp
   :linenos:
 
-  // 快慢指针，寻找某个“环”的入口
+  // 解法一：快慢指针，寻找某个“环”的入口
   class Solution {
   public:
       int findDuplicate(vector<int>& nums) {
           int slow = 0, fast = 0, t = 0;
-          while (true) {
+          while (true)
+          {
               slow = nums[slow];
               fast = nums[nums[fast]];
               if (slow == fast) break;
           }
-          while (true) {
+          while (true)
+          {
               slow = nums[slow];
               t = nums[t];
               if (slow == t) break;
           }
           return slow;
+      }
+  };
+
+  // 解法二：不断交换位置，找到第一个重复访问的元素
+  class Solution {
+  public:
+      int findDuplicate(vector<int>& nums){
+          int duplicate;
+          for(int k = 0; k < nums.size(); ++k)
+          {
+              while(nums[k]-1 != k)
+              {
+                  if(nums[k] == nums[nums[k]-1])
+                  {
+                      duplicate = nums[k];
+                      break;
+                  }
+                  swap(nums[k], nums[nums[k]-1]);
+              }
+          }
+          return duplicate;
       }
   };
 
