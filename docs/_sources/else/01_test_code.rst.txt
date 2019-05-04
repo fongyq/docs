@@ -170,18 +170,14 @@ command
 
 代码显示与隐藏：
 
-.. container:: toggle
+.. toggle-header::
+   :header: Example 1 **Show/Hide Code**
 
-    .. container:: header
+   .. code-block:: xml
+    :linenos:
 
-     **Show/Hide**
-
-    .. code-block:: xml
-     :linenos:
-
-     from plone import api
-     ...
-
+    from plone import api
+    ...
 
 参考资料
 -----------------

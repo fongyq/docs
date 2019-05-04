@@ -36,9 +36,9 @@ const_cast<type> (expr)
 
 **2**. 常量指针被转化成非常量的指针，并且仍然指向原来的对象；
 
-**3**. 常量引用被转换成非常量的引用，并且仍然指向原来的对象； 
+**3**. 常量引用被转换成非常量的引用，并且仍然指向原来的对象；
 
-**4**. const_cast一般用于修改指针。如const char *p形式。
+**4**. const_cast一般用于修改指针。如const char \*p形式。
 
 
 reinterpret_cast<type> (expr)
