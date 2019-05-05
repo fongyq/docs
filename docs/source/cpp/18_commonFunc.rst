@@ -157,67 +157,310 @@ sort
   template <class RandomAccessIterator, class Compare>
   void sort (RandomAccessIterator first, RandomAccessIterator last, Compare comp);
 
-例子：
+.. container:: toggle
 
-.. code-block:: cpp
-  :linenos:
+  .. container:: header
 
-  #include <iostream>
-  #include <vector>
-  #include <functional>
-  #include <algorithm>
-  using namespace std;
+    :math:`\color{darkgreen}{Show/Hide\ Code}`
 
-  bool comparator(int i, int j)
-  {
-    return (i < j);
-  }
+  .. code-block:: cpp
+    :linenos:
 
-  struct myclass
-  {
-    bool operator() (int i, int j)
+    #include <iostream>
+    #include <vector>
+    #include <functional>
+    #include <algorithm>
+    using namespace std;
+
+    bool comparator(int i, int j)
     {
       return (i < j);
     }
-  } myobject;
 
-  int main(int argc, char ** argv)
-  {
+    struct myclass
+    {
+      bool operator() (int i, int j)
+      {
+        return (i < j);
+      }
+    } myobject;
 
-    int a[] = { 32, 71, 12, 45, 26, 80, 53, 33 };
-    vector<int> v(a, a + 8);               // 32 71 12 45 26 80 53 33
+    int main(int argc, char ** argv)
+    {
 
-    // using default comparison (operator <):
-    sort(v.begin(), v.begin() + 4);           //(12 32 45 71)26 80 53 33
+      int a[] = { 32, 71, 12, 45, 26, 80, 53, 33 };
+      vector<int> v(a, a + 8);               // 32 71 12 45 26 80 53 33
 
-    // using comparator as comp
-    sort(v.begin() + 4, v.end(), comparator); // 12 32 45 71(26 33 53 80)
+      // using default comparison (operator <):
+      sort(v.begin(), v.begin() + 4);           //(12 32 45 71)26 80 53 33
 
-    // using object as comp
-    sort(v.begin(), v.end(), myobject);     //(12 26 32 33 45 53 71 80)
+      // using comparator as comp
+      sort(v.begin() + 4, v.end(), comparator); // 12 32 45 71(26 33 53 80)
 
-    // using build-in comp: greater
-    sort(v.begin(), v.end(), greater<int>()); // (80 71 53 45 33 32 26 12)
+      // using object as comp
+      sort(v.begin(), v.end(), myobject);     //(12 26 32 33 45 53 71 80)
 
-    // using build-in comp: less
-    sort(v.begin(), v.end(), less<int>());  //(12 26 32 33 45 53 71 80)
+      // using build-in comp: greater
+      sort(v.begin(), v.end(), greater<int>()); // (80 71 53 45 33 32 26 12)
 
-    // using reverse_iterator
-    sort(v.rbegin(), v.rend());  // (80 71 53 45 33 32 26 12)
+      // using build-in comp: less
+      sort(v.begin(), v.end(), less<int>());  //(12 26 32 33 45 53 71 80)
 
-    // sort array
-    sort(a, a + 8, greater<int>());  // (80 71 53 45 33 32 26 12)
-    sort(a, a + 8);                 // (12 26 32 33 45 53 71 80)，可使用 comparator、myobject、less<int>()
+      // using reverse_iterator
+      sort(v.rbegin(), v.rend());  // (80 71 53 45 33 32 26 12)
 
-    return 0;
-  }
+      // sort array
+      sort(a, a + 8, greater<int>());  // (80 71 53 45 33 32 26 12)
+      sort(a, a + 8);                 // (12 26 32 33 45 53 71 80)，可使用 comparator、myobject、less<int>()
 
+      return 0;
+    }
 
 **string** 类也是可以排序的，如 ::
 
   string str;
   sort(str.begin(), str.end());
 
+
+min\_element，max\_element，minmax\_element
+--------------------------------------------------------
+::
+
+  #include <algorithm>
+
+- **min_element** ：会返回指向输入序列的最小元素的迭代器；
+- **max_element** ：会返回指向最大元素的迭代器；
+- **minmax_element** ：会以 pair 对象的形式返回这两个迭代器。first 指向最小元素。second 指向最大元素。
+
+**min\_element**::
+
+  // default
+  template <class ForwardIterator>
+  ForwardIterator min_element (ForwardIterator first, ForwardIterator last);
+  // custom
+  template <class ForwardIterator, class Compare>
+  ForwardIterator min_element (ForwardIterator first, ForwardIterator last, Compare comp); // [first,last)
+
+例子：
+
+.. code-block:: cpp
+  :linenos:
+
+  #include <iostream>
+  #include <algorithm>
+  using namespace std;
+
+  int main(int argc, char ** argv)
+  {
+
+    int a[10] = { 1, 2, 3, 4, 5, 6 };
+    cout << a[9] << endl; // 0
+
+    cout << *min_element(a, a + 10) << endl; // 0
+
+    cout << *max_element(a, a + 10) << endl; // 6
+
+    auto p = minmax_element(a, a + 10);
+
+    cout << *p.first << ends << *p.second << endl; // 0 6
+
+    return 0;
+  }
+
+
+accumulate
+----------------
+
+::
+
+  #include <numeric>
+
+  // sum (1)
+  template <class InputIterator, class T>
+  T accumulate (InputIterator first, InputIterator last, T init);
+  // custom (2)
+  template <class InputIterator, class T, class BinaryOperation>
+  T accumulate (InputIterator first, InputIterator last, T init, BinaryOperation binary_op);
+
+累加区间 **[first,last)** 的元素，并加上 **init** 。
+
+.. container:: toggle
+
+    .. container:: header
+
+      :math:`\color{darkgreen}{Show/Hide\ Code}`
+
+    .. code-block:: cpp
+      :linenos:
+
+      #include <iostream>     // std::cout
+      #include <functional>   // std::minus
+      #include <numeric>      // std::accumulate
+
+      int myfunction (int x, int y) {return x+2*y;}
+
+      struct myclass
+      {
+      	int operator()(int x, int y) {return x+3*y;}
+      } myobject;
+
+      int main ()
+      {
+        int init = 100;
+        int numbers[] = {10,20,30};
+
+        std::cout << "using default accumulate: ";
+        std::cout << std::accumulate(numbers,numbers+3,init); // 100 + (10 + 20 + 30)
+        std::cout << '\n';
+
+        std::cout << "using functional's minus: ";
+        std::cout << std::accumulate (numbers, numbers+3, init, std::minus<int>()); // 100 - (10 + 20 + 30)
+        std::cout << '\n';
+
+        std::cout << "using custom function: ";
+        std::cout << std::accumulate (numbers, numbers+3, init, myfunction); // 100 + 2 * (10 + 20 + 30)
+        std::cout << '\n';
+
+        std::cout << "using custom object: ";
+        std::cout << std::accumulate (numbers, numbers+3, init, myobject); // 100 + 3 * (10 + 20 + 30)
+        std::cout << '\n';
+
+        return 0;
+      }
+
+
+partial_sum
+---------------
+
+::
+
+  #include <numeric>
+
+  // sum
+  template <class InputIterator, class OutputIterator>
+  OutputIterator partial_sum (InputIterator first, InputIterator last, OutputIterator result);
+  // custom
+  template <class InputIterator, class OutputIterator, class BinaryOperation>
+  OutputIterator partial_sum (InputIterator first, InputIterator last,
+                              OutputIterator result,
+                              BinaryOperation binary_op);
+
+  // y0 = x0
+  // y1 = x0 + x1
+  // y2 = x0 + x1 + x2
+  // y3 = x0 + x1 + x2 + x3
+  // y4 = x0 + x1 + x2 + x3 + x4
+  // ... ... ...
+
+累加，并把结果存到序列（数组、向量） **result** 中。
+
+.. container:: toggle
+
+  .. container:: header
+
+    :math:`\color{darkgreen}{Show/Hide\ Code}`
+
+  .. code-block:: cpp
+    :linenos:
+
+    #include <iostream>     // std::cout
+    #include <functional>   // std::multiplies
+    #include <numeric>      // std::partial_sum
+    #include <vector>
+
+    int myop (int x, int y) {return x+y+1;}
+
+    int main ()
+    {
+      int val[] = {1,2,3,4,5};
+      int result[5];
+
+      std::partial_sum (val, val+5, result);
+      std::cout << "using default partial_sum: ";
+      for (int i=0; i<5; i++) std::cout << result[i] << ' '; // 1 3 6 10 15
+      std::cout << '\n';
+
+      std::vector<int> result_vec(6, 0); // 0 0 0 0 0 0
+      std::partial_sum (val, val+5, result_vec.begin()); // 1 3 6 10 15 0
+
+      std::partial_sum (val, val+5, result, std::multiplies<int>()); // 1 2 6 24 120
+      std::cout << "using functional operation multiplies: ";
+      for (int i=0; i<5; i++) std::cout << result[i] << ' ';
+      std::cout << '\n';
+
+      std::partial_sum (val, val+5, result, myop); // 1 4 8 13 19
+      std::cout << "using custom function: ";
+      for (int i=0; i<5; i++) std::cout << result[i] << ' ';
+      std::cout << '\n';
+      return 0;
+    }
+
+
+inner\_product
+------------------
+
+::
+
+  #include <numeric>
+
+  // sum/multiply
+  emplate <class InputIterator1, class InputIterator2, class T>
+  T inner_product (InputIterator1 first1, InputIterator1 last1, InputIterator2 first2, T init);
+  // custom
+  template <class InputIterator1, class InputIterator2, class T, class BinaryOperation1, class BinaryOperation2>
+  T inner_product (InputIterator1 first1, InputIterator1 last1,
+                   InputIterator2 first2,
+                   T init,
+                   BinaryOperation1 binary_op1,
+                   BinaryOperation2 binary_op2);
+
+内积运算，再与 **init** 做运算::
+
+  while (first1!=last1)
+  {
+    init = init + (*first1)*(*first2);
+    // or: init = binary_op1 (init, binary_op2(*first1,*first2));
+    ++first1; ++first2;
+  }
+  return init;
+
+.. container:: toggle
+
+  .. container:: header
+
+    :math:`\color{darkgreen}{Show/Hide\ Code}`
+
+  .. code-block:: cpp
+    :linenos:
+
+    #include <iostream>     // std::cout
+    #include <functional>   // std::minus, std::divides
+    #include <numeric>      // std::inner_product
+
+    int myaccumulator (int x, int y) {return x-y;}
+    int myproduct (int x, int y) {return x+y;}
+
+    int main () {
+      int init = 100;
+      int series1[] = {10,20,30};
+      int series2[] = {1,2,3};
+
+      std::cout << "using default inner_product: ";
+      std::cout << std::inner_product(series1,series1+3,series2,init); // 100 + (10\*1 + 20\*2 + 30\*3)
+      std::cout << '\n';
+
+      std::cout << "using functional operations: ";
+      std::cout << std::inner_product(series1,series1+3,series2,init,
+                                      std::minus<int>(),std::divides<int>()); // 100 - (10/1 + 20/2 + 30/3)
+      std::cout << '\n';
+
+      std::cout << "using custom functions: ";
+      std::cout << std::inner_product(series1,series1+3,series2,init,
+                                      myaccumulator,myproduct); // 100 - (10+1 + 20+2 + 30+3)
+      std::cout << '\n';
+
+      return 0;
+    }
 
 附：头文件
 ----------------
@@ -265,17 +508,25 @@ sort
 参考资料
 --------------
 
-1. c++ reference
+1. C++ reference
 
-  http://www.cplusplus.com/reference/algorithm/lower_bound/
+  http://www.cplusplus.com/reference/algorithm/lower_bound
 
-  http://www.cplusplus.com/reference/algorithm/upper_bound/
+  http://www.cplusplus.com/reference/algorithm/upper_bound
 
-  http://www.cplusplus.com/reference/algorithm/fill/
+  http://www.cplusplus.com/reference/algorithm/fill
 
   http://www.cplusplus.com/reference/algorithm/for_each
 
-  http://www.cplusplus.com/reference/algorithm/sort/
+  http://www.cplusplus.com/reference/algorithm/sort
+
+  http://www.cplusplus.com/reference/algorithm/min_element
+
+  http://www.cplusplus.com/reference/numeric/accumulate
+
+  http://www.cplusplus.com/reference/numeric/partial_sum
+
+  http://www.cplusplus.com/reference/numeric/inner_product
 
 
 2. C/C++-STL中lower_bound与upper_bound的用法
