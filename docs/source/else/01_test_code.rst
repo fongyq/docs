@@ -138,35 +138,41 @@ command
 
 下面是 ``python`` (code-block):
 
-.. code-block:: python
-  :linenos:
+.. container:: toggle
 
-  class Solution(object):
-      def jump_from_i(self, nums, i):
-          if i == len(nums) - 1:
-              return True
-          max_step = min(len(nums), i + nums[i] + 1)
-          for t in range(i+1, max_step):
-              if self.jump_from_i(nums, t):
-                  return True
-          return False
-      def canJump(self, nums):
-          """
-          https://leetcode.com/problems/jump-game/
-          Each element in the array represents your maximum jump length at that position.
+  .. container:: header
 
-          Input: [2,3,1,1,4]
-          Output: true
-          Explanation: Jump 1 step from index 0 to 1, then 3 steps to the last index.
+   **Show/Hide**
 
-          :type nums: List[int]
-          :rtype: bool
-          """
-          if nums == []:
-              return False
-          if len(nums) == 1:
-              return True
-          return self.jump_from_i(nums, 0)
+  .. code-block:: python
+    :linenos:
+
+    class Solution(object):
+        def jump_from_i(self, nums, i):
+            if i == len(nums) - 1:
+                return True
+            max_step = min(len(nums), i + nums[i] + 1)
+            for t in range(i+1, max_step):
+                if self.jump_from_i(nums, t):
+                    return True
+            return False
+        def canJump(self, nums):
+            """
+            https://leetcode.com/problems/jump-game/
+            Each element in the array represents your maximum jump length at that position.
+
+            Input: [2,3,1,1,4]
+            Output: true
+            Explanation: Jump 1 step from index 0 to 1, then 3 steps to the last index.
+
+            :type nums: List[int]
+            :rtype: bool
+            """
+            if nums == []:
+                return False
+            if len(nums) == 1:
+                return True
+            return self.jump_from_i(nums, 0)
 
 
 参考资料
