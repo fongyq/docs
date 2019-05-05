@@ -323,6 +323,10 @@ Counter用于统计频率。
 
   https://docs.python.org/2/library/heapq.html
 
-4. Counter
+4. python使用heapq实现小顶堆（TopK大）/大顶堆（BtmK小）
+
+  https://blog.csdn.net/tanghaiyu777/article/details/55271004
+
+5. Counter
 
   https://docs.python.org/2/library/collections.html?highlight=counter
