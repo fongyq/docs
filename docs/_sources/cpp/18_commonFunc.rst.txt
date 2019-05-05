@@ -33,37 +33,41 @@ lower\_bound，upper\_bound
   upper_bound(first, last, val) - lower_bound(first, last, val);
 
 
-例子：
+.. container:: toggle
 
-.. code-block:: cpp
-  :linenos:
+  .. container:: header
 
-  #include <iostream>
-  #include <vector>
-  #include <algorithm>
-  using namespace std;
+    :math:`\color{darkgreen}{Example}`
 
-  int main(int argc, char ** argv)
-  {
-    int a[11] = {1,2,3,4,5,5,5,5,6,7,8};
-    cout << lower_bound(a, a + 11, 5) - a << endl; // 4
-    cout << upper_bound(a, a + 11, 5) - a << endl; // 8
-    vector<int> v(a, a + 11); // 用 a 对 v 初始化
-    cout << lower_bound(v.begin(), v.end(), 5) - v.begin() << endl; // 4
-    cout << upper_bound(v.begin(), v.end(), 5) - v.begin() << endl; // 8
+  .. code-block:: cpp
+    :linenos:
 
-    *lower_bound(a, a + 11, 5) = 500;
-    for (auto ai : a) cout << ai << ends; // 1 2 3 4 500 5 5 5 6 7 8
-    cout << endl;
+    #include <iostream>
+    #include <vector>
+    #include <algorithm>
+    using namespace std;
 
-    *lower_bound(v.begin(), v.end(), 5) = 500;
-    for (auto vi : v) cout << vi << ends; // 1 2 3 4 500 5 5 5 6 7 8
-    cout << endl;
+    int main(int argc, char ** argv)
+    {
+      int a[11] = {1,2,3,4,5,5,5,5,6,7,8};
+      cout << lower_bound(a, a + 11, 5) - a << endl; // 4
+      cout << upper_bound(a, a + 11, 5) - a << endl; // 8
+      vector<int> v(a, a + 11); // 用 a 对 v 初始化
+      cout << lower_bound(v.begin(), v.end(), 5) - v.begin() << endl; // 4
+      cout << upper_bound(v.begin(), v.end(), 5) - v.begin() << endl; // 8
 
-    return 0;
-  }
+      *lower_bound(a, a + 11, 5) = 500;
+      for (auto ai : a) cout << ai << ends; // 1 2 3 4 500 5 5 5 6 7 8
+      cout << endl;
 
+      *lower_bound(v.begin(), v.end(), 5) = 500;
+      for (auto vi : v) cout << vi << ends; // 1 2 3 4 500 5 5 5 6 7 8
+      cout << endl;
 
+      return 0;
+    }
+
+|
 
 fill，fill\_n，for\_each
 -----------------------------
@@ -87,36 +91,43 @@ fill，fill\_n，for\_each
   template <class InputIterator, class Function>
   Function for_each (InputIterator first, InputIterator last, Function fn);
 
-例子：
 
-.. code-block:: cpp
-  :linenos:
+.. container:: toggle
 
-  #include <iostream>
-  #include <vector>
-  #include <algorithm>
-  using namespace std;
+  .. container:: header
 
-  template<class T>
-  void print(T elem){ cout << elem << " "; }
+    :math:`\color{darkgreen}{Example}`
 
-  int main(int argc, char ** argv)
-  {
+  .. code-block:: cpp
+    :linenos:
 
-    float a[4] = { 0.0 }; // {0.0, 0.0, 0.0, 0.0}
-    vector<int> v(4, 0); // {0, 0, 0, 0}
+    #include <iostream>
+    #include <vector>
+    #include <algorithm>
+    using namespace std;
 
-    fill(a, a+4, 3.3); // {3.3, 3.3, 3.3, 3.3}
-    fill_n(a, 2, 6.6); // {6.6, 6.6, 3.3, 3.3}
-    fill_n(v.begin(), 4, 9); // {9, 9, 9, 9}
+    template<class T>
+    void print(T elem){ cout << elem << " "; }
 
-    for_each(a, a + 4, print<float>); //  6.6 6.6 3.3 3.3
-    cout << endl;
-    for_each(v.begin(), v.end(), print<int>); //  9 9 9 9
-    cout << endl;
+    int main(int argc, char ** argv)
+    {
 
-    return 0;
-  }
+      float a[4] = { 0.0 }; // {0.0, 0.0, 0.0, 0.0}
+      vector<int> v(4, 0); // {0, 0, 0, 0}
+
+      fill(a, a+4, 3.3); // {3.3, 3.3, 3.3, 3.3}
+      fill_n(a, 2, 6.6); // {6.6, 6.6, 3.3, 3.3}
+      fill_n(v.begin(), 4, 9); // {9, 9, 9, 9}
+
+      for_each(a, a + 4, print<float>); //  6.6 6.6 3.3 3.3
+      cout << endl;
+      for_each(v.begin(), v.end(), print<int>); //  9 9 9 9
+      cout << endl;
+
+      return 0;
+    }
+
+|
 
 最长上升子序列：
 
@@ -157,11 +168,12 @@ sort
   template <class RandomAccessIterator, class Compare>
   void sort (RandomAccessIterator first, RandomAccessIterator last, Compare comp);
 
+
 .. container:: toggle
 
   .. container:: header
 
-    :math:`\color{darkgreen}{Show/Hide\ Code}`
+    :math:`\color{darkgreen}{Example}`
 
   .. code-block:: cpp
     :linenos:
@@ -216,6 +228,8 @@ sort
       return 0;
     }
 
+|
+
 **string** 类也是可以排序的，如 ::
 
   string str;
@@ -237,36 +251,44 @@ min\_element，max\_element，minmax\_element
   // default
   template <class ForwardIterator>
   ForwardIterator min_element (ForwardIterator first, ForwardIterator last);
+
   // custom
   template <class ForwardIterator, class Compare>
   ForwardIterator min_element (ForwardIterator first, ForwardIterator last, Compare comp); // [first,last)
 
-例子：
 
-.. code-block:: cpp
-  :linenos:
 
-  #include <iostream>
-  #include <algorithm>
-  using namespace std;
+.. container:: toggle
 
-  int main(int argc, char ** argv)
-  {
+  .. container:: header
 
-    int a[10] = { 1, 2, 3, 4, 5, 6 };
-    cout << a[9] << endl; // 0
+    :math:`\color{darkgreen}{Example}`
 
-    cout << *min_element(a, a + 10) << endl; // 0
+  .. code-block:: cpp
+    :linenos:
 
-    cout << *max_element(a, a + 10) << endl; // 6
+    #include <iostream>
+    #include <algorithm>
+    using namespace std;
 
-    auto p = minmax_element(a, a + 10);
+    int main(int argc, char ** argv)
+    {
 
-    cout << *p.first << ends << *p.second << endl; // 0 6
+      int a[10] = { 1, 2, 3, 4, 5, 6 };
+      cout << a[9] << endl; // 0
 
-    return 0;
-  }
+      cout << *min_element(a, a + 10) << endl; // 0
 
+      cout << *max_element(a, a + 10) << endl; // 6
+
+      auto p = minmax_element(a, a + 10);
+
+      cout << *p.first << ends << *p.second << endl; // 0 6
+
+      return 0;
+    }
+
+|
 
 accumulate
 ----------------
@@ -275,10 +297,11 @@ accumulate
 
   #include <numeric>
 
-  // sum (1)
+  // sum
   template <class InputIterator, class T>
   T accumulate (InputIterator first, InputIterator last, T init);
-  // custom (2)
+
+  // custom
   template <class InputIterator, class T, class BinaryOperation>
   T accumulate (InputIterator first, InputIterator last, T init, BinaryOperation binary_op);
 
@@ -288,7 +311,7 @@ accumulate
 
     .. container:: header
 
-      :math:`\color{darkgreen}{Show/Hide\ Code}`
+      :math:`\color{darkgreen}{Example}`
 
     .. code-block:: cpp
       :linenos:
@@ -328,6 +351,7 @@ accumulate
         return 0;
       }
 
+|
 
 partial_sum
 ---------------
@@ -336,9 +360,14 @@ partial_sum
 
   #include <numeric>
 
+累加，并把结果存到序列（数组、向量） **result** 中。
+
+::
+
   // sum
   template <class InputIterator, class OutputIterator>
   OutputIterator partial_sum (InputIterator first, InputIterator last, OutputIterator result);
+
   // custom
   template <class InputIterator, class OutputIterator, class BinaryOperation>
   OutputIterator partial_sum (InputIterator first, InputIterator last,
@@ -352,13 +381,12 @@ partial_sum
   // y4 = x0 + x1 + x2 + x3 + x4
   // ... ... ...
 
-累加，并把结果存到序列（数组、向量） **result** 中。
 
 .. container:: toggle
 
   .. container:: header
 
-    :math:`\color{darkgreen}{Show/Hide\ Code}`
+    :math:`\color{darkgreen}{Example}`
 
   .. code-block:: cpp
     :linenos:
@@ -395,6 +423,7 @@ partial_sum
       return 0;
     }
 
+|
 
 inner\_product
 ------------------
@@ -406,6 +435,7 @@ inner\_product
   // sum/multiply
   emplate <class InputIterator1, class InputIterator2, class T>
   T inner_product (InputIterator1 first1, InputIterator1 last1, InputIterator2 first2, T init);
+
   // custom
   template <class InputIterator1, class InputIterator2, class T, class BinaryOperation1, class BinaryOperation2>
   T inner_product (InputIterator1 first1, InputIterator1 last1,
@@ -428,7 +458,7 @@ inner\_product
 
   .. container:: header
 
-    :math:`\color{darkgreen}{Show/Hide\ Code}`
+    :math:`\color{darkgreen}{Example}`
 
   .. code-block:: cpp
     :linenos:
@@ -461,6 +491,8 @@ inner\_product
 
       return 0;
     }
+
+|
 
 附：头文件
 ----------------

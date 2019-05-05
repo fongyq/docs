@@ -219,7 +219,9 @@
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">upper_bound</span><span class="p">(</span><span class="n">first</span><span class="p">,</span> <span class="n">last</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span> <span class="o">-</span> <span class="n">lower_bound</span><span class="p">(</span><span class="n">first</span><span class="p">,</span> <span class="n">last</span><span class="p">,</span> <span class="n">val</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>例子：</p>
+<div class="toggle docutils container">
+<div class="header docutils container">
+<span class="math notranslate nohighlight">\(\color{darkgreen}{Example}\)</span></div>
 <div class="highlight-cpp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -270,6 +272,10 @@
 </pre></div>
 </td></tr></table></div>
 </div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
 <div class="section" id="fill-fill-n-for-each">
 <h2>18.2. fill，fill_n，for_each<a class="headerlink" href="#fill-fill-n-for-each" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
@@ -290,7 +296,9 @@
 <span class="n">Function</span> <span class="n">for_each</span> <span class="p">(</span><span class="n">InputIterator</span> <span class="n">first</span><span class="p">,</span> <span class="n">InputIterator</span> <span class="n">last</span><span class="p">,</span> <span class="n">Function</span> <span class="n">fn</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>例子：</p>
+<div class="toggle docutils container">
+<div class="header docutils container">
+<span class="math notranslate nohighlight">\(\color{darkgreen}{Example}\)</span></div>
 <div class="highlight-cpp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -342,6 +350,10 @@
 <span class="p">}</span>
 </pre></div>
 </td></tr></table></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 <p>最长上升子序列：</p>
 <div class="highlight-cpp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -394,7 +406,7 @@
 </div>
 <div class="toggle docutils container">
 <div class="header docutils container">
-<span class="math notranslate nohighlight">\(\color{darkgreen}{Show/Hide\ Code}\)</span></div>
+<span class="math notranslate nohighlight">\(\color{darkgreen}{Example}\)</span></div>
 <div class="highlight-cpp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -495,6 +507,9 @@
 </pre></div>
 </td></tr></table></div>
 </div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 <p><strong>string</strong> 类也是可以排序的，如</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">string</span> <span class="n">str</span><span class="p">;</span>
 <span class="n">sort</span><span class="p">(</span><span class="n">str</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">str</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
@@ -515,12 +530,15 @@
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// default</span>
 <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">ForwardIterator</span><span class="o">&gt;</span>
 <span class="n">ForwardIterator</span> <span class="n">min_element</span> <span class="p">(</span><span class="n">ForwardIterator</span> <span class="n">first</span><span class="p">,</span> <span class="n">ForwardIterator</span> <span class="n">last</span><span class="p">);</span>
+
 <span class="c1">// custom</span>
 <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">ForwardIterator</span><span class="p">,</span> <span class="k">class</span> <span class="nc">Compare</span><span class="o">&gt;</span>
 <span class="n">ForwardIterator</span> <span class="n">min_element</span> <span class="p">(</span><span class="n">ForwardIterator</span> <span class="n">first</span><span class="p">,</span> <span class="n">ForwardIterator</span> <span class="n">last</span><span class="p">,</span> <span class="n">Compare</span> <span class="n">comp</span><span class="p">);</span> <span class="c1">// [first,last)</span>
 </pre></div>
 </div>
-<p>例子：</p>
+<div class="toggle docutils container">
+<div class="header docutils container">
+<span class="math notranslate nohighlight">\(\color{darkgreen}{Example}\)</span></div>
 <div class="highlight-cpp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -563,14 +581,19 @@
 </pre></div>
 </td></tr></table></div>
 </div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
 <div class="section" id="accumulate">
 <h2>18.5. accumulate<a class="headerlink" href="#accumulate" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;numeric&gt;</span><span class="cp"></span>
 
-<span class="c1">// sum (1)</span>
+<span class="c1">// sum</span>
 <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">InputIterator</span><span class="p">,</span> <span class="k">class</span> <span class="nc">T</span><span class="o">&gt;</span>
 <span class="n">T</span> <span class="n">accumulate</span> <span class="p">(</span><span class="n">InputIterator</span> <span class="n">first</span><span class="p">,</span> <span class="n">InputIterator</span> <span class="n">last</span><span class="p">,</span> <span class="n">T</span> <span class="n">init</span><span class="p">);</span>
-<span class="c1">// custom (2)</span>
+
+<span class="c1">// custom</span>
 <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">InputIterator</span><span class="p">,</span> <span class="k">class</span> <span class="nc">T</span><span class="p">,</span> <span class="k">class</span> <span class="nc">BinaryOperation</span><span class="o">&gt;</span>
 <span class="n">T</span> <span class="n">accumulate</span> <span class="p">(</span><span class="n">InputIterator</span> <span class="n">first</span><span class="p">,</span> <span class="n">InputIterator</span> <span class="n">last</span><span class="p">,</span> <span class="n">T</span> <span class="n">init</span><span class="p">,</span> <span class="n">BinaryOperation</span> <span class="n">binary_op</span><span class="p">);</span>
 </pre></div>
@@ -578,7 +601,7 @@
 <p>累加区间 <strong>[first,last)</strong> 的元素，并加上 <strong>init</strong> 。</p>
 <div class="toggle docutils container">
 <div class="header docutils container">
-<span class="math notranslate nohighlight">\(\color{darkgreen}{Show/Hide\ Code}\)</span></div>
+<span class="math notranslate nohighlight">\(\color{darkgreen}{Example}\)</span></div>
 <div class="highlight-cpp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -649,14 +672,20 @@
 </pre></div>
 </td></tr></table></div>
 </div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 </div>
 <div class="section" id="partial-sum">
 <h2>18.6. partial_sum<a class="headerlink" href="#partial-sum" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;numeric&gt;</span><span class="cp"></span>
-
-<span class="c1">// sum</span>
+</pre></div>
+</div>
+<p>累加，并把结果存到序列（数组、向量） <strong>result</strong> 中。</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// sum</span>
 <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">InputIterator</span><span class="p">,</span> <span class="k">class</span> <span class="nc">OutputIterator</span><span class="o">&gt;</span>
 <span class="n">OutputIterator</span> <span class="n">partial_sum</span> <span class="p">(</span><span class="n">InputIterator</span> <span class="n">first</span><span class="p">,</span> <span class="n">InputIterator</span> <span class="n">last</span><span class="p">,</span> <span class="n">OutputIterator</span> <span class="n">result</span><span class="p">);</span>
+
 <span class="c1">// custom</span>
 <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">InputIterator</span><span class="p">,</span> <span class="k">class</span> <span class="nc">OutputIterator</span><span class="p">,</span> <span class="k">class</span> <span class="nc">BinaryOperation</span><span class="o">&gt;</span>
 <span class="n">OutputIterator</span> <span class="n">partial_sum</span> <span class="p">(</span><span class="n">InputIterator</span> <span class="n">first</span><span class="p">,</span> <span class="n">InputIterator</span> <span class="n">last</span><span class="p">,</span>
@@ -671,10 +700,9 @@
 <span class="c1">// ... ... ...</span>
 </pre></div>
 </div>
-<p>累加，并把结果存到序列（数组、向量） <strong>result</strong> 中。</p>
 <div class="toggle docutils container">
 <div class="header docutils container">
-<span class="math notranslate nohighlight">\(\color{darkgreen}{Show/Hide\ Code}\)</span></div>
+<span class="math notranslate nohighlight">\(\color{darkgreen}{Example}\)</span></div>
 <div class="highlight-cpp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -739,6 +767,9 @@
 </pre></div>
 </td></tr></table></div>
 </div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 </div>
 <div class="section" id="inner-product">
 <h2>18.7. inner_product<a class="headerlink" href="#inner-product" title="Permalink to this headline">¶</a></h2>
@@ -747,6 +778,7 @@
 <span class="c1">// sum/multiply</span>
 <span class="n">emplate</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">InputIterator1</span><span class="p">,</span> <span class="k">class</span> <span class="nc">InputIterator2</span><span class="p">,</span> <span class="k">class</span> <span class="nc">T</span><span class="o">&gt;</span>
 <span class="n">T</span> <span class="n">inner_product</span> <span class="p">(</span><span class="n">InputIterator1</span> <span class="n">first1</span><span class="p">,</span> <span class="n">InputIterator1</span> <span class="n">last1</span><span class="p">,</span> <span class="n">InputIterator2</span> <span class="n">first2</span><span class="p">,</span> <span class="n">T</span> <span class="n">init</span><span class="p">);</span>
+
 <span class="c1">// custom</span>
 <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">InputIterator1</span><span class="p">,</span> <span class="k">class</span> <span class="nc">InputIterator2</span><span class="p">,</span> <span class="k">class</span> <span class="nc">T</span><span class="p">,</span> <span class="k">class</span> <span class="nc">BinaryOperation1</span><span class="p">,</span> <span class="k">class</span> <span class="nc">BinaryOperation2</span><span class="o">&gt;</span>
 <span class="n">T</span> <span class="n">inner_product</span> <span class="p">(</span><span class="n">InputIterator1</span> <span class="n">first1</span><span class="p">,</span> <span class="n">InputIterator1</span> <span class="n">last1</span><span class="p">,</span>
@@ -768,7 +800,7 @@
 </div>
 <div class="toggle docutils container">
 <div class="header docutils container">
-<span class="math notranslate nohighlight">\(\color{darkgreen}{Show/Hide\ Code}\)</span></div>
+<span class="math notranslate nohighlight">\(\color{darkgreen}{Example}\)</span></div>
 <div class="highlight-cpp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -826,6 +858,9 @@
 <span class="p">}</span>
 </pre></div>
 </td></tr></table></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
 </div>
 </div>
 <div class="section" id="id2">
