@@ -28,6 +28,7 @@
     <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Linux/Shell" href="../linux/index.html" />
@@ -111,10 +112,12 @@
 <li class="toctree-l3"><a class="reference internal" href="#id4">11.3. 堆</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#id5">11.3.1. 创建堆</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#id6">11.3.2. 获取最值</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id7">11.3.3. 大顶堆</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#k">11.3.4. 数列前K大的数</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#id7">11.4. 计数器</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id8">11.5. 参考资料</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">11.4. 计数器</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">11.5. 参考资料</a></li>
 </ul>
 </li>
 </ul>
@@ -454,9 +457,77 @@ maxsize指明了队列中能存放的数据个数的上限。
 </pre></div>
 </td></tr></table></div>
 </div>
-</div>
 <div class="section" id="id7">
-<h2>11.4. 计数器<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
+<h3>11.3.3. 大顶堆<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<p>heapq默认创建小顶堆，为了创建大顶堆，有以下trick:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">heapq</span><span class="o">.</span><span class="n">heappush</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">)</span> <span class="c1">## 插入 x</span>
+<span class="n">x</span> <span class="o">=</span> <span class="o">-</span> <span class="n">heapq</span><span class="o">.</span><span class="n">heappop</span><span class="p">(</span><span class="n">h</span><span class="p">)</span> <span class="c1">## 弹出堆顶元素</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="k">
+<h3>11.3.4. 数列前K大的数<a class="headerlink" href="#k" title="Permalink to this headline">¶</a></h3>
+<p>Hint：建立大小为K的小顶堆，对后续所有数进行遍历：如果大于堆顶元素，则有可能是前K的数，堆顶元素弹出，插入该数。
+时间复杂度 <span class="math notranslate nohighlight">\(\mathcal{O}(NlogK)\)</span>。</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">heapq</span> <span class="kn">as</span> <span class="nn">hq</span>
+
+<span class="k">class</span> <span class="nc">TopKHeap</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">k</span> <span class="o">=</span> <span class="n">k</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
+
+  <span class="k">def</span> <span class="nf">push</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">k</span><span class="p">:</span>
+      <span class="n">hq</span><span class="o">.</span><span class="n">heappush</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+      <span class="n">min_number</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+      <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="n">min_number</span><span class="p">:</span>
+        <span class="n">hq</span><span class="o">.</span><span class="n">heapreplace</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+
+  <span class="k">def</span> <span class="nf">topk</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">([</span><span class="n">hq</span><span class="o">.</span><span class="n">heappop</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">))]))</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+  <span class="n">nums</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+  <span class="n">tkh</span> <span class="o">=</span> <span class="n">TopKHeap</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+  <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">:</span>
+    <span class="n">tkh</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+  <span class="k">print</span> <span class="n">tkh</span><span class="o">.</span><span class="n">topk</span><span class="p">()</span> <span class="c1">## [9, 8, 7]</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+  <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+</div>
+<div class="section" id="id8">
+<h2>11.4. 计数器<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">Counter</span>
 </pre></div>
 </div>
@@ -505,8 +576,8 @@ maxsize指明了队列中能存放的数据个数的上限。
 </pre></div>
 </td></tr></table></div>
 </div>
-<div class="section" id="id8">
-<h2>11.5. 参考资料<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id9">
+<h2>11.5. 参考资料<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
 <li>python中的Queue(队列)详解</li>
 </ol>
@@ -598,7 +669,18 @@ maxsize指明了队列中能存放的数据个数的上限。
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+<script type="text/javascript">
+    $(document).ready(function() {
+     $(".toggle > *").hide();
+     $(".toggle .header").show();
+     $(".toggle .header").click(function() {
+      $(this).parent().children().not(".header").toggle(400);
+      $(this).parent().children(".header").toggleClass("open");
+     })
+    });
+</script>
+
 
 </body>
 </html>

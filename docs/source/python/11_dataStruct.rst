@@ -223,6 +223,54 @@ heapq创建的是 **小顶堆** ，堆顶元素是堆的最小元素。
   >>> print expensive
   [{'price': 543.22, 'name': 'AAPL'}, {'price': 115.65, 'name': 'ACME'}]
 
+
+大顶堆
+^^^^^^^^^^
+
+heapq默认创建小顶堆，为了创建大顶堆，有以下trick::
+
+  heapq.heappush(-x) ## 插入 x
+  x = - heapq.heappop(h) ## 弹出堆顶元素
+
+
+数列前K大的数
+^^^^^^^^^^^^^^^^^^^^^
+
+Hint：建立大小为K的小顶堆，对后续所有数进行遍历：如果大于堆顶元素，则有可能是前K的数，堆顶元素弹出，插入该数。
+时间复杂度 :math:`\mathcal{O}(NlogK)`。
+
+.. code-block:: python
+  :linenos:
+
+  import heapq as hq
+
+  class TopKHeap(object):
+    def __init__(self, k=3):
+      self.k = k
+      self.data = []
+
+    def push(self, x):
+      if len(self.data) < self.k:
+        hq.heappush(self.data, x)
+      else:
+        min_number = self.data[0]
+        if x > min_number:
+          hq.heapreplace(self.data, x)
+
+    def topk(self):
+      return list(reversed([hq.heappop(self.data) for _ in range(len(self.data))]))
+
+  def main():
+    nums = range(1, 10)
+    tkh = TopKHeap(3)
+    for n in nums:
+      tkh.push(n)
+    print tkh.topk() ## [9, 8, 7]
+
+  if __name__ == '__main__':
+    main()
+
+
 计数器
 ----------
 

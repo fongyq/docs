@@ -168,22 +168,21 @@ command
               return True
           return self.jump_from_i(nums, 0)
 
-
 代码显示与隐藏：
 
 :math:`\color{darkgreen}{Show/Hide\ Code}`
 
 .. container:: toggle
 
-    .. container:: header
+  .. container:: header
 
-      :math:`\color{darkgreen}{Show/Hide\ Code}`
+    :math:`\color{darkgreen}{Show/Hide\ Code}`
 
-    .. code-block:: xml
-     :linenos:
+  .. code-block:: xml
+   :linenos:
 
-     from plone import api
-     ...
+   from plone import api
+   ...
 
 
 参考资料
