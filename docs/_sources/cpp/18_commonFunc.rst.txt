@@ -446,7 +446,7 @@ inner\_product
       int series2[] = {1,2,3};
 
       std::cout << "using default inner_product: ";
-      std::cout << std::inner_product(series1,series1+3,series2,init); // 100 + (10\*1 + 20\*2 + 30\*3)
+      std::cout << std::inner_product(series1,series1+3,series2,init); // 100 + (10*1 + 20*2 + 30*3)
       std::cout << '\n';
 
       std::cout << "using functional operations: ";
