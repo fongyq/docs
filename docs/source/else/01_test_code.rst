@@ -218,3 +218,7 @@ command
   https://jamwheeler.com/college-productivity/how-to-write-beautiful-code-documentation/
 
   https://daler.github.io/sphinxdoc-test/includeme.html
+
+6. latex 颜色
+
+  http://latexcolor.com/
