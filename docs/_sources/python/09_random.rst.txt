@@ -23,7 +23,7 @@ python自带的random库。 ::
 
   - 指定范围内，按step递增的集合中的随机数。
 
-- **random.choice()**
+- **random.choice(lst)**
 
   - 给定的集合中选择一个元素。
 
@@ -39,15 +39,15 @@ numpy.random
 
   import numpy as np
 
-- **numpy.random.random([d0, d1, ..., dn])**
+- **numpy.random.random([** :math:`d_0, d_1, ... ,d_n` **])**
 
-  - 生成0~1的随机浮点数，维度为 d0\*d1\* ...\*dn（缺省为1）。
+  - 生成0~1的随机浮点数，维度为 :math:`d_0 \times d_1 \times ... \times d_n` （缺省为1）。
 
-- **numpy.random.rand(d0, d1, ..., dn)**
+- **numpy.random.rand(** :math:`d_0, d_1, ... ,d_n` **)**
 
-  - 生成0~1的随机浮点数，维度为 d0\*d1\* ...\*dn（缺省为1）。
+  - 生成0~1的随机浮点数，维度为 :math:`d_0 \times d_1 \times ... \times d_n` （缺省为1）。
 
-- **numpy.random.randn(d0, d1, ..., dn)**
+- **numpy.random.randn(** :math:`d_0, d_1, ... ,d_n` **)**
 
   - 标准正态分布。
 
@@ -55,7 +55,7 @@ numpy.random
 
   - 返回随机的整数，位于半开区间 [low, high)。如果high=None，区间为[0, low)。
 
-- **numpy.random.choice(a, size=None, replace=True, p=None)**
+- **numpy.random.choice(arr, size=None, replace=True, p=None)**
 
   - 从一个给定的一维数组，按概率p抽样一定数量的元素，replace=True表示允许重复元素。
 

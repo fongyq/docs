@@ -28,6 +28,7 @@
     <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="10. 归一化" href="10_normalize.html" />
@@ -206,7 +207,7 @@
 <li>指定范围内，按step递增的集合中的随机数。</li>
 </ul>
 </li>
-<li><strong>random.choice()</strong><ul>
+<li><strong>random.choice(lst)</strong><ul>
 <li>给定的集合中选择一个元素。</li>
 </ul>
 </li>
@@ -222,15 +223,15 @@
 </pre></div>
 </div>
 <ul class="simple">
-<li><strong>numpy.random.random([d0, d1, …, dn])</strong><ul>
-<li>生成0~1的随机浮点数，维度为 d0*d1* …*dn（缺省为1）。</li>
+<li><strong>numpy.random.random([</strong> <span class="math notranslate nohighlight">\(d_0, d_1, ... ,d_n\)</span> <strong>])</strong><ul>
+<li>生成0~1的随机浮点数，维度为 <span class="math notranslate nohighlight">\(d_0 \times d_1 \times ... \times d_n\)</span> （缺省为1）。</li>
 </ul>
 </li>
-<li><strong>numpy.random.rand(d0, d1, …, dn)</strong><ul>
-<li>生成0~1的随机浮点数，维度为 d0*d1* …*dn（缺省为1）。</li>
+<li><strong>numpy.random.rand(</strong> <span class="math notranslate nohighlight">\(d_0, d_1, ... ,d_n\)</span> <strong>)</strong><ul>
+<li>生成0~1的随机浮点数，维度为 <span class="math notranslate nohighlight">\(d_0 \times d_1 \times ... \times d_n\)</span> （缺省为1）。</li>
 </ul>
 </li>
-<li><strong>numpy.random.randn(d0, d1, …, dn)</strong><ul>
+<li><strong>numpy.random.randn(</strong> <span class="math notranslate nohighlight">\(d_0, d_1, ... ,d_n\)</span> <strong>)</strong><ul>
 <li>标准正态分布。</li>
 </ul>
 </li>
@@ -238,7 +239,7 @@
 <li>返回随机的整数，位于半开区间 [low, high)。如果high=None，区间为[0, low)。</li>
 </ul>
 </li>
-<li><strong>numpy.random.choice(a, size=None, replace=True, p=None)</strong><ul>
+<li><strong>numpy.random.choice(arr, size=None, replace=True, p=None)</strong><ul>
 <li>从一个给定的一维数组，按概率p抽样一定数量的元素，replace=True表示允许重复元素。</li>
 </ul>
 </li>
@@ -420,7 +421,18 @@
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+<script type="text/javascript">
+    $(document).ready(function() {
+     $(".toggle > *").hide();
+     $(".toggle .header").show();
+     $(".toggle .header").click(function() {
+      $(this).parent().children().not(".header").toggle(400);
+      $(this).parent().children(".header").toggleClass("open");
+     })
+    });
+</script>
+
 
 </body>
 </html>
