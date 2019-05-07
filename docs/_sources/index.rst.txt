@@ -20,9 +20,9 @@
    cpp/index
    python/index
    linux/index
+   git/index
    machineLearning/index
    deepLearning/index
-   git/index
    link/index
    softwares/index
    tech/index
