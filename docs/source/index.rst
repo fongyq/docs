@@ -22,6 +22,7 @@
    linux/index
    machineLearning/index
    deepLearning/index
+   git/index
    link/index
    softwares/index
    tech/index
