@@ -24,4 +24,5 @@
    deepLearning/index
    link/index
    softwares/index
+   tech/index
    else/index

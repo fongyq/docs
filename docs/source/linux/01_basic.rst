@@ -8,9 +8,9 @@
 
   cd ..
   pwd
-  ls -a -F -R
+  ls -a -F -R -l
 
-  cp [-i] source destination
+  cp [-i] src dst
   cp -R
 
   mv src des
@@ -21,7 +21,7 @@
   mkdir new
   rmdir new
 
-  file my_file ##查看文件类型
+  file my_file ## 查看文件类型
 
   cat -n log.txt
   tail log.txt
@@ -43,7 +43,7 @@
 
 .. code-block:: bash
 
-  sort [-n] log.txt
+  sort [-n] log.txt ## -n : 行号
 
   grep [-n] [-c] t file ## find *t* in file
 
@@ -53,3 +53,12 @@
   tar -cvf test.tar test/
   tar -xvf test.tar
   tar -xzvf test.tgz
+
+参考资料
+-----------
+
+1. 《Linux命令行与shell脚本编程大全》
+
+2. 每天一个linux命令目录
+
+  http://www.cnblogs.com/peida/archive/2012/12/05/2803591.html
