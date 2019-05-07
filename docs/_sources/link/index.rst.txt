@@ -38,6 +38,13 @@ Tutorials: https://pytorch.org/tutorials/
 
 Docs: https://pytorch.org/docs/master/index.html
 
+
+Jupyter Notebook
+--------------------
+
+https://jupyter.org/
+
+
 Standford University Lectures
 -------------------------------
 
