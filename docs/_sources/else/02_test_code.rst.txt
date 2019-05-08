@@ -168,6 +168,8 @@ command
               return True
           return self.jump_from_i(nums, 0)
 
+:math:`\color{darkgreen}{Show/Hide\ Code}`
+
 代码显示与隐藏：
 
 :math:`\color{darkgreen}{Show/Hide\ Code}`
