@@ -6,7 +6,8 @@
 
 以下结果若非特别指出，均在Windows系统下由编译器Visual Studio测试得到。
 
-.. table::
+.. table:: 类型大小
+    :align: center
 
     =============   =====================  ========================
      类型             size/32位编译器           size/64位编译器
@@ -89,7 +90,7 @@ float和double
 
 .. code-block:: cpp
   :linenos:
-  :emphasize-lines: 10
+  :emphasize-lines: 17 - 20, 22
 
   #include <iostream>
   using namespace std;
@@ -115,9 +116,9 @@ float和double
   	cout << boolalpha; // 设置布尔型输出格式
   	cout << (i == static_cast<int>(f_f)) << endl; // false
   	cout << (i == static_cast<int>(f_d)) << endl; // false
-  	cout << (i == static_cast<int>(d_d)) << endl; // true 只有double转换到int的结果与 i 一致。
+  	cout << (i == static_cast<int>(d_d)) << endl; // true （只有double转换到int的结果与 i 一致）
 
-  	return 0;
+    return 0;
   }
 
 
