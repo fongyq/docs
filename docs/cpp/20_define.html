@@ -307,7 +307,13 @@
 30
 31
 32
-33</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#define CALL_WITH_MAX(a, b) f((a)&gt;(b)? (a):(b))</span>
+33
+34
+35
+36</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="cp">#define CALL_WITH_MAX(a, b) f((a)&gt;(b)? (a):(b))</span>
 
 <span class="cp">#define MAX_COMP_1(a, b) (a)&gt;(b)? (a):(b)</span>
 

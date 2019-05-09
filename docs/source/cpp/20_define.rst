@@ -88,6 +88,9 @@ inline
 .. code-block:: cpp
   :linenos:
 
+  #include <iostream>
+  using namespace std;
+
   #define CALL_WITH_MAX(a, b) f((a)>(b)? (a):(b))
 
   #define MAX_COMP_1(a, b) (a)>(b)? (a):(b)
