@@ -110,6 +110,8 @@ list
 **底层实现：双向链表。**
 
 - 元素个数：size()，empty()
+- 表首元素：front()
+- 表尾元素：back()
 - 插入：push_front()，push_back()，emplace_front()，emplace_back()
 - 删除：pop_front()，pop_back()
 - 迭代器插入：在position **之前** 插入元素。
@@ -128,6 +130,8 @@ deque
 **底层实现：循环队列。**
 
 - 元素个数：size()，empty()
+- 队首元素：front()
+- 队尾元素：back()
 - 插入：push_front(x)，push_back(x)
 - 删除：pop_front()，pop_back()
 - 迭代器插入：在position **之前** 插入元素。
