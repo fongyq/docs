@@ -19,6 +19,13 @@ Tech
 
     https://codingstandards.iteye.com/blog/810900
 
+- 加速 git clone
+
+    https://blog.51cto.com/11887934/2051323
+
+    https://blog.lizebang.top/2018/02/git-clone-slow/
+
+
 问题
 -----------
 
