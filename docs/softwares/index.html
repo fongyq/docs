@@ -28,9 +28,10 @@
     <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="其他" href="../else/index.html" />
+    <link rel="next" title="Tech" href="../tech/index.html" />
     <link rel="prev" title="资源链接" href="../link/index.html" /> 
 
   
@@ -92,6 +93,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../cpp/index.html">C/C++</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../python/index.html">Python</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../linux/index.html">Linux/Shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../git/index.html">Git</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../machineLearning/index.html">机器学习</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../deepLearning/index.html">深度学习</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../link/index.html">资源链接</a></li>
@@ -101,8 +103,10 @@
 <li class="toctree-l2"><a class="reference internal" href="#mobaxterm">MobaXterm</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#teamviewer">TeamViewer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#notepad">Notepad++</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cmder">cmder</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../tech/index.html">Tech</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../else/index.html">其他</a></li>
 </ul>
 
@@ -210,6 +214,14 @@
 </div>
 <p><a class="reference external" href="https://notepad-plus-plus.org/">https://notepad-plus-plus.org/</a></p>
 </div>
+<div class="section" id="cmder">
+<h2>cmder<a class="headerlink" href="#cmder" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Windows下终端神器</p>
+</div>
+<p><a class="reference external" href="https://cmder.net/">https://cmder.net/</a></p>
+</div>
 </div>
 
 
@@ -220,7 +232,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../else/index.html" class="btn btn-neutral float-right" title="其他" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../tech/index.html" class="btn btn-neutral float-right" title="Tech" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="../link/index.html" class="btn btn-neutral" title="资源链接" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -278,7 +290,18 @@
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+<script type="text/javascript">
+    $(document).ready(function() {
+     $(".toggle > *").hide();
+     $(".toggle .header").show();
+     $(".toggle .header").click(function() {
+      $(this).parent().children().not(".header").toggle(400);
+      $(this).parent().children(".header").toggleClass("open");
+     })
+    });
+</script>
+
 
 </body>
 </html>

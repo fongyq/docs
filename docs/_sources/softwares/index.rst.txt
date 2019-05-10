@@ -40,6 +40,7 @@ TeamViewer
 
 https://www.teamviewer.com/zhCN/
 
+
 Notepad++
 ----------
 
@@ -48,3 +49,13 @@ Notepad++
     强大的文本阅读/编辑器
 
 https://notepad-plus-plus.org/
+
+
+cmder
+----------
+
+.. note::
+
+    Windows下终端神器
+
+https://cmder.net/
