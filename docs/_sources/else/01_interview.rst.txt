@@ -455,7 +455,6 @@
           }
       };
 
-|
 
 17. [LeetCode] Longest Consecutive Sequence 最长连续序列。Hint：方法一，排序；方法二，对于每个元素n，搜索n+1是否在数组中，使用 hash（set）可以获得 O(1) 的查找复杂度。
 
@@ -489,7 +488,7 @@
                   longest = max(longest, current_long)
 
           num_set.clear()
-          
+
           return longest
 
 
