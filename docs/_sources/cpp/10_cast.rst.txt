@@ -4,8 +4,7 @@
 static_cast<type> (expr)
 ---------------------------------
 
-**1**. ``static_cast`` 作用和C语言风格强制转换的效果基本一样，由于没有运行时类型检查来保证转换的安全性，
-所以这类型的强制转换和C语言风格的强制转换都有安全隐患。
+**1**. ``static_cast`` 作用和C语言风格强制转换的效果基本一样，由于没有运行时类型检查来保证转换的安全性，所以这类型的强制转换和C语言风格的强制转换都有安全隐患。
 
 **2**. 用于基本数据类型之间的转换，如把 ``int`` 转换成 ``char`` ，把 ``int`` 转换成 ``enum`` 。这种转换的安全性需要开发者来维护。
 
@@ -51,6 +50,69 @@ reinterpret_cast<type> (expr)
 **3**. reinterpret_cast可以在指针和引用里进行肆无忌惮的转换。
 
 
+使用stringstream转换类型
+------------------------------
+
+.. highlight:: cpp
+
+::
+
+  #include <sstream>
+
+**sstream** 头文件定义了三个类型来支持内存IO：istringstream，ostringstream，stringstream。这些类型可以向 **string** 写入数据，或从 **string** 读取数据。
+
+**stringstream** 的一些操作：
+
+  - stringstream strm; // strm是一个未绑定的stringstream类型
+
+  - stringstream strm(s); // strm是一个stringstream对象，保存 string s 的一个拷贝
+
+  - strm.str(); // 返回strm保存的拷贝
+
+  - strm(s); // 将 string s 拷贝到 strm 中，返回void
+
+强制类型转换
+^^^^^^^^^^^^^^^^^
+
+.. code-block:: cpp
+  :linenos:
+
+  #include <iostream>
+  #include <sstream>
+  using namespace std;
+
+  template <class output_type, class input_type>
+  output_type Convert(const input_type &input)
+  {
+    stringstream strm;
+    strm << input;
+    output_type result;
+    strm >> result;
+    strm.clear();
+    return result;
+  }
+
+
+  int main(int argc, char ** argv)
+  {
+    string strNum = "-22.22";
+    float f = Convert<float>(strNum);
+    cout << f << endl; // -22.22
+
+    float n = 22.22;
+    string str = Convert<string>(n);
+    cout << str << endl; // 22.22
+
+    return 0;
+  }
+
+.. note::
+
+  strm调用 **成对的** ``<<`` 和 ``>>`` 之后，状态为 ``end-of-file`` ，必须进行 ``clear`` 才能进行下一次 ``<<`` 操作。
+
+  ``strm.clear()`` 重置了strm的状态标识，并没有清空数据。如果没有调用 ``<<`` 之后没有使用 ``>>`` ，可以使用  ``strm.str("")`` 清空数据。
+
+
 参考资料
 ---------------
 
@@ -61,3 +123,11 @@ reinterpret_cast<type> (expr)
 2. c++ 四种强制类型转换介绍
 
   https://blog.csdn.net/ydar95/article/details/69822540
+
+3. C++中使用stringstream简化类型转换
+
+  https://www.cnblogs.com/Mr-Zhong/p/5312478.html
+
+4. c++ reference
+
+  http://www.cplusplus.com/reference/sstream/stringstream
