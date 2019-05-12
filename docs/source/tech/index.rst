@@ -31,4 +31,4 @@ Tech
 
 - Unable to locate package python-pip
 
-  https://askubuntu.com/questions/268539/unable-to-locate-package-python-pip-on-live-system
+    https://askubuntu.com/questions/268539/unable-to-locate-package-python-pip-on-live-system
