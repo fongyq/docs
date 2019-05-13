@@ -207,29 +207,29 @@
 <p><strong>1</strong>. <code class="docutils literal notranslate"><span class="pre">static_cast</span></code> 作用和C语言风格强制转换的效果基本一样，由于没有运行时类型检查来保证转换的安全性，所以这类型的强制转换和C语言风格的强制转换都有安全隐患。</p>
 <p><strong>2</strong>. 用于基本数据类型之间的转换，如把 <code class="docutils literal notranslate"><span class="pre">int</span></code> 转换成 <code class="docutils literal notranslate"><span class="pre">char</span></code> ，把 <code class="docutils literal notranslate"><span class="pre">int</span></code> 转换成 <code class="docutils literal notranslate"><span class="pre">enum</span></code> 。这种转换的安全性需要开发者来维护。</p>
 <p><strong>3</strong>. C++ 的任何的隐式转换都是使用 <code class="docutils literal notranslate"><span class="pre">static_cast</span></code> 来实现。</p>
-<p><strong>4</strong>. 基类和子类之间转换：其中子类指针转换成父类指针是安全的；但父类指针转换成子类指针是不安全的。(基类和子类之间的动态类型转换建议用dynamic_cast)</p>
+<p><strong>4</strong>. 基类和子类之间转换：其中子类指针转换成父类指针是安全的；但父类指针转换成子类指针是不安全的。（基类和子类之间的动态类型转换建议用 <code class="docutils literal notranslate"><span class="pre">dynamic_cast</span></code> ）</p>
 <p><strong>5</strong>. 把空指针转换成目标类型的空指针。</p>
-<p><strong>6</strong>. 把任何类型的表达式转换成void类型。</p>
+<p><strong>6</strong>. 把任何类型的表达式转换成 <code class="docutils literal notranslate"><span class="pre">void</span></code> 类型。</p>
 </div>
 <div class="section" id="dynamic-cast-type-expr">
 <h2>10.2. dynamic_cast&lt;type&gt; (expr)<a class="headerlink" href="#dynamic-cast-type-expr" title="Permalink to this headline">¶</a></h2>
-<p>有条件转换，动态类型转换，运行时类型安全检查(转换失败返回NULL)：</p>
+<p>有条件转换，动态类型转换，运行时类型安全检查（转换失败返回 <code class="docutils literal notranslate"><span class="pre">NULL</span></code> ）：</p>
 <p><strong>1</strong>. 安全的基类和子类之间转换。</p>
 <p><strong>2</strong>. 必须要有虚函数。</p>
-<p><strong>3</strong>. 相同基类不同子类之间的交叉转换。但结果是NULL。</p>
+<p><strong>3</strong>. 相同基类不同子类之间的交叉转换，结果是 <code class="docutils literal notranslate"><span class="pre">NULL</span></code> 。</p>
 </div>
 <div class="section" id="const-cast-type-expr">
 <h2>10.3. const_cast&lt;type&gt; (expr)<a class="headerlink" href="#const-cast-type-expr" title="Permalink to this headline">¶</a></h2>
-<p><strong>1</strong>. 去掉或加上类型的const、volitale属性;</p>
+<p><strong>1</strong>. 去掉或加上类型的 <code class="docutils literal notranslate"><span class="pre">const</span></code>、<code class="docutils literal notranslate"><span class="pre">volitale</span></code> 属性;</p>
 <p><strong>2</strong>. 常量指针被转化成非常量的指针，并且仍然指向原来的对象；</p>
 <p><strong>3</strong>. 常量引用被转换成非常量的引用，并且仍然指向原来的对象；</p>
-<p><strong>4</strong>. const_cast一般用于修改指针。如const char *p形式。</p>
+<p><strong>4</strong>. <code class="docutils literal notranslate"><span class="pre">const_cast</span></code> 一般用于修改指针。如 <code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">char</span> <span class="pre">\*p</span></code> 形式。</p>
 </div>
 <div class="section" id="reinterpret-cast-type-expr">
 <h2>10.4. reinterpret_cast&lt;type&gt; (expr)<a class="headerlink" href="#reinterpret-cast-type-expr" title="Permalink to this headline">¶</a></h2>
-<p><strong>1</strong>. reinterpret_cast是从底层对数据进行重新解释，依赖具体的平台，可移植性差。</p>
-<p><strong>2</strong>. reinterpret_cast可以将整型转换为指针，也可以把指针转换为数组。</p>
-<p><strong>3</strong>. reinterpret_cast可以在指针和引用里进行肆无忌惮的转换。</p>
+<p><strong>1</strong>. <code class="docutils literal notranslate"><span class="pre">reinterpret_cast</span></code> 是从底层对数据进行重新解释，依赖具体的平台，可移植性差。</p>
+<p><strong>2</strong>. <code class="docutils literal notranslate"><span class="pre">reinterpret_cast</span></code> 可以将整型转换为指针，也可以把指针转换为数组。</p>
+<p><strong>3</strong>. <code class="docutils literal notranslate"><span class="pre">reinterpret_cast</span></code> 可以在指针和引用里进行肆无忌惮的转换。</p>
 </div>
 <div class="section" id="stringstream">
 <h2>10.5. 使用stringstream转换类型<a class="headerlink" href="#stringstream" title="Permalink to this headline">¶</a></h2>
