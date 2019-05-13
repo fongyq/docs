@@ -31,7 +31,7 @@ dynamic_cast<type> (expr)
 const_cast<type> (expr)
 --------------------------------
 
-**1**. 去掉类型的const、volitale属性;
+**1**. 去掉或加上类型的const、volitale属性;
 
 **2**. 常量指针被转化成非常量的指针，并且仍然指向原来的对象；
 
@@ -131,3 +131,5 @@ reinterpret_cast<type> (expr)
 4. c++ reference
 
   http://www.cplusplus.com/reference/sstream/stringstream
+
+  http://www.cplusplus.com/doc/tutorial/typecasting/
