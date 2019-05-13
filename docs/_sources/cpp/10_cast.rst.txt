@@ -27,6 +27,37 @@ dynamic_cast<type> (expr)
 
 **3**. 相同基类不同子类之间的交叉转换，结果是 ``NULL`` 。
 
+.. code-block:: cpp
+  :linenos:
+
+  // dynamic_cast
+  #include <iostream>
+  #include <exception>
+  using namespace std;
+
+  class Base { virtual void dummy() {} };
+  class Derived: public Base { int a; };
+
+  int main ()
+  {
+    try
+    {
+      Base * pba = new Derived;
+      Base * pbb = new Base;
+      Derived * pd;
+
+      pd = dynamic_cast<Derived*>(pba);
+      if (pd==0) cout << "Null pointer on first type-cast.\n";
+
+      pd = dynamic_cast<Derived*>(pbb);
+      if (pd==0) cout << "Null pointer on second type-cast.\n";
+
+    } catch (exception& e) {cout << "Exception: " << e.what();}
+    return 0;
+  }
+
+  // 输出结果：Null pointer on second type-cast.
+
 
 const_cast<type> (expr)
 --------------------------------
@@ -37,7 +68,29 @@ const_cast<type> (expr)
 
 **3**. 常量引用被转换成非常量的引用，并且仍然指向原来的对象；
 
-**4**. ``const_cast`` 一般用于修改指针。如 ``const char \*p`` 形式。
+**4**. ``const_cast`` 一般用于修改指针。如 ``const char *p`` 形式。
+如果有一个函数，它的形参是 ``non-const`` 类型变量，而且函数不会对实参的值进行改动，这时我们可以使用类型为 ``const`` 的变量来调用函数，此时 ``const_cast`` 就派上用场了。
+
+.. code-block:: cpp
+  :linenos:
+
+  // const_cast
+  #include <iostream>
+  using namespace std;
+
+  void print (char * str)
+  {
+    cout << str << '\n';
+  }
+
+  int main ()
+  {
+    const char * c = "sample text";
+    print ( const_cast<char *> (c) );
+    return 0;
+  }
+
+  // 输出结果：sample text
 
 
 reinterpret_cast<type> (expr)
@@ -133,3 +186,7 @@ reinterpret_cast<type> (expr)
   http://www.cplusplus.com/reference/sstream/stringstream
 
   http://www.cplusplus.com/doc/tutorial/typecasting/
+
+5. C++强制类型转换操作符 const_cast
+
+  https://www.cnblogs.com/QG-whz/p/4513136.html
