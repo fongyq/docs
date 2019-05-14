@@ -28,6 +28,7 @@
     <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="2. 支持向量机" href="02_svm.html" />
@@ -92,6 +93,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../cpp/index.html">C/C++</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../python/index.html">Python</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../linux/index.html">Linux/Shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../git/index.html">Git</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">机器学习</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">1. Logistic Regression</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#id1">1.1. 基本假设</a></li>
@@ -102,12 +104,13 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="02_svm.html">2. 支持向量机</a></li>
-<li class="toctree-l2"><a class="reference internal" href="03_pca.html">3. 主成分分析PCA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_pca.html">3. 主成分分析</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../deepLearning/index.html">深度学习</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../link/index.html">资源链接</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../softwares/index.html">实用软件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tech/index.html">Tech</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../else/index.html">其他</a></li>
 </ul>
 
@@ -179,9 +182,9 @@
 <h1>1. Logistic Regression<a class="headerlink" href="#logistic-regression" title="Permalink to this headline">¶</a></h1>
 <p>模型：</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}h_\theta(\mathbf{x}) = g(\theta^\top \mathbf{x}),\\
-g(z) = \frac{1}{1+e^{-z}},\\
-g^\prime(z) = (1-g(z))g(z) \in (0, 0.25].\end{split}\]</div>
+\[\begin{split}h_\theta(\mathbf{x}) &amp; = &amp; \  g(\theta^\top \mathbf{x}),\\
+g(z) &amp; = &amp; \  \frac{1}{1+e^{-z}},\\
+g^\prime(z) &amp; = &amp; \  (1-g(z))g(z) \in (0, 0.25].\end{split}\]</div>
 <p>对数损失函数（极大似然）：</p>
 <div class="math notranslate nohighlight">
 \[\mathcal{l}_\theta = -\frac{1}{m} \sum_{i=1}^m y^{(i)}log\  h_\theta(\mathbf{x}^{(i)}) + (1 - y^{(i)})log(1 - h_\theta(\mathbf{x}^{(i)}))\]</div>
@@ -339,7 +342,18 @@ g^\prime(z) = (1-g(z))g(z) \in (0, 0.25].\end{split}\]</div>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+<script type="text/javascript">
+    $(document).ready(function() {
+     $(".toggle > *").hide();
+     $(".toggle .header").show();
+     $(".toggle .header").click(function() {
+      $(this).parent().children().not(".header").toggle(400);
+      $(this).parent().children(".header").toggleClass("open");
+     })
+    });
+</script>
+
 
 </body>
 </html>
