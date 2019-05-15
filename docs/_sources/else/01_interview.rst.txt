@@ -532,6 +532,34 @@ Hint：走 :math:`n` 步之后能到达的坐标是一个差为 2 的等差数�
       }
 
 
+20. 求 :math:`n` 的阶乘末尾有多少个 :math:`0` 。Hint：1个 :math:`5` 和1个 :math:`2` 搭配可以得到1个 :math:`0` ；:math:`2` 的个数比 :math:`5` 多，
+因此只关心 :math:`5` 的个数；:math:`25` 包含2个 :math:`5` ，:math:`125` 包含3个 :math:`5` ...。
+
+  .. container:: toggle
+
+    .. container:: header
+
+      :math:`\color{darkgreen}{Show/Hide\ Code}`
+
+    .. code-block:: cpp
+      :linenos:
+
+      class Solution
+      {
+      public:
+          int trailingZeroes(int n)
+          {
+              if(n <= 0) return 0;
+              int res = 0;
+              while(n)
+              {
+                  res += n / 5;
+                  n /= 5;
+              }
+              return res;
+          }
+      };
+
 
 
 C++
