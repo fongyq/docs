@@ -119,16 +119,18 @@
 <li class="toctree-l3"><a class="reference internal" href="#stack">19.7. stack</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#queue">19.8. queue</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#to-string">19.9. to_string函数</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#size-tsize-type">19.10. size_t和size_type</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#atoi-atof-atol">19.10. atoi，atof，atol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#size-tsize-type">19.11. size_t和size_type</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#size-t">size_t</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#size-type">size_type</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#id1">19.11. 参考资料</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">19.12. 参考资料</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="20_define.html">20. #define</a></li>
 <li class="toctree-l2"><a class="reference internal" href="21_operatorPrior.html">21. 运算符优先级</a></li>
+<li class="toctree-l2"><a class="reference internal" href="22_const.html">22. const</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../python/index.html">Python</a></li>
@@ -251,7 +253,10 @@
 </li>
 <li><p class="first">串接：+</p>
 </li>
-<li><p class="first">c_str()：返回指向C类型字符串的指针。</p>
+<li><p class="first">c_str()：返回指向C类型字符串的指针。如果需要使用C的字符串函数如strcmp、strcpy等，需要使用c_str()。</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="nf">c_str</span><span class="p">()</span> <span class="k">const</span> <span class="k">noexcept</span><span class="p">;</span>
+</pre></div>
+</div>
 </li>
 <li><p class="first">子串</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">string</span> <span class="n">substr</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">pos</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">len</span> <span class="o">=</span> <span class="n">npos</span><span class="p">)</span> <span class="k">const</span>
@@ -562,8 +567,20 @@
 </pre></div>
 </div>
 </div>
+<div class="section" id="atoi-atof-atol">
+<h2>19.10. atoi，atof，atol<a class="headerlink" href="#atoi-atof-atol" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdlib&gt;</span><span class="cp"></span>
+</pre></div>
+</div>
+<p>把C类型的字符串转换为数字（C++的string需要使用 <code class="docutils literal notranslate"><span class="pre">c_str()</span></code> 转换）。</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="nf">atoi</span> <span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">str</span><span class="p">);</span>
+<span class="kt">double</span> <span class="nf">atof</span> <span class="p">(</span><span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">str</span><span class="p">);</span>
+<span class="kt">long</span> <span class="kt">int</span> <span class="nf">atol</span> <span class="p">(</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">str</span> <span class="p">);</span>
+</pre></div>
+</div>
+</div>
 <div class="section" id="size-tsize-type">
-<h2>19.10. size_t和size_type<a class="headerlink" href="#size-tsize-type" title="Permalink to this headline">¶</a></h2>
+<h2>19.11. size_t和size_type<a class="headerlink" href="#size-tsize-type" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="size-t">
 <h3>size_t<a class="headerlink" href="#size-t" title="Permalink to this headline">¶</a></h3>
 <p>size_t 提供了一种可移植（不同平台下）的方法声明与系统可寻址的内存区域一致的长度。
@@ -625,7 +642,7 @@ size_t 是通过typedef定义的一些 <strong>无符号整型</strong> 的别�
 </div>
 </div>
 <div class="section" id="id1">
-<h2>19.11. 参考资料<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<h2>19.12. 参考资料<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
 <li>C++ reference</li>
 </ol>

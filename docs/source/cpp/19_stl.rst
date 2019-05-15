@@ -36,7 +36,11 @@ string
 - 访问：[pos]，at(pos)。at()返回位置pos处元素的引用，越界则抛出 ``out_of_range`` 异常。
 - 字典序比较：==，!=，<，<=，>，>=
 - 串接：+
-- c_str()：返回指向C类型字符串的指针。
+- c_str()：返回指向C类型字符串的指针。如果需要使用C的字符串函数如strcmp、strcpy等，需要使用c_str()。
+  ::
+
+    const char* c_str() const noexcept;
+
 - 子串
   ::
 
@@ -321,6 +325,22 @@ to\_string函数
   string to_string (float val);
   string to_string (double val);
   string to_string (long double val);
+
+
+atoi，atof，atol
+-------------------
+
+::
+
+  #include <cstdlib>
+
+把C类型的字符串转换为数字（C++的string需要使用 ``c_str()`` 转换）。
+
+::
+
+  int atoi (const char * str);
+  double atof (const char* str);
+  long int atol ( const char * str );
 
 
 size\_t和size\_type
