@@ -114,9 +114,15 @@
 softmax偏导为：
 
 .. math::
+  :nowrap:
 
-  \frac{\partial{\hat{y}_j}}{\partial{a^{(n)}_i}} & = & \  - \hat{y}_j \hat{y}_i, \quad i \ne j. \\
-                                                  & = & \  \hat{y}_i (1 - \hat{y}_i), \quad i = j.
+  $$
+  \frac{\partial{\hat{y}_j}}{\partial{a^{(n)}_i}} =
+  \begin{cases}
+     - \hat{y}_j \hat{y}_i & & i \ne j \\
+     \hat{y}_i (1 - \hat{y}_i) & &  i = j
+  \end{cases}
+  $$
 
 另外，由链式法则（chain rule）：
 

@@ -299,9 +299,13 @@ y_j \in \{ 0,1 \}, \\
 \hat{y}_j = softmax(\mathbb{a}^{(n)}, j) = \frac{e^{a^{(n)}_j}}{\sum_{k=1}^{C_n} e^{a^{(n)}_k}}.\end{split}\]</div>
 <p>softmax偏导为：</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}\frac{\partial{\hat{y}_j}}{\partial{a^{(n)}_i}} &amp; = &amp; \  - \hat{y}_j \hat{y}_i, \quad i \ne j. \\
-                                                &amp; = &amp; \  \hat{y}_i (1 - \hat{y}_i), \quad i = j.\end{split}\]</div>
-<p>另外，由链式法则（chain rule）：</p>
+$$
+\frac{\partial{\hat{y}_j}}{\partial{a^{(n)}_i}} =
+\begin{cases}
+   - \hat{y}_j \hat{y}_i &amp; &amp; i \ne j \\
+   \hat{y}_i (1 - \hat{y}_i) &amp; &amp;  i = j
+\end{cases}
+$$</div><p>另外，由链式法则（chain rule）：</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\frac{\partial{\mathcal{L}}}{\partial{z^{(n)}_i}} &amp; = &amp; \  \frac{\partial{\mathcal{L}}}{\partial{a^{(n)}_i}} \frac{\partial{a^{(n)}_i}}{\partial{z^{(n)}_i}} \\
 \frac{\partial{\mathcal{L}}}{\partial{a^{(n)}_i}} &amp; = &amp; \  \sum_{j=1}^{C_n} \frac{\partial{\mathcal{L}}}{\partial{\hat{y}_j}} \frac{\partial{\hat{y}_j}}{\partial{a^{(n)}_i}} \\
