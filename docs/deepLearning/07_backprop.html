@@ -266,25 +266,25 @@ a^{(l)}_i &amp; = &amp; \  g(z^{(l)}_i).\end{split}\]</div>
 \[\begin{split}\delta^{(l)}_i &amp; = &amp; \  \frac{\partial{\mathcal{L}}}{\partial{z^{(l)}_i}} \\
                 &amp; = &amp; \  \sum_{j=1}^{C_{l+1}} \frac{\partial{\mathcal{L}}}{\partial{z^{(l+1)}_j}} \frac{\partial{z^{(l+1)}_j}}{\partial{a^{(l)}_i}} \frac{\partial{a^{(l)}_i}}{\partial{z^{(l)}_i}} \\
                 &amp; = &amp; \  \sum_{j=1}^{C_{l+1}} \frac{\partial{\mathcal{L}}}{\partial{z^{(l+1)}_j}} \frac{\partial{\left ( b^{(l)}_i + \sum_{k=1}^{C_l}w^{(l)}_{jk}a^{(l)}_k \right )}}{\partial{a^{(l)}_i}} \frac{\partial{a^{(l)}_i}}{\partial{z^{(l)}_i}} \\
-                &amp; = &amp; \  \sum_{j=1}^{C_{l+1}} \delta^{(l+1)}_j w_{ji}^{l} g^{\prime}(z^{(l)}_i) \\
-                &amp; = &amp; \  g^{\prime}(z^{(l)}_i) \sum_{j=1}^{C_{l+1}} \delta^{(l+1)}_j w_{ji}^{l}\end{split}\]</div>
+                &amp; = &amp; \  \sum_{j=1}^{C_{l+1}} \delta^{(l+1)}_j w_{ji}^{(l)} g^{\prime}(z^{(l)}_i) \\
+                &amp; = &amp; \  g^{\prime}(z^{(l)}_i) \sum_{j=1}^{C_{l+1}} \delta^{(l+1)}_j w_{ji}^{(l)}\end{split}\]</div>
 <p>权重和偏置的梯度：</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}\frac{\partial{\mathcal{L}}}{\partial{w_{ij}^{l}}} &amp; = &amp; \  \frac{\partial{\mathcal{L}}}{\partial{z^{(l+1)}_i}} \frac{\partial{z^{(l+1)}_i}}{\partial{w_{ij}^{l}}} \\
-                                                   &amp; = &amp; \  \delta^{(l+1)}_i \frac{\partial{z^{(l+1)}_i}}{\partial{w_{ij}^{l}}} \\
-                                                   &amp; = &amp; \  \delta^{(l+1)}_i \frac{\partial{\left ( b^{(l)}_i + \sum_{k=1}^{C_l}w^{(l)}_{ik}a^{(l)}_k \right )}}{\partial{w_{ij}^{l}}} \\
+\[\begin{split}\frac{\partial{\mathcal{L}}}{\partial{w_{ij}^{(l)}}} &amp; = &amp; \  \frac{\partial{\mathcal{L}}}{\partial{z^{(l+1)}_i}} \frac{\partial{z^{(l+1)}_i}}{\partial{w_{ij}^{(l)}}} \\
+                                                   &amp; = &amp; \  \delta^{(l+1)}_i \frac{\partial{z^{(l+1)}_i}}{\partial{w_{ij}^{(l)}}} \\
+                                                   &amp; = &amp; \  \delta^{(l+1)}_i \frac{\partial{\left ( b^{(l)}_i + \sum_{k=1}^{C_l}w^{(l)}_{ik}a^{(l)}_k \right )}}{\partial{w_{ij}^{(l)}}} \\
                                                    &amp; = &amp; \  \delta^{(l+1)}_i a^{(l)}_j \\
-\frac{\partial{\mathcal{L}}}{\partial{b_i^{l}}} &amp; = &amp; \  \delta^{(l+1)}_i\end{split}\]</div>
+\frac{\partial{\mathcal{L}}}{\partial{b_i^{(l)}}} &amp; = &amp; \  \delta^{(l+1)}_i\end{split}\]</div>
 <dl class="docutils">
 <dt>梯度下降</dt>
 <dd><ul class="first last">
 <li><p class="first">权重更新</p>
 <div class="math notranslate nohighlight">
-\[w_{ij}^{l} \leftarrow w_{ij}^{l} - \alpha \times \frac{1}{m} \sum_x \frac{\partial{\mathcal{L}}}{\partial{w_{ij}^{l}}} = w_{ij}^{l} - \frac{\alpha}{m} \sum_x \delta^{(l+1)}_i a^{(l)}_j\]</div>
+\[w_{ij}^{(l)} \leftarrow w_{ij}^{(l)} - \alpha \times \frac{1}{m} \sum_x \frac{\partial{\mathcal{L}}}{\partial{w_{ij}^{(l)}}} = w_{ij}^{(l)} - \frac{\alpha}{m} \sum_x \delta^{(l+1)}_i a^{(l)}_j\]</div>
 </li>
 <li><p class="first">偏置更新</p>
 <div class="math notranslate nohighlight">
-\[b_i^{l}  \leftarrow b_i^{l} - \alpha \times \frac{1}{m} \sum_x \frac{\partial{\mathcal{L}}}{\partial{b_i^{l}}} = b_i^{l} - \frac{\alpha}{m} \sum_x \delta^{(l+1)}_i\]</div>
+\[b_i^{(l)}  \leftarrow b_i^{(l)} - \alpha \times \frac{1}{m} \sum_x \frac{\partial{\mathcal{L}}}{\partial{b_i^{(l)}}} = b_i^{(l)} - \frac{\alpha}{m} \sum_x \delta^{(l+1)}_i\]</div>
 </li>
 </ul>
 </dd>
