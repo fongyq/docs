@@ -166,7 +166,7 @@
               return r;
           }
 
-
+          // T(n) = 2T(n/2) + O(n)，时间复杂度 O(N)
           int quicksort(vector<int>& nums, int a, int b, int k)
           {
               int p = partition(nums, a, b);
@@ -611,6 +611,56 @@ Hint：走 :math:`n` 步之后能到达的坐标是一个差为 2 的等差数�
         }
         return cnt;
       }
+
+
+22. [LeetCode] Subarray Sum Equals K 子数组和为 :math:`K` 。Hint：依次求数组的前 :math:`n` 项和 :math:`sum[n]` ，:math:`n \in [0, arr\_size]` （注意：0也在内），
+将和作为哈希表的key，和的值出现次数作为value；如果存在 :math:`sum[i]−sum[j]=K \ (i \ge j)` ，则 :math:`sum[i]` 和 :math:`sum[j]` 都应该在哈希表中。
+
+  https://leetcode.com/problems/subarray-sum-equals-k/
+
+  .. container:: toggle
+
+    .. container:: header
+
+      :math:`\color{darkgreen}{Show/Hide\ Code}`
+
+    .. code-block:: cpp
+      :linenos:
+
+      // https://leetcode.com/problems/subarray-sum-equals-k/solution/ : Approach #4 Using hashmap
+
+      from collections import defaultdict
+      class Solution(object):
+      def subarraySum(self, nums, k):
+          """
+          :type nums: List[int]
+          :type k: int
+          :rtype: int
+          """
+
+          if len(nums) == 0:
+              return 0
+
+          N = len(nums)
+
+          sum_to_num = defaultdict(int)
+          sum_to_num[0] = 1 // 前 0 项和
+
+          cnt = 0
+          tmp_sum = 0
+          for n in nums:
+              tmp_sum += n
+              diff = tmp_sum - k
+              cnt += sum_to_num[diff]
+              sum_to_num[tmp_sum] += 1
+
+          return cnt
+
+
+
+
+
+
 
 
 C++
