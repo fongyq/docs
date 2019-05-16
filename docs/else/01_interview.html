@@ -1035,8 +1035,8 @@ Hint：走 <span class="math notranslate nohighlight">\(n\)</span> 步之后能�
 </td></tr></table></div>
 </div>
 </div></blockquote>
-<p>21. 求一个整数的二进制表示中 <span class="math notranslate nohighlight">\(1\)</span> 的个数。Hint：移位操作，负数可能造成死循环。
-注：指定移位次数大于或等于对象类型的比特数（如int型的32位），结果是未定义的。例如：<code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">&gt;&gt;</span> <span class="pre">32</span></code> 是未定义的，但是允许 <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">&gt;&gt;=</span> <span class="pre">1</span></code> 执行无限次，这是安全的。</p>
+<p>21. 求一个整数的二进制表示中 <span class="math notranslate nohighlight">\(1\)</span> 的个数。Hint：移位操作，负数可能造成死循环。 <strong>注：指定移位次数大于或等于对象类型的比特数（如int型的32位），或者对负数进行左移操作，结果都是未定义的</strong> 。
+例如：<code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">&gt;&gt;</span> <span class="pre">32</span></code> 是未定义的，但是允许 <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">&gt;&gt;=</span> <span class="pre">1</span></code> 执行无限次，这是安全的。</p>
 <blockquote>
 <div><div class="toggle docutils container">
 <div class="header docutils container">
@@ -1178,6 +1178,94 @@ Hint：走 <span class="math notranslate nohighlight">\(n\)</span> 步之后能�
         <span class="n">sum_to_num</span><span class="p">[</span><span class="n">tmp_sum</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
 
     <span class="k">return</span> <span class="n">cnt</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+</div></blockquote>
+<ol class="arabic simple" start="23">
+<li>使用位运算进行加法运算。Hint：原位加法运算等效为 <code class="docutils literal notranslate"><span class="pre">^</span></code> 运算，进位等效为 <code class="docutils literal notranslate"><span class="pre">&amp;</span></code> 和 <code class="docutils literal notranslate"><span class="pre">移位</span></code> 的复合。 <strong>注：C++不允许对负数进行左移运算。</strong></li>
+</ol>
+<blockquote>
+<div><p><a class="reference external" href="https://leetcode.com/problems/sum-of-two-integers/">https://leetcode.com/problems/sum-of-two-integers/</a></p>
+<div class="toggle docutils container">
+<div class="header docutils container">
+<span class="math notranslate nohighlight">\(\color{darkgreen}{Show/Hide\ Code}\)</span></div>
+<div class="highlight-cpp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="kt">int</span> <span class="n">getSum</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">sum</span><span class="p">,</span> <span class="n">carry</span><span class="p">;</span>
+        <span class="k">do</span>
+        <span class="p">{</span>
+            <span class="n">sum</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span> <span class="o">^</span> <span class="n">b</span><span class="p">);</span>
+            <span class="n">carry</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span> <span class="o">&amp;</span> <span class="n">b</span> <span class="o">&amp;</span> <span class="n">INT_MAX</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// &amp; INT_MAX 操作保证移位前的数是正数，否则结果是未定义的。</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="n">sum</span><span class="p">;</span>
+            <span class="n">b</span> <span class="o">=</span> <span class="n">carry</span><span class="p">;</span>
+        <span class="p">}</span><span class="k">while</span><span class="p">(</span><span class="n">b</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">);</span>
+        <span class="k">return</span> <span class="n">a</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</pre></div>
+</td></tr></table></div>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">int32</span>
+
+<span class="k">class</span> <span class="nc">Solution</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">getSum</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :type a: int</span>
+<span class="sd">        :type b: int</span>
+<span class="sd">        :rtype: int</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">int32</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">int32</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+
+        <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+            <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">a</span> <span class="o">^</span> <span class="n">b</span><span class="p">,</span> <span class="p">(</span><span class="n">a</span> <span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span>
+            <span class="k">print</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span>
+            <span class="k">if</span> <span class="n">b</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">break</span>
+
+        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+
+<span class="c1">## 注意，这里并没有与 0x7fffffff 做 &amp; 运算</span>
+<span class="c1">## 假设 a &amp; b = -16，-16 &amp; 0x7fffffff = 2147483632</span>
+<span class="c1">## C++ 中，对 2147483632 左移1位使得最高位符号位为 1，得到 -32</span>
+<span class="c1">## python中，2147483632的符号位为 0，继续左移1位，会直接做大整数运算，得到 4294967264L，导致不能得到正确结果</span>
+<span class="c1">## python 中，使用type()查看数据类型是发现，有时候系统会把 int32 转化为 int64，或者 int64 转为 int32，疑惑中。。。</span>
 </pre></div>
 </td></tr></table></div>
 </div>
