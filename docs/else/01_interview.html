@@ -1265,7 +1265,7 @@ Hint：走 <span class="math notranslate nohighlight">\(n\)</span> 步之后能�
 <span class="c1">## 假设 a &amp; b = -16，-16 &amp; 0x7fffffff = 2147483632</span>
 <span class="c1">## C++ 中，对 2147483632 左移1位使得最高位符号位为 1，得到 -32</span>
 <span class="c1">## python中，2147483632的符号位为 0，继续左移1位，会直接做大整数运算，得到 4294967264L，导致不能得到正确结果</span>
-<span class="c1">## python 中，使用type()查看数据类型是发现，有时候系统会把 int32 转化为 int64，或者 int64 转为 int32，疑惑中。。。</span>
+<span class="c1">## python 中，使用type()查看数据类型时发现，有时候系统会把 int32 转化为 int64，或者 int64 转为 int32，疑惑中。。。</span>
 </pre></div>
 </td></tr></table></div>
 </div>
