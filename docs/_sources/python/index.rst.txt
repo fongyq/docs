@@ -19,3 +19,4 @@ Python
     12_bool.rst
     13_name.rst
     14_classFunc.rst
+    15_memManage.rst
