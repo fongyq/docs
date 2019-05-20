@@ -714,6 +714,57 @@ Hint：走 :math:`n` 步之后能到达的坐标是一个差为 2 的等差数�
       ## python 中，使用type()查看数据类型时发现，有时候系统会把 int32 转化为 int64，或者 int64 转为 int32，疑惑中。。。
 
 
+24. [LeetCode] Longest Substring with At Least K Repeating Characters 包含重复字符的最长子串。Hint：由于该字符串只包含小写字母，因此
+直接使用长度为26的静态数组来统计字符频率更为简洁高效，不需要使用map。
+
+  https://leetcode.com/problems/longest-substring-with-at-least-k-repeating-characters/
+
+  .. container:: toggle
+
+    .. container:: header
+
+      :math:`\color{darkgreen}{Show/Hide\ Code}`
+
+    .. code-block:: cpp
+      :linenos:
+
+      // https://www.cnblogs.com/grandyang/p/5852352.html
+      // 使用一个int型（32位）的mask，指示各字符频率是否到达k
+      // 以每一个字符作为起点，往后统计。时间复杂度 O(N^2)
+      // mask第 idx 位从 0 -> 1，表示对应字符出现了，但是未达到k次
+      // mask第 idx 位从 1 -> 0，表示对应字符已经出现了k次
+      // mask变成 0，表示这段子串满足要求
+
+      class Solution
+      {
+      public:
+          int longestSubstring(string s, int k)
+          {
+              int ans = 0;
+              int start = 0;
+              while(start + k <= s.size())
+              {
+                  int hash[26] = {0};
+                  int mask = 0;
+                  int next_start = start + 1;
+                  for(int end = start; end < s.size(); ++ end)
+                  {
+                      int idx = s[end] - 'a';
+                      ++ hash[idx];
+                      if(hash[idx] < k) mask |= (1 << idx); // 0 -> 1
+                      else mask &= ~(1 << idx);             // 1 -> 0
+                      if(mask == 0)
+                      {
+                          ans = max(ans, end - start + 1);
+                          next_start = end + 1;
+                      }
+                  }
+                  start = next_start;
+              }
+              return ans;
+          }
+      };
+
 
 C++
 ------------
