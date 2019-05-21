@@ -1033,7 +1033,7 @@ Hint：走 :math:`n` 步之后能到达的坐标是一个差为 2 的等差数�
       void solve()
       {
         win[0] = false;
-        for(int j = 0; j <= X; ++j)
+        for(int j = 1; j <= X; ++j)
         {
           win[j] = false;
           for(int i = 0; i < K; ++i)
