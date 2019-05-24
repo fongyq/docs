@@ -26,9 +26,16 @@ Tech
     https://blog.lizebang.top/2018/02/git-clone-slow/
 
 
+
 问题
 -----------
 
 - Unable to locate package python-pip
 
     https://askubuntu.com/questions/268539/unable-to-locate-package-python-pip-on-live-system
+
+- pytorch: custom nn modules & define new autograd functions
+
+    https://pytorch.org/tutorials/beginner/pytorch_with_examples.html#pytorch-custom-nn-modules
+
+    https://pytorch.org/tutorials/beginner/pytorch_with_examples.html#pytorch-defining-new-autograd-functions
