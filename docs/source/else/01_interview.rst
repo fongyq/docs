@@ -1495,6 +1495,29 @@ Hint：走 :math:`n` 步之后能到达的坐标是一个差为 2 的等差数�
       };
 
 
+35. 正整数质因数分解。
+
+  .. container:: toggle
+
+    .. container:: header
+
+      :math:`\color{darkgreen}{Show/Hide\ Code}`
+
+    .. code-block:: python
+      :linenos:
+
+      ## 不断除以 2 之后，2 的倍数都不可能再整除 n；3 同理。
+      ## 思想类似于：找到 n 以内的素数，即把素数的倍数都排除。
+      def decomp(n):
+          prime = 2
+          while n >= prime:
+              if n % prime == 0:
+                  print prime
+                  n /= prime
+              else:
+                  prime += 1
+
+
 
 C++
 ------------
