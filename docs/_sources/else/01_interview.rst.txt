@@ -1830,20 +1830,22 @@ Hint：走 :math:`n` 步之后能到达的坐标是一个差为 2 的等差数�
     .. code-block:: python
       :linenos:
 
-      def strMul(a, b):
-          ## input: str, str
-          ## output: str
-
-          pa = a.find('.')
-          if pa != -1:
-              a = a[:pa] + a[pa+1:]
+      def preProcess(a):
+          ## input: str
+          ## output: list, l
+          pf = a.find('.')
+          lf = 0
+          if pf != -1:
+              lf = len(a) - 1 - pf ## 小数位数
+              a = a[:pf] + a[pf+1:] ## 去掉小数点
           a = list(a)
           a = a[::-1] ## 翻转数组，a[0] 表示最低位
-          pb = b.find('.')
-          if pb != -1:
-              b = b[:pb] + b[pb+1:]
-          b = list(b)
-          b = b[::-1]
+          return a, lf
+
+      def strMul(a, b):
+          a, la = preProcess(a)
+          b, lb = preProcess(b)
+          lf = la + lb
 
           ans = [0 for _ in range(len(a) + len(b))]
           for ia in range(len(a)):
@@ -1855,21 +1857,13 @@ Hint：走 :math:`n` 步之后能到达的坐标是一个差为 2 的等差数�
               ans[i] = tmp % 10
               carry = tmp / 10
           ans = ans[::-1] ## 翻转数组
-          if pa == -1:
-              la = 0
-          else:
-              la = len(a) - pa ## 注意：如果 pa != -1，说明存在小数点，此时的 a 是去掉了小数点之后的数组，因此长度比原来小 1
-          if pb == -1:
-              lb = 0
-          else:
-              lb = len(b) - pb
-          l = la + lb ## 小数位长度
-          ans.insert(len(ans) - l, '.')
 
+          if lf > 0:
+              ans.insert(len(ans) - lf, '.') ## 插入小数点
           if ans[0] == 0:
               ans = ans[1:] ## 最高位是 0 则去掉
           iz = len(ans)-1
-          while l > 0 and ans[iz] == 0: ## 去掉小数点末尾的 0
+          while lf > 0 and ans[iz] == 0: ## 去掉小数点末尾的 0
               iz -= 1
 
           s = ''
@@ -1877,6 +1871,7 @@ Hint：走 :math:`n` 步之后能到达的坐标是一个差为 2 的等差数�
               s += str(e)
 
           return s
+
 
 
 

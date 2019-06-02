@@ -107,6 +107,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../git/index.html">Git</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../machineLearning/index.html">机器学习</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../deepLearning/index.html">深度学习</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computerNetwork/index.html">计算机网络</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../link/index.html">资源链接</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../softwares/index.html">实用软件</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tech/index.html">Tech</a></li>
@@ -3089,26 +3090,22 @@ Hint：走 <span class="math notranslate nohighlight">\(n\)</span> 步之后能�
 38
 39
 40
-41
-42
-43
-44
-45
-46
-47</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">strMul</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-    <span class="c1">## input: str, str</span>
-    <span class="c1">## output: str</span>
-
-    <span class="n">pa</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">pa</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
-        <span class="n">a</span> <span class="o">=</span> <span class="n">a</span><span class="p">[:</span><span class="n">pa</span><span class="p">]</span> <span class="o">+</span> <span class="n">a</span><span class="p">[</span><span class="n">pa</span><span class="o">+</span><span class="mi">1</span><span class="p">:]</span>
+41</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">preProcess</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+    <span class="c1">## input: str</span>
+    <span class="c1">## output: list, l</span>
+    <span class="n">pf</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+    <span class="n">lf</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">if</span> <span class="n">pf</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+        <span class="n">lf</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">pf</span> <span class="c1">## 小数位数</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">a</span><span class="p">[:</span><span class="n">pf</span><span class="p">]</span> <span class="o">+</span> <span class="n">a</span><span class="p">[</span><span class="n">pf</span><span class="o">+</span><span class="mi">1</span><span class="p">:]</span> <span class="c1">## 去掉小数点</span>
     <span class="n">a</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
     <span class="n">a</span> <span class="o">=</span> <span class="n">a</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="c1">## 翻转数组，a[0] 表示最低位</span>
-    <span class="n">pb</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">pb</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
-        <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">[:</span><span class="n">pb</span><span class="p">]</span> <span class="o">+</span> <span class="n">b</span><span class="p">[</span><span class="n">pb</span><span class="o">+</span><span class="mi">1</span><span class="p">:]</span>
-    <span class="n">b</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
-    <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">a</span><span class="p">,</span> <span class="n">lf</span>
+
+<span class="k">def</span> <span class="nf">strMul</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="n">a</span><span class="p">,</span> <span class="n">la</span> <span class="o">=</span> <span class="n">preProcess</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="n">b</span><span class="p">,</span> <span class="n">lb</span> <span class="o">=</span> <span class="n">preProcess</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+    <span class="n">lf</span> <span class="o">=</span> <span class="n">la</span> <span class="o">+</span> <span class="n">lb</span>
 
     <span class="n">ans</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">))]</span>
     <span class="k">for</span> <span class="n">ia</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)):</span>
@@ -3120,21 +3117,13 @@ Hint：走 <span class="math notranslate nohighlight">\(n\)</span> 步之后能�
         <span class="n">ans</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmp</span> <span class="o">%</span> <span class="mi">10</span>
         <span class="n">carry</span> <span class="o">=</span> <span class="n">tmp</span> <span class="o">/</span> <span class="mi">10</span>
     <span class="n">ans</span> <span class="o">=</span> <span class="n">ans</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="c1">## 翻转数组</span>
-    <span class="k">if</span> <span class="n">pa</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
-        <span class="n">la</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">la</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">-</span> <span class="n">pa</span> <span class="c1">## 注意：如果 pa != -1，说明存在小数点，此时的 a 是去掉了小数点之后的数组，因此长度比原来小 1</span>
-    <span class="k">if</span> <span class="n">pb</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
-        <span class="n">lb</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">lb</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">-</span> <span class="n">pb</span>
-    <span class="n">l</span> <span class="o">=</span> <span class="n">la</span> <span class="o">+</span> <span class="n">lb</span> <span class="c1">## 小数位长度</span>
-    <span class="n">ans</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ans</span><span class="p">)</span> <span class="o">-</span> <span class="n">l</span><span class="p">,</span> <span class="s1">&#39;.&#39;</span><span class="p">)</span>
 
+    <span class="k">if</span> <span class="n">lf</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">ans</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ans</span><span class="p">)</span> <span class="o">-</span> <span class="n">lf</span><span class="p">,</span> <span class="s1">&#39;.&#39;</span><span class="p">)</span> <span class="c1">## 插入小数点</span>
     <span class="k">if</span> <span class="n">ans</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="n">ans</span> <span class="o">=</span> <span class="n">ans</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="c1">## 最高位是 0 则去掉</span>
     <span class="n">iz</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">ans</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
-    <span class="k">while</span> <span class="n">l</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">ans</span><span class="p">[</span><span class="n">iz</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="c1">## 去掉小数点末尾的 0</span>
+    <span class="k">while</span> <span class="n">lf</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">ans</span><span class="p">[</span><span class="n">iz</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="c1">## 去掉小数点末尾的 0</span>
         <span class="n">iz</span> <span class="o">-=</span> <span class="mi">1</span>
 
     <span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
