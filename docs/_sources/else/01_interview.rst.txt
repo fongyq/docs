@@ -1519,6 +1519,10 @@ Python
 
 3. R-CNN系列
 
+  - RCNN（三）：Fast R-CNN
+
+      https://blog.csdn.net/u011587569/article/details/52151871
+
   - 【RCNN系列】【超详细解析】
 
       https://blog.csdn.net/amor_tila/article/details/78809791
@@ -1527,9 +1531,14 @@ Python
 
       https://blog.csdn.net/jiongnima/article/details/79094159
 
-  - RCNN（三）：Fast R-CNN
+  - (Mask RCNN)——论文详解(真的很详细)
 
-      https://blog.csdn.net/u011587569/article/details/52151871
+      https://blog.csdn.net/wangdongwei0/article/details/83110305
+
+  - ROI-Align 原理理解
+
+      https://blog.csdn.net/gusui7202/article/details/84799535
+
 
 4. Focal Loss（样本不均衡：正/负样本数量不均衡（ :math:`\alpha` ），简单/困难样本数量不均衡（ :math:`\gamma` ））
 
