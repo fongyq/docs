@@ -67,6 +67,11 @@
   :nowrap:
 
   $$
+  c[0][j] = 0,\ 0 \leqslant j \leqslant n \\
+  c[i][0] = 0,\ 0 \leqslant i \leqslant m
+  $$
+
+  $$
   c[i][j] =
   \begin{cases}
      c[i-1][j-1] + 1 & & {i,j > 0;\ X[i-1] = Y[j-1]} \\
@@ -74,10 +79,6 @@
   \end{cases}
   $$
 
-  $$
-  c[0][j] = 0,\ 0 \leqslant j < n \\
-  c[i][0] = 0,\ 0 \leqslant i < m
-  $$
 
 .. container:: toggle
 
@@ -229,15 +230,15 @@
   :nowrap:
 
   $$
+  dp[0][j] = 0,\ 0 \leqslant j \leqslant W
+  $$
+
+  $$
   dp[i+1][j] =
   \begin{cases}
      dp[i][j] & & j < w[i] \\
      max\{ dp[i][j], dp[i][j-w[i]] + v[i] \} & &  j \geqslant w[i]
   \end{cases}
-  $$
-
-  $$
-  dp[0][j] = 0,\ 0 \leqslant j \leqslant W
   $$
 
 .. container:: toggle

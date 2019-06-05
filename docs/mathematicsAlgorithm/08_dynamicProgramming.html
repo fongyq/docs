@@ -273,16 +273,16 @@ $$</div><div class="toggle docutils container">
 <p>递归关系：</p>
 <div class="math notranslate nohighlight">
 $$
+c[0][j] = 0,\ 0 \leqslant j \leqslant n \\
+c[i][0] = 0,\ 0 \leqslant i \leqslant m
+$$
+
+$$
 c[i][j] =
 \begin{cases}
    c[i-1][j-1] + 1 &amp; &amp; {i,j &gt; 0;\ X[i-1] = Y[j-1]} \\
    max\{ c[i-1][j], c[i][j-1] \} &amp; &amp; {i,j &gt; 0;\ X[i-1] \ne Y[j-1]}
 \end{cases}
-$$
-
-$$
-c[0][j] = 0,\ 0 \leqslant j &lt; n \\
-c[i][0] = 0,\ 0 \leqslant i &lt; m
 $$</div><div class="toggle docutils container">
 <div class="header docutils container">
 <span class="math notranslate nohighlight">\(\color{darkgreen}{Code}\)</span></div>
@@ -468,15 +468,15 @@ $$</div><div class="toggle docutils container">
 <p>递归关系：</p>
 <div class="math notranslate nohighlight">
 $$
+dp[0][j] = 0,\ 0 \leqslant j \leqslant W
+$$
+
+$$
 dp[i+1][j] =
 \begin{cases}
    dp[i][j] &amp; &amp; j &lt; w[i] \\
    max\{ dp[i][j], dp[i][j-w[i]] + v[i] \} &amp; &amp;  j \geqslant w[i]
 \end{cases}
-$$
-
-$$
-dp[0][j] = 0,\ 0 \leqslant j \leqslant W
 $$</div><div class="toggle docutils container">
 <div class="header docutils container">
 <span class="math notranslate nohighlight">\(\color{darkgreen}{Code}\)</span></div>

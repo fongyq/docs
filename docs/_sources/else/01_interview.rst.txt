@@ -56,6 +56,9 @@
           ListNode(int x) : val(x), next(NULL) {}
       };
 
+    .. code-block:: cpp
+      :linenos:
+
       // 方法一，逐个反转
       ListNode* reverseList(ListNode* head)
       {
@@ -74,17 +77,23 @@
           return newHead;
       }
 
+    .. code-block:: cpp
+      :linenos:
+
       // 方法二，递归
       ListNode* reverseList(ListNode* head)
       {
           if(head==NULL || head->next==NULL) return head;
           else{
               ListNode* newHead = reverseList(head -> next);
-              head -> next -> next = head;
+              head -> next -> next = head; // head 指向的下一个节点是 newHead 的最后一个节点
               head -> next = NULL;
               return newHead;
           }
       }
+
+    .. code-block:: cpp
+      :linenos:
 
       // 方法三，使用栈保存节点的值，占用 O(n) 额外空间
       ListNode* reverseList(ListNode* head)
@@ -342,6 +351,9 @@
           }
       };
 
+    .. code-block:: cpp
+      :linenos:
+
       // 解法二：不断交换位置，找到第一个重复访问的元素
       class Solution
       {
@@ -397,6 +409,9 @@
               // 这种方法得到的 res 可能多次包含同一个元素，可以使用 set
           }
       };
+
+    .. code-block:: cpp
+      :linenos:
 
       // 解法二：不断交换位置使得 i == nums[i]-1
       class Solution
@@ -604,6 +619,9 @@ Hint：走 :math:`n` 步之后能到达的坐标是一个差为 2 的等差数�
         return cnt;
       }
 
+    .. code-block:: cpp
+      :linenos:
+
       // 方法二：n不动，左移一个比较子。
       int Numberof1(int n)
       {
@@ -616,6 +634,10 @@ Hint：走 :math:`n` 步之后能到达的坐标是一个差为 2 的等差数�
         }
         return cnt;
       }
+
+
+    .. code-block:: cpp
+      :linenos:
 
       // 方法三：把一个整数减1，再和原整数做逻辑与运算，会把该整数最右边的一个1变成0。
       int Numberof1(int n)
@@ -1086,6 +1108,10 @@ Hint：走 :math:`n` 步之后能到达的坐标是一个差为 2 的等差数�
         return 0;
       }
 
+
+    .. code-block:: cpp
+      :linenos:
+
       // 方法二
       // 如果 arr[mid] < arr[mid-1]，则 arr[mid] 是最小值
       // 每次比较 nums[mid] 与 nums[high]，如果两者相等，则 --high
@@ -1366,7 +1392,8 @@ Hint：走 :math:`n` 步之后能到达的坐标是一个差为 2 的等差数�
               }
           }
 
-          int numIslands(vector<vector<char>>& grid) {
+          int numIslands(vector<vector<char>>& grid)
+          {
               if(grid.size()==0) return 0;
               int M = grid.size();
               int N = grid[0].size();

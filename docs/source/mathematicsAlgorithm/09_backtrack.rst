@@ -230,12 +230,12 @@
                           if(find_path(board, word, flag, i, j, 1))
                           {
                               EXIST = true;
-                              break;
+                              break; // 跳出第二重循环
                           }
                           flag[i+1][j+1] = true; // flag 还原
                       }
                   }
-                  if(EXIST) break;
+                  if(EXIST) break; // 跳出第一重循环
               }
 
               for(int m = 0; m < M+2; ++m) delete[] flag[m];
