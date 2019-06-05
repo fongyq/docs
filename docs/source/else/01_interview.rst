@@ -1531,9 +1531,70 @@ Python
 
       https://blog.csdn.net/u011587569/article/details/52151871
 
-4. CapsuleNet解读
+4. Focal Loss（样本不均衡：正/负样本数量不均衡（ :math:`\alpha` ），简单/困难样本数量不均衡（ :math:`\gamma` ））
+
+  .. math::
+
+      CE & = &\ -y \log y_t - (1 - y) \log (1 - y_t) & &\ [\text{Cross Entropy Loss}] \\
+      FL & = &\ -y \alpha (1 - y_t)^\gamma \log y_t - (1 - y) (1 - \alpha) y_t^\gamma \log (1 - y_t) & &\ [\text{Focal Loss}]
+
+  即
+
+  .. math::
+      :nowrap:
+
+      $$
+      CE =
+      \begin{cases}
+      - \log y_t, & &\ y=1\\
+      - \log (1 - y_t), & &\ y=0
+      \end{cases}
+      $$
+
+      $$
+      FL =
+      \begin{cases}
+      - \alpha (1 - y_t)^\gamma \log y_t, & &\ y=1\\
+      - (1 - \alpha) y_t^\gamma \log (1 - y_t), & &\ y=0
+      \end{cases}
+      $$
+
+
+  - 损失函数改进方法之Focal Loss
+
+      https://blog.csdn.net/sinat_24143931/article/details/79033538
+
+  - RetinaNet论文理解
+
+      https://blog.csdn.net/wwwhp/article/details/83317738
+
+  - Focal Loss理解
+
+      https://www.cnblogs.com/king-lps/p/9497836.html
+
+
+5. FCN（Fully Convolutional Networks）
+
+  - FCN学习:Semantic Segmentation
+
+      https://zhuanlan.zhihu.com/p/22976342?utm_source=tuicool&utm_medium=referral
+
+  - FCN于反卷积(Deconvolution)、上采样(UpSampling)
+
+      https://blog.csdn.net/nijiayan123/article/details/79416764
+
+6. FPN（Feature Pyramid Networks for Object Detection）
+
+  https://www.cnblogs.com/fangpengchengbupter/p/7681683.html
+
+7. CapsuleNet解读
 
   https://blog.csdn.net/u013010889/article/details/78722140/
+
+
+8. 轻量级网络--MobileNet论文解读
+
+  https://blog.csdn.net/u011974639/article/details/79199306
 
 
 其他

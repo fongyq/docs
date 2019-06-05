@@ -2501,10 +2501,78 @@ Hint：走 <span class="math notranslate nohighlight">\(n\)</span> 步之后能�
 </ul>
 </div></blockquote>
 <ol class="arabic simple" start="4">
+<li>Focal Loss（样本不均衡：正/负样本数量不均衡（ <span class="math notranslate nohighlight">\(\alpha\)</span> ），简单/困难样本数量不均衡（ <span class="math notranslate nohighlight">\(\gamma\)</span> ））</li>
+</ol>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[\begin{split}CE &amp; = &amp;\ -y \log y_t - (1 - y) \log (1 - y_t) &amp; &amp;\ [\text{Cross Entropy Loss}] \\
+FL &amp; = &amp;\ -y \alpha (1 - y_t)^\gamma \log y_t - (1 - y) (1 - \alpha) y_t^\gamma \log (1 - y_t) &amp; &amp;\ [\text{Focal Loss}]\end{split}\]</div>
+<p>即</p>
+<div class="math notranslate nohighlight">
+$$
+CE =
+\begin{cases}
+- \log y_t, &amp; &amp;\ y=1\\
+- \log (1 - y_t), &amp; &amp;\ y=0
+\end{cases}
+$$
+
+$$
+FL =
+\begin{cases}
+- \alpha (1 - y_t)^\gamma \log y_t, &amp; &amp;\ y=1\\
+- (1 - \alpha) y_t^\gamma \log (1 - y_t), &amp; &amp;\ y=0
+\end{cases}
+$$</div><ul>
+<li><p class="first">损失函数改进方法之Focal Loss</p>
+<blockquote>
+<div><p><a class="reference external" href="https://blog.csdn.net/sinat_24143931/article/details/79033538">https://blog.csdn.net/sinat_24143931/article/details/79033538</a></p>
+</div></blockquote>
+</li>
+<li><p class="first">RetinaNet论文理解</p>
+<blockquote>
+<div><p><a class="reference external" href="https://blog.csdn.net/wwwhp/article/details/83317738">https://blog.csdn.net/wwwhp/article/details/83317738</a></p>
+</div></blockquote>
+</li>
+<li><p class="first">Focal Loss理解</p>
+<blockquote>
+<div><p><a class="reference external" href="https://www.cnblogs.com/king-lps/p/9497836.html">https://www.cnblogs.com/king-lps/p/9497836.html</a></p>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="5">
+<li>FCN（Fully Convolutional Networks）</li>
+</ol>
+<blockquote>
+<div><ul>
+<li><p class="first">FCN学习:Semantic Segmentation</p>
+<blockquote>
+<div><p><a class="reference external" href="https://zhuanlan.zhihu.com/p/22976342?utm_source=tuicool&amp;utm_medium=referral">https://zhuanlan.zhihu.com/p/22976342?utm_source=tuicool&amp;utm_medium=referral</a></p>
+</div></blockquote>
+</li>
+<li><p class="first">FCN于反卷积(Deconvolution)、上采样(UpSampling)</p>
+<blockquote>
+<div><p><a class="reference external" href="https://blog.csdn.net/nijiayan123/article/details/79416764">https://blog.csdn.net/nijiayan123/article/details/79416764</a></p>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="6">
+<li>FPN（Feature Pyramid Networks for Object Detection）</li>
+</ol>
+<blockquote>
+<div><a class="reference external" href="https://www.cnblogs.com/fangpengchengbupter/p/7681683.html">https://www.cnblogs.com/fangpengchengbupter/p/7681683.html</a></div></blockquote>
+<ol class="arabic simple" start="7">
 <li>CapsuleNet解读</li>
 </ol>
 <blockquote>
 <div><a class="reference external" href="https://blog.csdn.net/u013010889/article/details/78722140/">https://blog.csdn.net/u013010889/article/details/78722140/</a></div></blockquote>
+<ol class="arabic simple" start="8">
+<li>轻量级网络–MobileNet论文解读</li>
+</ol>
+<blockquote>
+<div><a class="reference external" href="https://blog.csdn.net/u011974639/article/details/79199306">https://blog.csdn.net/u011974639/article/details/79199306</a></div></blockquote>
 </div>
 <div class="section" id="id6">
 <h2>1.7. 其他<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
