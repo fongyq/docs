@@ -1661,7 +1661,17 @@ Python
 
   https://blog.csdn.net/diamonjoy_zone/article/details/70576775
 
-3. R-CNN系列
+3. ResNeXt
+
+  - ResNeXt
+
+      https://www.cnblogs.com/bonelee/p/9031639.html
+
+  - ResNeXt算法详解
+
+      https://blog.csdn.net/u014380165/article/details/71667916
+
+4. R-CNN系列
 
   - RCNN（三）：Fast R-CNN
 
@@ -1688,7 +1698,7 @@ Python
       https://www.zhihu.com/question/54117650
 
 
-4. Focal Loss（样本不均衡：正/负样本数量不均衡（ :math:`\alpha` ），简单/困难样本数量不均衡（ :math:`\gamma` ））
+5. Focal Loss（样本不均衡：正/负样本数量不均衡（ :math:`\alpha` ），简单/困难样本数量不均衡（ :math:`\gamma` ））
 
   .. math::
 
@@ -1730,7 +1740,7 @@ Python
       https://www.cnblogs.com/king-lps/p/9497836.html
 
 
-5. FCN（Fully Convolutional Networks）
+6. FCN（Fully Convolutional Networks）
 
   - FCN学习:Semantic Segmentation
 
@@ -1740,16 +1750,16 @@ Python
 
       https://blog.csdn.net/nijiayan123/article/details/79416764
 
-6. FPN（Feature Pyramid Networks for Object Detection）
+7. FPN（Feature Pyramid Networks for Object Detection）
 
   https://www.cnblogs.com/fangpengchengbupter/p/7681683.html
 
-7. CapsuleNet解读
+8. CapsuleNet解读
 
   https://blog.csdn.net/u013010889/article/details/78722140/
 
 
-8. 轻量级网络--MobileNet论文解读
+9. 轻量级网络--MobileNet论文解读
 
   https://blog.csdn.net/u011974639/article/details/79199306
 
