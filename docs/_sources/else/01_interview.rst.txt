@@ -1414,6 +1414,150 @@ Hint：走 :math:`n` 步之后能到达的坐标是一个差为 2 的等差数�
       };
 
 
+32. 回文。
+
+  - [LeetCode] Longest Palindromic Substring 最长回文子串（子串连续）。Hint：中心扩展法，回文中心的两侧互为镜像，将每一个位置作为中心进行扩展，回文分偶数和奇数；动态规划，类似于矩阵连乘问题，逐渐增大步长。
+
+      https://leetcode.com/problems/longest-palindromic-substring/
+
+    .. math::
+       :nowrap:
+
+       $$
+       dp[i][i] = true
+       $$
+
+       $$
+       dp[i][j] =
+       \begin{cases}
+       true & &\ s[i] = s[j]\ \&\&\ (i \leqslant j \leqslant i+1\ ||\ dp[i+1][j-1]) \\
+       false & &\ else
+       \end{cases}
+       $$
+
+
+  .. container:: toggle
+
+    .. container:: header
+
+      :math:`\color{darkgreen}{Code}`
+
+    .. code-block:: cpp
+        :linenos:
+
+        // 方法一，中心扩展法
+        class Solution {
+        public:
+            void Palindrome(int i, int j, string s, int& start, int& longest)
+            {
+                while(i >= 0 && j < s.size() && s.at(i) == s.at(j))
+                {
+                    i--;
+                    j++;
+                }
+                i += 1;
+                j -= 1;
+                if(j-i+1 > longest)
+                {
+                    longest = j-i+1;
+                    start = i;
+                }
+            }
+            string longestPalindrome(string s) {
+                int len = s.size();
+                if(len <= 1) return s;
+                int start = 0;
+                int longest = 1;
+                for(int i = 0; i < len-1; ++ i)
+                {
+                    Palindrome(i, i, s, start, longest);
+                    Palindrome(i, i+1, s, start, longest);
+                }
+                string str;
+                str.assign(s, start, longest);
+                return str;
+            }
+        };
+
+    .. code-block:: cpp
+       :linenos:
+
+       // 方法二，动态规划
+       class Solution
+       {
+       public:
+           string longestPalindrome(string s)
+           {
+               if(s.size() <= 1) return s;
+               size_t len = s.size();
+               vector<vector<bool>> dp(len, vector<bool>(len, false));
+               size_t start = 0;
+               size_t longest = 1;
+               for(size_t i = 0; i < len; ++i) dp[i][i] = true;
+               for(size_t gap = 0; gap < len; ++ gap)
+               {
+                   for(int i = 0; i + gap < len; ++ i)
+                   {
+                       int j = i + gap;
+                       if(s[i] == s[j])
+                       {
+                           if(j - i <= 1 || dp[i+1][j-1])
+                           {
+                               dp[i][j] = true;
+                               longest = j - i + 1; // 由于步长是逐渐增大的，因此最后得到的回文子串一定是最长的
+                               start = i;
+                           }
+                           else dp[i][j] = false;
+                       }
+                   }
+               }
+               vector<vector<bool>>().swap(dp);
+               return s.substr(start, longest);
+           }
+       };
+
+  - [LeetCode] Longest Palindromic Subsequence 最长回文子序列（子序列可以不连续）。Hint：寻找原字符串与翻转字符串的最长公共子序列，动态规划。
+
+      https://leetcode.com/problems/longest-palindromic-subsequence/
+
+  .. container:: toggle
+
+    .. container:: header
+
+      :math:`\color{darkgreen}{Code}`
+
+    .. code-block:: cpp
+      :linenos:
+
+      class Solution
+      {
+      public:
+          // 寻找字符串 str 与其翻转字符串的最长公共子序列
+          int lcsLength(string& str)
+          {
+              int len = str.size();
+              vector<vector<int>> dp(len+1, vector<int>(len+1, 0));
+              for(int i = 1; i <= len; ++i)
+              {
+                  for(int j = len - 1; j >= 0; --j) // 注意这里 j 是反向的
+                  {
+                      if(str[i-1] == str[j]) dp[i][j] = dp[i-1][j+1] + 1;
+                      else dp[i][j] = max(dp[i-1][j], dp[i][j+1]);
+                  }
+              }
+              int ans = dp[len][0];
+              vector<vector<int>>().swap(dp);
+              return ans;
+          }
+
+          int longestPalindromeSubseq(string s)
+          {
+              if(s.size() <= 1) return s.size();
+              return lcsLength(s);
+          }
+      };
+
+
 C++
 ------------
 
