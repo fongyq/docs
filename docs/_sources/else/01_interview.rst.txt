@@ -1659,7 +1659,7 @@ Python
 
 2. CNN卷积神经网络\_ GoogLeNet 之 Inception(V1-V4)
 
-  https://www.cnblogs.com/haiyang21/p/7243200.html
+  https://blog.csdn.net/diamonjoy_zone/article/details/70576775
 
 3. R-CNN系列
 
@@ -1682,6 +1682,10 @@ Python
   - ROI-Align 原理理解
 
       https://blog.csdn.net/gusui7202/article/details/84799535
+
+  - 为什么RCNN用SVM做分类而不直接用CNN全连接之后softmax输出？
+
+      https://www.zhihu.com/question/54117650
 
 
 4. Focal Loss（样本不均衡：正/负样本数量不均衡（ :math:`\alpha` ），简单/困难样本数量不均衡（ :math:`\gamma` ））
