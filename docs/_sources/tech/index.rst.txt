@@ -19,7 +19,7 @@ Tech
 
     https://codingstandards.iteye.com/blog/810900
 
-- 加速 git clone
+- 加速git clone
 
     https://blog.51cto.com/11887934/2051323
 
@@ -28,6 +28,10 @@ Tech
 - 在windows下安装Jupyter Notebook的安装和使用
 
     https://www.cnblogs.com/gengyi/p/9769471.html
+
+- 加速TexLive编译
+
+    https://blog.csdn.net/raby_gyl/article/details/73613601
 
 问题
 -----------
