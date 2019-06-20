@@ -245,7 +245,7 @@
               return r;
           }
 
-          // T(n) = T(n/2) + O(n)，时间复杂度 O(N)
+          // T(n) = T(n/2) + O(n)，时间复杂度 O(n)
           int quicksort(vector<int>& nums, int a, int b, int k)
           {
               int p = partition(nums, a, b);
@@ -586,7 +586,7 @@
 
 15. 跳跃的蚂蚱：从 0 点出发，往正或负向跳跃，第一次跳跃一个单位，之后每次跳跃距离比上一次多一个单位，跳跃多少次可到到达坐标 :math:`x` 处？
 Hint：走 :math:`n` 步之后能到达的坐标是一个差为 2 的等差数列（如 :math:`n=2` ，可到达 :math:`\{-3,-1,1,3\}` ）。
-只需找到第最小的 :math:`n` 使得
+只需找到最小的 :math:`n` 使得
 
 .. math::
 
@@ -907,22 +907,22 @@ Hint：走 :math:`n` 步之后能到达的坐标是一个差为 2 的等差数�
         ULL factor = 1;
         ULL lowerNum = 0;
         ULL currNum = 0;
-        ULL highNum = 0;
+        ULL higherNum = 0;
         while(N / factor)
         {
           lowerNum = N - (N / factor) * factor;
           currNum = (N / factor) % 10;
-          highNum = N / (factor * 10);
+          higherNum = N / (factor * 10);
           switch(currNum)
           {
             case 0:
-              cnt += highNum * factor;
+              cnt += higherNum * factor;
               break;
             case 1:
-              cnt += highNum * factor + (lowerNum + 1);
+              cnt += higherNum * factor + (lowerNum + 1);
               break;
             default:
-              cnt += (highNum + 1) * factor;
+              cnt += (higherNum + 1) * factor;
               break;
           }
           factor *= 10;
@@ -1700,6 +1700,7 @@ Hint：走 :math:`n` 步之后能到达的坐标是一个差为 2 的等差数�
       public:
         bool isValidBST(TreeNode* root)
         {
+          // 节点的值 val 是 int 型
           long long pre = (long long)(INT_MIN) - 1;
           return checkBST(root, pre);
         }

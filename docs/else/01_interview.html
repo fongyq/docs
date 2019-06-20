@@ -565,7 +565,7 @@
         <span class="k">return</span> <span class="n">r</span><span class="p">;</span>
     <span class="p">}</span>
 
-    <span class="c1">// T(n) = T(n/2) + O(n)，时间复杂度 O(N)</span>
+    <span class="c1">// T(n) = T(n/2) + O(n)，时间复杂度 O(n)</span>
     <span class="kt">int</span> <span class="n">quicksort</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">,</span> <span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">,</span> <span class="kt">int</span> <span class="n">k</span><span class="p">)</span>
     <span class="p">{</span>
         <span class="kt">int</span> <span class="n">p</span> <span class="o">=</span> <span class="n">partition</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
@@ -1081,7 +1081,7 @@
 <div><a class="reference external" href="https://www.cnblogs.com/Arvin-JIN/p/7247619.html">https://www.cnblogs.com/Arvin-JIN/p/7247619.html</a></div></blockquote>
 <p>15. 跳跃的蚂蚱：从 0 点出发，往正或负向跳跃，第一次跳跃一个单位，之后每次跳跃距离比上一次多一个单位，跳跃多少次可到到达坐标 <span class="math notranslate nohighlight">\(x\)</span> 处？
 Hint：走 <span class="math notranslate nohighlight">\(n\)</span> 步之后能到达的坐标是一个差为 2 的等差数列（如 <span class="math notranslate nohighlight">\(n=2\)</span> ，可到达 <span class="math notranslate nohighlight">\(\{-3,-1,1,3\}\)</span> ）。
-只需找到第最小的 <span class="math notranslate nohighlight">\(n\)</span> 使得</p>
+只需找到最小的 <span class="math notranslate nohighlight">\(n\)</span> 使得</p>
 <div class="math notranslate nohighlight">
 \[(1+2+...+n) - x = \frac{n(n+1)}{2} - x\]</div>
 <p>是非负偶数。跳到 <span class="math notranslate nohighlight">\(x\)</span> 和跳到 <span class="math notranslate nohighlight">\(-x\)</span> 的次数相同，
@@ -1541,22 +1541,22 @@ Hint：走 <span class="math notranslate nohighlight">\(n\)</span> 步之后能�
   <span class="n">ULL</span> <span class="n">factor</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
   <span class="n">ULL</span> <span class="n">lowerNum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
   <span class="n">ULL</span> <span class="n">currNum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-  <span class="n">ULL</span> <span class="n">highNum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="n">ULL</span> <span class="n">higherNum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
   <span class="k">while</span><span class="p">(</span><span class="n">N</span> <span class="o">/</span> <span class="n">factor</span><span class="p">)</span>
   <span class="p">{</span>
     <span class="n">lowerNum</span> <span class="o">=</span> <span class="n">N</span> <span class="o">-</span> <span class="p">(</span><span class="n">N</span> <span class="o">/</span> <span class="n">factor</span><span class="p">)</span> <span class="o">*</span> <span class="n">factor</span><span class="p">;</span>
     <span class="n">currNum</span> <span class="o">=</span> <span class="p">(</span><span class="n">N</span> <span class="o">/</span> <span class="n">factor</span><span class="p">)</span> <span class="o">%</span> <span class="mi">10</span><span class="p">;</span>
-    <span class="n">highNum</span> <span class="o">=</span> <span class="n">N</span> <span class="o">/</span> <span class="p">(</span><span class="n">factor</span> <span class="o">*</span> <span class="mi">10</span><span class="p">);</span>
+    <span class="n">higherNum</span> <span class="o">=</span> <span class="n">N</span> <span class="o">/</span> <span class="p">(</span><span class="n">factor</span> <span class="o">*</span> <span class="mi">10</span><span class="p">);</span>
     <span class="k">switch</span><span class="p">(</span><span class="n">currNum</span><span class="p">)</span>
     <span class="p">{</span>
       <span class="k">case</span> <span class="mi">0</span><span class="o">:</span>
-        <span class="n">cnt</span> <span class="o">+=</span> <span class="n">highNum</span> <span class="o">*</span> <span class="n">factor</span><span class="p">;</span>
+        <span class="n">cnt</span> <span class="o">+=</span> <span class="n">higherNum</span> <span class="o">*</span> <span class="n">factor</span><span class="p">;</span>
         <span class="k">break</span><span class="p">;</span>
       <span class="k">case</span> <span class="mi">1</span><span class="o">:</span>
-        <span class="n">cnt</span> <span class="o">+=</span> <span class="n">highNum</span> <span class="o">*</span> <span class="n">factor</span> <span class="o">+</span> <span class="p">(</span><span class="n">lowerNum</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+        <span class="n">cnt</span> <span class="o">+=</span> <span class="n">higherNum</span> <span class="o">*</span> <span class="n">factor</span> <span class="o">+</span> <span class="p">(</span><span class="n">lowerNum</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
         <span class="k">break</span><span class="p">;</span>
       <span class="k">default</span><span class="o">:</span>
-        <span class="n">cnt</span> <span class="o">+=</span> <span class="p">(</span><span class="n">highNum</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">factor</span><span class="p">;</span>
+        <span class="n">cnt</span> <span class="o">+=</span> <span class="p">(</span><span class="n">higherNum</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">factor</span><span class="p">;</span>
         <span class="k">break</span><span class="p">;</span>
     <span class="p">}</span>
     <span class="n">factor</span> <span class="o">*=</span> <span class="mi">10</span><span class="p">;</span>
@@ -2792,11 +2792,13 @@ $$</div></li>
 16
 17
 18
-19</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Solution</span>
+19
+20</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Solution</span>
 <span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
   <span class="kt">bool</span> <span class="n">isValidBST</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span>
   <span class="p">{</span>
+    <span class="c1">// 节点的值 val 是 int 型</span>
     <span class="kt">long</span> <span class="kt">long</span> <span class="n">pre</span> <span class="o">=</span> <span class="p">(</span><span class="kt">long</span> <span class="kt">long</span><span class="p">)(</span><span class="n">INT_MIN</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
     <span class="k">return</span> <span class="nf">checkBST</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">pre</span><span class="p">);</span>
   <span class="p">}</span>
