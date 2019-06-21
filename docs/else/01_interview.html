@@ -1157,8 +1157,8 @@ Hint：走 <span class="math notranslate nohighlight">\(n\)</span> 步之后能�
 </td></tr></table></div>
 </div>
 </div></blockquote>
-<p>17. 求一个整数的二进制表示中 <span class="math notranslate nohighlight">\(1\)</span> 的个数。Hint：移位操作，负数可能造成死循环。 <strong>注：指定移位次数大于或等于对象类型的比特数（如int型的32位），或者对负数进行左移操作，结果都是未定义的</strong> 。
-例如：<code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">&gt;&gt;</span> <span class="pre">32</span></code> 是未定义的，但是允许 <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">&gt;&gt;=</span> <span class="pre">1</span></code> 执行无限次，这是安全的。</p>
+<p>17. 求一个整数的二进制表示中 <span class="math notranslate nohighlight">\(1\)</span> 的个数。Hint：移位操作；负数可能造成死循环。 <strong>注：指定移位次数大于或等于对象类型的比特数（如int型的32位），或者对负数进行左移操作，结果都是未定义的</strong> 。
+例如：<code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">&gt;&gt;</span> <span class="pre">32</span></code> 是未定义的，但是允许 <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">&gt;&gt;=</span> <span class="pre">1</span></code> 执行无限次，这是安全的。延伸：检查一个数是否是 2 的整次幂，Hint：二进制表示只有一个 1。</p>
 <blockquote>
 <div><div class="toggle docutils container">
 <div class="header docutils container">
@@ -1173,7 +1173,7 @@ Hint：走 <span class="math notranslate nohighlight">\(n\)</span> 步之后能�
  8
  9
 10
-11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// 方法一：不断右移n。如果n是负数，需要保持最高位为1，不断移位后这个数字会变成 0xFFFFFFFF 而陷入死循环。</span>
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// 方法一：不断右移 n。如果 n 是负数，需要保持最高位为 1，不断移位后这个数字会变成 0xFFFFFFFF 而陷入死循环。</span>
 <span class="kt">int</span> <span class="nf">Numberof1</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span>
 <span class="p">{</span>
   <span class="kt">int</span> <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
@@ -1197,7 +1197,7 @@ Hint：走 <span class="math notranslate nohighlight">\(n\)</span> 步之后能�
  9
 10
 11
-12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// 方法二：n不动，左移一个比较子。</span>
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// 方法二：n 不动，左移一个比较子。</span>
 <span class="kt">int</span> <span class="nf">Numberof1</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span>
 <span class="p">{</span>
   <span class="kt">int</span> <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
@@ -1221,7 +1221,7 @@ Hint：走 <span class="math notranslate nohighlight">\(n\)</span> 步之后能�
  8
  9
 10
-11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// 方法三：把一个整数减1，再和原整数做逻辑与运算，会把该整数最右边的一个1变成0。</span>
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// 方法三：把一个整数减 1，再和原整数做逻辑与运算，会把该整数最右边的一个 1 变成 0。</span>
 <span class="kt">int</span> <span class="nf">Numberof1</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span>
 <span class="p">{</span>
   <span class="kt">int</span> <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
@@ -1231,6 +1231,17 @@ Hint：走 <span class="math notranslate nohighlight">\(n\)</span> 步之后能�
     <span class="n">n</span> <span class="o">=</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">n</span><span class="p">;</span>
   <span class="p">}</span>
   <span class="k">return</span> <span class="n">cnt</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<div class="highlight-cpp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// 检查一个数是否是 2 的整次幂</span>
+<span class="kt">bool</span> <span class="nf">checkPower2</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="k">return</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">n</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">==</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </td></tr></table></div>
