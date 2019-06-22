@@ -1157,8 +1157,9 @@ Hint：走 <span class="math notranslate nohighlight">\(n\)</span> 步之后能�
 </td></tr></table></div>
 </div>
 </div></blockquote>
-<p>17. 求一个整数的二进制表示中 <span class="math notranslate nohighlight">\(1\)</span> 的个数。Hint：移位操作；负数可能造成死循环。 <strong>注：指定移位次数大于或等于对象类型的比特数（如int型的32位），或者对负数进行左移操作，结果都是未定义的</strong> 。
-例如：<code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">&gt;&gt;</span> <span class="pre">32</span></code> 是未定义的，但是允许 <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">&gt;&gt;=</span> <span class="pre">1</span></code> 执行无限次，这是安全的。延伸：检查一个数是否是 2 的整次幂，Hint：二进制表示只有一个 1。</p>
+<p>17. 求一个整数的二进制表示中 <span class="math notranslate nohighlight">\(1\)</span> 的个数。Hint：移位操作；负数可能造成死循环。 <strong>注：C++中，指定移位次数大于或等于对象类型的比特数（如int型的32位），或者对负数进行左移操作，结果都是未定义的</strong> 。
+例如：<code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">&gt;&gt;</span> <span class="pre">32</span></code> 是未定义的，但是允许 <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">&gt;&gt;=</span> <span class="pre">1</span></code> 执行无限次，这是安全的。延伸：检查一个数是否是 2 的整次幂，Hint：二进制表示只有一个 1；检查一个数是否是 4 的整次幂，Hint：4 的整次幂的二进制表示中，
+1 都在奇数位；检查一个数是否是 3 的整次幂，Hint：质数的整次幂的质因子只有该质数本身。</p>
 <blockquote>
 <div><div class="toggle docutils container">
 <div class="header docutils container">
@@ -1242,6 +1243,36 @@ Hint：走 <span class="math notranslate nohighlight">\(n\)</span> 步之后能�
 <span class="kt">bool</span> <span class="nf">checkPower2</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span>
 <span class="p">{</span>
   <span class="k">return</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">n</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">==</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<div class="highlight-cpp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// 检查一个数是否是 4 的整次幂</span>
+<span class="kt">bool</span> <span class="nf">checkPower4</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">n</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="c1">// 先确保是 2 的整次幂（只有一个 1）</span>
+  <span class="p">{</span>
+    <span class="k">if</span><span class="p">((</span><span class="n">n</span> <span class="o">&amp;</span> <span class="mh">0x55555555</span><span class="p">)</span> <span class="o">==</span> <span class="n">n</span><span class="p">)</span> <span class="k">return</span> <span class="nb">true</span><span class="p">;</span> <span class="c1">// 0x55555555 = 0101 0101 0101 0101 0101 0101 0101 0101</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<div class="highlight-cpp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// 检查一个数是否是 3 的整次幂</span>
+<span class="kt">bool</span> <span class="nf">checkPower3</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="k">return</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="mi">1162261467</span> <span class="o">%</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// 3^19 = 1162261467 是 int 型中最大的 3 的整次幂</span>
 <span class="p">}</span>
 </pre></div>
 </td></tr></table></div>
