@@ -358,7 +358,7 @@
       for(int i = start + gap; i < len; i += gap)
       {
         int j = i;
-        while(arr[j] > arr[j - gap])
+        while(j >= gap && arr[j] > arr[j - gap])
         {
           swap(arr[j], arr[j - gap]);
           j -= gap;
