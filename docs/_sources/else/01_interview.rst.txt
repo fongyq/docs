@@ -1794,6 +1794,10 @@ C++
 
   https://www.zhihu.com/question/36538542
 
+5. 常见C++笔试面试题整理
+
+  https://zhuanlan.zhihu.com/p/69999591
+
 Python
 -----------
 
