@@ -580,7 +580,7 @@
           return longest
 
 
-14. 最小公约数与最大公倍数。Hint：辗转相除法；最大公倍数等于两数乘积除以最大公约数。
+14. 最大公约数与最小公倍数。Hint：辗转相除法；最小公倍数等于两数乘积除以最大公约数。
 
   https://www.cnblogs.com/Arvin-JIN/p/7247619.html
 
