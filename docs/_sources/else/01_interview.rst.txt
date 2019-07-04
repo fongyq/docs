@@ -185,6 +185,59 @@
           return pk;
       }
 
+
+  - 链表排序。Hint：方法一，快速排序或归并排序；方法二，遍历链表把值存入数组，使用数组的排序方法，再把值赋回链表。
+
+  .. container:: toggle
+
+    .. container:: header
+
+      :math:`\color{darkgreen}{Code}`
+
+    .. code-block:: cpp
+      :linenos:
+
+      // https://leetcode.com/problems/sort-list/
+
+      class Solution
+      {
+      public:
+          ListNode* sortList(ListNode* head)
+          {
+              quickSort(head, NULL);
+              return head;
+          }
+      private:
+          // 由于链表无法反向遍历，需要重新考虑如何交换两个位置的数值
+          // pre 指向 curr 的前一个数，或者指向第一个比 key 大的数的前一个数
+          // 当 curr 指向的数比 key 小，pre 移到下一位，交换两者的值
+          ListNode* partion(ListNode* head, ListNode* tail)
+          {
+              int key = head -> val;
+              ListNode* pre = head;
+              ListNode* curr = head -> next;
+              while(curr != tail)
+              {
+                  if(curr -> val < key)
+                  {
+                      pre = pre -> next;
+                      swap(pre -> val, curr -> val);
+                  }
+                  curr = curr -> next;
+              }
+              swap(head -> val, pre -> val);
+              return pre;
+          }
+          void quickSort(ListNode* head, ListNode* tail)
+          {
+              if(head == tail || (head -> next) == tail) return;
+              ListNode* mid = partion(head, tail);
+              quickSort(head, mid);
+              quickSort(mid->next, tail);
+          }
+      };
+
+
 5. 排列组合：:math:`k` 个球放入 :math:`m` 个盒子
 
   https://blog.csdn.net/qwb492859377/article/details/50654627?tdsourcetag=s_pctim_aiomsg
@@ -1757,58 +1810,8 @@ Hint：走 :math:`n` 步之后能到达的坐标是一个差为 2 的等差数�
           }
       };
 
-33. [LeetCode] Sort List 链表排序。Hint：方法一，快速排序或归并排序；方法二，遍历链表把值存入数组，使用数组的排序方法，再把值赋回链表。
 
-  https://leetcode.com/problems/sort-list/
-
-  .. container:: toggle
-
-    .. container:: header
-
-      :math:`\color{darkgreen}{Code}`
-
-    .. code-block:: cpp
-      :linenos:
-
-      class Solution
-      {
-      public:
-          ListNode* sortList(ListNode* head)
-          {
-              quickSort(head, NULL);
-              return head;
-          }
-      private:
-          // 由于链表无法反向遍历，需要重新考虑如何交换两个位置的数值
-          // pre 指向 curr 的前一个数，或者指向第一个比 key 大的数的前一个数
-          // 当 curr 指向的数比 key 小，pre 移到下一位，交换两者的值
-          ListNode* partion(ListNode* head, ListNode* tail)
-          {
-              int key = head -> val;
-              ListNode* pre = head;
-              ListNode* curr = head -> next;
-              while(curr != tail)
-              {
-                  if(curr -> val < key)
-                  {
-                      pre = pre -> next;
-                      swap(pre -> val, curr -> val);
-                  }
-                  curr = curr -> next;
-              }
-              swap(head -> val, pre -> val);
-              return pre;
-          }
-          void quickSort(ListNode* head, ListNode* tail)
-          {
-              if(head == tail || (head -> next) == tail) return;
-              ListNode* mid = partion(head, tail);
-              quickSort(head, mid);
-              quickSort(mid->next, tail);
-          }
-      };
-
-34. 给定两个字符串 s1 和 s2，检查 s2 是否由 s1 旋转得到。Hint：对 s1 做循环移位，所得字符串都将是字符串 s1s1 的子字符串。
+33. 给定两个字符串 s1 和 s2，检查 s2 是否由 s1 旋转得到。Hint：对 s1 做循环移位，所得字符串都将是字符串 s1s1 的子字符串。
 
   .. container:: toggle
 
@@ -1827,7 +1830,7 @@ Hint：走 :math:`n` 步之后能到达的坐标是一个差为 2 的等差数�
           return true;
       }
 
-35. [LeetCode] Validate Binary Search Tree 检查一棵二叉树是否为二叉查找树。Hint：不仅要求左节点比当前节点小，右节点比当前节点大，而是要求左子树所有节点都小于当前节点，右子树所有节点都大于当前节点；利用二叉树的中序遍历，BST 得到的序列是升序排列的。
+34. [LeetCode] Validate Binary Search Tree 检查一棵二叉树是否为二叉查找树。Hint：不仅要求左节点比当前节点小，右节点比当前节点大，而是要求左子树所有节点都小于当前节点，右子树所有节点都大于当前节点；利用二叉树的中序遍历，BST 得到的序列是升序排列的。
 
   https://leetcode.com/problems/validate-binary-search-tree/
 
@@ -1861,7 +1864,7 @@ Hint：走 :math:`n` 步之后能到达的坐标是一个差为 2 的等差数�
         }
       };
 
-36. 判断一个数是否是奇数。Hint：考虑负数的情形；方法一，判断模 2 结果不为 0；方法二，位运算判断最低位为 1。延伸：判断两个数是否相等（或判断某个数是否为 0），
+35. 判断一个数是否是奇数。Hint：考虑负数的情形；方法一，判断模 2 结果不为 0；方法二，位运算判断最低位为 1。延伸：判断两个数是否相等（或判断某个数是否为 0），
 如果是浮点数，应该判断两者差的绝对值是否小于一个阈值，而不是直接使用 ==。
 
   .. container:: toggle
@@ -1889,7 +1892,7 @@ Hint：走 :math:`n` 步之后能到达的坐标是一个差为 2 的等差数�
       }
 
 
-37. [LeetCode] Valid Number 验证一个字符串是否表示某个有效数字。Hint：完整的数字表达是“空格+正负号+整数+小数点+整数+e+正负号+整数+空格”；小数点的相邻两边至少要有一边是整数；如果出现 e，其两边都必须出现整数，但不要求相邻；如 05.e-3 是一个有效数字。
+36. [LeetCode] Valid Number 验证一个字符串是否表示某个有效数字。Hint：完整的数字表达是“空格+正负号+整数+小数点+整数+e+正负号+整数+空格”；小数点的相邻两边至少要有一边是整数；如果出现 e，其两边都必须出现整数，但不要求相邻；如 05.e-3 是一个有效数字。
 
   https://leetcode.com/problems/valid-number/
 
