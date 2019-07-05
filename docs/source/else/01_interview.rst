@@ -600,7 +600,7 @@
       };
 
 
-13. [LeetCode] Longest Consecutive Sequence 最长连续序列。Hint：方法一，排序；方法二，对于每个元素 :math:`n` ，搜索 :math:`n+1` 是否在数组中，使用 hash（set）可以获得 :math:`\mathcal{O}(1)` 的查找复杂度。
+13. [LeetCode] Longest Consecutive Sequence 最长连续序列。Hint：方法一，排序；方法二，对于每个元素 :math:`n` ，搜索 :math:`n+1` 是否在数组中，使用 hash/set 可以获得 :math:`\mathcal{O}(1)` 的查找复杂度。
 
   https://leetcode.com/problems/longest-consecutive-sequence/
 
@@ -610,30 +610,30 @@
 
       :math:`\color{darkgreen}{Code}`
 
-    .. code-block:: cpp
+    .. code-block:: python
       :linenos:
 
       class Solution(object):
-      def longestConsecutive(self, nums):
-          """
-          :type nums: List[int]
-          :rtype: int
-          """
+          def longestConsecutive(self, nums):
+              """
+              :type nums: List[int]
+              :rtype: int
+              """
 
-          longest = 0
-          num_set = set(nums)
+              longest = 0
+              num_set = set(nums)
 
-          for num in nums:
-              if num-1 not in num_set:
-                  current_long = 1
-                  while num + 1 in num_set:
-                      current_long += 1
-                      num += 1
-                  longest = max(longest, current_long)
+              for num in nums:
+                  if num-1 not in num_set:
+                      current_long = 1
+                      while num + 1 in num_set:
+                          current_long += 1
+                          num += 1
+                      longest = max(longest, current_long)
 
-          num_set.clear()
+              num_set.clear()
 
-          return longest
+              return longest
 
 
 14. 最大公约数与最小公倍数。Hint：辗转相除法；最小公倍数等于两数乘积除以最大公约数。
@@ -804,37 +804,37 @@ Hint：走 :math:`n` 步之后能到达的坐标是一个差为 2 的等差数�
 
       :math:`\color{darkgreen}{Code}`
 
-    .. code-block:: cpp
+    .. code-block:: python
       :linenos:
 
-      // https://leetcode.com/problems/subarray-sum-equals-k/solution/ : Approach #4 Using hashmap
+      ## https://leetcode.com/problems/subarray-sum-equals-k/solution/ : Approach #4 Using hashmap
 
       from collections import defaultdict
       class Solution(object):
-      def subarraySum(self, nums, k):
-          """
-          :type nums: List[int]
-          :type k: int
-          :rtype: int
-          """
+          def subarraySum(self, nums, k):
+              """
+              :type nums: List[int]
+              :type k: int
+              :rtype: int
+              """
 
-          if len(nums) == 0:
-              return 0
+              if len(nums) == 0:
+                  return 0
 
-          N = len(nums)
+              N = len(nums)
 
-          sum_to_num = defaultdict(int)
-          sum_to_num[0] = 1 // 前 0 项和
+              sum_to_num = defaultdict(int)
+              sum_to_num[0] = 1 ## 前 0 项和
 
-          cnt = 0
-          tmp_sum = 0
-          for n in nums:
-              tmp_sum += n
-              diff = tmp_sum - k
-              cnt += sum_to_num[diff]
-              sum_to_num[tmp_sum] += 1
+              cnt = 0
+              tmp_sum = 0
+              for n in nums:
+                  tmp_sum += n
+                  diff = tmp_sum - k
+                  cnt += sum_to_num[diff]
+                  sum_to_num[tmp_sum] += 1
 
-          return cnt
+              return cnt
 
 
 19. 使用位运算进行加法运算。Hint：原位加法运算等效为 ``^`` 运算，进位等效为 ``&`` 和 ``移位`` 的复合。 **注：C++不允许对负数进行左移运算。**
@@ -1199,7 +1199,7 @@ Hint：走 :math:`n` 步之后能到达的坐标是一个差为 2 的等差数�
       {
         if (arr == nullptr || n <= 0) return -1;
         int low = 0;
-        int high = n - 1;
+        int high = n - 1; // 查找区间： [0, n)
         while (low <= high)
         {
           int mid = low + (high - low) / 2; // mid = (low + high)/2 可能导致溢出
@@ -1209,6 +1209,47 @@ Hint：走 :math:`n` 步之后能到达的坐标是一个差为 2 的等差数�
         }
         return -1;
       }
+
+    .. code-block:: cpp
+      :linenos:
+
+      // 浮点数二分，不存在区间取整，要求达到某个精度
+
+      // 例：在区间 [low, high] 二分查找开方数
+
+      #define eps 1e-5
+
+      bool judge(double mid, double x)
+      {
+        return mid >= x / mid;
+      }
+
+      double search(double low, double high, double x)
+      {
+        while (high - low > eps)
+        {
+          double mid = low + (high - low) / 2;
+          if (judge(mid, x)) high = mid;
+          else low = mid;
+        }
+        return low + (high - low) / 2; // 此时 low 和 high 比较接近，取它们的均值作为最终结果
+      }
+
+    .. code-block:: python
+      :linenos:
+
+      ## 返回区间 [first, last) 内第一个不小于 target 的位置
+      ## 如果所有数都小于 target，则返回 last
+      def lower_bound(a, first, last, target):
+          if first > last:
+              return None
+          while first < last: ## [first, last)不为空
+              mid = first + (last - first) // 2
+              if a[mid] < target:
+                  first = mid + 1
+              else:
+                  last = mid
+          return first  ## 返回 last 也行，因为 [first, last) 为空的时候它们相等
 
   - 查找旋转数组最小值（含重复元素）
 
