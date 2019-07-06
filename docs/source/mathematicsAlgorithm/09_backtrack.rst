@@ -193,9 +193,9 @@
           res.push_back(tmp);
           return;
         }
-        backtrack(n - 1, tmp, res); // 包含 n
-        tmp.push_back(n);
         backtrack(n - 1, tmp, res); // 不包含 n
+        tmp.push_back(n);
+        backtrack(n - 1, tmp, res); // 包含 n
         tmp.pop_back();
       }
 
