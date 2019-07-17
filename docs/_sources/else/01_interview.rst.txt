@@ -2635,6 +2635,118 @@ Hint：走 :math:`n` 步之后能到达的坐标是一个差为 2 的等差数�
           }
       };
 
+41. [LeetCode] Word Break 字符串按字典切分。Hint：回溯；动态规划。
+
+  https://leetcode.com/problems/word-break/
+
+  .. container:: toggle
+
+    .. container:: header
+
+      :math:`\color{darkgreen}{Code}`
+
+    .. code-block:: cpp
+      :linenos:
+
+      // 方法一，回溯
+      // 测试用例超时
+      // "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaab" ["a","aa","aaa","aaaa","aaaaa","aaaaaa","aaaaaaa","aaaaaaaa","aaaaaaaaa","aaaaaaaaaa"]
+
+      class Solution
+      {
+      public:
+          bool wordBreak(string s, vector<string>& wordDict)
+          {
+              if(s=="") return true;
+              if(wordDict.size()==0) return false;
+              return word_find(s, wordDict, 0);
+          }
+      private:
+          bool word_find(string& s, vector<string>& wordDict, int k)
+          {
+              if(k==s.size()) return true;
+              for(int w = 0; w < wordDict.size(); ++w)
+              {
+                  if(k+wordDict[w].size()<=s.size() && s.substr(k, wordDict[w].size()) == wordDict[w])
+                  {
+                      if(word_find(s, wordDict, k + wordDict[w].size())) return true;
+                  }
+              }
+              return false;
+          }
+      };
+
+
+    .. code-block:: cpp
+      :linenos:
+
+      // 方法二，动态规划，空间复杂度 O(n^2)
+      // dp[i][j] 表示字符串区间 [i, j] 的切分情况
+      // 解法类似于矩阵连乘问题
+
+      class Solution
+      {
+      public:
+          bool wordBreak(string s, vector<string>& wordDict)
+          {
+              if(s.empty() || wordDict.empty()) return false;
+              int n = s.size();
+              vector<vector<bool>> dp(n, vector<bool>(n, false));
+              for(int gap = 0; gap < n; ++gap)
+              {
+                  for(int i = 0; i + gap < n; ++i)
+                  {
+                      int j = i + gap;
+                      for(string& word: wordDict)
+                      {
+                          // 这里用 ||，只要有一个 word 匹配就行
+                          if(gap + 1 == word.size()) dp[i][j] = dp[i][j] || (s.substr(i, word.size()) == word);
+                          else if(gap + 1 > word.size()) dp[i][j] = dp[i][j] || (s.substr(i, word.size()) == word && dp[i+word.size()][j]);
+                      }
+                  }
+              }
+              return dp[0][n-1];
+          }
+      };
+
+
+    .. code-block:: cpp
+      :linenos:
+
+      // 方法三，动态规划，空间复杂度 O(n)
+      // dp[i] 表示字符串区间 [0, i-1] 的切分情况
+
+      class Solution {
+      public:
+          bool wordBreak(string s, vector<string>& wordDict) {
+              if(s.empty() || wordDict.empty()) return false;
+
+              int n = s.size();
+              vector<bool> dp(n+1, false);
+              dp[0] = true; // 初始化
+
+              for(unsigned int i = 1; i <= n; ++i)
+              {
+                 for(unsigned int j = 0; j < i; ++j)
+                 {
+                     if(dp[j]) // 两段子串：[0, j-1], [j, i]
+                     {
+                         string str = s.substr(j, i-j);
+                         for(string& word: wordDict)
+                         {
+                             if(str == word)
+                             {
+                                 dp[i] = true;
+                                 break;
+                             }
+                         }
+                     }
+                 }
+              }
+              return dp[n];
+          }
+      };
+
 C++
 ------------
 
