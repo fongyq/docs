@@ -82,14 +82,14 @@
           if(head==NULL || head->next==NULL) return head;
           ListNode* newHead = head;
           ListNode* curr = head -> next;
-          ListNode* post = curr -> next;
           newHead -> next = NULL;
+          ListNode* post;
           while(curr)
           {
+              post = curr -> next;
               curr -> next = newHead;
               newHead = curr;
               curr = post;
-              if(post) post = post -> next;
           }
           return newHead;
       }

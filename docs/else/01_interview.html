@@ -306,14 +306,14 @@
     <span class="k">if</span><span class="p">(</span><span class="n">head</span><span class="o">==</span><span class="nb">NULL</span> <span class="o">||</span> <span class="n">head</span><span class="o">-&gt;</span><span class="n">next</span><span class="o">==</span><span class="nb">NULL</span><span class="p">)</span> <span class="k">return</span> <span class="n">head</span><span class="p">;</span>
     <span class="n">ListNode</span><span class="o">*</span> <span class="n">newHead</span> <span class="o">=</span> <span class="n">head</span><span class="p">;</span>
     <span class="n">ListNode</span><span class="o">*</span> <span class="n">curr</span> <span class="o">=</span> <span class="n">head</span> <span class="o">-&gt;</span> <span class="n">next</span><span class="p">;</span>
-    <span class="n">ListNode</span><span class="o">*</span> <span class="n">post</span> <span class="o">=</span> <span class="n">curr</span> <span class="o">-&gt;</span> <span class="n">next</span><span class="p">;</span>
     <span class="n">newHead</span> <span class="o">-&gt;</span> <span class="n">next</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="n">ListNode</span><span class="o">*</span> <span class="n">post</span><span class="p">;</span>
     <span class="k">while</span><span class="p">(</span><span class="n">curr</span><span class="p">)</span>
     <span class="p">{</span>
+        <span class="n">post</span> <span class="o">=</span> <span class="n">curr</span> <span class="o">-&gt;</span> <span class="n">next</span><span class="p">;</span>
         <span class="n">curr</span> <span class="o">-&gt;</span> <span class="n">next</span> <span class="o">=</span> <span class="n">newHead</span><span class="p">;</span>
         <span class="n">newHead</span> <span class="o">=</span> <span class="n">curr</span><span class="p">;</span>
         <span class="n">curr</span> <span class="o">=</span> <span class="n">post</span><span class="p">;</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">post</span><span class="p">)</span> <span class="n">post</span> <span class="o">=</span> <span class="n">post</span> <span class="o">-&gt;</span> <span class="n">next</span><span class="p">;</span>
     <span class="p">}</span>
     <span class="k">return</span> <span class="n">newHead</span><span class="p">;</span>
 <span class="p">}</span>
