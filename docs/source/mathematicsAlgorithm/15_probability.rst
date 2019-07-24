@@ -100,7 +100,7 @@
     mode = argmax \ f(x)
 
 
-附：对数正态分布
+对数正态分布
 ----------------------
 
 :math:`Y` 服从标准正态分布，则 :math:`X = e^{\mu + \sigma Y}` 服从对数正态分布： :math:`\ln (X) \sim \mathcal{N}(\mu, \sigma^2)` 。
@@ -158,6 +158,40 @@
 
         p_Y(y) = n y^{n-1},\ E[Y] = \frac{n}{n+1}; \\
         p_Z(z) = n (1-z)^{n-1},\ E[Z] = \frac{1}{n+1}.
+
+- 设 :math:`X, Y` 的联合概率密度函数为 :math:`f_{XY}(x, y)` ，则 :math:`X+Y` 的概率密度函数 :math:`f_Z(z) = \int_x f(x, z-x) dx = \int_y f(z-y, y) dy` 。
+  若 :math:`X, Y \sim U(0, 1)` 是相互独立的均匀分布，求 :math:`U = X + Y` 和  :math:`V = X - Y` 的概率密度函数。
+
+  解：
+    知 :math:`f_{XY}(x, y) = 1,\ x \in [0,1],\ y \in [0, 1]` 。
+
+    对于 :math:`U` ，
+
+    .. math::
+        :nowrap:
+
+        $$
+        f_U(u) = \int_{x \in [0,1],\ u-x \in [0,1]} f(x, u-x) dx = \int_{max(0, u-1)}^{min(1, u)} f(x, u-x) dx \\
+        =
+        \begin{cases}
+          u & , & 0 \leqslant u \leqslant 1 \\
+          2 - u & , & 1 < u \leqslant 2
+        \end{cases}
+        $$
+
+    对于 :math:`V` ，设 :math:`Z = -Y \sim U(-1, 0)` ，则 :math:`V = X + Z` ，
+
+    .. math::
+        :nowrap:
+
+        $$
+        f_V(v) = \int_{x \in [0,1],\ v-x \in [-1,0]} f(x, v-x) dx = \int_{max(0, v)}^{min(1, v+1)} f(x, v-x) dx \\
+        =
+        \begin{cases}
+          1 + v & , & -1 \leqslant v \leqslant 0 \\
+          1 - v & , & 0 < v \leqslant 1
+        \end{cases}
+        $$
 
 参考资料
 ------------
