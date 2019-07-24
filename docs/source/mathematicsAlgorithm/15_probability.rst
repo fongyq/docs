@@ -113,9 +113,51 @@
            &=&\ \varphi \left( \frac{\ln x - \mu}{\sigma} \right) \frac{1}{\sigma x} \\
            &=&\ \frac{1}{x}\cdot\frac{1}{\sqrt{2\pi}\sigma}exp\left(-\frac{(\ln x-\mu)^2}{2\sigma^2} \right)
 
+.. math::
+
+    mean =  e^{\mu + \frac{\sigma^2}{2}},\ variance = (e^{\sigma^2}-1) e^{2\mu + \sigma^2},\ median = e^\mu,\ mode = e^{\mu - \sigma^2}.
+
 .. image:: ./15_pdf.png
   :align: center
   :width: 300 px
+
+实例
+-----------
+
+- 已知 :math:`X_1, X_2, ..., X_n` 是 :math:`n` 个相互独立同分布随机变量，:math:`F_X(x)` 和 :math:`p_X(x)` 是它们的（累计）分布函数和概率密度函数，分别求其最大值 :math:`Y = max(X_1, X_2, ..., X_n)` 与其最小值 :math:`Z = min(X_1, X_2, ..., X_n)` 的分布函数与概率密度函数。
+
+  解：
+    对于 :math:`Y` ：
+
+    .. math::
+
+        F_Y(y) &=&\ P(Y \leqslant y) \\
+               &=&\ P(max(X_1, X_2, ..., X_n) \leqslant y) \\
+               &=&\ P(X_1 \leqslant y, X_2 \leqslant y, ..., X_n \leqslant y) \\
+               &=&\ P(X_1 \leqslant y)P(X_2 \leqslant y) \cdots P(X_n \leqslant y) \\
+               &=&\ [F_X(y)]^n
+    .. math::
+
+        p_Y(y) = \frac{d}{dy} F_Y(y) = n [F_X(y)]^{n-1} p_X(y)
+
+    对于 :math:`Z` ，同理可得：
+
+    .. math::
+
+        F_Z(z) &=&\ P(Z \leqslant z) \\
+               &=&\ 1 - P(Z \geqslant z) \\
+               &=&\ 1 - P(X_1 \geqslant z, X_2 \geqslant z, ..., X_n \geqslant z) \\
+               &=&\ 1 - [1 - F_X(z)]^n
+    .. math::
+
+        p_Z(z) = \frac{d}{dz} F_Z(z) = n [1 - F_X(z)]^{n-1} p_X(z)
+
+    例如，:math:`X_1, X_2, ..., X_n` 均服从区间 :math:`[0, 1]` 的均匀分布，则 :math:`F_X(x) = x, p_X(x) = 1` ，有
+
+    .. math::
+
+        p_Y(y) = n y^{n-1},\ E[Y] = \frac{n}{n+1}; \\
+        p_Z(z) = n (1-z)^{n-1},\ E[Z] = \frac{1}{n+1}.
 
 参考资料
 ------------
