@@ -152,7 +152,7 @@
 
         p_Z(z) = \frac{d}{dz} F_Z(z) = n [1 - F_X(z)]^{n-1} p_X(z)
 
-    例如，:math:`X_1, X_2, ..., X_n` 均服从区间 :math:`[0, 1]` 的均匀分布，则 :math:`F_X(x) = x, p_X(x) = 1` ，有
+    例如，:math:`X_1, X_2, ..., X_n` 均服从区间 :math:`[0, 1]` 的均匀分布，则 :math:`F_X(x) = x,\ p_X(x) = 1` ，有
 
     .. math::
 
