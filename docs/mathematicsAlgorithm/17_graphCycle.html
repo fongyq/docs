@@ -220,7 +220,7 @@
 </ul>
 </div></blockquote>
 <p>另外，使用 father 数组记录 DFS 过程中所有顶点的父节点。</p>
-<p>判断：若在 DFS 过程中遇到“回边”（即指向已经访问过的顶点的边，父节点除外），则必定存在环。</p>
+<p>判断：若在 DFS 过程中遇到“回边”（即指向已经访问过的顶点的边，父节点除外），则存在环。</p>
 <div class="highlight-cpp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -251,7 +251,9 @@
 28
 29
 30
-31</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">DFS</span><span class="p">(</span><span class="kt">int</span> <span class="n">v</span><span class="p">,</span> <span class="n">Graph</span> <span class="n">G</span><span class="p">)</span>
+31
+32
+33</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">DFS</span><span class="p">(</span><span class="kt">int</span> <span class="n">v</span><span class="p">,</span> <span class="n">Graph</span> <span class="n">G</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="n">visited</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// 开始访问节点 v</span>
     <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">G</span><span class="p">.</span><span class="n">vertexNum</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
@@ -260,7 +262,9 @@
         <span class="p">{</span>
             <span class="k">if</span><span class="p">(</span><span class="n">visited</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">father</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">!=</span> <span class="n">i</span><span class="p">)</span>
             <span class="c1">// i 不是父节点，而且还被访问过（状态 1，说明不是回溯过来的顶点），说明存在环</span>
-            <span class="c1">// visited[i] == 2 不行：对无向图而言，意味着边 i - v 早就访问过；对有向图而言，说明 i 是 v 和其他节点的公共子节点，不构成环</span>
+            <span class="c1">// visited[i] == 2 不行：</span>
+            <span class="c1">// 对无向图而言，v 也是 i 的邻接点，意味着 i -&gt; v 早就访问过，不会再重复访问 v -&gt; i，因此不会出现 visited[i] == 2</span>
+            <span class="c1">// 对有向图而言，说明 i 是 v 和其他节点的公共子节点，不构成环</span>
             <span class="p">{</span>
                 <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&quot;图存在环&quot;</span><span class="p">;</span>
                 <span class="kt">int</span> <span class="n">temp</span> <span class="o">=</span> <span class="n">v</span><span class="p">;</span>
