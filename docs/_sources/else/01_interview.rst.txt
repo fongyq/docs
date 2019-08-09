@@ -3259,7 +3259,7 @@ Hint：走 :math:`n` 步之后能到达的坐标是一个差为 2 的等差数�
           if(n == 1) return x;
           if(n < 0)
           {
-              if(n == INT_MIN) return 1/x * myPow(1/x, - n - 1); // - INT_MIN 溢出
+              if(n == INT_MIN) return 1/x * myPow(1/x, - (n + 1)); // - INT_MIN 溢出
               else return myPow(1/x, - n);
           }
           double tmp = myPow(x, n/2);
