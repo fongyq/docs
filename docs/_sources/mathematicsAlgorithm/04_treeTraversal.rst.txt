@@ -31,7 +31,7 @@
     if(!T) return;
     else
     {
-      visite(T -> val);
+      visit(T -> val);
       preOrder_Recur(T -> left);
       preOrder_Recur(T -> right);
     }
@@ -49,7 +49,7 @@
     {
       while(T)
       {
-        visite(T -> val);
+        visit(T -> val);
         stk.push(T);
         T = T -> left;
       }
@@ -76,7 +76,7 @@
       else
       {
         inOrder_Recur(T -> left);
-        visite(T -> val);
+        visit(T -> val);
         inOrder_Recur(T -> right);
       }
     }
@@ -100,7 +100,7 @@
       {
         T = stk.top();
         stk.pop();
-        visite(T -> val);
+        visit(T -> val);
         T = T -> right;
       }
     }
@@ -122,7 +122,7 @@
     {
       postOrder_Recur(T -> left);
       postOrder_Recur(T -> right);
-      visite(T -> val);
+      visit(T -> val);
     }
   }
 
@@ -209,7 +209,7 @@
     {
       T = Q.front();
       Q.pop();
-      visite(T -> val);
+      visit(T -> val);
       if(T -> left) Q.push(T -> left);
       if(T -> right) Q.push(T -> right);
     }
