@@ -207,9 +207,9 @@
 <h1>2. __all__ 的使用<a class="headerlink" href="#all" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="init-py">
 <h2>2.1. 从__init__.py谈起<a class="headerlink" href="#init-py" title="Permalink to this headline">¶</a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> 的 <strong>作用一</strong> ：package的标识</p>
+<p><code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> 的 <strong>作用一</strong> ：package 的标识</p>
 <blockquote>
-<div><p>在每一个package文件夹中都会有一个__init__.py文件。我们倒入一个包时，实际上是导入了它的__init__.py文件。因此我们可以在__init__.py文件中批量导入所需的模块，
+<div><p>在每一个 package 文件夹中都会有一个 __init__.py 文件。我们倒入一个包时，实际上是导入了它的 __init__.py 文件。因此我们可以在 __init__.py 文件中批量导入所需的模块，
 而不需要再一个一个地倒入。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">### package</span>
 <span class="c1">## __init__.py</span>
@@ -223,9 +223,9 @@
 </pre></div>
 </div>
 </div></blockquote>
-<p><code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> 的 <strong>作用二</strong> ：定义该package的 <code class="docutils literal notranslate"><span class="pre">__all__</span></code> ，用以模糊导入</p>
+<p><code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> 的 <strong>作用二</strong> ：定义该 package 的 <code class="docutils literal notranslate"><span class="pre">__all__</span></code> ，用以模糊导入</p>
 <blockquote>
-<div><p>python中包(package)和模块(module)有两种导入形式：精确导入和模糊导入。</p>
+<div><p>python中包（package）和模块（module）有两种导入形式：精确导入和模糊导入。</p>
 <dl class="docutils">
 <dt>精确导入</dt>
 <dd><div class="first last highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">PACK</span> <span class="kn">import</span> <span class="n">CLASS1</span><span class="p">,</span> <span class="n">CLASS2</span>

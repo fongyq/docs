@@ -345,7 +345,7 @@
 <ul>
 <li><p class="first">结构变量或数组可以为所有成员初始化。</p>
 </li>
-<li><p class="first">共用体变量或数组在初始化时，只能对初始化它的 <strong>第一个成员</strong> ，对多个成员初始化是不允许的。</p>
+<li><p class="first">共用体变量或数组在初始化时，只能初始化它的 <strong>第一个成员</strong> ，对多个成员初始化是不允许的。</p>
 <blockquote>
 <div><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">union</span> <span class="n">ifcd</span> <span class="n">x3</span> <span class="o">=</span> <span class="p">{</span><span class="mi">256</span><span class="p">},</span> <span class="n">x4</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">256</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="mi">256</span><span class="p">};</span> <span class="c1">// 对成员 i 初始化</span>
 </pre></div>
