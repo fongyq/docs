@@ -440,7 +440,7 @@ vptr不存在，不可能完成动态绑定。</p>
 6
 7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">*</span><span class="n">pa</span> <span class="o">=</span> <span class="k">new</span> <span class="n">B</span><span class="p">();</span>
 <span class="k">delete</span> <span class="n">pa</span><span class="p">;</span>
-<span class="c1">// 输出： delete B</span>
+<span class="c1">// 输出： delete A</span>
 
 <span class="n">B</span> <span class="o">*</span><span class="n">pb</span> <span class="o">=</span> <span class="k">new</span> <span class="n">B</span><span class="p">();</span>
 <span class="k">delete</span> <span class="n">pb</span><span class="p">;</span>
