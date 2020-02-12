@@ -15,16 +15,16 @@ is和==
     >>> a = "hello"
     >>> b = "hello"
     >>> a==b
-	True
+    True
     >>> a is b 
-	False
+    False
 
     >>> a = [1,2,3]
     >>> b = a
     >>> a==b 
-	True
+    True
     >>> a is b
-	True
+    True
 
 None
 --------
