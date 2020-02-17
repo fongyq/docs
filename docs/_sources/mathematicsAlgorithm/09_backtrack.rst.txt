@@ -397,7 +397,7 @@
                       for _ in range(k): tmp.pop()
           def subsetsWithDup(self, nums: List[int]) -> List[List[int]]:
               cnt = Counter(nums)
-              ints, freqs = list(cnt.keys()), list(cnt.values()) ## python3 中需要把 dict_keys 类型转换为 list
+              ints, freqs = list(cnt.keys()), list(cnt.values()) ## python3 中需要把 dict_keys、dict_values 类型转换为 list
               res = []
               tmp = []
               self.backtrack(ints, freqs, tmp, res, 0)
