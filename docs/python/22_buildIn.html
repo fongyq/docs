@@ -305,7 +305,7 @@
 <div class="section" id="dict">
 <h2>22.4. __dict__<a class="headerlink" href="#dict" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">__dict__</span></code> 存储了类和实例的一些属性。</p>
-<p>在 <code class="docutils literal notranslate"><span class="pre">__init__</span></code> 中声明的变量（ <code class="docutils literal notranslate"><span class="pre">self.</span></code> ），会存到实例的 <code class="docutils literal notranslate"><span class="pre">__dict__</span></code> 中；类的静态函数、类函数、普通函数、全局变量以及一些内置的属性都是放在类的 <code class="docutils literal notranslate"><span class="pre">__dict__</span></code> 中。</p>
+<p>在 <code class="docutils literal notranslate"><span class="pre">__init__</span></code> 中声明的变量（ <code class="docutils literal notranslate"><span class="pre">self.xxx</span></code> ），会存到实例的 <code class="docutils literal notranslate"><span class="pre">__dict__</span></code> 中；类的静态函数、类函数、普通函数、全局变量以及一些内置的属性都是放在类的 <code class="docutils literal notranslate"><span class="pre">__dict__</span></code> 中。</p>
 <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -417,7 +417,7 @@
 </td></tr></table></div>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">如果在 <code class="docutils literal notranslate"><span class="pre">__setattr__</span></code> 中试图通过  <code class="docutils literal notranslate"><span class="pre">self.xxx</span></code> 来访问其他属性，容易出现错误。比如，初始化之前， <code class="docutils literal notranslate"><span class="pre">__doc__</span></code> 中还没有插入属性，是无法访问的。</p>
+<p class="last">如果在 <code class="docutils literal notranslate"><span class="pre">__setattr__</span></code> 中试图通过  <code class="docutils literal notranslate"><span class="pre">self.xxx</span></code> 来访问其他属性，容易出现错误。比如，初始化之前， <code class="docutils literal notranslate"><span class="pre">__dict__</span></code> 中还没有插入属性，是无法访问的。</p>
 </div>
 </div>
 <div class="section" id="getattr">
