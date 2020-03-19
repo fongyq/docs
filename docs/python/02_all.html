@@ -110,7 +110,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#id2">2.3. 命名空间包</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id3">2.4. 相对路径导入</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#getattr">2.5. getattr</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id8">2.6. 参考资料</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">2.6. 参考资料</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="03_is.html">3. is和==</a></li>
@@ -403,8 +403,8 @@
 </div>
 <div class="section" id="id3">
 <h2>2.4. 相对路径导入<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
-<p><a href="#id4"><span class="problematic" id="id5">``</span></a>from .Module import func `` 表示从当前目录的模块中导入。</p>
-<p><a href="#id6"><span class="problematic" id="id7">``</span></a>from ..PKG.Module import func `` 表示从上一级目录的包中导入。</p>
+<p><code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">.Module</span> <span class="pre">import</span> <span class="pre">func</span></code> 表示从当前目录的模块中导入。</p>
+<p><code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">..PKG.Module</span> <span class="pre">import</span> <span class="pre">func</span></code> 表示从上一级目录的包中导入。</p>
 <p>错误:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ne">ImportError</span><span class="p">:</span> <span class="n">attempted</span> <span class="n">relative</span> <span class="kn">import</span> <span class="nn">with</span> <span class="n">no</span> <span class="n">known</span> <span class="n">parent</span> <span class="n">package</span><span class="o">.</span>
 </pre></div>
@@ -480,8 +480,8 @@
 </pre></div>
 </td></tr></table></div>
 </div>
-<div class="section" id="id8">
-<h2>2.6. 参考资料<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id4">
+<h2>2.6. 参考资料<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
 <li>Python中的 __all__</li>
 </ol>

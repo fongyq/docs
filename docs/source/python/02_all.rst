@@ -175,9 +175,9 @@ Python3.3 之后引入了命名空间包（namespace packages）的概念，目�
 相对路径导入
 -------------
 
-``from .Module import func `` 表示从当前目录的模块中导入。
+``from .Module import func`` 表示从当前目录的模块中导入。
 
-``from ..PKG.Module import func `` 表示从上一级目录的包中导入。
+``from ..PKG.Module import func`` 表示从上一级目录的包中导入。
 
 错误::
 
