@@ -69,7 +69,7 @@ sed（stream editor，流编辑器），利用脚本处理文本文件。
 
 目标：去掉 html.txt 中所有的 ``<*>`` 。
 
-    - ``sed "s/<.*>//g" html.txt`` 结果：`` meant. Understand?``
+    - ``sed "s/<.*>//g" html.txt`` 结果：``meant. Understand?`` （开头有空格）。
 
     - ``sed "s/<[^>]*>//g" html.txt`` 结果：``This is what I meant. Understand?`` 。``[^>]`` 表示除 ``>`` 之外的字符集合。
 
@@ -100,7 +100,7 @@ foo.txt::
     This is my fish, my fish's name is george
     This is my goat, my goat's name is adam
 
-``sed "s/This is my \(.*\),.*is \(.*\)/\1:\2/g" foo.txt`` ::
+``sed "s/This is my \(.*\),.*is \(.*\)/\1:\2/g" foo.txt`` 得到::
 
     cat:betty
     dog:frank

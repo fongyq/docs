@@ -258,7 +258,7 @@
 <p>目标：去掉 html.txt 中所有的 <code class="docutils literal notranslate"><span class="pre">&lt;*&gt;</span></code> 。</p>
 <blockquote>
 <div><ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">sed</span> <span class="pre">&quot;s/&lt;.*&gt;//g&quot;</span> <span class="pre">html.txt</span></code> 结果：`` meant. Understand?``</li>
+<li><code class="docutils literal notranslate"><span class="pre">sed</span> <span class="pre">&quot;s/&lt;.*&gt;//g&quot;</span> <span class="pre">html.txt</span></code> 结果：<code class="docutils literal notranslate"><span class="pre">meant.</span> <span class="pre">Understand?</span></code> （开头有空格）。</li>
 <li><code class="docutils literal notranslate"><span class="pre">sed</span> <span class="pre">&quot;s/&lt;[^&gt;]*&gt;//g&quot;</span> <span class="pre">html.txt</span></code> 结果：<code class="docutils literal notranslate"><span class="pre">This</span> <span class="pre">is</span> <span class="pre">what</span> <span class="pre">I</span> <span class="pre">meant.</span> <span class="pre">Understand?</span></code> 。<code class="docutils literal notranslate"><span class="pre">[^&gt;]</span></code> 表示除 <code class="docutils literal notranslate"><span class="pre">&gt;</span></code> 之外的字符集合。</li>
 </ul>
 </div></blockquote>
@@ -286,7 +286,7 @@
 <span class="n">This</span> <span class="ow">is</span> <span class="n">my</span> <span class="n">goat</span><span class="p">,</span> <span class="n">my</span> <span class="n">goat</span><span class="s1">&#39;s name is adam</span>
 </pre></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">sed</span> <span class="pre">&quot;s/This</span> <span class="pre">is</span> <span class="pre">my</span> <span class="pre">\(.*\),.*is</span> <span class="pre">\(.*\)/\1:\2/g&quot;</span> <span class="pre">foo.txt</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">sed</span> <span class="pre">&quot;s/This</span> <span class="pre">is</span> <span class="pre">my</span> <span class="pre">\(.*\),.*is</span> <span class="pre">\(.*\)/\1:\2/g&quot;</span> <span class="pre">foo.txt</span></code> 得到:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cat</span><span class="p">:</span><span class="n">betty</span>
 <span class="n">dog</span><span class="p">:</span><span class="n">frank</span>
 <span class="n">fish</span><span class="p">:</span><span class="n">george</span>
