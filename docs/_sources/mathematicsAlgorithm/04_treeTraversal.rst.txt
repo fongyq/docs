@@ -280,7 +280,7 @@
     .. code-block:: cpp
       :linenos:
 
-	  // 方法一：栈
+      // 方法一：栈
 
       class Solution
       {
