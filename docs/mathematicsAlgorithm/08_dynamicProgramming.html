@@ -679,7 +679,7 @@ dp[i][j] =
 \begin{cases}
 1 &amp; &amp; {i=0;\ \text{状态 j 可以放牧且牛不相邻}} \\
 dp[i][j] + dp[i-1][j] &amp; &amp; {i&gt;0;\ \text{状态 j 可以放牧且牛不相邻}} \\
-0 &amp; &amp; {\text{状态 j 可以放牧且牛不相邻}}
+0 &amp; &amp; {\text{状态 j 不可以放牧或牛相邻}}
 \end{cases}
 $$</div><div class="toggle docutils container">
 <div class="header docutils container">
@@ -808,13 +808,13 @@ $$</div><div class="toggle docutils container">
 </div>
 <div class="section" id="poj-3311-hie-with-the-pie">
 <h3>[Poj 3311] Hie With The Pie<a class="headerlink" href="#poj-3311-hie-with-the-pie" title="Permalink to this headline">¶</a></h3>
-<p>问题描述：一个送外卖的人，从起点0出发，要经过所有地点一次，然后再回到起点，求最少花费的代价（旅行社问题）。</p>
+<p>问题描述：一个送外卖的人，从起点0出发，要经过所有地点一次，然后再回到起点，求最少花费的代价（旅行商问题）。</p>
 <p>策略：假设当前已经访问过的顶点集合为 <span class="math notranslate nohighlight">\(S\)</span> （起点0当做未访问过），当前所在顶点为 <span class="math notranslate nohighlight">\(v\)</span> ，  <span class="math notranslate nohighlight">\(dp[S][v]\)</span> 表示：从 <span class="math notranslate nohighlight">\(v\)</span> 出发访问剩余所有顶点，最终回到起点0的路径的权重总和的最小值。设 <span class="math notranslate nohighlight">\(V\)</span> 表示所有顶点的集合。</p>
 <p>递推关系：</p>
 <div class="math notranslate nohighlight">
 $$
-dp[V][0] = 0 \\
-dp[S][v] = min\{ dp[S \cup u][u] + d[v][u] \},\ u \notin S
+dp[V][0] &amp;=&amp; \  0 \\
+dp[S][v] &amp;=&amp; \  min\{ dp[S \cup u][u] + d[v][u] \},\ u \notin S
 $$</div><div class="toggle docutils container">
 <div class="header docutils container">
 <span class="math notranslate nohighlight">\(\color{darkgreen}{Code}\)</span></div>
@@ -840,27 +840,7 @@ $$</div><div class="toggle docutils container">
 20
 21
 22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// 递归：时间复杂度 O(n^2 \times 2^n)</span>
+23</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// 递归：时间复杂度 O(n^2 \times 2^n)</span>
 <span class="kt">int</span> <span class="n">d</span><span class="p">[</span><span class="n">N</span><span class="p">][</span><span class="n">N</span><span class="p">];</span> <span class="c1">// 邻接矩阵</span>
 <span class="kt">int</span> <span class="n">dp</span><span class="p">[</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">N</span><span class="p">][</span><span class="n">N</span><span class="p">];</span>
 
@@ -883,8 +863,27 @@ $$</div><div class="toggle docutils container">
   <span class="n">memset</span><span class="p">(</span><span class="n">dp</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">dp</span><span class="p">));</span>
   <span class="k">return</span> <span class="n">minCost</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
 <span class="p">}</span>
-
-<span class="c1">// 循环</span>
+</pre></div>
+</td></tr></table></div>
+<div class="highlight-cpp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// 循环</span>
 <span class="kt">int</span> <span class="n">d</span><span class="p">[</span><span class="n">N</span><span class="p">][</span><span class="n">N</span><span class="p">];</span> <span class="c1">// 邻接矩阵</span>
 <span class="kt">int</span> <span class="n">dp</span><span class="p">[</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">N</span><span class="p">][</span><span class="n">N</span><span class="p">];</span>
 <span class="kt">int</span> <span class="nf">solve</span><span class="p">()</span>
