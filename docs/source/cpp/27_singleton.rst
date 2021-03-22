@@ -1,5 +1,12 @@
+单例模式
+=============
 
-ck:: cpp
+单例是一种创建型设计模式，保证一个类只有一个实例（对象），并提供一个访问该实例的全局节点。
+
+基础单例
+----------
+
+.. code-block:: cpp
   :linenos:
   
   // from the header file
@@ -15,7 +22,7 @@ ck:: cpp
   // from the implementation file
   Singleton* Singleton::pInstance = 0; // nullptr
   
-  Singleton* Singleton::instance() 
+  Singleton* Singleton::instance()
   {
     if(pInstance == 0)
     {
@@ -23,7 +30,6 @@ ck:: cpp
     }
     return pInstance;
   }
-
 
 这种实现方法不是线程安全的（Thread-safe)，多个线程同时调用 ``instance()`` 可能会构造出多个对象。
 
