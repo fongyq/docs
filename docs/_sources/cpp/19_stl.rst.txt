@@ -200,6 +200,18 @@ vector
   - ``myVec.clear()`` 让 myVec.size() 为0，但是 myVec.capcity() 不为0，调用 ``myVec.clear()`` 之后再调用 ``myVec.shrink_to_fit()`` 。 ``shrink_to_fit()`` 的作用是减小 capcity() 以匹配 size()。
 
 
+.. note::
+
+  类模板用于产生类，比如 ::
+
+    template <typename T>
+    class Vector
+    {
+      // ...
+    };
+
+  Vector 是 **类模板** ，Vector<int>、Vector<char> 是生成的 **模板类** 。
+
 
 list
 ---------

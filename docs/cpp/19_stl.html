@@ -423,6 +423,18 @@ They are implemented as class templates, which allows a great flexibility in the
 </ul>
 </li>
 </ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>类模板用于产生类，比如</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+<span class="k">class</span> <span class="nc">Vector</span>
+<span class="p">{</span>
+  <span class="c1">// ...</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p class="last">Vector 是 <strong>类模板</strong> ，Vector&lt;int&gt;、Vector&lt;char&gt; 是生成的 <strong>模板类</strong> 。</p>
+</div>
 </div>
 <div class="section" id="list">
 <h2>19.3. list<a class="headerlink" href="#list" title="Permalink to this headline">¶</a></h2>
