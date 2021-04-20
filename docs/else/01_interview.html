@@ -6999,7 +6999,19 @@ $$</div></li>
 42
 43
 44
-45</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Solution</span>
+45
+46
+47
+48
+49
+50
+51</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm">逆波兰式求值</span>
+<span class="cm">遍历逆波兰式，遇到操作数就入栈；遇到操作符则出栈两个操作数执行运算，运算结果重新入栈；</span>
+<span class="cm">遍历结束时，栈内存放的是最终运算结果。</span>
+<span class="cm">*/</span>
+
+<span class="k">class</span> <span class="nc">Solution</span>
 <span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
     <span class="kt">int</span> <span class="n">evalRPN</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;&amp;</span> <span class="n">tokens</span><span class="p">)</span>
