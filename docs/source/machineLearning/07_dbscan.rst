@@ -1,4 +1,4 @@
-CAN
+DBSCAN
 ==========
 
 DBSCAN（Density-Based Spatial Clustering of Applications with Noise）是一种基于密度的聚类算法。基于密度的聚类算法一般假定类别可以通过样本分布的紧密程度决定，同一类别的样本是紧密相连的，也就是说，在该类别任意样本周围不远处一定有同类别的样本存在。
@@ -12,13 +12,13 @@ DBSCAN（Density-Based Spatial Clustering of Applications with Noise）是一种
 
 假设有样本集 :math:`\mathcal{D} = \{ x_1, x_2, \cdots, x_n \}` ，定义几个概念如下：
 
-- :math:`\epsilon-` 邻域（Eps-neighborhood）：:math:`\mathcal{N}_{\epsilon}(x_i) = \{ x_j \in \mathcal{D} | distance(x_i, x_j) \leq \epsilon  \}` 。
+- :math:`\epsilon` 邻域（Eps-neighborhood）：:math:`\mathcal{N}_{\epsilon}(x_i) = \{ x_j \in \mathcal{D} | distance(x_i, x_j) \leq \epsilon  \}` 。
 
-- 核心点（Core points）：核心点的 :math:`\epsilon-` 邻域包含至少 :math:`MinPts` 个样本点。
+- 核心点（Core points）：核心点的 :math:`\epsilon` 邻域包含至少 :math:`MinPts` 个样本点。
 
 - 密度直达（Directly density-reachable）：假设 :math:`x_i` 是核心点，:math:`x_j \in \mathcal{N}_{\epsilon}(x_i)` ，则称 :math:`x_j` 由 :math:`x_i` 密度直达，反之不一定成立。
 
-- 密度可达（Density-reachable）：假设存在样本序列 :math:`p_1, p2, \cdots, p_T` ，满足 :math:`p_1 = x_i, p_T = x_j` ，且 :math:`p_1, p2, \cdots, p_{T-1}` 都是核心点， :math:`p_{t+1}` 由 :math:`p_t ` 密度直达，则称 :math:`x_j` 由 :math:`x_i` 密度可达，反之不一定成立。
+- 密度可达（Density-reachable）：假设存在样本序列 :math:`p_1, p_2, \cdots, p_T` ，满足 :math:`p_1 = x_i, p_T = x_j` ，且 :math:`p_1, p2, \cdots, p_{T-1}` 都是核心点， :math:`p_{t+1}` 由 :math:`p_t` 密度直达，则称 :math:`x_j` 由 :math:`x_i` 密度可达，反之不一定成立。
 
 - 密度相连（Density-connected）: 对于 :math:`x_i` 和 :math:`x_j` ，如果存在核心点  :math:`x_k` ，使 :math:`x_i` 和 :math:`x_j` 均由 :math:`x_k` 密度可达，则称 :math:`x_i` 和 :math:`x_j` 密度相连；密度相连关系是满足对称性的。
 
@@ -31,7 +31,7 @@ DBSCAN（Density-Based Spatial Clustering of Applications with Noise）是一种
 
 DBSCAN 的聚类思想很简单：由密度可达关系导出的最大密度相连的样本集合，即为最终聚类的一个类别/簇。
 
-一个簇里面可以有一个或者多个核心点。如果只有一个核心点，则簇里其他的非核心点都在这个核心点的 :math:`\epsilon-` 邻域里；如果有多个核心点，则簇里的任意一个核心点的 :math:`\epsilon-` 邻域中一定有一个其他的核心点，否则这两个核心点无法密度可达。这些核心点的 :math:`\epsilon-` 邻域里的样本的集合组成一个簇。
+一个簇里面可以有一个或者多个核心点。如果只有一个核心点，则簇里其他的非核心点都在这个核心点的 :math:`\epsilon` 邻域里；如果有多个核心点，则簇里的任意一个核心点的 :math:`\epsilon` 邻域中一定有一个其他的核心点，否则这两个核心点无法密度可达。这些核心点的 :math:`\epsilon` 邻域里的样本的集合组成一个簇。
 
 DBSCAN 首先选择一个核心点作为种子，然后找到所有这个核心点能够密度可达的样本集合，即为一个聚类簇；接着继续选择另一个尚未访问过的核心点去寻找密度可达的样本集合，这样就得到另一个聚类簇。一直执行直到所有核心点都访问过为止。
 
@@ -77,7 +77,7 @@ DBSCAN 的缺点：
 
 - 初始化：核心点集合 :math:`\mathcal{\Omega} = \emptyset` ；聚簇数量 :math:`k = 0` ；尚未访问的样本点集合 :math:`\mathcal{V} = \mathcal{D}` 。
 
-- 对于所有样本点 :math:`x_i \in \mathcal{D}` ，计算其 :math:`\epsilon-` 邻域 :math:`\mathcal{N}_{\epsilon}(x_i)` ：
+- 对于所有样本点 :math:`x_i \in \mathcal{D}` ，计算其 :math:`\epsilon` 邻域 :math:`\mathcal{N}_{\epsilon}(x_i)` ：
 
   - 若 :math:`| \mathcal{N}_{\epsilon}(x_i)| \geq MinPts` ，则加入核心点集合。
 
