@@ -18,7 +18,7 @@ DBSCAN（Density-Based Spatial Clustering of Applications with Noise）是一种
 
 - 密度直达（Directly density-reachable）：假设 :math:`x_i` 是核心点，:math:`x_j \in \mathcal{N}_{\epsilon}(x_i)` ，则称 :math:`x_j` 由 :math:`x_i` 密度直达，反之不一定成立。
 
-- 密度可达（Density-reachable）：假设存在样本序列 :math:`p_1, p_2, \cdots, p_T` ，满足 :math:`p_1 = x_i, p_T = x_j` ，且 :math:`p_1, p2, \cdots, p_{T-1}` 都是核心点， :math:`p_{t+1}` 由 :math:`p_t` 密度直达，则称 :math:`x_j` 由 :math:`x_i` 密度可达，反之不一定成立。
+- 密度可达（Density-reachable）：假设存在样本序列 :math:`p_1, p_2, \cdots, p_T` ，满足 :math:`p_1 = x_i, p_T = x_j` ，且 :math:`p_1, p_2, \cdots, p_{T-1}` 都是核心点， :math:`p_{t+1}` 由 :math:`p_t` 密度直达，则称 :math:`x_j` 由 :math:`x_i` 密度可达，反之不一定成立。
 
 - 密度相连（Density-connected）: 对于 :math:`x_i` 和 :math:`x_j` ，如果存在核心点  :math:`x_k` ，使 :math:`x_i` 和 :math:`x_j` 均由 :math:`x_k` 密度可达，则称 :math:`x_i` 和 :math:`x_j` 密度相连；密度相连关系是满足对称性的。
 
