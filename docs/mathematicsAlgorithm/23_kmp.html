@@ -313,7 +313,7 @@
 <h2>23.4. 优化算法<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="id10">
 <h3>第一个优化<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
-<p>相邻的前缀函数值至多相差 1，即 <span class="math notranslate nohighlight">\(| \pi[i] - \pi[i+1] | \leq 1\)</span> 。</p>
+<p>相邻的前缀函数值至多增加 1，即 <span class="math notranslate nohighlight">\(\pi[i+1] - \pi[i] \leq 1\)</span> 。</p>
 <p>当 <span class="math notranslate nohighlight">\(S[i+1] = S[\pi[i]]\)</span> ，此时 <span class="math notranslate nohighlight">\(\pi[i+1] = \pi[i] + 1\)</span> 。</p>
 <div class="math notranslate nohighlight">
 \[\underbrace{\overbrace{S_0 ~ S_1 ~ S_2}^{\pi[i] = 3} ~ S_3}_{\pi[i+1] = 4} ~ \cdots ~ \underbrace{\overbrace{S_{i-2} ~ S_{i-1} ~ S_{i}}^{\pi[i] = 3} ~ S_{i+1}}_{\pi[i+1] = 4}\]</div>
