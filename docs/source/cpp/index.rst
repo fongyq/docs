@@ -34,3 +34,4 @@ C/C++
     27_singleton.rst
     28_vaFunc.rst
     29_operatorOverload.rst
+    30_templateSpecialization.rst
