@@ -112,7 +112,7 @@
 <li class="toctree-l2"><a class="reference internal" href="08_overload.html">8. 重载、覆盖、隐藏</a></li>
 <li class="toctree-l2"><a class="reference internal" href="09_strcpy.html">9. strcpy函数</a></li>
 <li class="toctree-l2"><a class="reference internal" href="10_cast.html">10. 强制类型转换</a></li>
-<li class="toctree-l2"><a class="reference internal" href="11_heapStack.html">11. 堆、栈</a></li>
+<li class="toctree-l2"><a class="reference internal" href="11_heapStack.html">11. 堆和栈</a></li>
 <li class="toctree-l2"><a class="reference internal" href="12_argPass.html">12. 参数传递</a></li>
 <li class="toctree-l2"><a class="reference internal" href="13_nullClassPtr.html">13. 空类指针</a></li>
 <li class="toctree-l2"><a class="reference internal" href="14_staticExtern.html">14. static和extern</a></li>
@@ -123,7 +123,7 @@
 <li class="toctree-l2"><a class="reference internal" href="19_stl.html">19. 常用 STL 容器</a></li>
 <li class="toctree-l2"><a class="reference internal" href="20_define.html">20. #define</a></li>
 <li class="toctree-l2"><a class="reference internal" href="21_operatorPrior.html">21. 运算符优先级</a></li>
-<li class="toctree-l2"><a class="reference internal" href="22_const.html">22. const</a></li>
+<li class="toctree-l2"><a class="reference internal" href="22_const.html">22. const和constexpr</a></li>
 <li class="toctree-l2"><a class="reference internal" href="23_copyControl.html">23. 拷贝控制</a></li>
 <li class="toctree-l2"><a class="reference internal" href="24_exception.html">24. 异常</a></li>
 <li class="toctree-l2"><a class="reference internal" href="25_namespace.html">25. 命名空间</a></li>
@@ -139,10 +139,13 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#id7">27.4. 另一种实现</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id8">27.5. 参考资料</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">27.5. 饿汉与懒汉模式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">27.6. 参考资料</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="28_vaFunc.html">28. 可变参数函数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="29_operatorOverload.html">29. 运算符重载</a></li>
+<li class="toctree-l2"><a class="reference internal" href="30_templateSpecialization.html">30. 模板特化</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../python/index.html">Python</a></li>
@@ -466,7 +469,8 @@
 18
 19
 20
-21</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">S</span>
+21
+22</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">S</span>
 <span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
     <span class="k">static</span> <span class="n">S</span><span class="o">&amp;</span> <span class="n">getInstance</span><span class="p">(</span><span class="kt">int</span> <span class="n">_x</span><span class="p">)</span>
@@ -474,28 +478,66 @@
         <span class="k">static</span> <span class="n">S</span> <span class="n">instance</span><span class="p">(</span><span class="n">_x</span><span class="p">);</span>
         <span class="k">return</span> <span class="n">instance</span><span class="p">;</span>
     <span class="p">}</span>
-    <span class="n">S</span><span class="p">(</span><span class="kt">int</span> <span class="n">_x</span><span class="p">)</span><span class="o">:</span> <span class="n">x</span><span class="p">(</span><span class="n">_x</span><span class="p">){}</span>
     <span class="n">S</span><span class="p">(</span><span class="k">const</span> <span class="n">S</span><span class="o">&amp;</span><span class="p">)</span> <span class="o">=</span> <span class="k">delete</span><span class="p">;</span>
     <span class="n">S</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span> <span class="n">S</span><span class="o">&amp;</span><span class="p">)</span> <span class="o">=</span> <span class="k">delete</span><span class="p">;</span>
     <span class="kt">int</span> <span class="n">x</span><span class="p">;</span>
+<span class="k">private</span><span class="o">:</span>
+    <span class="n">S</span><span class="p">(</span><span class="kt">int</span> <span class="n">_x</span><span class="p">)</span><span class="o">:</span> <span class="n">x</span><span class="p">(</span><span class="n">_x</span><span class="p">){}</span>
 <span class="p">};</span>
 
 <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
 <span class="p">{</span>
     <span class="k">const</span> <span class="n">S</span><span class="o">*</span> <span class="n">ps</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">S</span><span class="o">::</span><span class="n">getInstance</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
-    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">ps</span><span class="o">-&gt;</span><span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>  <span class="c1">// 5</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">ps</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">ps</span><span class="o">-&gt;</span><span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>   <span class="c1">// 0x6013e0 5</span>
     <span class="k">const</span> <span class="n">S</span><span class="o">*</span> <span class="n">pss</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">S</span><span class="o">::</span><span class="n">getInstance</span><span class="p">(</span><span class="mi">6</span><span class="p">);</span>
-    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">pss</span><span class="o">-&gt;</span><span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> <span class="c1">// 5</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">pss</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">pss</span><span class="o">-&gt;</span><span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> <span class="c1">// 0x6013e0 5</span>
 <span class="p">}</span>
 </pre></div>
 </td></tr></table></div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">拷贝构造函数和拷贝赋值运算符需要声明为不可调用。</p>
+<p class="last">拷贝构造函数和拷贝赋值运算符需要声明为不可调用；无参构造函数、有参构造函数应该声明为 private。</p>
 </div>
 </div>
 <div class="section" id="id8">
-<h2>27.5. 参考资料<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h2>
+<h2>27.5. 饿汉与懒汉模式<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h2>
+<p>第一节和第四节都是“懒汉”模式（Lazy Mode）的例子：第一次使用到类实例的时候才创建。</p>
+<p>“饿汉”模式（Hungry Mode）：在使用之前已经创建好了实例，取之即用。</p>
+<div class="highlight-cpp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Singleton</span>
+<span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="k">static</span> <span class="n">Singleton</span><span class="o">*</span> <span class="n">getInstance</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="n">p</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="k">private</span><span class="o">:</span>
+    <span class="k">static</span> <span class="n">Singleton</span><span class="o">*</span> <span class="n">p</span><span class="p">;</span>
+    <span class="n">Singleton</span><span class="p">(){}</span>
+<span class="p">};</span>
+
+<span class="n">Singleton</span><span class="o">*</span> <span class="n">Singleton</span><span class="o">::</span><span class="n">p</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Singleton</span><span class="p">();</span>
+</pre></div>
+</td></tr></table></div>
+<p>“饿汉”模式是线程安全的，因为在进入 main 函数之前就由单线程方式进行了实例化。</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">上面例子中，静态成员指针初始化调用了私有构造函数。创建普通实例是不能直接调用私有构造函数的。</p>
+</div>
+</div>
+<div class="section" id="id9">
+<h2>27.6. 参考资料<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
 <li>C++ and the Perils of Double-Checked Locking</li>
 </ol>
