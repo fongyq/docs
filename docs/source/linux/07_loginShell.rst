@@ -75,7 +75,7 @@ Shell 交互与登录
     
 .. note::
     
-    su 表示 **switch user** ；sudo 表示 **super user do** 。 ``bashrc`` 的 rc 表示 **run commands** 。
+    su 表示 **switch user** ；sudo 表示 **super user do** 。 bashrc 的 rc 表示 **run commands** 。
 
 非登录式（Non-Login Shell）
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -178,6 +178,20 @@ Shell 中创建孩子 Shell 的方式有：
     a test
     2
     /bin/bash.exe
+
+
+.. note::
+
+    全局环境变量通过 ``export`` 定义::
+
+        export GLOBALVAR='global var'
+        localvar='local var'
+
+    删除变量定义用 ``unset`` 。
+
+    打印当前所有全局环境变量可以用命令 ``env`` 或 ``export -p`` 。
+
+    打印单个全局环境变量可以用命令 ``echo $HOME`` 或 ``printenv HOME`` 。
 
 
 参考资料

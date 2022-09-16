@@ -248,7 +248,7 @@
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">su 表示 <strong>switch user</strong> ；sudo 表示 <strong>super user do</strong> 。 <code class="docutils literal notranslate"><span class="pre">bashrc</span></code> 的 rc 表示 <strong>run commands</strong> 。</p>
+<p class="last">su 表示 <strong>switch user</strong> ；sudo 表示 <strong>super user do</strong> 。 bashrc 的 rc 表示 <strong>run commands</strong> 。</p>
 </div>
 </div>
 <div class="section" id="non-login-shell">
@@ -333,6 +333,17 @@
 <span class="m">2</span>
 /bin/bash.exe
 </pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>全局环境变量通过 <code class="docutils literal notranslate"><span class="pre">export</span></code> 定义:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">GLOBALVAR</span><span class="o">=</span><span class="s1">&#39;global var&#39;</span>
+<span class="nv">localvar</span><span class="o">=</span><span class="s1">&#39;local var&#39;</span>
+</pre></div>
+</div>
+<p>删除变量定义用 <code class="docutils literal notranslate"><span class="pre">unset</span></code> 。</p>
+<p>打印当前所有全局环境变量可以用命令 <code class="docutils literal notranslate"><span class="pre">env</span></code> 或 <code class="docutils literal notranslate"><span class="pre">export</span> <span class="pre">-p</span></code> 。</p>
+<p class="last">打印单个全局环境变量可以用命令 <code class="docutils literal notranslate"><span class="pre">echo</span> <span class="pre">$HOME</span></code> 或 <code class="docutils literal notranslate"><span class="pre">printenv</span> <span class="pre">HOME</span></code> 。</p>
 </div>
 </div>
 <div class="section" id="id5">
