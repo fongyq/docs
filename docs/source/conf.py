@@ -19,6 +19,14 @@
 import sphinx_rtd_theme
 
 # import os
+# on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
+
+# if not on_rtd:  # only import and set the theme if we're building docs locally
+    # import sphinx_rtd_theme
+    # html_theme = 'sphinx_rtd_theme'
+    # html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
+
+# import os
 # on_rtd = os.environ.get('READTHEDOCS') == 'False'
 # if on_rtd:
 #     html_theme = 'default'
@@ -28,7 +36,7 @@ import sphinx_rtd_theme
 # -- Project information -----------------------------------------------------
 
 project = u'fong'
-copyright = u'2018, fong'
+copyright = u'2018-2022, fong'
 author = u'fong'
 
 # The short X.Y version
@@ -82,8 +90,8 @@ language = 'en'
 exclude_patterns = []
 
 # The name of the Pygments (syntax highlighting) style to use.
-pygments_style = 'sphinx'
-# pygments_style = 'default'
+# pygments_style = 'sphinx'
+pygments_style = 'default'
 
 # -- Options for HTML output -------------------------------------------------
 
@@ -146,6 +154,8 @@ latex_elements = {
     'preamble': r'''
 	    % Use some font with UTF-8 support with XeLaTeX
         \usepackage[UTF8]{ctex}
+        \usepackage{amsmath,bm}
+        \usepackage{color}
         \usepackage{xcolor}
         \definecolor{darkgreen}{rgb}{0.0, 0.2, 0.13}
      '''
