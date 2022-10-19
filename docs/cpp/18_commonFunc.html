@@ -191,9 +191,6 @@
 </pre></div>
 </div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>map、multimap、set、multiset 是基于红黑树实现的、有序的，其中 map、multimap 默认按照 key 排序。
@@ -294,9 +291,6 @@
 </pre></div>
 </div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>最长上升子序列：</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="cm">/* https://leetcode.com/problems/longest-increasing-subsequence/ */</span><span class="w"></span>
 <span class="linenos"> 2</span><span class="cm">/* O(nlogn) in time.*/</span><span class="w"></span>
@@ -392,9 +386,6 @@
 </pre></div>
 </div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p><strong>string</strong> 类也是可以排序的，如</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">string</span><span class="w"> </span><span class="n">str</span><span class="p">;</span><span class="w"></span>
 <span class="n">sort</span><span class="p">(</span><span class="n">str</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">str</span><span class="p">.</span><span class="n">end</span><span class="p">());</span><span class="w"></span>
@@ -444,9 +435,6 @@
 </pre></div>
 </div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 </section>
 <section id="min-element-max-element-minmax-element">
 <h2><span class="section-number">18.5. </span>min_element，max_element，minmax_element<a class="headerlink" href="#min-element-max-element-minmax-element" title="Permalink to this heading"></a></h2>
@@ -494,9 +482,6 @@
 <span class="linenos">20</span><span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
 </div>
 </section>
 <section id="accumulate">
@@ -553,9 +538,6 @@
 <span class="linenos">34</span><span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
 </div>
 </section>
 <section id="partial-sum">
@@ -620,9 +602,6 @@
 </pre></div>
 </div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 </section>
 <section id="iota">
 <h2><span class="section-number">18.8. </span>iota<a class="headerlink" href="#iota" title="Permalink to this heading"></a></h2>
@@ -654,16 +633,13 @@
 </pre></div>
 </div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 </section>
 <section id="inner-product">
 <h2><span class="section-number">18.9. </span>inner_product<a class="headerlink" href="#inner-product" title="Permalink to this heading"></a></h2>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;numeric&gt;</span><span class="cp"></span>
 
 <span class="c1">// sum/multiply</span>
-<span class="n">emplate</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">InputIterator1</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">InputIterator2</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span><span class="w"></span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">InputIterator1</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">InputIterator2</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span><span class="w"></span>
 <span class="n">T</span><span class="w"> </span><span class="n">inner_product</span><span class="w"> </span><span class="p">(</span><span class="n">InputIterator1</span><span class="w"> </span><span class="n">first1</span><span class="p">,</span><span class="w"> </span><span class="n">InputIterator1</span><span class="w"> </span><span class="n">last1</span><span class="p">,</span><span class="w"> </span><span class="n">InputIterator2</span><span class="w"> </span><span class="n">first2</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">init</span><span class="p">);</span><span class="w"></span>
 
 <span class="c1">// custom</span>
@@ -721,9 +697,6 @@
 </pre></div>
 </div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 </section>
 <section id="memset">
 <h2><span class="section-number">18.10. </span>memset<a class="headerlink" href="#memset" title="Permalink to this heading"></a></h2>
@@ -759,9 +732,6 @@
 <span class="linenos">19</span><span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
 </div>
 </section>
 <section id="id2">
@@ -868,7 +838,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2018, fong.</p>
+    <p>&#169; Copyright 2018-2022, fong.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
