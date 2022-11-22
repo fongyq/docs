@@ -81,7 +81,7 @@
   - ``git diff <commit>`` 比较某次 commit 和当前版本（HEAD）的差异。
   - ``git diff <commit1> <commit2>`` 比较两次 commit 的差异。
 
-- ``git log`` 查看 commit 记录，包括版本的 hash 值、commit 注释等信息。
+- ``git log`` 查看版本历史记录，包括版本的 hash 值、commit 注释等信息。
 
 - ``git reflog`` 查看可引用的历史版本记录，一般是为了找到所需的 commit 索引，从而进行版本回退或恢复操作所使用。
 
