@@ -412,6 +412,15 @@ Ubuntu 6.10 开始默认使用 dash，dash 符合 POSIX 标准。</p>
 </pre></div>
 </div>
 </div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">[</span> <span class="pre">$1</span> <span class="pre">=</span> <span class="pre">'target'</span> <span class="pre">]</span></code> 判断第一个参数值是否为 target，如果执行脚本的时候没有输入参数，会报错：</p>
+<blockquote>
+<div><p>[: =: unary operator expected</p>
+</div></blockquote>
+<p>因为原命令变成了 <code class="docutils literal notranslate"><span class="pre">[</span> <span class="pre">=</span> <span class="pre">'target'</span> <span class="pre">]</span></code> 。</p>
+<p>更规范的写法是在变量外部都加双引号，即： <code class="docutils literal notranslate"><span class="pre">[</span> <span class="pre">&quot;$1&quot;</span> <span class="pre">=</span> <span class="pre">'target'</span> <span class="pre">]</span></code> ，如果执行脚本的时候没有输入参数，原命令变成 <code class="docutils literal notranslate"><span class="pre">[</span> <span class="pre">''</span> <span class="pre">=</span> <span class="pre">'target'</span> <span class="pre">]</span></code> 。</p>
+</div>
 </section>
 <section id="id13">
 <h3>文件测试<a class="headerlink" href="#id13" title="Permalink to this headline"></a></h3>
