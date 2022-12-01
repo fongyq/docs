@@ -6,8 +6,8 @@ SPHINXOPTS    =
 SPHINXBUILD   = sphinx-build
 SPHINXPROJ    = fong
 SOURCEDIR     = source
-#BUILDDIR      = build
-BUILDDIR = ..
+BUILDDIR      = build
+#BUILDDIR = ..
 
 # Put it first so that "make" without argument is like "make help".
 help:
