@@ -10,10 +10,10 @@
   // Definition for a binary tree node.
   struct TreeNode
   {
-     int val;
-     TreeNode *left;
-     TreeNode *right;
-     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(int x) : val(x), left(NULL), right(NULL) {}
   };
 
 先序遍历
@@ -26,14 +26,14 @@
 .. code-block:: cpp
   :linenos:
 
-  void preOrder_Recur(TreeNode* T)
+  void preOrderRecur(TreeNode* T)
   {
     if(!T) return;
     else
     {
       visit(T -> val);
-      preOrder_Recur(T -> left);
-      preOrder_Recur(T -> right);
+      preOrderRecur(T -> left);
+      preOrderRecur(T -> right);
     }
   }
 
@@ -42,7 +42,7 @@
 .. code-block:: cpp
   :linenos:
 
-  void preOrder_NonRecur(TreeNode* T)
+  void preOrderNonRecur(TreeNode* T)
   {
     stack<TreeNode*> stk;
     while(T || !stk.empty())
@@ -53,7 +53,7 @@
         stk.push(T);
         T = T -> left;
       }
-      if(! stk.empty())
+      if(!stk.empty())
       {
         T = stk.top();
         stk.pop();
@@ -70,14 +70,14 @@
   .. code-block:: cpp
     :linenos:
 
-    void inOrder_Recur(TreeNode* T)
+    void inOrderRecur(TreeNode* T)
     {
       if(!T) return;
       else
       {
-        inOrder_Recur(T -> left);
+        inOrderRecur(T -> left);
         visit(T -> val);
-        inOrder_Recur(T -> right);
+        inOrderRecur(T -> right);
       }
     }
 
@@ -86,7 +86,7 @@
 .. code-block:: cpp
   :linenos:
 
-  void inOrder_NonRecur(TreeNode* T)
+  void inOrderNonRecur(TreeNode* T)
   {
     stack<TreeNode*> stk;
     while(T || !stk.empty())
@@ -96,7 +96,7 @@
         stk.push(T);
         T = T -> left;
       }
-      if(! stk.empty())
+      if(!stk.empty())
       {
         T = stk.top();
         stk.pop();
@@ -115,13 +115,13 @@
 .. code-block:: cpp
   :linenos:
 
-  void postOrder_Recur(TreeNode* T)
+  void postOrderRecur(TreeNode* T)
   {
     if(!T) return;
     else
     {
-      postOrder_Recur(T -> left);
-      postOrder_Recur(T -> right);
+      postOrderRecur(T -> left);
+      postOrderRecur(T -> right);
       visit(T -> val);
     }
   }
@@ -133,7 +133,7 @@
   .. code-block:: cpp
     :linenos:
 
-    vector<int> postOrder_NonRecur(TreeNode* T)
+    vector<int> postOrderNonRecur(TreeNode* T)
     {
       vector<int> res;
       stack<TreeNode*> nodePtr;
@@ -156,7 +156,7 @@
   .. code-block:: cpp
     :linenos:
 
-    vector<int> postOrder_NonRecur(TreeNode* T)
+    vector<int> postOrderNonRecur(TreeNode* T)
     {
       vector<int> res;
       stack<TreeNode*> nodePtr;
@@ -539,9 +539,11 @@
     .. code-block:: cpp
       :linenos:
 
-      class Solution {
+      class Solution 
+      {
       public:
-          TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+          TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) 
+          {
               if(!root || !p || !q) return root;
               TreeNode* res = nullptr;
               postOrderTraversal(root, p, q, res);
