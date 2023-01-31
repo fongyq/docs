@@ -158,38 +158,38 @@
 
     vector<int> postOrderNonRecur(TreeNode* T)
     {
-      vector<int> res;
-      stack<TreeNode*> nodePtr;
-      stack<TreeNode*> inNode;
-      while(T || ! nodePtr.empty())
-      {
-          while(T)
-          {
-              nodePtr.push(T);
-              T = T -> left;
-          }
-          T = nodePtr.top();
-          nodePtr.pop();
+        vector<int> res;
+        stack<TreeNode*> nodePtr;
+        stack<TreeNode*> inNode;
+        while(T || ! nodePtr.empty())
+        {
+            while(T)
+            {
+                nodePtr.push(T);
+                T = T -> left;
+            }
+            T = nodePtr.top();
+            nodePtr.pop();
 
-          if(T -> right)
-          {
-              inNode.push(T);
-              T = T -> right;
-          }
-          else
-          {
-              res.push_back(T -> val);
-              while(!inNode.empty() && T == inNode.top() -> right)
-              // 访问完节点的右子树之后，就从栈弹出该节点进行访问
-              {
-                  res.push_back(inNode.top() -> val);
-                  T = inNode.top();
-                  inNode.pop();
-              }
-              T = NULL;
-          }
-      }
-      return res;
+            if(T -> right)
+            {
+                inNode.push(T);
+                T = T -> right;
+            }
+            else
+            {
+                res.push_back(T -> val);
+                while(!inNode.empty() && T == inNode.top() -> right)
+                // 访问完节点的右子树之后，就从栈弹出该节点进行访问
+                {
+                    res.push_back(inNode.top() -> val);
+                    T = inNode.top();
+                    inNode.pop();
+                }
+                T = NULL;
+            }
+        }
+        return res;
     }
 
 
