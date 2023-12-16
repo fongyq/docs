@@ -64,7 +64,15 @@
 <li class="toctree-l2"><a class="reference internal" href="06_ee.html">6. 探索和利用</a></li>
 <li class="toctree-l2"><a class="reference internal" href="07_metric.html">7. 评价指标</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">8. 推荐与大语言模型</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id2">8.1. 参考资料</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">8.1. 何处运用大语言模型</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id3">特征工程</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id4">特征编码</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5">打分排序</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id6">流程控制</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">8.2. 如何运用大语言模型</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">8.3. 参考资料</a></li>
 </ul>
 </li>
 </ul>
@@ -104,8 +112,61 @@
              
   <section id="id1">
 <h1><span class="section-number">8. </span>推荐与大语言模型<a class="headerlink" href="#id1" title="Permalink to this headline"></a></h1>
+<a class="reference internal image-reference" href="../_images/08_llm.png"><img alt="../_images/08_llm.png" class="align-center" src="../_images/08_llm.png" style="width: 900px;" /></a>
 <section id="id2">
-<h2><span class="section-number">8.1. </span>参考资料<a class="headerlink" href="#id2" title="Permalink to this headline"></a></h2>
+<h2><span class="section-number">8.1. </span>何处运用大语言模型<a class="headerlink" href="#id2" title="Permalink to this headline"></a></h2>
+<section id="id3">
+<h3>特征工程<a class="headerlink" href="#id3" title="Permalink to this headline"></a></h3>
+<ul class="simple">
+<li><p>用户理解：利用 LLM 丰富用户画像</p></li>
+<li><p>内容理解：利用 LLM 进行 Item 画像抽取</p></li>
+<li><p>样本扩充：利用 LLM 进行 Item 生成</p></li>
+</ul>
+</section>
+<section id="id4">
+<h3>特征编码<a class="headerlink" href="#id4" title="Permalink to this headline"></a></h3>
+<p>利用 LLM 的通用语义信息丰富推荐特征。</p>
+</section>
+<section id="id5">
+<h3>打分排序<a class="headerlink" href="#id5" title="Permalink to this headline"></a></h3>
+<ul class="simple">
+<li><p>物品评分任务(Item Scoring Task)：大语言模型对候选物品逐一评分，最后根据分数排序得到最终的排序列表。</p></li>
+<li><p>物品生成任务(Item Generation Task)：通过生成式的方式生成下一个物品的 ID，或者直接生成排序列表。</p></li>
+<li><p>混合任务(Hybrid Task)：大语言模型天然地适合多任务场景，因此很多工作会利用大语言模型来实现多个推荐任务，其中包括评分任务和生成任务。</p></li>
+</ul>
+</section>
+<section id="id6">
+<h3>流程控制<a class="headerlink" href="#id6" title="Permalink to this headline"></a></h3>
+<p>使用 LLM 来集成推荐系统流程各模块（检索、排序、用户画像、用户模拟）的一个对话式推荐系统。</p>
+</section>
+</section>
+<section id="id7">
+<h2><span class="section-number">8.2. </span>如何运用大语言模型<a class="headerlink" href="#id7" title="Permalink to this headline"></a></h2>
+<p>四种方案：</p>
+<ul class="simple">
+<li><p>在训练阶段，大语言模型是否需要微调。</p></li>
+<li><p>在推理阶段，是否需要引入传统推荐模型（CRM），比如直接使用 LLM 生成推荐列表。</p></li>
+</ul>
+<p>两种趋势：</p>
+<ul class="simple">
+<li><p>模型：引入传统推荐模型（CRM）为语言模型注入协同信号。</p></li>
+<li><p>数据：引入推荐场景的数据，结合微调技术，为语言模型注入协同信号。</p></li>
+</ul>
+</section>
+<section id="id8">
+<h2><span class="section-number">8.3. </span>参考资料<a class="headerlink" href="#id8" title="Permalink to this headline"></a></h2>
+<ol class="arabic simple">
+<li><p>一文梳理推荐系统中如何应用大模型</p></li>
+</ol>
+<blockquote>
+<div><p><a class="reference external" href="https://zhuanlan.zhihu.com/p/658252702">https://zhuanlan.zhihu.com/p/658252702</a></p>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li><p>How Can Recommender Systems Benefit from Large Language Models: A Survey</p></li>
+</ol>
+<blockquote>
+<div><p><a class="reference external" href="https://arxiv.org/pdf/2306.05817.pdf">https://arxiv.org/pdf/2306.05817.pdf</a></p>
+</div></blockquote>
 </section>
 </section>
 

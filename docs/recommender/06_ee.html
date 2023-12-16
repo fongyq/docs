@@ -19,6 +19,7 @@
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -62,9 +63,10 @@
 <li class="toctree-l2"><a class="reference internal" href="04_rank.html">4. 精排</a></li>
 <li class="toctree-l2"><a class="reference internal" href="05_rerank.html">5. 重排</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">6. 探索和利用</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id2">6.1. 汤普森采样</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#ucb">6.2. UCB</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id3">6.3. 参考资料</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">6.1. 冷启</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#epsilon-greedy">6.2. <span class="math notranslate nohighlight">\(\epsilon\)</span>-Greedy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#thompson-sampling">6.3. Thompson Sampling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ucb">6.4. UCB</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="07_metric.html">7. 评价指标</a></li>
@@ -106,15 +108,58 @@
              
   <section id="id1">
 <h1><span class="section-number">6. </span>探索和利用<a class="headerlink" href="#id1" title="Permalink to this headline"></a></h1>
-<p>冷启</p>
+<dl class="simple">
+<dt>利用（Exploitation）</dt><dd><p>在当前已知信息中做决策</p>
+</dd>
+<dt>探索（Exploration）</dt><dd><p>探索未知空间获取更多信息</p>
+</dd>
+</dl>
+<p>探索和利用也是增加系统多样性的一种手段。</p>
 <section id="id2">
-<h2><span class="section-number">6.1. </span>汤普森采样<a class="headerlink" href="#id2" title="Permalink to this headline"></a></h2>
+<h2><span class="section-number">6.1. </span>冷启<a class="headerlink" href="#id2" title="Permalink to this headline"></a></h2>
+<p>冷启动不同于传统推荐链路（召回-粗排-精排-重排），其是单独的一路，会有专门的流量供给给冷启动链路，让 User 或者 Item 进入冷启动进行过渡。</p>
+<p>对于 User 冷启动来说，因为新用户缺少行为数据，所以不能直接用正常的个性化推荐链路，因为正常的个性化推荐链路中用户画像已经基本成型，其分布和新用户的分布是很不一样的。</p>
+<ul class="simple">
+<li><p>利用用户注册信息冷启动</p></li>
+<li><p>好物推荐冷启动</p></li>
+<li><p>问题启发式冷启动</p></li>
+<li><p>社交冷启动</p></li>
+<li><p>模型冷启动（单独对新用户建模）</p></li>
+</ul>
+<p>Item 冷启动的主要作用有两个第一是让新入库的 Item 得到充足的曝光，第二是让高质量的 Item 得到迅速下发，满足用户兴趣。</p>
+<ul class="simple">
+<li><p>基础信息冷启动（主题、类目）</p></li>
+<li><p>相似性冷启动</p></li>
+</ul>
+</section>
+<section id="epsilon-greedy">
+<h2><span class="section-number">6.2. </span><span class="math notranslate nohighlight">\(\epsilon\)</span>-Greedy<a class="headerlink" href="#epsilon-greedy" title="Permalink to this headline"></a></h2>
+<p><span class="math notranslate nohighlight">\(\epsilon\)</span>-Greedy 是一种用于探索和利用平衡的强化学习策略，参数 <span class="math notranslate nohighlight">\(\epsilon\)</span> 是探索和利用之间的权衡点。</p>
+<p>具体而言，<span class="math notranslate nohighlight">\(\epsilon\)</span> 代表对探索的偏好程度，每次以概率 <span class="math notranslate nohighlight">\(\epsilon\)</span> 去探索，以概率 <span class="math notranslate nohighlight">\(1-\epsilon\)</span> 来利用，基于被选择 Item 的 Reward 来更新其回报期望。</p>
+</section>
+<section id="thompson-sampling">
+<h2><span class="section-number">6.3. </span>Thompson Sampling<a class="headerlink" href="#thompson-sampling" title="Permalink to this headline"></a></h2>
+<p>Thompson Sampling 假设多臂老虎机（Multi-Arm Bandit）的每个臂都有一个吐钱的概率 <span class="math notranslate nohighlight">\(p\)</span> ，同时 <span class="math notranslate nohighlight">\(p\)</span> 符合 Beta(wins, lose) 分布，每个臂都维护一个 Beta 分布的参数（即 win 和 lose）。每次试验后，选中一个臂，摇一下，有收益则该臂的 win 增加 1，否则该臂的 lose 增加 1。</p>
+<p>每次选择臂的方式是：用每个臂现有的 Beta 分布产生一个随机数，选择所有臂产生的随机数中最大的那个臂去摇。</p>
+<p>Beta 分布的均值为：</p>
+<div class="math notranslate nohighlight">
+\[\frac{\mathrm{win}}{\mathrm{win} + \mathrm{lose}}\]</div>
 </section>
 <section id="ucb">
-<h2><span class="section-number">6.2. </span>UCB<a class="headerlink" href="#ucb" title="Permalink to this headline"></a></h2>
-</section>
-<section id="id3">
-<h2><span class="section-number">6.3. </span>参考资料<a class="headerlink" href="#id3" title="Permalink to this headline"></a></h2>
+<h2><span class="section-number">6.4. </span>UCB<a class="headerlink" href="#ucb" title="Permalink to this headline"></a></h2>
+<p>UCB 算法全称是 Upper Confidence Bound（置信区间上界），算法步骤：</p>
+<ol class="arabic">
+<li><p>先对每个老虎机随机摇臂 <span class="math notranslate nohighlight">\(m\)</span> 次，获取其初始化收益期望 <span class="math notranslate nohighlight">\(\bar{x}_j\)</span>；</p></li>
+<li><p>用 <span class="math notranslate nohighlight">\(t\)</span> 表示至今摇臂的总次数，用 <span class="math notranslate nohighlight">\(n_j\)</span> 表示第 <span class="math notranslate nohighlight">\(j\)</span> 个老虎机至今被摇臂的次数，计算每个老虎机的 UCB 值：</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[\mathrm{UCB}_j(t) = \bar{x}_j + \sqrt{\frac{2\ln t}{n_j}}\]</div>
+</div></blockquote>
+</li>
+<li><p>选择 UCB 值最大的老虎机 <span class="math notranslate nohighlight">\(i\)</span> 进行摇臂，并观察其收益 <span class="math notranslate nohighlight">\(X_{i,t}\)</span> ；</p></li>
+<li><p>根据 <span class="math notranslate nohighlight">\(X_{i,t}\)</span> 更新 <span class="math notranslate nohighlight">\(X_{i,t}\)</span> 的收益期望 <span class="math notranslate nohighlight">\(\bar{x}_i\)</span> ；</p></li>
+<li><p>重复第二步。</p></li>
+</ol>
 </section>
 </section>
 
