@@ -235,7 +235,7 @@ Deep 与 FM 这两个部分的输入是一样的，并没有像 Wide &amp; Deep 
 <p>提出了 Embedding Gate 和 MLP Hidden Gate，分别作用于 Embedding 层和 MLP 层。</p>
 </section>
 <section id="id11">
-<h3><a class="reference external" href="https://zhuanlan.zhihu.com/p/635364011">PEPNet</a><a class="headerlink" href="#id11" title="Permalink to this headline"></a></h3>
+<h3><a class="reference external" href="https://arxiv.org/pdf/2302.01115.pdf">PEPNet</a><a class="headerlink" href="#id11" title="Permalink to this headline"></a></h3>
 <a class="reference internal image-reference" href="../_images/04_pepNet.png"><img alt="../_images/04_pepNet.png" class="align-center" src="../_images/04_pepNet.png" style="width: 800px;" /></a>
 <p>PEPNet 借鉴了 <a class="reference external" href="https://arxiv.org/pdf/1601.02828.pdf">LHUC 算法</a> 的思想（Speaker Adaptation，在 DNN 网络中为每个 Speaker 学习 Hidden Unit Contributions，来提升不同 Speaker 的语音识别效果），
 提出了 Gate NU，通过 Gate NU 为神经网络层输入增加个性化偏置项，可以显著提升模型的目标预估能力。Gate NU 是一个两层神经网络，其中第二层网络的激活函数是 <span class="math notranslate nohighlight">\(2 \times \mathrm{sigmoid}\)</span> ，目的是约束其输出的值域为 [0, 2] ，并且默认值为 1。</p>

@@ -146,7 +146,7 @@ ETA 主要是解决长序列的建模问题，为了获得更好的实时性能�
 提出了 Embedding Gate 和 MLP Hidden Gate，分别作用于 Embedding 层和 MLP 层。
 
 
-`PEPNet <https://zhuanlan.zhihu.com/p/635364011>`_
+`PEPNet <https://arxiv.org/pdf/2302.01115.pdf>`_
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. image:: ./04_pepNet.png
