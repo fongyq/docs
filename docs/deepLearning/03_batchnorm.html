@@ -63,7 +63,7 @@
 <li class="toctree-l2"><a class="reference internal" href="02_activationFunction.html">6. 激活函数</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">7. Batch Normalization</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#id1">7.1. 加速训练</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#bn">7.2. BN消除</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bn">7.2. BN 消除</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id2">7.3. 训练与测试</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#id3">训练</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#id4">测试</a></li>
@@ -140,13 +140,13 @@ y^{(k)} &amp;=\ \gamma^{(k)} \hat{x}^{(k)} + \beta^{(k)}.\end{split}\]</div>
 <h2><span class="section-number">7.1. </span>加速训练<a class="headerlink" href="#id1" title="Permalink to this headline"></a></h2>
 <ul class="simple">
 <li><p><strong>增大学习率</strong> 。由于网络参数不断更新，导致各层输入的分布不断变化，导致往往需要使用较小的学习率，并精心设计参数初始化。使用 BN 进行归一化之后，各层输入的分布相同，因此可以使用更大的学习率更快地收敛，并降低网络对初始化的依赖。</p></li>
-<li><p><strong>移除 dropout</strong> 。进行 BN 之后，各样本的 Feature Map 已经融合了一个 batch 之中其他样本的特性（均值，方差），因此单一样本的影响变小，网络更好学习整体的规律，有效地减小了过拟合的可能性（ BN 提供了正则化的作用）。</p></li>
+<li><p><strong>移除 Dropout</strong> 。进行 BN 之后，各样本的 Feature Map 已经融合了一个 batch 之中其他样本的特性（均值，方差），因此单一样本的影响变小，网络更好学习整体的规律，有效地减小了过拟合的可能性（ BN 提供了正则化的作用）。</p></li>
 <li><p><strong>减小</strong> <span class="math notranslate nohighlight">\(L_2\)</span> <strong>正则化损失的权重</strong> 。</p></li>
 <li><p><strong>加速学习率衰减</strong> 。</p></li>
 </ul>
 </section>
 <section id="bn">
-<h2><span class="section-number">7.2. </span>BN消除<a class="headerlink" href="#bn" title="Permalink to this headline"></a></h2>
+<h2><span class="section-number">7.2. </span>BN 消除<a class="headerlink" href="#bn" title="Permalink to this headline"></a></h2>
 <p>如果在训练过程中，网络发现这种 Normalization 是多余的，可以通过学习使得：</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\gamma^{(k)} &amp;=\ \sqrt{Var[x^{{(k)}}]}, \\
