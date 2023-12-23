@@ -78,10 +78,10 @@
 <li class="toctree-l3"><a class="reference internal" href="#layer-normalization">13.5. Layer Normalization</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#cv">13.6. CV 领域的应用</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#id4">ViT</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id5">Swin</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5">Swin Transformer</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#id6">13.7. 参考资料</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">13.7. 参考资料</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="14_clip.html">14. 多模态 CLIP 模型</a></li>
@@ -157,9 +157,9 @@
 <a class="reference internal image-reference" href="../_images/13_attention.png"><img alt="../_images/13_attention.png" class="align-center" src="../_images/13_attention.png" style="width: 600px;" /></a>
 <p>在 Self-Attention 中，序列中的每个单词和该序列中其余单词进行 Attention 计算。Self-Attention 的特点在于无视 Token 之间的距离直接计算依赖关系，从而能够学习到序列的内部结构，实现起来也比较简单。引入 Self-Attention 后会更容易捕获句子中长距离的相互依赖的特征。</p>
 <div class="math notranslate nohighlight">
-\[\text{SelfAttention} = \text{softmax} \left( \frac{QK^T}{\sqrt{d}} \right)V\]</div>
+\[\mathrm{SelfAttention}(Q,K,V) = \mathrm{softmax} \left( \frac{QK^T}{\sqrt{d}} \right)V\]</div>
 <p>其中， <span class="math notranslate nohighlight">\(Q=XW_Q,\ K=XW_K,\ V=XW_V \in \mathbb{R}^{n \times d}\)</span> 。由于这 3 个矩阵都是由输入 <span class="math notranslate nohighlight">\(X\)</span> 得到，因此叫 Self-Attention。</p>
-<p>使用 <span class="math notranslate nohighlight">\(\mathbf{q}\)</span> 和 <span class="math notranslate nohighlight">\(\mathbf{k}\)</span> 两组向量来计算权重（而不是一组），增加了权重的自由度，权重有可能是非对偶的（即 <span class="math notranslate nohighlight">\(\mathbf{q}_i^{\top}\mathbf{k}_j \ne \mathbf{k}_i^{\top}\mathbf{q}_j\)</span> ），增强了模型的表达能力。</p>
+<p>使用 <span class="math notranslate nohighlight">\(\boldsymbol{q}\)</span> 和 <span class="math notranslate nohighlight">\(\boldsymbol{k}\)</span> 两组向量来计算权重（而不是一组），增加了权重的自由度，权重有可能是非对偶的（即 <span class="math notranslate nohighlight">\(\boldsymbol{q}_i^{\top}\boldsymbol{k}_j \ne \boldsymbol{k}_i^{\top}\boldsymbol{q}_j\)</span> ），增强了模型的表达能力。</p>
 <p>假设两个 <span class="math notranslate nohighlight">\(d\)</span> 维向量的每个分量都是一个相互独立的服从标准正态分布的随机变量，那么他们的点乘方差就是 <span class="math notranslate nohighlight">\(d\)</span> ，对每一个分量除以 <span class="math notranslate nohighlight">\(\sqrt{d}\)</span> 可以让点乘的方差归一化成 1。</p>
 <a class="reference internal image-reference" href="../_images/13_example.png"><img alt="../_images/13_example.png" class="align-center" src="../_images/13_example.png" style="width: 600px;" /></a>
 <p>Multi-Head Attention 相当于 <span class="math notranslate nohighlight">\(h\)</span> 个不同的 Self-Attention 的集成。将模型分为多个头，形成多个子空间，可以让模型去关注不同方面的信息，最后再将各个方面的信息综合起来。类比 CNN 中同时使用多个卷积核的作用，多头的注意力有助于网络捕捉到更丰富的特征/信息。</p>
@@ -174,7 +174,11 @@ Self-Attention 三个步骤的复杂度：</p>
 </ul>
 <p>因此总的时间复杂度是 <span class="math notranslate nohighlight">\(\mathcal{O}(n^2 d)\)</span> 。</p>
 <p>Multi-Head Attention 的实现不是循环地计算每个头，而是通过 Transposes and Reshapes，把一个大矩阵相乘变成了多个小矩阵的相乘。
-Multi-Head Attention时间复杂度也是 <span class="math notranslate nohighlight">\(\mathcal{O}(n^2 d)\)</span> （每个头的对应的 <span class="math notranslate nohighlight">\(\mathbf{q},\mathbf{k},\mathbf{v}\)</span> 向量维度为 <span class="math notranslate nohighlight">\(\frac{d}{h}\)</span> ）。</p>
+Multi-Head Attention时间复杂度也是 <span class="math notranslate nohighlight">\(\mathcal{O}(n^2 d)\)</span> （每个头的对应的 <span class="math notranslate nohighlight">\(\boldsymbol{q},\boldsymbol{k},\boldsymbol{v}\)</span> 向量维度为 <span class="math notranslate nohighlight">\(\frac{d}{h}\)</span> ）。</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>如果考虑从 <span class="math notranslate nohighlight">\(X\)</span> 到 <span class="math notranslate nohighlight">\(Q,K,V\)</span> 的线性映射，时间复杂度还需要加上 <span class="math notranslate nohighlight">\(\mathcal{O}(n d^2)\)</span> 。</p>
+</div>
 </section>
 </section>
 <section id="layer-normalization">
@@ -220,11 +224,55 @@ CNN 具有两种归纳偏置：</p>
 </section>
 </section>
 <section id="id5">
-<h3><a class="reference external" href="https://arxiv.org/pdf/2103.14030.pdf">Swin</a><a class="headerlink" href="#id5" title="Permalink to this headline"></a></h3>
-</section>
-</section>
+<h3><a class="reference external" href="https://arxiv.org/pdf/2103.14030.pdf">Swin Transformer</a><a class="headerlink" href="#id5" title="Permalink to this headline"></a></h3>
+<a class="reference internal image-reference" href="../_images/13_swin1.png"><img alt="../_images/13_swin1.png" class="align-center" src="../_images/13_swin1.png" style="width: 400px;" /></a>
+<p>Swin Transformer 主要有两个创新：</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>使用了层级式多分辨率的 Patch（Hierarchical Feature Maps）。</dt><dd><p>先是进行 4 倍下采样，然后是 8 倍，接着是 16 倍，一直下采样直到达到预期的下采样倍数。相比之下，ViT 只使用了 16 倍的下采样。
+这样利于支持更多的图像下游任务，而不仅仅是分类。</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>窗口式的 Self-Attention（W-MSA，SW-MSA）。</dt><dd><p>将 Feature Map 划分成一个个的小窗口，将这些小窗口送入到 Swin Transformer Block 中，减少了计算量。</p>
+</dd>
+</dl>
+</li>
+</ul>
 <section id="id6">
-<h2><span class="section-number">13.7. </span>参考资料<a class="headerlink" href="#id6" title="Permalink to this headline"></a></h2>
+<h4>模型框架<a class="headerlink" href="#id6" title="Permalink to this headline"></a></h4>
+<a class="reference internal image-reference" href="../_images/13_swin2.png"><img alt="../_images/13_swin2.png" class="align-center" src="../_images/13_swin2.png" style="width: 800px;" /></a>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Transformer 的输入输出都是二维的矩阵，比如图中的 <span class="math notranslate nohighlight">\(\frac{H}{4} \times \frac{W}{4} \times C\)</span> 其实是 <span class="math notranslate nohighlight">\(\frac{HW}{16}\times C\)</span> 。</p>
+</div>
+<section id="patch-partition-linear-embedding">
+<h5>Patch partition + Linear Embedding<a class="headerlink" href="#patch-partition-linear-embedding" title="Permalink to this headline"></a></h5>
+<p>同 ViT。</p>
+</section>
+<section id="patch-merging">
+<h5>Patch Merging<a class="headerlink" href="#patch-merging" title="Permalink to this headline"></a></h5>
+<p>实现 Feature Map 分辨率减半，通道数翻倍。</p>
+</section>
+<section id="swin-transformer-block">
+<h5>Swin Transformer Block<a class="headerlink" href="#swin-transformer-block" title="Permalink to this headline"></a></h5>
+<p>W-MSA（Windows Multi-Head Attention）和 SW-MSA（Shifted Windows Multi-Head Attention）代替了原生版本的 Multi-Head Attention。</p>
+<p>W-MSA 将 Feature Map 分成一个个 Windows，然后对每个 Windows 执行 Multi-Head Attention 操作，减少了计算量。</p>
+<p>W-MSA 的各个 Windows 之间相互独立、缺乏交互，SW-MSA 会重新划分窗口，使得之前各个 Windows 的数据可以进一步融合、传递（需要 Mask 掉原本不相邻的数据块）。</p>
+<a class="reference internal image-reference" href="../_images/13_swin3.png"><img alt="../_images/13_swin3.png" class="align-center" src="../_images/13_swin3.png" style="width: 500px;" /></a>
+</section>
+<section id="relative-position-bias">
+<h5>Relative Position Bias<a class="headerlink" href="#relative-position-bias" title="Permalink to this headline"></a></h5>
+<p>相对位置偏置 <span class="math notranslate nohighlight">\(B\)</span> 融合进 Attention 的公式中：</p>
+<div class="math notranslate nohighlight">
+\[\mathrm{Attention}(Q,K,V) = \mathrm{softmax} \left( \frac{QK^T}{\sqrt{d}} + B \right)V\]</div>
+</section>
+</section>
+</section>
+</section>
+<section id="id7">
+<h2><span class="section-number">13.7. </span>参考资料<a class="headerlink" href="#id7" title="Permalink to this headline"></a></h2>
 <ol class="arabic simple">
 <li><p>Transformer</p></li>
 </ol>
@@ -255,6 +303,12 @@ CNN 具有两种归纳偏置：</p>
 </ol>
 <blockquote>
 <div><p><a class="reference external" href="https://zhuanlan.zhihu.com/p/445122996">https://zhuanlan.zhihu.com/p/445122996</a></p>
+</div></blockquote>
+<ol class="arabic simple" start="6">
+<li><p>Swin Transformer原理详解篇</p></li>
+</ol>
+<blockquote>
+<div><p><a class="reference external" href="https://juejin.cn/post/7157873015055712293">https://juejin.cn/post/7157873015055712293</a></p>
 </div></blockquote>
 </section>
 </section>

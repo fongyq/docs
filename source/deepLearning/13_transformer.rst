@@ -48,11 +48,11 @@ Self-Attention
 
 .. math::
 
-    \text{SelfAttention} = \text{softmax} \left( \frac{QK^T}{\sqrt{d}} \right)V
+    \mathrm{SelfAttention}(Q,K,V) = \mathrm{softmax} \left( \frac{QK^T}{\sqrt{d}} \right)V
 
 其中， :math:`Q=XW_Q,\ K=XW_K,\ V=XW_V \in \mathbb{R}^{n \times d}` 。由于这 3 个矩阵都是由输入 :math:`X` 得到，因此叫 Self-Attention。
 
-使用 :math:`\mathbf{q}` 和 :math:`\mathbf{k}` 两组向量来计算权重（而不是一组），增加了权重的自由度，权重有可能是非对偶的（即 :math:`\mathbf{q}_i^{\top}\mathbf{k}_j \ne \mathbf{k}_i^{\top}\mathbf{q}_j` ），增强了模型的表达能力。
+使用 :math:`\boldsymbol{q}` 和 :math:`\boldsymbol{k}` 两组向量来计算权重（而不是一组），增加了权重的自由度，权重有可能是非对偶的（即 :math:`\boldsymbol{q}_i^{\top}\boldsymbol{k}_j \ne \boldsymbol{k}_i^{\top}\boldsymbol{q}_j` ），增强了模型的表达能力。
 
 假设两个 :math:`d` 维向量的每个分量都是一个相互独立的服从标准正态分布的随机变量，那么他们的点乘方差就是 :math:`d` ，对每一个分量除以 :math:`\sqrt{d}` 可以让点乘的方差归一化成 1。
 
@@ -76,7 +76,12 @@ Self-Attention 三个步骤的复杂度：
 因此总的时间复杂度是 :math:`\mathcal{O}(n^2 d)` 。
 
 Multi-Head Attention 的实现不是循环地计算每个头，而是通过 Transposes and Reshapes，把一个大矩阵相乘变成了多个小矩阵的相乘。
-Multi-Head Attention时间复杂度也是 :math:`\mathcal{O}(n^2 d)` （每个头的对应的 :math:`\mathbf{q},\mathbf{k},\mathbf{v}` 向量维度为 :math:`\frac{d}{h}` ）。
+Multi-Head Attention时间复杂度也是 :math:`\mathcal{O}(n^2 d)` （每个头的对应的 :math:`\boldsymbol{q},\boldsymbol{k},\boldsymbol{v}` 向量维度为 :math:`\frac{d}{h}` ）。
+
+
+.. note::
+
+    如果考虑从 :math:`X` 到 :math:`Q,K,V` 的线性映射，时间复杂度还需要加上 :math:`\mathcal{O}(n d^2)` 。
 
 Layer Normalization
 ---------------------------
@@ -141,10 +146,66 @@ CNN + Transformer 混合模型
 :math:`224 \times 224 \times 3` 的图像经过卷积层得到 :math:`14 \times 14 \times 768` 的 Feature Map，拉成一个  :math:`196 \times 768` 的二维 Tensor，后续操作和 ViT 相同。
 
 
-`Swin <https://arxiv.org/pdf/2103.14030.pdf>`_
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+`Swin Transformer <https://arxiv.org/pdf/2103.14030.pdf>`_
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. image:: ./13_swin1.png
+    :width: 400 px
+    :align: center
+
+Swin Transformer 主要有两个创新：
+
+- 使用了层级式多分辨率的 Patch（Hierarchical Feature Maps）。
+    先是进行 4 倍下采样，然后是 8 倍，接着是 16 倍，一直下采样直到达到预期的下采样倍数。相比之下，ViT 只使用了 16 倍的下采样。
+    这样利于支持更多的图像下游任务，而不仅仅是分类。
+
+- 窗口式的 Self-Attention（W-MSA，SW-MSA）。
+    将 Feature Map 划分成一个个的小窗口，将这些小窗口送入到 Swin Transformer Block 中，减少了计算量。
 
 
+模型框架
+++++++++++++++++++
+
+.. image:: ./13_swin2.png
+    :width: 800 px
+    :align: center
+
+.. note::
+
+    Transformer 的输入输出都是二维的矩阵，比如图中的 :math:`\frac{H}{4} \times \frac{W}{4} \times C` 其实是 :math:`\frac{HW}{16}\times C` 。
+
+Patch partition + Linear Embedding
+""""""""""""""""""""""""""""""""""""""""
+
+同 ViT。
+
+Patch Merging
+""""""""""""""""""""""""""""""""""""""""
+
+实现 Feature Map 分辨率减半，通道数翻倍。
+
+
+Swin Transformer Block
+""""""""""""""""""""""""""""""""
+
+W-MSA（Windows Multi-Head Attention）和 SW-MSA（Shifted Windows Multi-Head Attention）代替了原生版本的 Multi-Head Attention。
+
+W-MSA 将 Feature Map 分成一个个 Windows，然后对每个 Windows 执行 Multi-Head Attention 操作，减少了计算量。
+
+W-MSA 的各个 Windows 之间相互独立、缺乏交互，SW-MSA 会重新划分窗口，使得之前各个 Windows 的数据可以进一步融合、传递（需要 Mask 掉原本不相邻的数据块）。
+
+.. image:: ./13_swin3.png
+    :width: 500 px
+    :align: center
+
+Relative Position Bias
+""""""""""""""""""""""""""""""""
+
+相对位置偏置 :math:`B` 融合进 Attention 的公式中：
+
+.. math::
+
+    \mathrm{Attention}(Q,K,V) = \mathrm{softmax} \left( \frac{QK^T}{\sqrt{d}} + B \right)V
 
 
 参考资料
@@ -172,3 +233,7 @@ CNN + Transformer 混合模型
 5. ViT（Vision Transformer）解析
 
   https://zhuanlan.zhihu.com/p/445122996
+
+6. Swin Transformer原理详解篇
+
+  https://juejin.cn/post/7157873015055712293

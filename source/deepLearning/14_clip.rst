@@ -38,12 +38,12 @@ Loss 分成两部分，考虑了“图片->文字”和“文字->图片”的�
 .. math::
 
     \mathcal{L} & = \frac{1}{2} (\mathcal{L}_I + \mathcal{L}_T) \\
-    \mathcal{L}_I & = -\frac{1}{N}\sum_{i=1}^{N}\log\frac{s(\mathbf{v}_i, \mathbf{t}_i) e^{\tau}}{\sum_{j=1}^{N} s(\mathbf{v}_i, \mathbf{t}_j) e^{\tau}} \\
-    \mathcal{L}_T & = -\frac{1}{N}\sum_{i=1}^{N}\log\frac{s(\mathbf{t}_i, \mathbf{v}_i) e^{\tau}}{\sum_{j=1}^{N} s(\mathbf{t}_i, \mathbf{v}_j) e^{\tau}}
+    \mathcal{L}_I & = -\frac{1}{N}\sum_{i=1}^{N}\log\frac{s(\boldsymbol{v}_i, \boldsymbol{t}_i) e^{\tau}}{\sum_{j=1}^{N} s(\boldsymbol{v}_i, \boldsymbol{t}_j) e^{\tau}} \\
+    \mathcal{L}_T & = -\frac{1}{N}\sum_{i=1}^{N}\log\frac{s(\boldsymbol{t}_i, \boldsymbol{v}_i) e^{\tau}}{\sum_{j=1}^{N} s(\boldsymbol{t}_i, \boldsymbol{v}_j) e^{\tau}}
 
 温度系数 :math:`\tau` 对 Logits 进行了平滑，控制了模型对负样本的区分度。
 
-表征向量 :math:`\mathbf{v}` 和 :math:`\mathbf{t}` 都经过 L2 归一化，约束在一个超球面上，有利于训练的稳定和泛化性能。
+表征向量 :math:`\boldsymbol{v}` 和 :math:`\boldsymbol{t}` 都经过 L2 归一化，约束在一个超球面上，有利于训练的稳定和泛化性能。
 
 
 Zero-Shot 预测
@@ -71,3 +71,7 @@ CLIP 不用做任何微调，也能实现 Zero-Shot 的图片分类。同时，�
 2. CLIP：多模态领域革命者
 
   https://zhuanlan.zhihu.com/p/555314976
+
+3. GPT: Improving Language Understanding by Generative Pre-Training
+
+  https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf

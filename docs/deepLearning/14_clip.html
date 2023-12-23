@@ -140,10 +140,10 @@
 </ul>
 <div class="math notranslate nohighlight">
 \[\begin{split}\mathcal{L} &amp; = \frac{1}{2} (\mathcal{L}_I + \mathcal{L}_T) \\
-\mathcal{L}_I &amp; = -\frac{1}{N}\sum_{i=1}^{N}\log\frac{s(\mathbf{v}_i, \mathbf{t}_i) e^{\tau}}{\sum_{j=1}^{N} s(\mathbf{v}_i, \mathbf{t}_j) e^{\tau}} \\
-\mathcal{L}_T &amp; = -\frac{1}{N}\sum_{i=1}^{N}\log\frac{s(\mathbf{t}_i, \mathbf{v}_i) e^{\tau}}{\sum_{j=1}^{N} s(\mathbf{t}_i, \mathbf{v}_j) e^{\tau}}\end{split}\]</div>
+\mathcal{L}_I &amp; = -\frac{1}{N}\sum_{i=1}^{N}\log\frac{s(\boldsymbol{v}_i, \boldsymbol{t}_i) e^{\tau}}{\sum_{j=1}^{N} s(\boldsymbol{v}_i, \boldsymbol{t}_j) e^{\tau}} \\
+\mathcal{L}_T &amp; = -\frac{1}{N}\sum_{i=1}^{N}\log\frac{s(\boldsymbol{t}_i, \boldsymbol{v}_i) e^{\tau}}{\sum_{j=1}^{N} s(\boldsymbol{t}_i, \boldsymbol{v}_j) e^{\tau}}\end{split}\]</div>
 <p>温度系数 <span class="math notranslate nohighlight">\(\tau\)</span> 对 Logits 进行了平滑，控制了模型对负样本的区分度。</p>
-<p>表征向量 <span class="math notranslate nohighlight">\(\mathbf{v}\)</span> 和 <span class="math notranslate nohighlight">\(\mathbf{t}\)</span> 都经过 L2 归一化，约束在一个超球面上，有利于训练的稳定和泛化性能。</p>
+<p>表征向量 <span class="math notranslate nohighlight">\(\boldsymbol{v}\)</span> 和 <span class="math notranslate nohighlight">\(\boldsymbol{t}\)</span> 都经过 L2 归一化，约束在一个超球面上，有利于训练的稳定和泛化性能。</p>
 </section>
 <section id="zero-shot">
 <h2><span class="section-number">14.3. </span>Zero-Shot 预测<a class="headerlink" href="#zero-shot" title="Permalink to this headline"></a></h2>
@@ -173,6 +173,12 @@
 </ol>
 <blockquote>
 <div><p><a class="reference external" href="https://zhuanlan.zhihu.com/p/555314976">https://zhuanlan.zhihu.com/p/555314976</a></p>
+</div></blockquote>
+<ol class="arabic simple" start="3">
+<li><p>GPT: Improving Language Understanding by Generative Pre-Training</p></li>
+</ol>
+<blockquote>
+<div><p><a class="reference external" href="https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf">https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf</a></p>
 </div></blockquote>
 </section>
 </section>
