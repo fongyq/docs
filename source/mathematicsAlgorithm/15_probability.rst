@@ -91,7 +91,7 @@
 
 .. math::
 
-    \int_{-\infty} ^{median} f(x) dx \geqslant \frac{1}{2} \ and \ \int_{median} ^{+\infty} f(x) dx \geqslant \frac{1}{2}.
+    \int_{-\infty} ^{median} f(x) dx \geqslant \frac{1}{2} \ \mathrm{and} \ \int_{median} ^{+\infty} f(x) dx \geqslant \frac{1}{2}.
 
 众数：
 
