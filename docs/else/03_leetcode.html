@@ -1461,7 +1461,7 @@ Hint：走 <span class="math notranslate nohighlight">\(n\)</span> 步之后能�
 <section id="leetcode-subarray-sum-equals-k-k">
 <h2><span class="section-number">4.16. </span>[LeetCode] Subarray Sum Equals K 子数组和为 <span class="math notranslate nohighlight">\(K\)</span><a class="headerlink" href="#leetcode-subarray-sum-equals-k-k" title="Permalink to this headline"></a></h2>
 <p>Hint：依次求数组的前 <span class="math notranslate nohighlight">\(n\)</span> 项和 <span class="math notranslate nohighlight">\(s[n]\)</span> ，<span class="math notranslate nohighlight">\(n \in [0, N]\)</span> （注意：0 也在内），
-将和作为哈希表的 key，和的值出现次数作为 value；如果存在 <span class="math notranslate nohighlight">\(s[i]−s[j]=K \ (i \ge j)\)</span> ，则 <span class="math notranslate nohighlight">\(s[i]\)</span> 和 <span class="math notranslate nohighlight">\(s[j]\)</span> 都应该在哈希表中。</p>
+将和作为哈希表的 key，和的值出现次数作为 value；如果存在 <span class="math notranslate nohighlight">\(s[i]−s[j]=K \ (i \gt j)\)</span> ，则 <span class="math notranslate nohighlight">\(s[i]\)</span> 和 <span class="math notranslate nohighlight">\(s[j]\)</span> 都应该在哈希表中。</p>
 <p><a class="reference external" href="https://leetcode.com/problems/subarray-sum-equals-k/">https://leetcode.com/problems/subarray-sum-equals-k/</a></p>
 <blockquote>
 <div><div class="toggle docutils container">

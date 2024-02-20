@@ -1442,7 +1442,7 @@ Hint：移位操作；负数可能造成死循环。
 -------------------------------------------------------------------------------
 
 Hint：依次求数组的前 :math:`n` 项和 :math:`s[n]` ，:math:`n \in [0, N]` （注意：0 也在内），
-将和作为哈希表的 key，和的值出现次数作为 value；如果存在 :math:`s[i]−s[j]=K \ (i \ge j)` ，则 :math:`s[i]` 和 :math:`s[j]` 都应该在哈希表中。
+将和作为哈希表的 key，和的值出现次数作为 value；如果存在 :math:`s[i]−s[j]=K \ (i \gt j)` ，则 :math:`s[i]` 和 :math:`s[j]` 都应该在哈希表中。
 
 https://leetcode.com/problems/subarray-sum-equals-k/
 
