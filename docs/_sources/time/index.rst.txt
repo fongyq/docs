@@ -100,7 +100,7 @@
             /*时钟中心点*/
             .clockcenter{ width: 3%; height: 3%; border-radius: 40%; background: #33373f; top:48.8%; left: 48.8%; position: absolute;}
             /*时钟数字*/
-            .num{ width: 10%; height: 10%; line-height: 1.6em;text-align: center; font-size: 1.8em; position: absolute;}
+            .num{ width: 10%; height: 10%; line-height: 1.6em;text-align: center; font-size: 1.5em; position: absolute;}
             /*时钟刻度*/
             .clockscale{width:50%;height:1px;transform-origin:0%;z-index:7;position:absolute;top:50%;left:50%;}
             .hiddenscale{width:91.5%;height:1px;float:left;} 
