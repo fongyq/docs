@@ -247,14 +247,13 @@
         function updateTime(){
             var my_date = new Date();
             var hour = my_date.getHours(), minute = my_date.getMinutes(), second = my_date.getSeconds();
-            // console.log("hour:"+hour); console.log("minute:"+minute); console.log("second:"+second);
             var hour_rotate = (hour * 30 - 90) + (Math.floor(minute / 12) * 6);
             hourhand.style.transform = "rotate(" + hour_rotate + "deg)";
             minutehand.style.transform = "rotate(" + (minute * 6 - 90) + "deg)";
             secondhand.style.transform = "rotate(" + (second * 6 - 90) + "deg)";
-            setTimeout(updateTime, 1000);
+            setTimeout(updateTime, 123);
         }
-        setTimeout(updateTime, 1000);
+        setTimeout(updateTime, 123);
     </script>
 </body>
 </html></section>
