@@ -121,6 +121,9 @@
             function getDistance(startTime, endTime) {
                 startTime = new Date(startTime).getTime();
                 endTime = new Date(endTime).getTime();
+                if (startTime < endTime) {
+                    startTime = Math.floor(startTime / 1000) * 1000; // 秒取整
+                }
                 var distance = endTime - startTime;
                 var sign = distance > 0? "还有":"已过";
                 distance = Math.abs(distance);
@@ -172,7 +175,7 @@
                 format(arr[3], "minutes", flag);
                 format(arr[4], "seconds", flag);
             }
-            setInterval(countdown, 1000);
+            setInterval(countdown, 100);
             function setStartTime(e) {
                 var startTime = e.target.value;
                 countdown();
