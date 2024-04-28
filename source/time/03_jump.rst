@@ -91,7 +91,7 @@
                 var idx2 = (lunarDate.year - 4) % 12;
                 document.getElementById("lunar-year").innerHTML = tiangan[idx1] + dizhi[idx2] + shengxiao[idx2] + "年";
             }
-            window.on("load", displayTime);
+            window.addEventListener("load", displayTime);
         </script>
         <style>
             canvas {
