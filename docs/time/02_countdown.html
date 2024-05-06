@@ -158,10 +158,10 @@
                     document.getElementById("startTimeFlag").innerHTML = "<br>";
                 }
                 if (endTime.length == 0) {
-                    var now = new Date();
-                    var wuyi = now.getFullYear() + "-05-01 00:00:00";
-                    var shiyi = now.getFullYear() + "-10-01 00:00:00";
-                    var nextYear = (now.getFullYear() + 1) + "-01-01 00:00:00";
+                    var t = new Date(startTime);
+                    var wuyi = t.getFullYear() + "-05-01 00:00:00";
+                    var shiyi = t.getFullYear() + "-10-01 00:00:00";
+                    var nextYear = (t.getFullYear() + 1) + "-01-01 00:00:00";
                     var endTime;
                     if (startTime <= wuyi) {
                         endTime = wuyi;
