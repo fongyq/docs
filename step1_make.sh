@@ -12,4 +12,5 @@ mv build/doctrees .
 mv build/html docs
 rm -r build
 cp custom.css docs/_static
+cp override_theme.css docs/_static
 cd ../
