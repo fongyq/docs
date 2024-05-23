@@ -1,7 +1,7 @@
 #!/opt/homebrew/bin/bash
 cd /Users/fong/Documents/github_repo/fongyq
-mv blog/docs blog/build
-cd blog
+mv docs/docs docs/build
+cd docs
 if [ "$1" = 'clean' ]
 then
     make clean
