@@ -133,7 +133,7 @@
     <title>User Info</title>
     <style>
       .info {
-        margin-left: 10%;
+        margin: 0 10%;
         overflow-wrap: break-word;
       }
       .key {
@@ -160,7 +160,6 @@
         <p><span class="key">  TimeZone: </span><span id="userTimezone" class="value"></span></p>
         <p><span class="key">  Platform: </span><span id="userPlatform" class="value"></span></p>
         <p><span class="key">    Screen: </span><span id="userScreen" class="value"></span></p>
-        <p><span class="key">    Vendor: </span><span id="vendor" class="value"></span></p>
         <p><span class="key"> UserAgent: </span><span id="userAgent" class="value"></span></p>
     </div>
 
@@ -185,7 +184,6 @@
         .catch(error => console.error('Error fetching IP address:', error));
         document.getElementById('userPlatform').innerText = navigator.userAgentData.platform;
         document.getElementById('userScreen').innerText = window.screen.width + " x " + window.screen.height + " x " + window.screen.colorDepth;
-        document.getElementById('vendor').innerText = navigator.vendor;
         document.getElementById('userAgent').innerText = navigator.userAgent;
 
         function detectOS() {
