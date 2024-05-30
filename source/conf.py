@@ -134,7 +134,7 @@ html_search_language = "en"
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 html_css_files = [
-    'custom.css',
+    'css/custom.css',
 ]
 html_js_files = [
     'js/chinese-lunar.js',
