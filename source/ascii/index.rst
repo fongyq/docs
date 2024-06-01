@@ -32,7 +32,7 @@ ASCII 码
     6                    006                    06                    00000110                    :f:`ACK`                    &#06;                                         Acknowledge
     7                    007                    07                    00000111                    :f:`BEL`                    &#07;                                         Bell, Alert, \\a
     8                    010                    08                    00001000                    :f:`BS`                    &#08;                                         Backspace, \\b
-    9                    011                    09                    00001001                    :f:`HT`                    &#09;                                         Horizontal Tab, \\t
+    9                    011                    09                    00001001                    :f:`HT`                    &#09;                                         Horizontal Tabulation, \\t
     10                    012                    0A                    00001010                    :f:`LF`                    &#10;                                         Line Feed, \\n
     11                    013                    0B                    00001011                    :f:`VT`                    &#11;                                         Vertical Tabulation, \\v
     12                    014                    0C                    00001100                    :f:`FF`                    &#12;                                         Form Feed, \\f
@@ -71,19 +71,19 @@ ASCII 码
     ============= ==================== ===================== ========================= =========================== ========================== ======================= ===============================================================================================================
     32                    040                    20                    00100000                    :f:`SP`                   &#32;                                         Space
     33                    041                    21                    00100001                    :f:`!`                    &#33;                    &excl;                    Exclamation mark
-    34                    042                    22                    00100010                    :f:`"`                    &#34;                    &quot;                    Double quotes, Speech marks
+    34                    042                    22                    00100010                    :f:`"`                    &\#34;                    &quot;                    Double quotes, Speech marks
     35                    043                    23                    00100011                    :f:`#`                    &#35;                    &num;                    Number sign
     36                    044                    24                    00100100                    :f:`$`                    &#36;                    &dollar;                    Dollar
     37                    045                    25                    00100101                    :f:`%`                    &#37;                    &percnt;                    Percent sign
     38                    046                    26                    00100110                    :f:`&`                    &#38;                    &amp;                    Ampersand
-    39                    047                    27                    00100111                    :f:`'`                    &#39;                    &apos;                    Single quote
+    39                    047                    27                    00100111                    :f:`'`                    &\#39;                    &apos;                    Single quote
     40                    050                    28                    00101000                    :f:`(`                    &#40;                    &lparen;                    Open parenthesis, Open bracket
     41                    051                    29                    00101001                    :f:`)`                    &#41;                    &rparen;                    Close parenthesis, Close bracket
     42                    052                    2A                    00101010                    :f:`*`                    &#42;                    &ast;                    Asterisk
     43                    053                    2B                    00101011                    :f:`+`                    &#43;                    &plus;                    Plus
     44                    054                    2C                    00101100                    :f:`,`                    &#44;                    &comma;                    Comma
-    45                    055                    2D                    00101101                    :f:`-`                    &#45;                                         Hyphen, Minus
-    46                    056                    2E                    00101110                    :f:`.`                    &#46;                    &period;                    Period, Dot, Full stop
+    45                    055                    2D                    00101101                    :f:`-`                    &\#45;                                         Hyphen, Minus
+    46                    056                    2E                    00101110                    :f:`.`                    &\#46;                    &period;                    Period, Dot, Full stop
     47                    057                    2F                    00101111                    :f:`/`                    &#47;                    &sol;                    Slash, Divide
     48                    060                    30                    00110000                    :f:`0`                    &#48;                                         Zero
     49                    061                    31                    00110001                    :f:`1`                    &#49;                                         One
@@ -129,11 +129,11 @@ ASCII 码
     89                    131                    59                    01011001                    :f:`Y`                    &#89;                                         Uppercase Y
     90                    132                    5A                    01011010                    :f:`Z`                    &#90;                                         Uppercase Z
     91                    133                    5B                    01011011                    :f:`[`                    &#91;                    &lsqb;                    Opening bracket
-    92                    134                    5C                    01011100                    :f:`\\`                    &#92;                    &bsol;                    Backslash
+    92                    134                    5C                    01011100                    :f:`\\`                    &\#92;                    &bsol;                    Backslash
     93                    135                    5D                    01011101                    :f:`]`                    &#93;                    &rsqb;                    Closing bracket
     94                    136                    5E                    01011110                    :f:`^`                    &#94;                    &Hat;                    Caret, Circumflex
     95                    137                    5F                    01011111                    :f:`_`                    &#95;                    &lowbar;                    Underscore
-    96                    140                    60                    01100000                    :f:`\``                    &#96;                    &grave;                    Grave accent
+    96                    140                    60                    01100000                    :f:`\``                    &\#96;                    &grave;                    Grave accent
     97                    141                    61                    01100001                    :f:`a`                    &#97;                                         Lowercase a
     98                    142                    62                    01100010                    :f:`b`                    &#98;                                         Lowercase b
     99                    143                    63                    01100011                    :f:`c`                    &#99;                                         Lowercase c
