@@ -77,12 +77,13 @@ Shell 中使用 ``cat -vET file`` 可以打印出一些 Caret Notation 格式的
 
 网页中显示的效果如下（默认 tab-size 为 8）：
 
-.. code-block:: html
-  :linenos:
+.. raw:: html
 
-          This line begins with a single tab.
-  Here    are     some    more    tab     characters      !
+  <pre>
+  &#9;This line begins with a single tab.
+  Here&#9;are&#9;some&#9;more&#9;tab&#9;characters&#9;!
   T.......T.......T.......T.......T.......T.......T.......T
+  </pre>
 
 
 满足：
