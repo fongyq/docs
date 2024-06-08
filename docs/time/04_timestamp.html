@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>3. 日期跳转 &mdash; fong alpha documentation</title>
+  <title>4. 时间戳 &mdash; fong alpha documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
@@ -22,8 +22,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="4. 时间戳" href="04_timestamp.html" />
-    <link rel="prev" title="2. 倒计时" href="02_countdown.html" /> 
+    <link rel="next" title="快速访问" href="../link/index.html" />
+    <link rel="prev" title="3. 日期跳转" href="03_jump.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -50,8 +50,8 @@
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">现在时刻</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="01_timer.html">1. 计时器</a></li>
 <li class="toctree-l2"><a class="reference internal" href="02_countdown.html">2. 倒计时</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">3. 日期跳转</a></li>
-<li class="toctree-l2"><a class="reference internal" href="04_timestamp.html">4. 时间戳</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_jump.html">3. 日期跳转</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">4. 时间戳</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../link/index.html">快速访问</a></li>
@@ -87,9 +87,9 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
           <li><a href="index.html">现在时刻</a> &raquo;</li>
-      <li><span class="section-number">3. </span>日期跳转</li>
+      <li><span class="section-number">4. </span>时间戳</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/time/03_jump.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/time/04_timestamp.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -98,97 +98,51 @@
            <div itemprop="articleBody">
              
   <section id="id1">
-<h1><span class="section-number">3. </span>日期跳转<a class="headerlink" href="#id1" title="Permalink to this headline"></a></h1>
+<h1><span class="section-number">4. </span>时间戳<a class="headerlink" href="#id1" title="Permalink to this headline"></a></h1>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TIME</title>
-    <!-- <script src="https://cdn.jsdelivr.net/npm/chinese-lunar"></script> -->
+    <title>TimeStamp</title>
     <script>
-        function setJumpTime(e) {
-            var jumpTime = e.target.value;
-            displayTime();
+        // https://www.epochconverter.com/
+        function cleanTimestamp(e) {
+            return e ? ("L" == (e = e.replace(/[`'"\s\,]+/g, "")).charAt(e.length - 1) && (e = e.slice(0, -1)),
+            e) : ""
         }
-        function parseTime(targetTime) {
-            var timestamp = Math.floor(targetTime.getTime() / 1000);
-            var year = targetTime.getFullYear();
-            var month = targetTime.getMonth() + 1;
-            var day = targetTime.getDate();
-            var hours = targetTime.getHours();
-            var minutes = targetTime.getMinutes();
-            var seconds = targetTime.getSeconds();
-            var days = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
-            var dayOfWeek = days[targetTime.getDay()];
 
-            month = (month < 10 ? "0" : "") + month;
-            day = (day < 10 ? "0" : "") + day;
-            hours = (hours < 10 ? "0" : "") + hours;
-            minutes = (minutes < 10 ? "0" : "") + minutes;
-            seconds = (seconds < 10 ? "0" : "") + seconds;
-
-            var timeString = year + "-" + month + "-" + day;
-            timeString = timeString + " " + hours + ":" + minutes + ":" + seconds;
-
-            return [year, month, day, hours, minutes, seconds, dayOfWeek, timestamp, timeString]
+        function epochConverter(e) {
+            var hint = document.getElementById("hint");
+            if (typeof e != 'number') {
+                e = cleanTimestamp(e);
+                e = parseInt(e);
+            }
+            if (e >= 1e16 || e <= -1e16) {
+                hint.innerText = "单位：纳秒";
+                e = Math.floor(e / 1e6);
+            } else if (e >= 1e14 || e <= -1e14) {
+                hint.innerText = "单位：微秒";
+                e = Math.floor(e / 1e3);
+            } else if (e >= 1e11 || e <= -3e10) {
+                hint.innerText = "单位：毫秒";
+            } else {
+                hint.innerText = "单位：秒";
+                e *= 1e3;
+            }
+            return new Date(e);
         }
         function displayTime() {
-            var jumpTime = document.getElementById("jump-time").value;
+            var epoch = document.getElementById("timestamp").value;
             var targetTime;
-            if (jumpTime.length == 0) {
-                targetTime = new Date("1970-01-01 08:00:00");
+            if (epoch.length == 0) {
+                targetTime = epochConverter(0);
             } else {
-                if (!jumpTime.includes(" ")) {
-                    jumpTime += " 00:00:00";
-                }
-                targetTime = new Date(jumpTime);
+                targetTime = epochConverter(epoch);
             }
-            var parsedTime = parseTime(targetTime);
-            year = parsedTime[0];
-            month = parsedTime[1];
-            day = parsedTime[2];
-            hours = parsedTime[3];
-            minutes = parsedTime[4];
-            seconds = parsedTime[5];
-            dayOfWeek = parsedTime[6];
-            timestamp = parsedTime[7];
-            timeString = parsedTime[8];
-            if (jumpTime.length == 0) {
-                document.getElementById("jump-time").placeholder = "1970-01-01 08:00:00";
-            }
-            document.getElementById("target-week").innerHTML = dayOfWeek;
-            document.getElementById("target-ts").innerHTML = timestamp.toString();
-
-            var timeZoneOffset = targetTime.getTimezoneOffset();
-            var timeZoneOffsetSign = timeZoneOffset > 0 ? "-" : "+";
-            timeZoneOffset = parseInt(Math.abs(timeZoneOffset / 60));
-            var timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-            timeZone = timeZone + " UTC" + timeZoneOffsetSign + timeZoneOffset.toString().padStart(2, '0');
-            document.getElementById("target-tz").innerHTML = timeZone;
-
-            utcDateM1 = new Date(Date.UTC(targetTime.getFullYear(), targetTime.getMonth(), targetTime.getDate() - 1));
-            var lunarDate = chineseLunar.solarToLunar(utcDateM1);
-            var lunarDateOut = chineseLunar.format(lunarDate, 'YMD');
-            // fix chineseLunar bug when cross month
-            var lunarDateA1 = chineseLunar.solarToLunar(new Date(
-                Date.UTC(targetTime.getFullYear(), targetTime.getMonth(), targetTime.getDate())));
-            if ((lunarDate.month + 1) % 12 == lunarDateA1.month % 12) {
-                var lunarDateA1Out = chineseLunar.format(lunarDateA1, 'YMD');
-                if (lunarDateA1Out.includes("初二")) {
-                    lunarDate = lunarDateA1;
-                    lunarDateOut = lunarDateA1Out.replace("初二", "初一");
-                }
-            }
-            document.getElementById("lunar-date").innerHTML = lunarDateOut;
-
-            var tiangan = ['甲', '乙', '丙', '丁', '戊', '己', '庚', '辛', '壬', '癸'];
-            var dizhi = ['子', '丑', '寅', '卯', '辰', '巳', '午', '未', '申', '酉', '戌', '亥'];
-            var shengxiao = ['鼠', '牛', '虎', '兔', '龙', '蛇', '马', '羊', '猴', '鸡', '狗', '猪'];
-
-            var idx1 = (lunarDate.year - 4) % 10;
-            var idx2 = (lunarDate.year - 4) % 12;
-            document.getElementById("lunar-year").innerHTML = tiangan[idx1] + dizhi[idx2] + shengxiao[idx2] + "年";
+            document.getElementById("gmt").innerHTML = targetTime.toUTCString();
+            document.getElementById("local").innerHTML =
+                targetTime.toLocaleDateString() + " " + targetTime.toTimeString();
         }
         window.addEventListener("load", displayTime);
     </script>
@@ -220,21 +174,17 @@
 </head>
 <body>
 
-    <p id="target-week" class="time"></p>
+    <p id="hint" class="time"></p>
 
     <p style="text-align:center;">
-        <input type="text" oninput="setJumpTime(event)" id="jump-time" placeholder="1970-01-01 08:00:00">
+        <input type="text" oninput="displayTime()" id="timestamp" placeholder="0">
     </p>
 
-    <p id="target-ts" class="time"></p>
+    <p id="gmt" class="time"></p>
 
-    <p id="target-tz" class="time"></p>
+    <p id="local" class="time"></p>
 
     <br>
-
-    <p id="lunar-year" class="time"></p>
-
-    <p id="lunar-date" class="time"></p>
 
 </body>
 </html></section>
@@ -243,8 +193,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="02_countdown.html" class="btn btn-neutral float-left" title="2. 倒计时" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="04_timestamp.html" class="btn btn-neutral float-right" title="4. 时间戳" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="03_jump.html" class="btn btn-neutral float-left" title="3. 日期跳转" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../link/index.html" class="btn btn-neutral float-right" title="快速访问" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
