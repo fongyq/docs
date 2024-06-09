@@ -78,6 +78,8 @@
     </head>
     <body>
 
+        <br>
+
         <p id="hint" class="time"></p>
 
         <p style="text-align:center;">
@@ -88,6 +90,10 @@
 
         <p id="local" class="time"></p>
         
+        <br>
+        <br>
+        <br>
+        <br>
         <br>
 
     </body>
