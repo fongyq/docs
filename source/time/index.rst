@@ -37,7 +37,7 @@
 
                 var timeZoneOffset = currentTime.getTimezoneOffset();
                 var timeZoneOffsetSign = timeZoneOffset > 0 ? "-" : "+";
-                timeZoneOffset = parseInt(Math.abs(timeZoneOffset / 60));
+                timeZoneOffset = Math.abs(timeZoneOffset / 60);
                 var timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
                 timeZone = timeZone + " UTC" + timeZoneOffsetSign + timeZoneOffset.toString().padStart(2, '0'); 
                 document.getElementById("current-tz").innerHTML = timeZone;

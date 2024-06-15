@@ -45,17 +45,43 @@
                     targetTime = epochConverter(epoch);
                 }
                 document.getElementById("gmt").innerHTML = targetTime.toUTCString();
-                document.getElementById("local").innerHTML = 
-                    targetTime.toLocaleDateString() + " " + targetTime.toTimeString();
+                document.getElementById("local-time").innerHTML = targetTime.toLocaleString();
+                var s = targetTime.toTimeString().split(' ');
+                s.splice(0, 1);
+                var days = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+                document.getElementById("local-day").innerHTML = days[targetTime.getDay()];
+                document.getElementById("local-tz").innerHTML = s.join(' ');
             }
             window.addEventListener("load", displayTime);
         </script>
         <style>
-            canvas {
-                border: 1px solid black;
+            table {
+                width: 100%;
+                border-collapse: collapse;
             }
-            .time {
-                text-align: center; 
+            table, th, td {
+                border: none;
+            }
+            th, td {
+                padding: 10px;
+                text-align: left;
+                font-size: 30px; 
+                color: #2980b9;
+            }
+            th:first-child, td:first-child {
+                text-align: right;
+            }
+            th:nth-child(2), td:nth-child(2) {
+                text-align: left;
+            }
+            .top {
+                margin-top: 20px;
+                margin-bottom: 20px;
+            }
+            .text-center {
+                text-align: center;
+            }
+            .time { 
                 font-size: 30px; 
                 color: #2980b9;
             }
@@ -69,32 +95,34 @@
                 font-size:30px;
                 border-radius:0.9rem;
             }
-            /*
-            input::placeholder {
-                color: #2980b9;
-            }
-            */
         </style>
     </head>
     <body>
 
-        <br>
-
-        <p id="hint" class="time"></p>
+        <div id="hint" class="time text-center top"></div>
 
         <p style="text-align:center;">
             <input type="text" oninput="displayTime()" id="timestamp" placeholder="0">
         </p>
 
-        <p id="gmt" class="time"></p>
-
-        <p id="local" class="time"></p>
-        
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
+        <table style="margin: 0 auto 20px;">
+            <tr>
+                <td style="color: gray;">GMT:</td>
+                <td><span id="gmt"></span></td>
+            </tr>
+            <tr>
+                <td style="color: gray;">你的时区:</td>
+                <td><span id="local-time"></span></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><span id="local-day"></span></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><span id="local-tz"></span></td>
+            </tr>
+        </table>
 
     </body>
     </html>
