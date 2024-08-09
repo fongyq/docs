@@ -97,6 +97,11 @@
                 font-size: 30px;
                 filter: opacity(0.5); /* 设置透明度为50% */
             }
+            #current-ts {
+                text-align: center; 
+                font-size: 30px; 
+                color: grey;
+            }
         </style>
     </head>
     <body>
@@ -105,7 +110,7 @@
 
         <p id="current-time" class="time"></p>
 
-        <p id="current-ts" style="text-align: center; font-size:30px; color:grey;"></p>
+        <p id="current-ts"></p>
 
         <p id="current-tz" class="time"></p>
         
