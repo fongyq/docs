@@ -105,6 +105,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TIME</title>
     <!-- <script src="https://cdn.jsdelivr.net/npm/chinese-lunar"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
     <script>
         function displayTime() {
             var currentTime = new Date();
@@ -172,6 +173,13 @@
             document.getElementById("chinese-zodiac").innerHTML = zodiac;
         }
         setInterval(displayTime, 123);
+        const clipboard = new ClipboardJS('.timestamp');
+        clipboard.on('success', function(event) {
+            event.clearSelection();
+        });
+        clipboard.on('error', function(event) {
+            console.log('复制失败 ' + event.action);
+        });
     </script>
     <style>
         canvas {
@@ -192,10 +200,13 @@
             font-size: 30px;
             filter: opacity(0.5); /* 设置透明度为50% */
         }
-        #current-ts {
+        .timestamp {
             text-align: center;
             font-size: 30px;
             color: grey;
+        }
+        .timestamp:hover {
+            cursor: pointer;
         }
     </style>
 </head>
@@ -205,7 +216,7 @@
 
     <p id="current-time" class="time"></p>
 
-    <p id="current-ts"></p>
+    <p id="current-ts" data-clipboard-target="#current-ts" class="timestamp" title="点击可复制"></p>
 
     <p id="current-tz" class="time"></p>
 
