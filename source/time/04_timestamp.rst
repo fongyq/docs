@@ -97,8 +97,8 @@
                 border-radius:0.9rem;
             }
             p input[type="text"]:focus {
-                outline: 2px solid rgb(180,20,20,0.8);
-                border: none;
+                outline: none;
+                border: 1px solid rgb(180,20,20,0.8);
             }
         </style>
     </head>
