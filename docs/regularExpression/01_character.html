@@ -276,6 +276,10 @@
 </div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
+<p>不包含某个字符串的正则表达式： <code class="docutils literal notranslate"><span class="pre">((?!target_str).)*</span></code> 。</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
 <p>VS Code 在使用正则进行查找替换的时候，替换结果中使用 <code class="docutils literal notranslate"><span class="pre">$num</span></code> 来引用所获取的匹配组（ <code class="docutils literal notranslate"><span class="pre">num</span></code> 从 1 开始）, <code class="docutils literal notranslate"><span class="pre">$0</span></code> 表示完整的原始字符串。</p>
 <p>VS Code 可以使用 <code class="docutils literal notranslate"><span class="pre">\u</span></code> <code class="docutils literal notranslate"><span class="pre">\U</span></code> <code class="docutils literal notranslate"><span class="pre">\l</span></code> <code class="docutils literal notranslate"><span class="pre">\L</span></code> 四种字符来改变匹配组的大小写：</p>
 <ul class="simple">
