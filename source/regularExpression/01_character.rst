@@ -70,7 +70,7 @@ x|y                                          匹配 x 或 y
 
 .. tip::
 
-    不包含某个字符串的正则表达式： ``((?!target_str).)*`` 。
+    不包含某个字符串的行： ``^((?!target_str).)*$`` ，等效于 ``grep -v target_str`` 。
 
 .. tip::
 
