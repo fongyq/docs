@@ -46,7 +46,7 @@ Ubuntu 6.10 开始默认使用 dash，dash 符合 POSIX 标准。
 变量
 -----------
 
-变量定义的时候不需要 ``$`` 符号，引用取值的时候需要。定义的时候等号两边不允许带空格::
+变量定义的时候不需要 ``$`` 符号（Parameter Expansion），引用取值的时候需要。定义的时候等号两边不允许带空格::
 
     var="hello world"
     echo $var
@@ -304,6 +304,14 @@ Ubuntu 6.10 开始默认使用 dash，dash 符合 POSIX 标准。
     1 < 2
     $ [[ 199 < 2 ]] && echo '199 < 2'
     199 < 2
+
+.. note::
+
+    ``${parameter:-word}`` ：当参数 parameter 已定义且为非空字符串，该表达式值为 ``${parameter}`` ，否则为默认值 ``word`` 。
+
+    ``${parameter-word}`` ：当参数 parameter 已定义，该表达式值为 ``${parameter}`` ，否则为默认值 ``word`` 。
+
+    设置默认值的好处是，在已设置 ``set -u`` 的情况下，访问未定义的变量不会报错导致程序终止。
 
 .. hint::
 
