@@ -123,6 +123,7 @@
 
 - ``git reset [<mode>] [<commit>]``
 
+  - ``commit`` 是期望回撤到的之前的某个版本。
   - ``--soft`` 从本地仓库撤销到暂存区（撤销了 git commit，不撤销 git add）。
   - ``--mixed`` 默认 mode，撤销 git commit 和 git add，工作区内容保持。
   - ``--hard`` 本地仓库回到之前版本，暂存区和工作区的修改都被丢弃。
