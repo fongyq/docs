@@ -115,10 +115,7 @@
 <h1><span class="section-number">1. </span>基本命令<a class="headerlink" href="#id1" title="Permalink to this headline"></a></h1>
 <section id="id2">
 <h2><span class="section-number">1.1. </span>系统目录<a class="headerlink" href="#id2" title="Permalink to this headline"></a></h2>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ls /
-</pre></div>
-</div>
-<p>该指令可以查看系统根目录。注意， <code class="docutils literal notranslate"><span class="pre">/</span></code> 是指根目录，而不是当前目录。</p>
+<p><code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">/</span></code> 可以查看系统根目录。</p>
 <ul class="simple">
 <li><p><strong>/bin</strong> ：binary 的缩写, 这个目录存放着最经常使用的命令。</p></li>
 <li><p><strong>/boot</strong> ：存放的是启动 Linux 时使用的一些核心文件，包括一些连接文件以及镜像文件。</p></li>
@@ -214,9 +211,10 @@
 <span class="linenos">3</span><span class="c1">## 操作系统版本</span>
 <span class="linenos">4</span>cat /etc/issue
 <span class="linenos">5</span><span class="c1">## cpu 信息</span>
-<span class="linenos">6</span>cat /proc/cpuinfo
-<span class="linenos">7</span><span class="c1">## 内存信息</span>
-<span class="linenos">8</span>cat /proc/meminfo
+<span class="linenos">6</span>lscpu
+<span class="linenos">7</span>cat /proc/cpuinfo
+<span class="linenos">8</span><span class="c1">## 内存信息</span>
+<span class="linenos">9</span>cat /proc/meminfo
 </pre></div>
 </div>
 </section>
