@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>9. 回归问题 &mdash; fong alpha documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/magnum.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="../_static/js/chinese-lunar.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="正则表达式" href="../regularExpression/index.html" />
+    <link rel="prev" title="8. 推荐与大语言模型" href="08_llm.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> fong
+            <img src="../_static/magnum.jpg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                alpha
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">目录</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../time/index.html">现在时刻</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../link/index.html">快速访问</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ascii/index.html">ASCII 码</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cpp/index.html">C/C++</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../python/index.html">Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../linux/index.html">Linux/Shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../git/index.html">Git</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../machineLearning/index.html">机器学习</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deepLearning/index.html">深度学习</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathematicsAlgorithm/index.html">数理与算法</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">推荐系统</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01_introduction.html">1. 概述</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_recall.html">2. 召回</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_prerank.html">3. 粗排</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_rank.html">4. 精排</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_rerank.html">5. 重排</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_ee.html">6. 探索和利用</a></li>
+<li class="toctree-l2"><a class="reference internal" href="07_metric.html">7. 评价指标</a></li>
+<li class="toctree-l2"><a class="reference internal" href="08_llm.html">8. 推荐与大语言模型</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">9. 回归问题</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mse-mae">9.1. MSE &amp; MAE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#weighted-logistics-regression">9.2. Weighted Logistics Regression</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">9.3. D2Q</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">9.4. Ordinal Regression</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">9.5. ZILN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bucketing-with-softmax">9.6. Bucketing With Softmax</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">9.7. 评估指标</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">9.8. 参考资料</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../regularExpression/index.html">正则表达式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cron/index.html">Cron 表达式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computerNetwork/index.html">计算机网络</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../softwares/index.html">实用软件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tech/index.html">技巧</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../else/index.html">其他</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">fong</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">推荐系统</a> &raquo;</li>
+      <li><span class="section-number">9. </span>回归问题</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/recommender/09_regression.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1><span class="section-number">9. </span>回归问题<a class="headerlink" href="#id1" title="Permalink to this headline"></a></h1>
+<section id="mse-mae">
+<h2><span class="section-number">9.1. </span>MSE &amp; MAE<a class="headerlink" href="#mse-mae" title="Permalink to this headline"></a></h2>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Mean_squared_error">MSE</a> 假设预估值 <span class="math notranslate nohighlight">\(\boldsymbol{\theta}^{\top}\boldsymbol{x}\)</span> 和真实值 <span class="math notranslate nohighlight">\(y\)</span> 的误差服从标准正态分布，可以推导出
+<span class="math notranslate nohighlight">\(p(y|\boldsymbol{x};\boldsymbol{\theta})\)</span> 是正态分布。通过最大似然估计（ <a class="reference external" href="https://en.wikipedia.org/wiki/Maximum_likelihood_estimation">MLE</a> ）可知，
+最大化似然概率就是最小化 MSE Loss。</p>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Mean_absolute_error">MAE</a> 的推导跟 MSE 很类似，只是假设误差服从 <a class="reference external" href="https://zh.wikipedia.org/wiki/%E6%8B%89%E6%99%AE%E6%8B%89%E6%96%AF%E5%88%86%E5%B8%83">拉普拉斯分布</a> 。</p>
+</section>
+<section id="weighted-logistics-regression">
+<h2><span class="section-number">9.2. </span>Weighted Logistics Regression<a class="headerlink" href="#weighted-logistics-regression" title="Permalink to this headline"></a></h2>
+<p><a class="reference external" href="https://static.googleusercontent.com/media/research.google.com/zh-CN//pubs/archive/45530.pdf">Youtube DNN</a> 在预估视频观看时长时，
+在训练中使用交叉熵损失，然后对于正样本（有点击的样本）用实际观看时长来做加权，负样本不变。</p>
+<p>推断时使用 <span class="math notranslate nohighlight">\(e^{Wx+b}\)</span> 作为观看时长的估计（这里面假设了点击概率非常小）。</p>
+<a class="reference internal image-reference" href="../_images/09_youtubeDnn.png"><img alt="../_images/09_youtubeDnn.png" class="align-center" src="../_images/09_youtubeDnn.png" style="width: 800px;" /></a>
+</section>
+<section id="id3">
+<h2><span class="section-number">9.3. </span><a class="reference external" href="https://arxiv.org/pdf/2206.06003">D2Q</a><a class="headerlink" href="#id3" title="Permalink to this headline"></a></h2>
+<p>分析指出，观看时长主要受两个因素的影响：用户是否对视频感兴趣 &amp; 视频本身的时长。一方面，长度在 100s 以下的视频，其观看时长和本身时长正相关，将视频时长作为输入特征的观看时长预测方法会引入偏置问题；另一方面，随时间推移，视频时长分布极不均匀，且长视频曝光占比会逐渐增大，此时模型训练样本被长视频占据，用户兴趣可能无法有效建模。</p>
+<p>D2Q 首先将数据按视频时长分组（按时长排序，等分成若干个组），然后每个分组学习回归模型去预测观看时长分位数（Watch-Time Quantiles）；推断时，将对应分组中预测的分位数映射回时长。</p>
+<p>在实际应用中，无法为每一个分组单独预测观看时长，因为模型参数太多，效率低下；但如果在所有分组之间共享模型参数，拟合原始观看时长数值，相当于没有进行数据划分、无法消偏。因此，作者进一步提出将原始观看时长转换为视频时长相关的时长分位数标签，
+这样一来，每个分组的参数是共享的，同时每个分组的学习目标的尺度也是统一的。</p>
+<a class="reference internal image-reference" href="../_images/09_d2q.png"><img alt="../_images/09_d2q.png" class="align-center" src="../_images/09_d2q.png" style="width: 800px;" /></a>
+</section>
+<section id="id4">
+<h2><span class="section-number">9.4. </span><a class="reference external" href="https://en.wikipedia.org/wiki/Ordinal_regression">Ordinal Regression</a><a class="headerlink" href="#id4" title="Permalink to this headline"></a></h2>
+<p><a class="reference external" href="https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/Niu_Ordinal_Regression_With_CVPR_2016_paper.pdf">OR-CNN</a> 做年龄预测时，
+考虑到年龄的连续性特点，用 <span class="math notranslate nohighlight">\(K-1\)</span> 个二分类问题实现顺序的年龄回归。</p>
+<a class="reference internal image-reference" href="../_images/09_orcnn.png"><img alt="../_images/09_orcnn.png" class="align-center" src="../_images/09_orcnn.png" style="width: 800px;" /></a>
+<p>损失函数（可以为每个分类任务设置不同的权重）：</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{L} = - \frac{1}{N} \sum_{i=1}^{N} \boldsymbol{y}_i \log \boldsymbol{p}_i\]</div>
+<p>其中 <span class="math notranslate nohighlight">\(\boldsymbol{y}_i, \boldsymbol{p}_i \in \mathbb{R}^{K-1}\)</span> ；当 <span class="math notranslate nohighlight">\(\mathrm{Age}_i &gt; r_k\)</span> ， <span class="math notranslate nohighlight">\(y_i^k = 1\)</span> ，反之 <span class="math notranslate nohighlight">\(y_i^k = 0\)</span> 。</p>
+<p>预测年龄是 <span class="math notranslate nohighlight">\(r_q\)</span> ， 其中 <span class="math notranslate nohighlight">\(q = 1 +  \sum_{k=1}^{K-1} f(k)\)</span> ， <span class="math notranslate nohighlight">\(f(k) \in \{0,1\}\)</span> 是每个分类任务的预测结果。</p>
+</section>
+<section id="id5">
+<h2><span class="section-number">9.5. </span><a class="reference external" href="https://arxiv.org/pdf/1912.07753">ZILN</a><a class="headerlink" href="#id5" title="Permalink to this headline"></a></h2>
+<p>在 LTV （Life-Time Value）预测任务中，数据往往是长尾且稀疏的，比如会有非常多的 0 值，也存在极端大的值。
+MSE 无法准确地拟合 0 值，且对于极端大的值非常敏感。</p>
+<p>ZILN（Zero-Inflated LogNormal）是一个对数正态参数估计模型，其假设 LTV 服从对数正态分布。</p>
+<p>ZILN 需要估计三个参数： <span class="math notranslate nohighlight">\(p,\mu,\sigma\)</span> ：</p>
+<a class="reference internal image-reference" href="../_images/09_ziln.png"><img alt="../_images/09_ziln.png" class="align-center" src="../_images/09_ziln.png" style="width: 800px;" /></a>
+<p>损失函数：</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathcal{L}(x;p,\mu,\sigma) &amp; = -\mathbb{1}_{\{x=0\}} \log (1-p) - \mathbb{1}_{\{x&gt;0\}} (\log p - \mathcal{L}_{\mathrm{Lognormal}}(x;\mu,\sigma)) \\
+                            &amp; = \mathcal{L}_{\mathrm{CrossEntropy}}(\mathbb{1}_{\{x&gt;0\}};p) + \mathbb{1}_{\{x&gt;0\}} \mathcal{L}_{\mathrm{Lognormal}}(x;\mu,\sigma) \\
+\mathcal{L}_{\mathrm{Lognormal}}(x;\mu,\sigma) &amp; =  \log (x\sigma \sqrt{2\pi}) + \frac{(\log x - \mu)^2}{2\sigma^2}\end{split}\]</div>
+<p>相比于 MSE，在预估值异常大时 <span class="math notranslate nohighlight">\(\mathcal{L}_{\mathrm{Lognormal}}(x;\mu,\sigma)\)</span> 也不会非常大。</p>
+<p>预测结果：</p>
+<div class="math notranslate nohighlight">
+\[\hat{y} = p \times \mathbb{E}(x) = p \times \exp (\mu + \frac{\sigma^2}{2})\]</div>
+</section>
+<section id="bucketing-with-softmax">
+<h2><span class="section-number">9.6. </span>Bucketing With Softmax<a class="headerlink" href="#bucketing-with-softmax" title="Permalink to this headline"></a></h2>
+<p>对 Label 的值域进行分桶，然后根据每个样本的 Label 把样本分到某个桶里，将任务转换为一个多分类问题，通过 Softmax 损失函数进行训练。</p>
+<p>有一个问题是，Softmax 会将所有的桶平等看待。事实上，当 Label 的大小是有意义的，相邻桶之间的 Loss 应该小于不相邻桶之间的 Loss。</p>
+</section>
+<section id="id6">
+<h2><span class="section-number">9.7. </span>评估指标<a class="headerlink" href="#id6" title="Permalink to this headline"></a></h2>
+<ul class="simple">
+<li><p>MAE</p></li>
+<li><p>MSE</p></li>
+<li><p>排序逆序对</p></li>
+</ul>
+</section>
+<section id="id7">
+<h2><span class="section-number">9.8. </span>参考资料<a class="headerlink" href="#id7" title="Permalink to this headline"></a></h2>
+<ol class="arabic simple">
+<li><p>回归任务里的损失函数</p></li>
+</ol>
+<blockquote>
+<div><p><a class="reference external" href="https://zhuanlan.zhihu.com/p/627092216">https://zhuanlan.zhihu.com/p/627092216</a></p>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li><p>视频播放建模</p></li>
+</ol>
+<blockquote>
+<div><p><a class="reference external" href="https://syf1844803351.github.io/2023/10/15/%E6%8E%92%E5%BA%8F04%EF%BC%9A%E8%A7%86%E9%A2%91%E6%92%AD%E6%94%BE%E5%BB%BA%E6%A8%A1/">https://syf1844803351.github.io/2023/10/15/%E6%8E%92%E5%BA%8F04%EF%BC%9A%E8%A7%86%E9%A2%91%E6%92%AD%E6%94%BE%E5%BB%BA%E6%A8%A1/</a></p>
+</div></blockquote>
+<ol class="arabic simple" start="3">
+<li><p>快手：基于因果消偏的观看时长预估模型</p></li>
+</ol>
+<blockquote>
+<div><p><a class="reference external" href="https://zhuanlan.zhihu.com/p/557463255">https://zhuanlan.zhihu.com/p/557463255</a></p>
+</div></blockquote>
+<ol class="arabic simple" start="4">
+<li><p>LTV预估的一些思考</p></li>
+</ol>
+<blockquote>
+<div><p><a class="reference external" href="https://www.cnblogs.com/zhouyc/p/16943042.html">https://www.cnblogs.com/zhouyc/p/16943042.html</a></p>
+</div></blockquote>
+<ol class="arabic simple" start="5">
+<li><p>加权对数几率回归</p></li>
+</ol>
+<blockquote>
+<div><p><a class="reference external" href="https://www.jianshu.com/p/463fb5513520">https://www.jianshu.com/p/463fb5513520</a></p>
+</div></blockquote>
+<ol class="arabic simple" start="6">
+<li><p>年龄估计：Ordinal Regression</p></li>
+</ol>
+<blockquote>
+<div><p><a class="reference external" href="https://blog.csdn.net/chaipp0607/article/details/90739483">https://blog.csdn.net/chaipp0607/article/details/90739483</a></p>
+</div></blockquote>
+<ol class="arabic simple" start="7">
+<li><p>Ordinal regression</p></li>
+</ol>
+<blockquote>
+<div><p><a class="reference external" href="https://en.wikipedia.org/wiki/Ordinal_regression">https://en.wikipedia.org/wiki/Ordinal_regression</a></p>
+</div></blockquote>
+<ol class="arabic simple" start="8">
+<li><p>Deconfounding Duration Bias in Watch-time Prediction for Video Recommendation</p></li>
+</ol>
+<blockquote>
+<div><p><a class="reference external" href="https://arxiv.org/pdf/2206.06003">https://arxiv.org/pdf/2206.06003</a></p>
+</div></blockquote>
+<ol class="arabic simple" start="9">
+<li><p>A Deep Probabilistic Model For Customer Lifetime Value Prediction</p></li>
+</ol>
+<blockquote>
+<div><p><a class="reference external" href="https://arxiv.org/pdf/1912.07753">https://arxiv.org/pdf/1912.07753</a></p>
+</div></blockquote>
+<ol class="arabic simple" start="10">
+<li><p>Ordinal Regression with Multiple Output CNN for Age Estimation</p></li>
+</ol>
+<blockquote>
+<div><p><a class="reference external" href="https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/Niu_Ordinal_Regression_With_CVPR_2016_paper.pdf">https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/Niu_Ordinal_Regression_With_CVPR_2016_paper.pdf</a></p>
+</div></blockquote>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="08_llm.html" class="btn btn-neutral float-left" title="8. 推荐与大语言模型" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../regularExpression/index.html" class="btn btn-neutral float-right" title="正则表达式" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2018-2024, fong.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+<script type="text/javascript">
+    $(document).ready(function() {
+     $(".toggle > *").hide();
+     $(".toggle .header").show();
+     $(".toggle .header").click(function() {
+      $(this).parent().children().not(".header").toggle(400);
+      $(this).parent().children(".header").toggleClass("open");
+     })
+    });
+</script>
+
+
+</body>
+</html>

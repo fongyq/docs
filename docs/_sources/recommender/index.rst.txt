@@ -13,3 +13,4 @@
     06_ee.rst
     07_metric.rst
     08_llm.rst
+    09_regression.rst
