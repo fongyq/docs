@@ -132,6 +132,7 @@
 <section id="id3">
 <h2><span class="section-number">9.3. </span><a class="reference external" href="https://arxiv.org/pdf/2206.06003">D2Q</a><a class="headerlink" href="#id3" title="Permalink to this headline"></a></h2>
 <p>分析指出，观看时长主要受两个因素的影响：用户是否对视频感兴趣 &amp; 视频本身的时长。一方面，长度在 100s 以下的视频，其观看时长和本身时长正相关，将视频时长作为输入特征的观看时长预测方法会引入偏置问题；另一方面，随时间推移，视频时长分布极不均匀，且长视频曝光占比会逐渐增大，此时模型训练样本被长视频占据，用户兴趣可能无法有效建模。</p>
+<a class="reference internal image-reference" href="../_images/09_duration.png"><img alt="../_images/09_duration.png" class="align-center" src="../_images/09_duration.png" style="width: 600px;" /></a>
 <p>D2Q 首先将数据按视频时长分组（按时长排序，等分成若干个组），然后每个分组学习回归模型去预测观看时长分位数（Watch-Time Quantiles）；推断时，将对应分组中预测的分位数映射回时长。</p>
 <p>在实际应用中，无法为每一个分组单独预测观看时长，因为模型参数太多，效率低下；但如果在所有分组之间共享模型参数，拟合原始观看时长数值，相当于没有进行数据划分、无法消偏。因此，作者进一步提出将原始观看时长转换为视频时长相关的时长分位数标签，
 这样一来，每个分组的参数是共享的，同时每个分组的学习目标的尺度也是统一的。</p>
