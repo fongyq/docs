@@ -58,11 +58,11 @@ D2Q 首先将数据按视频时长分组（按时长排序，等分成若干个�
 
 .. math::
 
-    \mathcal{L} = - \frac{1}{N} \sum_{i=1}^{N} \boldsymbol{y}_i \log \boldsymbol{p}_i
+    \mathcal{L}_i = \sum_{k=1}^{K-1} - y_i^k \log p_i^{k,0} - (1 - y_i^k) \log p_i^{k,1}
 
-其中 :math:`\boldsymbol{y}_i, \boldsymbol{p}_i \in \mathbb{R}^{K-1}` ；当 :math:`\mathrm{Age}_i > r_k` ， :math:`y_i^k = 1` ，反之 :math:`y_i^k = 0` 。
+其中 :math:`\boldsymbol{p}_i \in \mathbb{R}^{(K-1) \times 2},\ \boldsymbol{y}_i \in \mathbb{R}^{K-1}` ；当 :math:`\mathrm{Age}[i] > r_k` ， :math:`y_i^k = 1` ，反之 :math:`y_i^k = 0` ； :math:`\boldsymbol{p}_i^k` 经过 Softmax 归一化。
 
-预测年龄是 :math:`r_q` ， 其中 :math:`q = 1 +  \sum_{k=1}^{K-1} f(k)` ， :math:`f(k) \in \{0,1\}` 是每个分类任务的预测结果。
+预测年龄是 :math:`r_q` ，  :math:`q = 1 +  \sum_{k=1}^{K-1} f(k)` ，其中 :math:`f(k) \in \{0,1\}` 是每个分类任务的预测结果。
 
 
 `ZILN <https://arxiv.org/pdf/1912.07753>`_
