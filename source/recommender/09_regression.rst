@@ -16,13 +16,23 @@ Weighted Logistics Regression
 ---------------------------------------------------
 
 `Youtube DNN <https://static.googleusercontent.com/media/research.google.com/zh-CN//pubs/archive/45530.pdf>`_ 在预估视频观看时长时，
-在训练中使用交叉熵损失，然后对于正样本（有点击的样本）用实际观看时长来做加权，负样本不变。
+在训练中使用交叉熵损失，然后对于正样本（有点击的样本）用实际观看时长来做加权，负样本（曝光未点击的样本）不变。
 
 推断时使用 :math:`e^{Wx+b}` 作为观看时长的估计（这里面假设了点击概率非常小）。
 
 .. image:: ./09_youtubeDnn.png
     :width: 800px
     :align: center
+
+.. note::
+
+  上面的建模是基于曝光样本，还有一种思路是仅用点击样本训练（假设数量为 :math:`k` ），这些样本作为正样本的权重也是观看时长，同时再将这些样本复制一遍作为负样本（只改变 label），权重为 1。
+  
+  .. math::
+
+    \mathrm{Odds} = \frac{p}{1-p} = \frac{\sum t_i}{k} = \mathbb{E}[T]
+
+
 
 
 `D2Q <https://arxiv.org/pdf/2206.06003>`_

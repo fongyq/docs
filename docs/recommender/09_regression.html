@@ -125,9 +125,15 @@
 <section id="weighted-logistics-regression">
 <h2><span class="section-number">9.2. </span>Weighted Logistics Regression<a class="headerlink" href="#weighted-logistics-regression" title="Permalink to this headline"></a></h2>
 <p><a class="reference external" href="https://static.googleusercontent.com/media/research.google.com/zh-CN//pubs/archive/45530.pdf">Youtube DNN</a> 在预估视频观看时长时，
-在训练中使用交叉熵损失，然后对于正样本（有点击的样本）用实际观看时长来做加权，负样本不变。</p>
+在训练中使用交叉熵损失，然后对于正样本（有点击的样本）用实际观看时长来做加权，负样本（曝光未点击的样本）不变。</p>
 <p>推断时使用 <span class="math notranslate nohighlight">\(e^{Wx+b}\)</span> 作为观看时长的估计（这里面假设了点击概率非常小）。</p>
 <a class="reference internal image-reference" href="../_images/09_youtubeDnn.png"><img alt="../_images/09_youtubeDnn.png" class="align-center" src="../_images/09_youtubeDnn.png" style="width: 800px;" /></a>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>上面的建模是基于曝光样本，还有一种思路是仅用点击样本训练（假设数量为 <span class="math notranslate nohighlight">\(k\)</span> ），这些样本作为正样本的权重也是观看时长，同时再将这些样本复制一遍作为负样本（只改变 label），权重为 1。</p>
+<div class="math notranslate nohighlight">
+\[\mathrm{Odds} = \frac{p}{1-p} = \frac{\sum t_i}{k} = \mathbb{E}[T]\]</div>
+</div>
 </section>
 <section id="id3">
 <h2><span class="section-number">9.3. </span><a class="reference external" href="https://arxiv.org/pdf/2206.06003">D2Q</a><a class="headerlink" href="#id3" title="Permalink to this headline"></a></h2>
