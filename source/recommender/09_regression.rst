@@ -104,7 +104,7 @@ ZILN 需要估计三个参数： :math:`p,\mu,\sigma` ：
 
 .. math::
 
-    \hat{y} = p \times \mathbb{E}(x) = p \times \exp (\mu + \frac{\sigma^2}{2})
+    \hat{y} = p \times \mathbb{E}[X] = p \times \exp (\mu + \frac{\sigma^2}{2})
 
 
 Bucketing With Softmax
@@ -120,7 +120,7 @@ Bucketing With Softmax
 - MAE
 - MSE
 - 排序逆序对
-
+- `斯皮尔曼秩相关系数 <https://zh.wikipedia.org/wiki/%E6%96%AF%E7%9A%AE%E5%B0%94%E6%9B%BC%E7%AD%89%E7%BA%A7%E7%9B%B8%E5%85%B3%E7%B3%BB%E6%95%B0>`_
 
 参考资料
 --------------
