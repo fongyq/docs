@@ -4,7 +4,7 @@
 Bellman-Ford 算法
 ---------------------------
 
-时间复杂度 :math:`\mathcal{O}(VE)` 其中顶点数 :math:`V` ，边数 :math:`E` 。如果不存在负圈（一条回路的代价和为负），那么每一条最短路径都不会经过同一个顶点两次，因此 while 循环最多执行 :math:`V-1` 次。
+时间复杂度 :math:`\mathcal{O}(VE)` ，其中顶点数 :math:`V` ，边数 :math:`E` 。如果不存在负圈（一条回路的代价和为负），那么每一条最短路径都不会经过同一个顶点两次，因此 while 循环最多执行 :math:`V-1` 次。
 
 .. code-block:: cpp
   :linenos:
@@ -134,7 +134,7 @@ Dijkstra 算法
       int v = p.second;
       if(d[v] < p.first) continue;
 
-      for(int i = 0; i < G[v].size(); ++ i)
+      for(int i = 0; i < G[v].size(); ++i)
       {
         edge e = G[v][i];
         if(d[e.to] > d[v] + e.cost)
