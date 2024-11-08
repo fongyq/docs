@@ -232,6 +232,7 @@
 <li><p>清空：clear()</p></li>
 <li><p>移除/删除元素：remove，del （del可删除切片）</p></li>
 <li><p>排序：sort</p></li>
+<li><p>逆序：reverse</p></li>
 </ul>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
 <span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
@@ -264,6 +265,29 @@
 </pre></div>
 </div>
 </div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>对于 <code class="docutils literal notranslate"><span class="pre">切片（slice）</span></code> 操作，下标越界 <strong>不会</strong> 报错，返回空。</p>
+<p>对于 <code class="docutils literal notranslate"><span class="pre">索引（index）</span></code> 操作，下标越界 <strong>会</strong> 报错。</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>s[i:j]
+
+The slice of s from i to j is defined as the sequence of items with index k such that i &lt;= k &lt; j.
+
+If i or j is greater than len(s), use len(s).
+If i is omitted or None, use 0.
+If j is omitted or None, use len(s).
+If i is greater than or equal to j, the slice is empty.
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>s[i:j:-1]
+
+- 当 i 省略，默认使用 len(s)。
+- 当 j 省略，输出 s[0:i+1] 的逆序。
+- 当 j = -1，默认使用 len(s)，会输出空列表。注意，这里不等同于 s[i::-1]。
+- s[::-1] 是 s 的逆序。
+</pre></div>
+</div>
+</div>
 </section>
 <section id="dict">
 <h3><span class="section-number">8.1.4. </span>dict<a class="headerlink" href="#dict" title="Permalink to this headline"></a></h3>
@@ -335,21 +359,6 @@
 </pre></div>
 </div>
 </div></blockquote>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>对于 <code class="docutils literal notranslate"><span class="pre">切片（slice）</span></code> 操作，下标越界 <strong>不会</strong> 报错，返回空。</p>
-<p>对于 <code class="docutils literal notranslate"><span class="pre">索引（index）</span></code> 操作，下标越界 <strong>会</strong> 报错。</p>
-</div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">j</span><span class="p">]</span>
-
-<span class="n">The</span> <span class="nb">slice</span> <span class="n">of</span> <span class="n">s</span> <span class="kn">from</span> <span class="nn">i</span> <span class="n">to</span> <span class="n">j</span> <span class="ow">is</span> <span class="n">defined</span> <span class="k">as</span> <span class="n">the</span> <span class="n">sequence</span> <span class="n">of</span> <span class="n">items</span> <span class="k">with</span> <span class="n">index</span> <span class="n">k</span> <span class="n">such</span> <span class="n">that</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">j</span><span class="o">.</span>
-
-<span class="n">If</span> <span class="n">i</span> <span class="ow">or</span> <span class="n">j</span> <span class="ow">is</span> <span class="n">greater</span> <span class="n">than</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="n">use</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">.</span>
-<span class="n">If</span> <span class="n">i</span> <span class="ow">is</span> <span class="n">omitted</span> <span class="ow">or</span> <span class="kc">None</span><span class="p">,</span> <span class="n">use</span> <span class="mf">0.</span>
-<span class="n">If</span> <span class="n">j</span> <span class="ow">is</span> <span class="n">omitted</span> <span class="ow">or</span> <span class="kc">None</span><span class="p">,</span> <span class="n">use</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">.</span>
-<span class="n">If</span> <span class="n">i</span> <span class="ow">is</span> <span class="n">greater</span> <span class="n">than</span> <span class="ow">or</span> <span class="n">equal</span> <span class="n">to</span> <span class="n">j</span><span class="p">,</span> <span class="n">the</span> <span class="nb">slice</span> <span class="ow">is</span> <span class="n">empty</span><span class="o">.</span>
-</pre></div>
-</div>
 </section>
 </section>
 <section id="id3">

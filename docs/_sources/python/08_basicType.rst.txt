@@ -117,6 +117,8 @@ list
 
   - 排序：sort
 
+  - 逆序：reverse
+
   .. code-block:: python
     :linenos:
 
@@ -149,6 +151,31 @@ list
     >>> a
     [30, 20, 5, 3, 1]
 
+.. note::
+
+  对于 ``切片（slice）`` 操作，下标越界 **不会** 报错，返回空。
+
+  对于 ``索引（index）`` 操作，下标越界 **会** 报错。
+
+  .. code-block:: text
+
+      s[i:j]
+
+      The slice of s from i to j is defined as the sequence of items with index k such that i <= k < j.
+
+      If i or j is greater than len(s), use len(s).
+      If i is omitted or None, use 0.
+      If j is omitted or None, use len(s).
+      If i is greater than or equal to j, the slice is empty.
+
+  .. code-block:: text
+
+      s[i:j:-1]
+
+      - 当 i 省略，默认使用 len(s)。
+      - 当 j 省略，输出 s[0:i+1] 的逆序。
+      - 当 j = -1，默认使用 len(s)，会输出空列表。注意，这里不等同于 s[i::-1]。
+      - s[::-1] 是 s 的逆序。
 
 dict
 ^^^^^^^^^^^^^^
@@ -229,23 +256,6 @@ set
     >>> s1.update({'e','d'})
     >>> s1
     set(['a', 'c', 'b', 'e', 'd'])
-
-.. note::
-
-  对于 ``切片（slice）`` 操作，下标越界 **不会** 报错，返回空。
-
-  对于 ``索引（index）`` 操作，下标越界 **会** 报错。
-
-::
-
-  s[i:j]
-
-  The slice of s from i to j is defined as the sequence of items with index k such that i <= k < j.
-
-  If i or j is greater than len(s), use len(s).
-  If i is omitted or None, use 0.
-  If j is omitted or None, use len(s).
-  If i is greater than or equal to j, the slice is empty.
 
 
 深复制和浅复制
