@@ -237,6 +237,7 @@ deque
   - reverse
   - rotate
   - count
+  - index
   - clear
 
 .. code-block:: python
@@ -256,6 +257,10 @@ deque
   >>> dq.reverse()
   >>> dq
   deque([3, 2, 1, 0, 4])
+  >>> len(dq)
+  5
+  >>> dq[-1]
+  4
 
 
 堆
