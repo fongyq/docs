@@ -3717,16 +3717,16 @@ https://blog.csdn.net/u014113686/article/details/82464635
     .. code-block:: cpp
       :linenos:
 
-      int minTimeCrossBridge(int* Time, int n)
+      int minTimeCrossBridge(int* time, int n)
       {
           assert(n > 0);
-          sort(Time, Time + n);
+          sort(time, time + n);
           int* dp = new int[n];
-          dp[0] = Time[0];
-          dp[1] = Time[1];
+          dp[0] = time[0];
+          dp[1] = time[1];
           for (size_t i = 2; i < n; ++i)
           {
-              dp[i] = min(dp[i - 1] + Time[0] + Time[i], dp[i - 2] + Time[i] + Time[0] + 2 * Time[1]);
+              dp[i] = min(dp[i - 1] + time[0] + time[i], dp[i - 2] + time[i] + time[0] + 2 * time[1]);
           }
           int res = dp[n - 1];
           delete[] dp;
@@ -5228,6 +5228,8 @@ https://leetcode.com/problems/restore-the-array
                   return cnt
 
 - [LeetCode] Minimum Number of Arrows to Burst Balloons 用最少数量的箭引爆气球。Hint：贪心算法。
+
+  https://leetcode.com/problems/minimum-number-of-arrows-to-burst-balloons
 
   .. container:: toggle
 
