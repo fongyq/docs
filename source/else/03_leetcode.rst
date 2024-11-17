@@ -3434,7 +3434,7 @@ https://leetcode.com/problems/max-points-on-a-line/
 [LeetCode] Word Break 字符串按字典切分
 --------------------------------------------------------------------------------------------
 
-Hint：回溯；动态规划；字典树。
+Hint：回溯；动态规划；字典树/哈希表。
 
 https://leetcode.com/problems/word-break
 
