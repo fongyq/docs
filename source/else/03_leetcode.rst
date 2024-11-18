@@ -1452,6 +1452,40 @@ https://leetcode.com/problems/subarray-sum-equals-k/
               return cnt
 
 
+延伸：和不小于 :math:`K` 的最短子数组。Hint：滑动窗口 + 单调 deque。
+
+https://leetcode.com/problems/shortest-subarray-with-sum-at-least-k
+
+  .. container:: toggle
+
+    .. container:: header
+
+      :math:`\color{darkgreen}{Code}`
+
+    .. code-block:: python
+        :linenos:
+
+        from collections import deque
+        class Solution:
+            def shortestSubarray(self, nums: List[int], k: int) -> int:
+                ans = float('inf')
+                s = 0
+                dq = deque() ## (s, i)
+                for i in range(len(nums)):
+                    s += nums[i]
+                    if s >= k:
+                        ans = min(ans, i + 1)
+                    ## 以 i 为窗口右边界，收拢左边界
+                    while dq and s - dq[0][0] >= k:
+                        ans = min(ans, i - dq[0][1])
+                        dq.popleft()
+                    ## 保持 dq 是单调增队列
+                    while dq and dq[-1][0] > s:
+                        dq.pop()
+                    dq.append((s, i))
+                return ans if ans != float('inf') else -1
+
+
 使用位运算进行加法运算
 -------------------------------------------------------------------------------
 
