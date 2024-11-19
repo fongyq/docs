@@ -1475,7 +1475,7 @@ Hint：走 <span class="math notranslate nohighlight">\(n\)</span> 步之后能�
 </div>
 </div>
 </div></blockquote>
-<p>延伸：和不小于 <span class="math notranslate nohighlight">\(K\)</span> 的最短子数组。Hint：滑动窗口 + 单调 deque。</p>
+<p>延伸：和不小于 <span class="math notranslate nohighlight">\(K\)</span> 的最短子数组。Hint：滑动窗口 + 单调 deque，时间复杂度和空间复杂度都是 <span class="math notranslate nohighlight">\(\mathcal{O}(N)\)</span> 。</p>
 <p><a class="reference external" href="https://leetcode.com/problems/shortest-subarray-with-sum-at-least-k">https://leetcode.com/problems/shortest-subarray-with-sum-at-least-k</a></p>
 <blockquote>
 <div><div class="toggle docutils container">
@@ -1497,10 +1497,12 @@ Hint：走 <span class="math notranslate nohighlight">\(n\)</span> 步之后能�
 <span class="linenos">13</span>                <span class="n">ans</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="n">i</span> <span class="o">-</span> <span class="n">dq</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
 <span class="linenos">14</span>                <span class="n">dq</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span>
 <span class="linenos">15</span>            <span class="c1">## 保持 dq 是单调增队列</span>
-<span class="linenos">16</span>            <span class="k">while</span> <span class="n">dq</span> <span class="ow">and</span> <span class="n">dq</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">s</span><span class="p">:</span>
-<span class="linenos">17</span>                <span class="n">dq</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
-<span class="linenos">18</span>            <span class="n">dq</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">s</span><span class="p">,</span> <span class="n">i</span><span class="p">))</span>
-<span class="linenos">19</span>        <span class="k">return</span> <span class="n">ans</span> <span class="k">if</span> <span class="n">ans</span> <span class="o">!=</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">)</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span>
+<span class="linenos">16</span>            <span class="c1">## dq[-1][0] &gt; s 说明数组在区间 [dq[-1][0] + 1, i] 的和是负数</span>
+<span class="linenos">17</span>            <span class="c1">## 因此 dq[-1][0] + 1 不可能是右边界在 i 之后的任何最短子数组的左边界</span>
+<span class="linenos">18</span>            <span class="k">while</span> <span class="n">dq</span> <span class="ow">and</span> <span class="n">dq</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">s</span><span class="p">:</span>
+<span class="linenos">19</span>                <span class="n">dq</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+<span class="linenos">20</span>            <span class="n">dq</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">s</span><span class="p">,</span> <span class="n">i</span><span class="p">))</span>
+<span class="linenos">21</span>        <span class="k">return</span> <span class="n">ans</span> <span class="k">if</span> <span class="n">ans</span> <span class="o">!=</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">)</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>

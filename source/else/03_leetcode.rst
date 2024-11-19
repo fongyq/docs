@@ -1452,7 +1452,7 @@ https://leetcode.com/problems/subarray-sum-equals-k/
               return cnt
 
 
-延伸：和不小于 :math:`K` 的最短子数组。Hint：滑动窗口 + 单调 deque。
+延伸：和不小于 :math:`K` 的最短子数组。Hint：滑动窗口 + 单调 deque，时间复杂度和空间复杂度都是 :math:`\mathcal{O}(N)` 。
 
 https://leetcode.com/problems/shortest-subarray-with-sum-at-least-k
 
@@ -1480,6 +1480,8 @@ https://leetcode.com/problems/shortest-subarray-with-sum-at-least-k
                         ans = min(ans, i - dq[0][1])
                         dq.popleft()
                     ## 保持 dq 是单调增队列
+                    ## dq[-1][0] > s 说明数组在区间 [dq[-1][0] + 1, i] 的和是负数
+                    ## 因此 dq[-1][0] + 1 不可能是右边界在 i 之后的任何最短子数组的左边界
                     while dq and dq[-1][0] > s:
                         dq.pop()
                     dq.append((s, i))
