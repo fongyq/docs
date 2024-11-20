@@ -3734,6 +3734,35 @@ $$</div><div class="toggle docutils container">
 </div>
 </div>
 </div></blockquote>
+<p>相关题：从字符串首/末取字符，至少包含 <span class="math notranslate nohighlight">\(k\)</span> 个 a、b、c。Hint：双指针，时间复杂度 <span class="math notranslate nohighlight">\(\mathcal{O}(N)\)</span> 。</p>
+<p><a class="reference external" href="https://leetcode.com/problems/take-k-of-each-character-from-left-and-right">https://leetcode.com/problems/take-k-of-each-character-from-left-and-right</a></p>
+<blockquote>
+<div><div class="toggle docutils container">
+<div class="header docutils container">
+<p><span class="math notranslate nohighlight">\(\color{darkgreen}{Code}\)</span></p>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+<span class="linenos"> 2</span><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+<span class="linenos"> 3</span>    <span class="k">def</span> <span class="nf">takeCharacters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="linenos"> 4</span>        <span class="n">c</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="linenos"> 5</span>        <span class="k">if</span> <span class="n">c</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">k</span> <span class="ow">or</span> <span class="n">c</span><span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">k</span> <span class="ow">or</span> <span class="n">c</span><span class="p">[</span><span class="s1">&#39;c&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">k</span><span class="p">:</span>
+<span class="linenos"> 6</span>            <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+<span class="linenos"> 7</span>        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="linenos"> 8</span>        <span class="n">l</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos"> 9</span>        <span class="n">res</span> <span class="o">=</span> <span class="n">n</span>
+<span class="linenos">10</span>        <span class="c1">## 区间 [l, r] 不取</span>
+<span class="linenos">11</span>        <span class="c1">## 遍历 r</span>
+<span class="linenos">12</span>        <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="linenos">13</span>            <span class="n">c</span><span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="n">r</span><span class="p">]]</span> <span class="o">-=</span> <span class="mi">1</span>
+<span class="linenos">14</span>            <span class="k">while</span> <span class="n">c</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">k</span> <span class="ow">or</span> <span class="n">c</span><span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">k</span> <span class="ow">or</span> <span class="n">c</span><span class="p">[</span><span class="s1">&#39;c&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">k</span><span class="p">:</span>
+<span class="linenos">15</span>                <span class="n">c</span><span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="n">l</span><span class="p">]]</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="linenos">16</span>                <span class="n">l</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="linenos">17</span>            <span class="n">res</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="p">(</span><span class="n">r</span> <span class="o">-</span> <span class="n">l</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+<span class="linenos">18</span>        <span class="k">return</span> <span class="n">res</span>
+</pre></div>
+</div>
+</div>
+</div></blockquote>
 </section>
 <section id="leetcode-nth-digit-n">
 <h2><span class="section-number">4.42. </span>[LeetCode] Nth Digit 第 <span class="math notranslate nohighlight">\(N\)</span> 个数字<a class="headerlink" href="#leetcode-nth-digit-n" title="Permalink to this headline"></a></h2>

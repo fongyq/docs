@@ -3899,6 +3899,38 @@ https://leetcode.com/problems/minimum-window-substring/
           }
       };
 
+相关题：从字符串首/末取字符，至少包含 :math:`k` 个 a、b、c。Hint：双指针，时间复杂度 :math:`\mathcal{O}(N)` 。
+
+https://leetcode.com/problems/take-k-of-each-character-from-left-and-right
+
+  .. container:: toggle
+
+    .. container:: header
+
+      :math:`\color{darkgreen}{Code}`
+
+    .. code-block:: python
+        :linenos:
+
+        from collections import Counter
+        class Solution:
+            def takeCharacters(self, s: str, k: int) -> int:
+                c = Counter(s)
+                if c['a'] < k or c['b'] < k or c['c'] < k:
+                    return -1
+                n = len(s)
+                l = 0
+                res = n
+                ## 区间 [l, r] 不取
+                ## 遍历 r
+                for r in range(n):
+                    c[s[r]] -= 1
+                    while c['a'] < k or c['b'] < k or c['c'] < k:
+                        c[s[l]] += 1
+                        l += 1
+                    res = min(res, n - (r - l + 1))
+                return res
+
 
 [LeetCode] Nth Digit 第 :math:`N` 个数字
 --------------------------------------------------------------------------------------------
