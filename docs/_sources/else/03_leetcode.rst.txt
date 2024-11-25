@@ -2251,6 +2251,44 @@ Hint：采用二分查找的思路。
           }
       };
 
+- 在旋转数组查找目标值（含重复元素，若存在多个目标值需返回最小的下标）
+
+  https://leetcode.cn/problems/search-rotate-array-lcci
+
+  .. container:: toggle
+
+    .. container:: header
+
+      :math:`\color{darkgreen}{Code}`
+
+    .. code-block:: python
+        :linenos:
+
+        class Solution:
+            def search(self, arr: List[int], target: int) -> int:
+                n = len(arr)
+                low, high = 0, n - 1
+                while low <= high:
+                    mid = (low + high) // 2
+                    ## 最左侧找到直接返回
+                    if arr[low] == target:
+                        return low
+                    ## 这里将右边界移到 mid
+                    if arr[mid] == target:
+                        high = mid
+                    elif arr[mid] == arr[high]:
+                        high -= 1
+                    elif arr[mid] < arr[high]:
+                        if arr[mid] < target <= arr[high]:
+                            low = mid + 1
+                        else:
+                            high = mid - 1
+                    else:
+                        if arr[low] <= target < arr[mid]:
+                            high = mid - 1
+                        else:
+                            low = mid + 1
+                return -1
 
 [LeetCode] Maximum Gap 最大间隔
 --------------------------------------------------------------------------------------------
@@ -4675,6 +4713,58 @@ https://leetcode.com/problems/evaluate-reverse-polish-notation/
               return res;
           }
       };
+
+https://leetcode.cn/problems/calculator-lcci
+
+  .. container:: toggle
+
+    .. container:: header
+
+      :math:`\color{darkgreen}{Code}`
+
+    .. code-block:: python
+        :linenos:
+
+        class Solution:
+            def calculate(self, s: str) -> int:
+                def scan_num(s, i):
+                    num = 0
+                    while i < len(s) and ord('0') <= ord(s[i]) <= ord('9'):
+                        num = num * 10 + int(s[i])
+                        i += 1
+                    return i, num
+                def scan_op(s, i):
+                    return i + 1, s[i]
+                def eval_op(num_stk, op):
+                    rhs = num_stk.pop()
+                    lhs = num_stk.pop()
+                    if op == '+':
+                        num_stk.append(lhs + rhs)
+                    elif op == '-':
+                        num_stk.append(lhs - rhs)
+                    elif op == '*':
+                        num_stk.append(lhs * rhs)
+                    else:
+                        num_stk.append(lhs // rhs)
+                s = s.replace(' ', '')
+                n = len(s)
+                op_stk, num_stk = [], []
+                prior = {'+': 0, '-': 0, '*': 1, '/': 1}
+                i, num = scan_num(s, 0)
+                num_stk.append(num)
+                while i < n:
+                    i, op = scan_op(s, i)
+                    while op_stk and prior[op] <= prior[op_stk[-1]]:
+                        eval_op(num_stk, op_stk[-1])
+                        op_stk.pop()
+                    op_stk.append(op)
+                    i, num = scan_num(s, i)
+                    num_stk.append(num)
+                while op_stk:
+                    eval_op(num_stk, op_stk[-1])
+                    op_stk.pop()
+                return num_stk[0]
+
 
 字典树/前缀树（ `Trie <https://oi-wiki.org/string/trie/>`_ ）
 --------------------------------------------------------------------------------------------

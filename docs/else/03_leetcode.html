@@ -2200,6 +2200,41 @@ Hint：走 <span class="math notranslate nohighlight">\(n\)</span> 步之后能�
 </div>
 </div>
 </li>
+<li><p>在旋转数组查找目标值（含重复元素，若存在多个目标值需返回最小的下标）</p>
+<p><a class="reference external" href="https://leetcode.cn/problems/search-rotate-array-lcci">https://leetcode.cn/problems/search-rotate-array-lcci</a></p>
+<div class="toggle docutils container">
+<div class="header docutils container">
+<p><span class="math notranslate nohighlight">\(\color{darkgreen}{Code}\)</span></p>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+<span class="linenos"> 2</span>    <span class="k">def</span> <span class="nf">search</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arr</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">target</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="linenos"> 3</span>        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
+<span class="linenos"> 4</span>        <span class="n">low</span><span class="p">,</span> <span class="n">high</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="linenos"> 5</span>        <span class="k">while</span> <span class="n">low</span> <span class="o">&lt;=</span> <span class="n">high</span><span class="p">:</span>
+<span class="linenos"> 6</span>            <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">low</span> <span class="o">+</span> <span class="n">high</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+<span class="linenos"> 7</span>            <span class="c1">## 最左侧找到直接返回</span>
+<span class="linenos"> 8</span>            <span class="k">if</span> <span class="n">arr</span><span class="p">[</span><span class="n">low</span><span class="p">]</span> <span class="o">==</span> <span class="n">target</span><span class="p">:</span>
+<span class="linenos"> 9</span>                <span class="k">return</span> <span class="n">low</span>
+<span class="linenos">10</span>            <span class="c1">## 这里将右边界移到 mid</span>
+<span class="linenos">11</span>            <span class="k">if</span> <span class="n">arr</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">==</span> <span class="n">target</span><span class="p">:</span>
+<span class="linenos">12</span>                <span class="n">high</span> <span class="o">=</span> <span class="n">mid</span>
+<span class="linenos">13</span>            <span class="k">elif</span> <span class="n">arr</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">==</span> <span class="n">arr</span><span class="p">[</span><span class="n">high</span><span class="p">]:</span>
+<span class="linenos">14</span>                <span class="n">high</span> <span class="o">-=</span> <span class="mi">1</span>
+<span class="linenos">15</span>            <span class="k">elif</span> <span class="n">arr</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">arr</span><span class="p">[</span><span class="n">high</span><span class="p">]:</span>
+<span class="linenos">16</span>                <span class="k">if</span> <span class="n">arr</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">target</span> <span class="o">&lt;=</span> <span class="n">arr</span><span class="p">[</span><span class="n">high</span><span class="p">]:</span>
+<span class="linenos">17</span>                    <span class="n">low</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="linenos">18</span>                <span class="k">else</span><span class="p">:</span>
+<span class="linenos">19</span>                    <span class="n">high</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="linenos">20</span>            <span class="k">else</span><span class="p">:</span>
+<span class="linenos">21</span>                <span class="k">if</span> <span class="n">arr</span><span class="p">[</span><span class="n">low</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">target</span> <span class="o">&lt;</span> <span class="n">arr</span><span class="p">[</span><span class="n">mid</span><span class="p">]:</span>
+<span class="linenos">22</span>                    <span class="n">high</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="linenos">23</span>                <span class="k">else</span><span class="p">:</span>
+<span class="linenos">24</span>                    <span class="n">low</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="linenos">25</span>        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+</li>
 </ul>
 </section>
 <section id="leetcode-maximum-gap">
@@ -4457,6 +4492,55 @@ $$</div><div class="toggle docutils container">
 <span class="linenos">45</span><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">res</span><span class="p">;</span><span class="w"></span>
 <span class="linenos">46</span><span class="w">    </span><span class="p">}</span><span class="w"></span>
 <span class="linenos">47</span><span class="p">};</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div></blockquote>
+<p><a class="reference external" href="https://leetcode.cn/problems/calculator-lcci">https://leetcode.cn/problems/calculator-lcci</a></p>
+<blockquote>
+<div><div class="toggle docutils container">
+<div class="header docutils container">
+<p><span class="math notranslate nohighlight">\(\color{darkgreen}{Code}\)</span></p>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+<span class="linenos"> 2</span>    <span class="k">def</span> <span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="linenos"> 3</span>        <span class="k">def</span> <span class="nf">scan_num</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+<span class="linenos"> 4</span>            <span class="n">num</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos"> 5</span>            <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">ord</span><span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="nb">ord</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">&lt;=</span> <span class="nb">ord</span><span class="p">(</span><span class="s1">&#39;9&#39;</span><span class="p">):</span>
+<span class="linenos"> 6</span>                <span class="n">num</span> <span class="o">=</span> <span class="n">num</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+<span class="linenos"> 7</span>                <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="linenos"> 8</span>            <span class="k">return</span> <span class="n">i</span><span class="p">,</span> <span class="n">num</span>
+<span class="linenos"> 9</span>        <span class="k">def</span> <span class="nf">scan_op</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+<span class="linenos">10</span>            <span class="k">return</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+<span class="linenos">11</span>        <span class="k">def</span> <span class="nf">eval_op</span><span class="p">(</span><span class="n">num_stk</span><span class="p">,</span> <span class="n">op</span><span class="p">):</span>
+<span class="linenos">12</span>            <span class="n">rhs</span> <span class="o">=</span> <span class="n">num_stk</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+<span class="linenos">13</span>            <span class="n">lhs</span> <span class="o">=</span> <span class="n">num_stk</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+<span class="linenos">14</span>            <span class="k">if</span> <span class="n">op</span> <span class="o">==</span> <span class="s1">&#39;+&#39;</span><span class="p">:</span>
+<span class="linenos">15</span>                <span class="n">num_stk</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lhs</span> <span class="o">+</span> <span class="n">rhs</span><span class="p">)</span>
+<span class="linenos">16</span>            <span class="k">elif</span> <span class="n">op</span> <span class="o">==</span> <span class="s1">&#39;-&#39;</span><span class="p">:</span>
+<span class="linenos">17</span>                <span class="n">num_stk</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lhs</span> <span class="o">-</span> <span class="n">rhs</span><span class="p">)</span>
+<span class="linenos">18</span>            <span class="k">elif</span> <span class="n">op</span> <span class="o">==</span> <span class="s1">&#39;*&#39;</span><span class="p">:</span>
+<span class="linenos">19</span>                <span class="n">num_stk</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lhs</span> <span class="o">*</span> <span class="n">rhs</span><span class="p">)</span>
+<span class="linenos">20</span>            <span class="k">else</span><span class="p">:</span>
+<span class="linenos">21</span>                <span class="n">num_stk</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lhs</span> <span class="o">//</span> <span class="n">rhs</span><span class="p">)</span>
+<span class="linenos">22</span>        <span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="linenos">23</span>        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="linenos">24</span>        <span class="n">op_stk</span><span class="p">,</span> <span class="n">num_stk</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+<span class="linenos">25</span>        <span class="n">prior</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;+&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;*&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;/&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
+<span class="linenos">26</span>        <span class="n">i</span><span class="p">,</span> <span class="n">num</span> <span class="o">=</span> <span class="n">scan_num</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="linenos">27</span>        <span class="n">num_stk</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+<span class="linenos">28</span>        <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
+<span class="linenos">29</span>            <span class="n">i</span><span class="p">,</span> <span class="n">op</span> <span class="o">=</span> <span class="n">scan_op</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+<span class="linenos">30</span>            <span class="k">while</span> <span class="n">op_stk</span> <span class="ow">and</span> <span class="n">prior</span><span class="p">[</span><span class="n">op</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">prior</span><span class="p">[</span><span class="n">op_stk</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]:</span>
+<span class="linenos">31</span>                <span class="n">eval_op</span><span class="p">(</span><span class="n">num_stk</span><span class="p">,</span> <span class="n">op_stk</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="linenos">32</span>                <span class="n">op_stk</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+<span class="linenos">33</span>            <span class="n">op_stk</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">op</span><span class="p">)</span>
+<span class="linenos">34</span>            <span class="n">i</span><span class="p">,</span> <span class="n">num</span> <span class="o">=</span> <span class="n">scan_num</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+<span class="linenos">35</span>            <span class="n">num_stk</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+<span class="linenos">36</span>        <span class="k">while</span> <span class="n">op_stk</span><span class="p">:</span>
+<span class="linenos">37</span>            <span class="n">eval_op</span><span class="p">(</span><span class="n">num_stk</span><span class="p">,</span> <span class="n">op_stk</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="linenos">38</span>            <span class="n">op_stk</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+<span class="linenos">39</span>        <span class="k">return</span> <span class="n">num_stk</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
