@@ -116,13 +116,13 @@ SimCLR 做了两次非线性映射（Encoder 和 Projector），可能是如下�
 
 `MoCo v2 <https://arxiv.org/pdf/2003.04297.pdf>`_ 的图像增强方法、Encoder、Projector、相似性计算方法以及 InfoNCE 损失函数和 SimCLR 基本一致。最主要的特点和创新在于：
 
+- MoCo v2 维护了一个较大的负例队列，当需要在正例和负例之间进行对比计算时，就从这个负例队列里取 K 个，已经不局限于 Batch Size 的限制了。
+
 - MoCo v2 的下分枝模型参数更新，则采用了动量更新（Momentum Update）机制。缓慢地更新模型参数（ :math:`m` 接近 1.0 ），对队列中来自不同 Batch 的实例表征编码的改变会相对稳定而统一，增加了表示空间的一致性。
 
 .. math::
 
     \theta_k \leftarrow m \theta_k + (1 - m) \theta_q
-
-- MoCo v2 维护了一个较大的负例队列，当需要在正例和负例之间进行对比计算时，就从这个负例队列里取 K 个，已经不局限于 Batch Size 的限制了。
 
 `MoCo <https://arxiv.org/pdf/1911.05722.pdf>`_ 还发现 BN 对性能是有负面影响的，可能是 BN 导致了 Batch 内各样本之间的信息泄露，使得模型发现了能够快速降低 Loss 的方法，所以提出了 Shuffle BN。
 
@@ -165,8 +165,8 @@ BYOL 有两个不对称分支：Online 和 Target。Online 分支新增了一个
 
 .. math::
 
-    \mathcal{L} & = \mathcal{L}(\boldsymbol{z}_1, \boldsymbol{v}_2) + \mathcal{L}(\boldsymbol{z}_2, \boldsymbol{v}_1) \\
-    \mathcal{L}(\boldsymbol{z}, \boldsymbol{v}) & = \left\lVert  \boldsymbol{z} - \boldsymbol{v} \right\rVert^2_2
+    \mathcal{L} & = \mathcal{L}(\boldsymbol{z}_1, \boldsymbol{q}_2) + \mathcal{L}(\boldsymbol{z}_2, \boldsymbol{q}_1) \\
+    \mathcal{L}(\boldsymbol{z}, \boldsymbol{q}) & = \left\lVert  \boldsymbol{z} - \boldsymbol{q} \right\rVert^2_2
 
 BYOL 只用正例，防止模型坍塌的关键因素在于新加入的 Predictor 结构。
 

@@ -38,10 +38,10 @@ Loss 分成两部分，考虑了“图片->文字”和“文字->图片”的�
 .. math::
 
     \mathcal{L} & = \frac{1}{2} (\mathcal{L}_I + \mathcal{L}_T) \\
-    \mathcal{L}_I & = -\frac{1}{N}\sum_{i=1}^{N}\log\frac{s(\boldsymbol{v}_i, \boldsymbol{t}_i) e^{\tau}}{\sum_{j=1}^{N} s(\boldsymbol{v}_i, \boldsymbol{t}_j) e^{\tau}} \\
-    \mathcal{L}_T & = -\frac{1}{N}\sum_{i=1}^{N}\log\frac{s(\boldsymbol{t}_i, \boldsymbol{v}_i) e^{\tau}}{\sum_{j=1}^{N} s(\boldsymbol{t}_i, \boldsymbol{v}_j) e^{\tau}}
+    \mathcal{L}_I & = -\frac{1}{N}\sum_{i=1}^{N}\log\frac{\exp^{\tau s(\boldsymbol{v}_i, \boldsymbol{t}_i)}}{\sum_{j=1}^{N} \exp^{\tau s(\boldsymbol{v}_i, \boldsymbol{t}_j)}} \\
+    \mathcal{L}_T & = -\frac{1}{N}\sum_{i=1}^{N}\log\frac{\exp^{\tau s(\boldsymbol{t}_i, \boldsymbol{v}_i)}}{\sum_{j=1}^{N} \exp^{\tau s(\boldsymbol{t}_i, \boldsymbol{v}_j)}}
 
-温度系数 :math:`\tau` 对 Logits 进行了平滑，控制了模型对负样本的区分度。
+温度系数 :math:`\tau` 对 Logits 进行了平滑，控制了模型对负样本的区分度。论文中对应的是 logit_scale，是一个可学习的标量参数，初始值为 :math:`\log \frac{1}{0.07}` 。
 
 表征向量 :math:`\boldsymbol{v}` 和 :math:`\boldsymbol{t}` 都经过 L2 归一化，约束在一个超球面上，有利于训练的稳定和泛化性能。
 
@@ -64,14 +64,22 @@ CLIP 不用做任何微调，也能实现 Zero-Shot 的图片分类。同时，�
 参考资料
 --------------
 
-1. CV大模型系列之：多模态经典之作CLIP，探索图文结合的奥秘
+1. Contrastive Language-Image Pre-Training
+
+  https://openai.com/index/clip/
+
+2. openai/CLIP
+
+  https://github.com/openai/CLIP
+
+3. CV大模型系列之：多模态经典之作CLIP，探索图文结合的奥秘
 
   https://juejin.cn/post/7264503343996747830
 
-2. CLIP：多模态领域革命者
+4. CLIP：多模态领域革命者
 
   https://zhuanlan.zhihu.com/p/555314976
 
-3. GPT: Improving Language Understanding by Generative Pre-Training
+5. GPT: Improving Language Understanding by Generative Pre-Training
 
   https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf

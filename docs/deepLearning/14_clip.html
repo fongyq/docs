@@ -142,9 +142,9 @@
 </ul>
 <div class="math notranslate nohighlight">
 \[\begin{split}\mathcal{L} &amp; = \frac{1}{2} (\mathcal{L}_I + \mathcal{L}_T) \\
-\mathcal{L}_I &amp; = -\frac{1}{N}\sum_{i=1}^{N}\log\frac{s(\boldsymbol{v}_i, \boldsymbol{t}_i) e^{\tau}}{\sum_{j=1}^{N} s(\boldsymbol{v}_i, \boldsymbol{t}_j) e^{\tau}} \\
-\mathcal{L}_T &amp; = -\frac{1}{N}\sum_{i=1}^{N}\log\frac{s(\boldsymbol{t}_i, \boldsymbol{v}_i) e^{\tau}}{\sum_{j=1}^{N} s(\boldsymbol{t}_i, \boldsymbol{v}_j) e^{\tau}}\end{split}\]</div>
-<p>温度系数 <span class="math notranslate nohighlight">\(\tau\)</span> 对 Logits 进行了平滑，控制了模型对负样本的区分度。</p>
+\mathcal{L}_I &amp; = -\frac{1}{N}\sum_{i=1}^{N}\log\frac{\exp^{\tau s(\boldsymbol{v}_i, \boldsymbol{t}_i)}}{\sum_{j=1}^{N} \exp^{\tau s(\boldsymbol{v}_i, \boldsymbol{t}_j)}} \\
+\mathcal{L}_T &amp; = -\frac{1}{N}\sum_{i=1}^{N}\log\frac{\exp^{\tau s(\boldsymbol{t}_i, \boldsymbol{v}_i)}}{\sum_{j=1}^{N} \exp^{\tau s(\boldsymbol{t}_i, \boldsymbol{v}_j)}}\end{split}\]</div>
+<p>温度系数 <span class="math notranslate nohighlight">\(\tau\)</span> 对 Logits 进行了平滑，控制了模型对负样本的区分度。论文中对应的是 logit_scale，是一个可学习的标量参数，初始值为 <span class="math notranslate nohighlight">\(\log \frac{1}{0.07}\)</span> 。</p>
 <p>表征向量 <span class="math notranslate nohighlight">\(\boldsymbol{v}\)</span> 和 <span class="math notranslate nohighlight">\(\boldsymbol{t}\)</span> 都经过 L2 归一化，约束在一个超球面上，有利于训练的稳定和泛化性能。</p>
 </section>
 <section id="zero-shot">
@@ -165,18 +165,30 @@
 <section id="id3">
 <h2><span class="section-number">14.4. </span>参考资料<a class="headerlink" href="#id3" title="Permalink to this headline"></a></h2>
 <ol class="arabic simple">
+<li><p>Contrastive Language-Image Pre-Training</p></li>
+</ol>
+<blockquote>
+<div><p><a class="reference external" href="https://openai.com/index/clip/">https://openai.com/index/clip/</a></p>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li><p>openai/CLIP</p></li>
+</ol>
+<blockquote>
+<div><p><a class="reference external" href="https://github.com/openai/CLIP">https://github.com/openai/CLIP</a></p>
+</div></blockquote>
+<ol class="arabic simple" start="3">
 <li><p>CV大模型系列之：多模态经典之作CLIP，探索图文结合的奥秘</p></li>
 </ol>
 <blockquote>
 <div><p><a class="reference external" href="https://juejin.cn/post/7264503343996747830">https://juejin.cn/post/7264503343996747830</a></p>
 </div></blockquote>
-<ol class="arabic simple" start="2">
+<ol class="arabic simple" start="4">
 <li><p>CLIP：多模态领域革命者</p></li>
 </ol>
 <blockquote>
 <div><p><a class="reference external" href="https://zhuanlan.zhihu.com/p/555314976">https://zhuanlan.zhihu.com/p/555314976</a></p>
 </div></blockquote>
-<ol class="arabic simple" start="3">
+<ol class="arabic simple" start="5">
 <li><p>GPT: Improving Language Understanding by Generative Pre-Training</p></li>
 </ol>
 <blockquote>

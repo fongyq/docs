@@ -224,13 +224,11 @@ s_{i,j} &amp;= \frac{\boldsymbol{z}_i^{\top} \boldsymbol{z}_j}{\left\Vert \bolds
 <a class="reference internal image-reference" href="../_images/15_mocov2.png"><img alt="../_images/15_mocov2.png" class="align-center" src="../_images/15_mocov2.png" style="width: 400px;" /></a>
 <p><a class="reference external" href="https://arxiv.org/pdf/2003.04297.pdf">MoCo v2</a> 的图像增强方法、Encoder、Projector、相似性计算方法以及 InfoNCE 损失函数和 SimCLR 基本一致。最主要的特点和创新在于：</p>
 <ul class="simple">
+<li><p>MoCo v2 维护了一个较大的负例队列，当需要在正例和负例之间进行对比计算时，就从这个负例队列里取 K 个，已经不局限于 Batch Size 的限制了。</p></li>
 <li><p>MoCo v2 的下分枝模型参数更新，则采用了动量更新（Momentum Update）机制。缓慢地更新模型参数（ <span class="math notranslate nohighlight">\(m\)</span> 接近 1.0 ），对队列中来自不同 Batch 的实例表征编码的改变会相对稳定而统一，增加了表示空间的一致性。</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[\theta_k \leftarrow m \theta_k + (1 - m) \theta_q\]</div>
-<ul class="simple">
-<li><p>MoCo v2 维护了一个较大的负例队列，当需要在正例和负例之间进行对比计算时，就从这个负例队列里取 K 个，已经不局限于 Batch Size 的限制了。</p></li>
-</ul>
 <p><a class="reference external" href="https://arxiv.org/pdf/1911.05722.pdf">MoCo</a> 还发现 BN 对性能是有负面影响的，可能是 BN 导致了 Batch 内各样本之间的信息泄露，使得模型发现了能够快速降低 Loss 的方法，所以提出了 Shuffle BN。</p>
 <figure class="align-center" id="id14">
 <a class="reference internal image-reference" href="../_images/15_mocoSimCLR.png"><img alt="../_images/15_mocoSimCLR.png" src="../_images/15_mocoSimCLR.png" style="width: 500px;" /></a>
@@ -259,8 +257,8 @@ s_{i,j} &amp;= \frac{\boldsymbol{z}_i^{\top} \boldsymbol{z}_j}{\left\Vert \bolds
 <p>BYOL 有两个不对称分支：Online 和 Target。Online 分支新增了一个非线性变换模块 Predictor；Target 依然采用动量更新结构。但是 BYOL 不用负例，所以并不需要维护负例队列。
 优化目标要求正例的 Online 部分在表示空间中向 Target 侧靠近，也即拉近两组图像增强正例之间的距离：</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}\mathcal{L} &amp; = \mathcal{L}(\boldsymbol{z}_1, \boldsymbol{v}_2) + \mathcal{L}(\boldsymbol{z}_2, \boldsymbol{v}_1) \\
-\mathcal{L}(\boldsymbol{z}, \boldsymbol{v}) &amp; = \left\lVert  \boldsymbol{z} - \boldsymbol{v} \right\rVert^2_2\end{split}\]</div>
+\[\begin{split}\mathcal{L} &amp; = \mathcal{L}(\boldsymbol{z}_1, \boldsymbol{q}_2) + \mathcal{L}(\boldsymbol{z}_2, \boldsymbol{q}_1) \\
+\mathcal{L}(\boldsymbol{z}, \boldsymbol{q}) &amp; = \left\lVert  \boldsymbol{z} - \boldsymbol{q} \right\rVert^2_2\end{split}\]</div>
 <p>BYOL 只用正例，防止模型坍塌的关键因素在于新加入的 Predictor 结构。</p>
 <p>有 <a class="reference external" href="https://imbue.com/research/2020-08-24-understanding-self-supervised-contrastive-learning/">分析</a> 指出 BYOL 的 Predictor 如果去掉 BN ，模型就无效了。</p>
 </section>
