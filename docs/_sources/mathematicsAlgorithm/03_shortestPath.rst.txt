@@ -269,3 +269,48 @@ Dijkstra 算法
                       pn[v] = pn[v] % MOD
               return pn[-1]
 
+- [LeetCode] 到达目的地的最短时间。
+
+  https://leetcode.com/problems/minimum-time-to-visit-a-cell-in-a-grid
+
+  .. container:: toggle
+
+    .. container:: header
+
+      :math:`\color{darkgreen}{Code}`
+
+    .. code-block:: python
+      :linenos:
+
+      from queue import PriorityQueue
+      class Solution:
+          def minimumTime(self, grid: List[List[int]]) -> int:
+              m, n = len(grid), len(grid[0])
+              assert m >= 2 and n >= 2
+              ## 先排除一步也走不出去的情形
+              if grid[0][1] > 1 and grid[1][0] > 1:
+                  return -1
+              visited = [[False] * n for _ in range(m)]
+              pq = PriorityQueue()
+              pq.put((0, 0, 0)) ## (time, row, col)
+              visited[0][0] = True
+              while not pq.empty():
+                  t, r, c = pq.get()
+                  if r == m - 1 and c == n - 1:
+                      return t
+                  for dr, dc in [(-1,0), (0,-1), (1,0), (0,1)]:
+                      _r, _c = r + dr, c + dc
+                      if 0 <= _r < m and 0 <= _c < n and not visited[_r][_c]:
+                          visited[_r][_c] = True
+                          if grid[_r][_c] <= t + 1:
+                              ## 下一步直接迈进 (_r, _c)
+                              pq.put((t + 1, _r, _c))
+                          else:
+                              ## 在第 t 和 t-1 步之间来回踱步，以达到时间要求
+                              ## 这里导致先入队的不一定是先到达的节点，所以使用的是优先队列
+                              diff = grid[_r][_c] - t
+                              if diff & 1:
+                                  pq.put((grid[_r][_c], _r, _c))
+                              else:
+                                  pq.put((grid[_r][_c] + 1, _r, _c))
+              return -1

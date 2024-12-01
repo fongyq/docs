@@ -377,6 +377,48 @@
 </div>
 </div>
 </li>
+<li><p>[LeetCode] 到达目的地的最短时间。</p>
+<p><a class="reference external" href="https://leetcode.com/problems/minimum-time-to-visit-a-cell-in-a-grid">https://leetcode.com/problems/minimum-time-to-visit-a-cell-in-a-grid</a></p>
+<div class="toggle docutils container">
+<div class="header docutils container">
+<p><span class="math notranslate nohighlight">\(\color{darkgreen}{Code}\)</span></p>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">from</span> <span class="nn">queue</span> <span class="kn">import</span> <span class="n">PriorityQueue</span>
+<span class="linenos"> 2</span><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+<span class="linenos"> 3</span>    <span class="k">def</span> <span class="nf">minimumTime</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">grid</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="linenos"> 4</span>        <span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">grid</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">grid</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="linenos"> 5</span>        <span class="k">assert</span> <span class="n">m</span> <span class="o">&gt;=</span> <span class="mi">2</span> <span class="ow">and</span> <span class="n">n</span> <span class="o">&gt;=</span> <span class="mi">2</span>
+<span class="linenos"> 6</span>        <span class="c1">## 先排除一步也走不出去的情形</span>
+<span class="linenos"> 7</span>        <span class="k">if</span> <span class="n">grid</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">grid</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+<span class="linenos"> 8</span>            <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+<span class="linenos"> 9</span>        <span class="n">visited</span> <span class="o">=</span> <span class="p">[[</span><span class="kc">False</span><span class="p">]</span> <span class="o">*</span> <span class="n">n</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">)]</span>
+<span class="linenos">10</span>        <span class="n">pq</span> <span class="o">=</span> <span class="n">PriorityQueue</span><span class="p">()</span>
+<span class="linenos">11</span>        <span class="n">pq</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span> <span class="c1">## (time, row, col)</span>
+<span class="linenos">12</span>        <span class="n">visited</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="linenos">13</span>        <span class="k">while</span> <span class="ow">not</span> <span class="n">pq</span><span class="o">.</span><span class="n">empty</span><span class="p">():</span>
+<span class="linenos">14</span>            <span class="n">t</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">pq</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+<span class="linenos">15</span>            <span class="k">if</span> <span class="n">r</span> <span class="o">==</span> <span class="n">m</span> <span class="o">-</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">c</span> <span class="o">==</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+<span class="linenos">16</span>                <span class="k">return</span> <span class="n">t</span>
+<span class="linenos">17</span>            <span class="k">for</span> <span class="n">dr</span><span class="p">,</span> <span class="n">dc</span> <span class="ow">in</span> <span class="p">[(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)]:</span>
+<span class="linenos">18</span>                <span class="n">_r</span><span class="p">,</span> <span class="n">_c</span> <span class="o">=</span> <span class="n">r</span> <span class="o">+</span> <span class="n">dr</span><span class="p">,</span> <span class="n">c</span> <span class="o">+</span> <span class="n">dc</span>
+<span class="linenos">19</span>                <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">_r</span> <span class="o">&lt;</span> <span class="n">m</span> <span class="ow">and</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">_c</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">visited</span><span class="p">[</span><span class="n">_r</span><span class="p">][</span><span class="n">_c</span><span class="p">]:</span>
+<span class="linenos">20</span>                    <span class="n">visited</span><span class="p">[</span><span class="n">_r</span><span class="p">][</span><span class="n">_c</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="linenos">21</span>                    <span class="k">if</span> <span class="n">grid</span><span class="p">[</span><span class="n">_r</span><span class="p">][</span><span class="n">_c</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">t</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:</span>
+<span class="linenos">22</span>                        <span class="c1">## 下一步直接迈进 (_r, _c)</span>
+<span class="linenos">23</span>                        <span class="n">pq</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="n">t</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">_r</span><span class="p">,</span> <span class="n">_c</span><span class="p">))</span>
+<span class="linenos">24</span>                    <span class="k">else</span><span class="p">:</span>
+<span class="linenos">25</span>                        <span class="c1">## 在第 t 和 t-1 步之间来回踱步，以达到时间要求</span>
+<span class="linenos">26</span>                        <span class="c1">## 这里导致先入队的不一定是先到达的节点，所以使用的是优先队列</span>
+<span class="linenos">27</span>                        <span class="n">diff</span> <span class="o">=</span> <span class="n">grid</span><span class="p">[</span><span class="n">_r</span><span class="p">][</span><span class="n">_c</span><span class="p">]</span> <span class="o">-</span> <span class="n">t</span>
+<span class="linenos">28</span>                        <span class="k">if</span> <span class="n">diff</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">:</span>
+<span class="linenos">29</span>                            <span class="n">pq</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="n">grid</span><span class="p">[</span><span class="n">_r</span><span class="p">][</span><span class="n">_c</span><span class="p">],</span> <span class="n">_r</span><span class="p">,</span> <span class="n">_c</span><span class="p">))</span>
+<span class="linenos">30</span>                        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">31</span>                            <span class="n">pq</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="n">grid</span><span class="p">[</span><span class="n">_r</span><span class="p">][</span><span class="n">_c</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">_r</span><span class="p">,</span> <span class="n">_c</span><span class="p">))</span>
+<span class="linenos">32</span>        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+</li>
 </ul>
 </section>
 </section>
