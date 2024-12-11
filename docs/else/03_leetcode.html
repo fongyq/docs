@@ -5136,6 +5136,33 @@ $$</div><div class="toggle docutils container">
 </div>
 </div>
 </li>
+<li><p>[LeetCode] Maximum Beauty of an Array After Applying Operation 数组最大美感（最大重叠区间个数）。</p>
+<p><a class="reference external" href="https://leetcode.com/problems/maximum-beauty-of-an-array-after-applying-operation">https://leetcode.com/problems/maximum-beauty-of-an-array-after-applying-operation</a></p>
+<div class="toggle docutils container">
+<div class="header docutils container">
+<p><span class="math notranslate nohighlight">\(\color{darkgreen}{Code}\)</span></p>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+<span class="linenos"> 2</span><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+<span class="linenos"> 3</span>    <span class="k">def</span> <span class="nf">maximumBeauty</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="linenos"> 4</span>        <span class="n">intervals</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="linenos"> 5</span>        <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">:</span>
+<span class="linenos"> 6</span>            <span class="n">intervals</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">num</span> <span class="o">-</span> <span class="n">k</span><span class="p">,</span> <span class="n">num</span> <span class="o">+</span> <span class="n">k</span><span class="p">))</span>
+<span class="linenos"> 7</span>        <span class="n">intervals</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">intervals</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="linenos"> 8</span>        <span class="n">beauty</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="linenos"> 9</span>        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+<span class="linenos">10</span>        <span class="n">dq</span> <span class="o">=</span> <span class="n">deque</span><span class="p">()</span>
+<span class="linenos">11</span>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="linenos">12</span>            <span class="n">s</span><span class="p">,</span> <span class="n">e</span> <span class="o">=</span> <span class="n">intervals</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+<span class="linenos">13</span>            <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">dq</span><span class="p">)</span> <span class="ow">and</span> <span class="n">intervals</span><span class="p">[</span><span class="n">dq</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">s</span><span class="p">:</span>
+<span class="linenos">14</span>                <span class="n">dq</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span>
+<span class="linenos">15</span>            <span class="n">dq</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="linenos">16</span>            <span class="n">beauty</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">beauty</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">dq</span><span class="p">))</span>
+<span class="linenos">17</span>        <span class="k">return</span> <span class="n">beauty</span>
+</pre></div>
+</div>
+</div>
+</li>
 </ul>
 </section>
 <section id="leetcode-stone-game">

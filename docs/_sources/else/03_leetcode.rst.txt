@@ -5412,6 +5412,38 @@ https://leetcode.com/problems/restore-the-array
                         ans += 1
                 return ans
 
+- [LeetCode] Maximum Beauty of an Array After Applying Operation 数组最大美感（最大重叠区间个数）。
+
+  https://leetcode.com/problems/maximum-beauty-of-an-array-after-applying-operation
+
+  .. container:: toggle
+
+      .. container:: header
+
+          :math:`\color{darkgreen}{Code}`
+
+      .. code-block:: python
+        :linenos:
+
+        from collections import deque
+        class Solution:
+            def maximumBeauty(self, nums: List[int], k: int) -> int:
+                intervals = []
+                for num in nums:
+                    intervals.append((num - k, num + k))
+                intervals = sorted(intervals, key=lambda x: x[1])
+                beauty = 1
+                n = len(nums)
+                dq = deque()
+                for i in range(n):
+                    s, e = intervals[i]
+                    while len(dq) and intervals[dq[0]][1] < s:
+                        dq.popleft()
+                    dq.append(i)
+                    beauty = max(beauty, len(dq))
+                return beauty
+
+
 [LeetCode] Stone Game 石头游戏
 ----------------------------------------------------------------
 
