@@ -3969,6 +3969,42 @@ https://leetcode.com/problems/take-k-of-each-character-from-left-and-right
                     res = min(res, n - (r - l + 1))
                 return res
 
+[LeetCode] Continuous Subarrays 连续数组（元素之差不超过 2）的数量
+--------------------------------------------------------------------------------------------
+
+Hint：双指针。字典插入、删除、查找最大值/最小值的时间复杂度是 :math:`\mathcal{O}(\log k)` 。
+
+https://leetcode.com/problems/continuous-subarrays
+
+  .. container:: toggle
+
+    .. container:: header
+
+      :math:`\color{darkgreen}{Code}`
+
+    .. code-block:: python
+        :linenos:
+
+        from collections import defaultdict
+        class Solution:
+            def continuousSubarrays(self, nums: List[int]) -> int:
+                freq = defaultdict(int)
+                left, right = 0, 0
+                cnt = 0
+                n = len(nums)
+                while right < n:
+                    freq[nums[right]] += 1
+                    ## min/max 复杂度 O(log k), k <= 3
+                    while left <= right and max(freq) - min(freq) > 2:
+                        freq[nums[left]] -= 1
+                        ## 出队，避免影响 min/max 的统计
+                        if freq[nums[left]] == 0:
+                            freq.pop(nums[left])
+                        left += 1
+                    ## 以 right 结尾的子数组个数
+                    cnt += right - left + 1
+                    right += 1
+                return cnt
 
 [LeetCode] Nth Digit 第 :math:`N` 个数字
 --------------------------------------------------------------------------------------------
