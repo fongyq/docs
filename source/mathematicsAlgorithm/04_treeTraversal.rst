@@ -629,6 +629,40 @@
           }
       };
 
+- [LeetCode] Reverse Odd Levels of Binary Tree 翻转完全二叉树奇数层节点的值。Hint：DFS，需要交换值的两个节点位置是对称的。
+
+  https://leetcode.com/problems/reverse-odd-levels-of-binary-tree
+
+  .. container:: toggle
+
+    .. container:: header
+
+      :math:`\color{darkgreen}{Code}`
+
+    .. code-block:: python
+      :linenos:
+
+      # Definition for a binary tree node.
+      # class TreeNode:
+      #     def __init__(self, val=0, left=None, right=None):
+      #         self.val = val
+      #         self.left = left
+      #         self.right = right
+      class Solution:
+          def reverseOddLevels(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+              if not root:
+                  return root
+              self.dfs(root.left, root.right, 1)
+              return root
+
+          def dfs(self, l, r, level):
+              if not l or not r:
+                  return
+              if level & 1:
+                  l.val, r.val = r.val, l.val
+              self.dfs(l.left, r.right, level + 1)
+              self.dfs(l.right, r.left, level + 1)
+
 
 参考资料
 --------------

@@ -702,6 +702,36 @@
 </div>
 </div>
 </li>
+<li><p>[LeetCode] Reverse Odd Levels of Binary Tree 翻转完全二叉树奇数层节点的值。Hint：DFS，需要交换值的两个节点位置是对称的。</p>
+<p><a class="reference external" href="https://leetcode.com/problems/reverse-odd-levels-of-binary-tree">https://leetcode.com/problems/reverse-odd-levels-of-binary-tree</a></p>
+<div class="toggle docutils container">
+<div class="header docutils container">
+<p><span class="math notranslate nohighlight">\(\color{darkgreen}{Code}\)</span></p>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># Definition for a binary tree node.</span>
+<span class="linenos"> 2</span><span class="c1"># class TreeNode:</span>
+<span class="linenos"> 3</span><span class="c1">#     def __init__(self, val=0, left=None, right=None):</span>
+<span class="linenos"> 4</span><span class="c1">#         self.val = val</span>
+<span class="linenos"> 5</span><span class="c1">#         self.left = left</span>
+<span class="linenos"> 6</span><span class="c1">#         self.right = right</span>
+<span class="linenos"> 7</span><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+<span class="linenos"> 8</span>    <span class="k">def</span> <span class="nf">reverseOddLevels</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">TreeNode</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">TreeNode</span><span class="p">]:</span>
+<span class="linenos"> 9</span>        <span class="k">if</span> <span class="ow">not</span> <span class="n">root</span><span class="p">:</span>
+<span class="linenos">10</span>            <span class="k">return</span> <span class="n">root</span>
+<span class="linenos">11</span>        <span class="bp">self</span><span class="o">.</span><span class="n">dfs</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">left</span><span class="p">,</span> <span class="n">root</span><span class="o">.</span><span class="n">right</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="linenos">12</span>        <span class="k">return</span> <span class="n">root</span>
+<span class="linenos">13</span>
+<span class="linenos">14</span>    <span class="k">def</span> <span class="nf">dfs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">level</span><span class="p">):</span>
+<span class="linenos">15</span>        <span class="k">if</span> <span class="ow">not</span> <span class="n">l</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">r</span><span class="p">:</span>
+<span class="linenos">16</span>            <span class="k">return</span>
+<span class="linenos">17</span>        <span class="k">if</span> <span class="n">level</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">:</span>
+<span class="linenos">18</span>            <span class="n">l</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">val</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="n">l</span><span class="o">.</span><span class="n">val</span>
+<span class="linenos">19</span>        <span class="bp">self</span><span class="o">.</span><span class="n">dfs</span><span class="p">(</span><span class="n">l</span><span class="o">.</span><span class="n">left</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">right</span><span class="p">,</span> <span class="n">level</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="linenos">20</span>        <span class="bp">self</span><span class="o">.</span><span class="n">dfs</span><span class="p">(</span><span class="n">l</span><span class="o">.</span><span class="n">right</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">left</span><span class="p">,</span> <span class="n">level</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</li>
 </ul>
 </section>
 <section id="id8">
