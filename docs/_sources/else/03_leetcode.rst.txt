@@ -5831,7 +5831,7 @@ Hint：总在第一个队列压入最新元素。
                         stk.pop()
                         h = height[last]
                         pre = stk[-1] if stk else -1
-                        ## 计算 [pre, i) 之间的 bar 构成的矩形面积
+                        ## 计算 [pre + 1, i - 1] 之间的 bar 构成的矩形面积
                         ## pre = -1 代表高度最低的矩形，面积为 h * i
                         ans = max(ans, h * (i - 1 - pre))
                     ## 入栈

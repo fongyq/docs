@@ -5517,7 +5517,7 @@ $$</div><div class="toggle docutils container">
 <span class="linenos">17</span>                <span class="n">stk</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
 <span class="linenos">18</span>                <span class="n">h</span> <span class="o">=</span> <span class="n">height</span><span class="p">[</span><span class="n">last</span><span class="p">]</span>
 <span class="linenos">19</span>                <span class="n">pre</span> <span class="o">=</span> <span class="n">stk</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="n">stk</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span>
-<span class="linenos">20</span>                <span class="c1">## 计算 [pre, i) 之间的 bar 构成的矩形面积</span>
+<span class="linenos">20</span>                <span class="c1">## 计算 [pre + 1, i - 1] 之间的 bar 构成的矩形面积</span>
 <span class="linenos">21</span>                <span class="c1">## pre = -1 代表高度最低的矩形，面积为 h * i</span>
 <span class="linenos">22</span>                <span class="n">ans</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="n">h</span> <span class="o">*</span> <span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">pre</span><span class="p">))</span>
 <span class="linenos">23</span>            <span class="c1">## 入栈</span>
