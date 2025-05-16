@@ -49,6 +49,10 @@
 
 - ``git push <远程主机名> <本地分支名>:<远程分支名>`` 将本地分支的更新，推送到远程主机。
 
+- ``git push origin --delete <远程分支名>`` 删除远程分支。
+
+- ``git push -u origin <本地分支名>`` 或 ``git push --set-upstream origin <本地分支名>`` 将本地新创建的分支推送到远程。
+
 .. note::
 
   git clone 只拉取远程仓库的 master 分支，如果想拉取其他分支：

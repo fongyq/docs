@@ -137,11 +137,12 @@
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-<p><a class="reference external" href="https://git-scm.com/docs/git-merge">git merge</a> 会产生一条额外的 commit 记录，如果希望得到更干净、直观的记录，可以使用 <a class="reference external" href="https://git-scm.com/docs/git-rebase">git rebase</a> 。rebase 操作还能用于合并多次提交记录。
-但是不建议在公共分支（如 master）进行 rebase 操作，避免出现代码提交记录错乱和浪费存储空间的现象。</p>
+<p><a class="reference external" href="https://git-scm.com/docs/git-merge">git merge</a> 会产生额外的 commit 记录，如果希望得到更干净、直观的记录，可以使用 <a class="reference external" href="https://git-scm.com/docs/git-rebase">git rebase</a> 。
+rebase 操作还能用于合并多次提交记录。在开发分支 rebase 之后，推到远程需要使用 <code class="docutils literal notranslate"><span class="pre">push</span> <span class="pre">-f</span></code> ，因为 rebase 会生成新的 commit 顶在 master 最前面。
+不建议在公共分支（如 master）进行 rebase 其他分支的操作，避免出现代码提交记录错乱和浪费存储空间的现象。</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>协同开发场景下，在开发自己的分支时，要注意合并 master 分支的最新更新： <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span> <span class="pre">origin</span> <span class="pre">master</span></code> ，手动解决冲突。</p>
+<p>协同开发场景下，在开发自己的分支时，要注意合并 master 分支的最新更新： <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span> <span class="pre">origin</span> <span class="pre">master</span></code> 或 <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rebase</span> <span class="pre">master</span></code> ，手动解决冲突。</p>
 </div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
@@ -199,6 +200,12 @@
 </ol>
 <blockquote>
 <div><p><a class="reference external" href="https://dingjingmaster.github.io/2022/05/0002-rebase%E4%B8%8Emerge%E7%9A%84%E5%8C%BA%E5%88%AB/">https://dingjingmaster.github.io/2022/05/0002-rebase%E4%B8%8Emerge%E7%9A%84%E5%8C%BA%E5%88%AB/</a></p>
+</div></blockquote>
+<ol class="arabic simple" start="8">
+<li><p>【git命令】git rebase合并多次commit操作</p></li>
+</ol>
+<blockquote>
+<div><p><a class="reference external" href="https://www.cnblogs.com/sunbines/p/15478014.html">https://www.cnblogs.com/sunbines/p/15478014.html</a></p>
 </div></blockquote>
 </section>
 </section>
