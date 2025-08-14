@@ -90,6 +90,16 @@ Layer Normalization
 
 Layer Normalization 的作用是对神经网络中隐藏层输出的 Embedding 施加尺度约束，将其归一为标准正态分布，以起到加快训练速度、加速收敛的作用。
 
+Feed Forward Network
+---------------------------
+
+两层全连接结构：
+
+.. math::
+
+    \mathrm{FFN(x)} = \max(0, xW_1 + b_1)W_2 + b_2
+
+:math:`W_1` 将输入的维度扩展为 :math:`4d` ，:math:`W_2` 重新降回原来的维度 :math:`d` 。
 
 CV 领域的应用
 -------------------------

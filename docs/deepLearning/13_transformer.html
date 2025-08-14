@@ -78,12 +78,13 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#layer-normalization">13.5. Layer Normalization</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#cv">13.6. CV 领域的应用</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#feed-forward-network">13.6. Feed Forward Network</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cv">13.7. CV 领域的应用</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#id5">ViT</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#id6">Swin Transformer</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#id8">13.7. 参考资料</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">13.8. 参考资料</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="14_clip.html">14. 多模态 CLIP 模型</a></li>
@@ -192,8 +193,15 @@ Multi-Head Attention时间复杂度也是 <span class="math notranslate nohighli
 <h2><span class="section-number">13.5. </span>Layer Normalization<a class="headerlink" href="#layer-normalization" title="Permalink to this headline"></a></h2>
 <p>Layer Normalization 的作用是对神经网络中隐藏层输出的 Embedding 施加尺度约束，将其归一为标准正态分布，以起到加快训练速度、加速收敛的作用。</p>
 </section>
+<section id="feed-forward-network">
+<h2><span class="section-number">13.6. </span>Feed Forward Network<a class="headerlink" href="#feed-forward-network" title="Permalink to this headline"></a></h2>
+<p>两层全连接结构：</p>
+<div class="math notranslate nohighlight">
+\[\mathrm{FFN(x)} = \max(0, xW_1 + b_1)W_2 + b_2\]</div>
+<p><span class="math notranslate nohighlight">\(W_1\)</span> 将输入的维度扩展为 <span class="math notranslate nohighlight">\(4d\)</span> ，<span class="math notranslate nohighlight">\(W_2\)</span> 重新降回原来的维度 <span class="math notranslate nohighlight">\(d\)</span> 。</p>
+</section>
 <section id="cv">
-<h2><span class="section-number">13.6. </span>CV 领域的应用<a class="headerlink" href="#cv" title="Permalink to this headline"></a></h2>
+<h2><span class="section-number">13.7. </span>CV 领域的应用<a class="headerlink" href="#cv" title="Permalink to this headline"></a></h2>
 <section id="id5">
 <h3><a class="reference external" href="https://arxiv.org/pdf/2010.11929.pdf">ViT</a><a class="headerlink" href="#id5" title="Permalink to this headline"></a></h3>
 <a class="reference internal image-reference" href="../_images/13_vit.png"><img alt="../_images/13_vit.png" class="align-center" src="../_images/13_vit.png" style="width: 600px;" /></a>
@@ -291,7 +299,7 @@ CNN 具有两种归纳偏置：</p>
 </section>
 </section>
 <section id="id8">
-<h2><span class="section-number">13.7. </span>参考资料<a class="headerlink" href="#id8" title="Permalink to this headline"></a></h2>
+<h2><span class="section-number">13.8. </span>参考资料<a class="headerlink" href="#id8" title="Permalink to this headline"></a></h2>
 <ol class="arabic simple">
 <li><p>Transformer</p></li>
 </ol>
