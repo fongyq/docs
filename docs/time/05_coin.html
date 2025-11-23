@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>5. 抛硬币 &mdash; fong alpha documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/magnum.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/js/chinese-lunar.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="快速访问" href="../link/index.html" />
+    <link rel="prev" title="4. 时间戳" href="04_timestamp.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> fong
+            <img src="../_static/magnum.jpg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                alpha
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">目录</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">现在时刻</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01_timer.html">1. 计时器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_countdown.html">2. 倒计时</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_jump.html">3. 日期跳转</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_timestamp.html">4. 时间戳</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">5. 抛硬币</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../link/index.html">快速访问</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ascii/index.html">ASCII 码</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cpp/index.html">C/C++</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../python/index.html">Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../linux/index.html">Linux/Shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../git/index.html">Git</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../machineLearning/index.html">机器学习</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deepLearning/index.html">深度学习</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathematicsAlgorithm/index.html">数理与算法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../recommender/index.html">推荐系统</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../regularExpression/index.html">正则表达式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cron/index.html">Cron 表达式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computerNetwork/index.html">计算机网络</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../softwares/index.html">实用软件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tech/index.html">技巧</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../else/index.html">其他</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">fong</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">现在时刻</a> &raquo;</li>
+      <li><span class="section-number">5. </span>抛硬币</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/time/05_coin.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1><span class="section-number">5. </span>抛硬币<a class="headerlink" href="#id1" title="Permalink to this headline"></a></h1>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>coin</title>
+    <style>
+        .container {
+            text-align: center;
+            height: 90%;
+            margin: 2%;
+            background: rgba(48,100,242,0.3);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        h1 {
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .subtitle {
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .coin-container {
+            perspective: 1000px;
+            margin: 40px auto;
+            width: 200px;
+            height: 200px;
+        }
+
+        .coin {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        }
+
+        .coin.animate {
+            animation: flip 3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        }
+
+        .coin-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            backface-visibility: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 5rem;
+            font-weight: bold;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            border: 8px solid #ffd700;
+            background: linear-gradient(145deg, #ffd700, #daa520);
+            color: white;
+        }
+
+        .coin-face.front {
+            background: linear-gradient(145deg, #ffd700, #daa520);
+        }
+
+        .coin-face.back {
+            background: linear-gradient(145deg, #daa520, #ffd700);
+            transform: rotateY(180deg);
+        }
+
+        .coin-face::after {
+            content: '';
+            position: absolute;
+            width: 90%;
+            height: 90%;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .controls {
+            margin-top: 30px;
+        }
+
+        .btn {
+            width: 20%;
+            background: #ffd700;
+            color: rgb(48,100,242);
+            border: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:hover {
+            background: #ffed4e;
+            transform: translateY(-3px);
+        }
+
+
+        .result {
+            margin-top: 20px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 30px;
+            background-color: rgba(98,124,244,0.3);
+            border-radius: 15px;
+            padding: 15px;
+        }
+
+        .stat-item {
+            text-align: center;
+            color: rgba(255,255,255,0.99);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        @keyframes flip {
+            0% {
+                transform: rotateY(0) scale(1);
+            }
+            20% {
+                transform: rotateY(720deg) scale(1.1);
+            }
+            40% {
+                transform: rotateY(1440deg) scale(1.05);
+            }
+            60% {
+                transform: rotateY(2160deg) scale(1.1);
+            }
+            80% {
+                transform: rotateY(2880deg) scale(1.05);
+            }
+            100% {
+                transform: rotateY(3600deg) scale(1);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .coin-container {
+                width: 150px;
+                height: 150px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="coin-container">
+            <div class="coin" id="coin">
+                <div class="coin-face front">正</div>
+                <div class="coin-face back">反</div>
+            </div>
+        </div>
+
+        <div class="result" id="result">点击「抛硬币」开始</div>
+
+        <div class="controls">
+            <button class="btn" id="flipButton">抛硬币</button>
+        </div>
+
+        <div class="stats">
+            <div class="stat-item">
+                <div class="stat-value" id="headsCount">0</div>
+                <div class="stat-label">正面次数</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="tailsCount">0</div>
+                <div class="stat-label">反面次数</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="totalFlips">0</div>
+                <div class="stat-label">总次数</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const coin = document.getElementById('coin');
+            const flipButton = document.getElementById('flipButton');
+            const result = document.getElementById('result');
+            const headsCount = document.getElementById('headsCount');
+            const tailsCount = document.getElementById('tailsCount');
+            const totalFlips = document.getElementById('totalFlips');
+
+            let isFlipping = false;
+            let heads = 0;
+            let tails = 0;
+            let total = 0;
+
+            flipButton.addEventListener('click', function() {
+                if (isFlipping) return;
+
+                isFlipping = true;
+                result.textContent = "硬币旋转中...";
+                flipButton.disabled = true;
+
+                // 移除之前的动画类
+                coin.classList.remove('animate');
+
+                // 触发重绘
+                void coin.offsetWidth;
+
+                // 添加动画类
+                coin.classList.add('animate');
+
+                // 随机决定结果
+                const randomResult = Math.random() < 0.5 ? 'heads' : 'tails';
+
+                // 更新统计数据
+                total++;
+                if (randomResult === 'heads') {
+                    heads++;
+                } else {
+                    tails++;
+                }
+
+                // 动画结束后显示结果
+                setTimeout(function() {
+                    coin.classList.remove('animate');
+
+                    // 设置最终硬币方向
+                    if (randomResult === 'heads') {
+                        coin.style.transform = 'rotateY(0deg)';
+                        result.textContent = "结果是：正面";
+                        result.style.color = "#4CAF50";
+                    } else {
+                        coin.style.transform = 'rotateY(180deg)';
+                        result.textContent = "结果是：反面";
+                        result.style.color = "#F44336";
+                    }
+
+                    // 更新统计显示
+                    headsCount.textContent = heads;
+                    tailsCount.textContent = tails;
+                    totalFlips.textContent = total;
+
+                    isFlipping = false;
+                    flipButton.disabled = false;
+                }, 3000);
+            });
+        });
+    </script>
+</body>
+</html></section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="04_timestamp.html" class="btn btn-neutral float-left" title="4. 时间戳" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../link/index.html" class="btn btn-neutral float-right" title="快速访问" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2018-2025, fong.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+<script type="text/javascript">
+    $(document).ready(function() {
+     $(".toggle > *").hide();
+     $(".toggle .header").show();
+     $(".toggle .header").click(function() {
+      $(this).parent().children().not(".header").toggle(400);
+      $(this).parent().children(".header").toggleClass("open");
+     })
+    });
+</script>
+
+
+</body>
+</html>

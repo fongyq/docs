@@ -257,3 +257,4 @@
     02_countdown.rst
     03_jump.rst
     04_timestamp.rst
+    05_coin.rst
