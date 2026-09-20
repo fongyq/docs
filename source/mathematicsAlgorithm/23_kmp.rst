@@ -90,7 +90,7 @@
     vector<int> pi(n); // pi[0] = 0
     for (int i = 1; i < n; i++)
       for (int j = i; j >= 0; j--)
-        if (s.substr(0, j) == s.substr(i - j + 1, j))
+        if (s.substr(0, j) == s.substr(i - j + 1, i))
         {
           pi[i] = j;
           break;

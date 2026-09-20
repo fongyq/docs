@@ -97,7 +97,7 @@
       for(int i = 0; i <= n; ++i)
       {
         parent[i] = i;
-        rank[i] = i;
+        rank[i] = 1;
       }
     }
 
