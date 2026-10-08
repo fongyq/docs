@@ -64,6 +64,204 @@ Multi-Head Attention 相当于 :math:`h` 个不同的 Self-Attention 的集成�
 
     `Self-Attention 示例 <https://jalammar.github.io/illustrated-transformer/>`_
     
+.. note::
+
+    Q 决定：我要关注谁；
+
+    K 决定：我有多容易被关注；
+
+    V 决定：被关注后我贡献什么信息。
+
+.. container:: toggle
+
+  .. container:: header
+
+    :math:`\color{darkgreen}{Code}`
+
+  .. code-block:: python
+    :linenos:
+
+    import numpy as np
+
+
+    def softmax_with_mask(scores, mask=None):
+        """
+        带 mask 的 softmax。
+
+        参数:
+            scores: 形状 (..., L, S)，注意力分数
+            mask:   形状可广播到 scores 的布尔数组，True 表示保留，False 表示屏蔽
+
+        返回:
+            attn: 形状同 scores，每行和为 1；如果某一行全被屏蔽，则该行全为 0
+        """
+        if mask is not None:
+            # 被屏蔽的位置设为 -inf，这样 exp 后为 0
+            scores = np.where(mask, scores, -np.inf)
+
+        # 数值稳定：减去每行最大值
+        max_scores = np.max(scores, axis=-1, keepdims=True)
+
+        # 如果某一行全部被 mask，max_scores 可能是 -inf，需要特殊处理
+        all_masked = np.isneginf(max_scores)
+        max_scores = np.where(all_masked, 0.0, max_scores)
+
+        exp_scores = np.exp(scores - max_scores)
+        sum_exp = np.sum(exp_scores, axis=-1, keepdims=True)
+
+        # 避免除零：全 masked 行 sum_exp 为 0，令其输出全 0
+        sum_exp = np.where(sum_exp == 0, 1.0, sum_exp)
+        attn = exp_scores / sum_exp
+        return attn
+
+
+    class MultiHeadAttention:
+        def __init__(self, d_model, num_heads, seed=0):
+            """
+            参数:
+                d_model: 模型维度
+                num_heads: 注意力头数
+                seed: 随机种子
+            """
+            assert d_model % num_heads == 0, "d_model 必须能被 num_heads 整除"
+
+            self.d_model = d_model
+            self.num_heads = num_heads
+            self.head_dim = d_model // num_heads
+
+            rng = np.random.default_rng(seed)
+
+            # Xavier/Glorot 初始化
+            limit = np.sqrt(6.0 / (d_model + d_model))
+            self.W_q = rng.uniform(-limit, limit, (d_model, d_model))
+            self.W_k = rng.uniform(-limit, limit, (d_model, d_model))
+            self.W_v = rng.uniform(-limit, limit, (d_model, d_model))
+            self.W_o = rng.uniform(-limit, limit, (d_model, d_model))
+
+            self.b_q = np.zeros(d_model)
+            self.b_k = np.zeros(d_model)
+            self.b_v = np.zeros(d_model)
+            self.b_o = np.zeros(d_model)
+
+        def _split_heads(self, x):
+            """
+            将 (B, seq_len, d_model) 拆分为多头:
+            (B, seq_len, num_heads, head_dim) -> (B, num_heads, seq_len, head_dim)
+            """
+            batch, seq_len, _ = x.shape
+            x = x.reshape(batch, seq_len, self.num_heads, self.head_dim)
+            return x.transpose(0, 2, 1, 3)
+
+        def _combine_heads(self, x):
+            """
+            将多头合并回 (B, seq_len, d_model)
+            x: (B, num_heads, seq_len, head_dim)
+            """
+            batch, num_heads, seq_len, head_dim = x.shape
+            x = x.transpose(0, 2, 1, 3)  # (B, seq_len, num_heads, head_dim)
+            return x.reshape(batch, seq_len, self.d_model)
+
+        def forward(self, query, key, value, attn_mask=None, key_padding_mask=None):
+            """
+            多头注意力前向计算。
+
+            参数:
+                query: (B, q_len, d_model)
+                key:   (B, k_len, d_model)
+                value: (B, k_len, d_model)
+                attn_mask: 
+                    - 形状 (q_len, k_len) 或 (B, q_len, k_len)
+                    - 布尔数组，True 表示保留，False 表示屏蔽
+                    - 常用于 causal mask（自回归时屏蔽未来位置）
+                key_padding_mask:
+                    - 形状 (B, k_len)
+                    - 布尔数组，True 表示保留，False 表示屏蔽（即 padding 位置为 False）
+                    - 用于屏蔽 key/value 中的 padding token
+
+            返回:
+                output: (B, q_len, d_model)
+                attn_weights: (B, num_heads, q_len, k_len)
+            """
+            # 1. 线性投影得到 Q, K, V
+            q = query @ self.W_q + self.b_q  # (B, q_len, d_model)
+            k = key @ self.W_k + self.b_k    # (B, k_len, d_model)
+            v = value @ self.W_v + self.b_v  # (B, k_len, d_model)
+
+            # 2. 分头
+            q = self._split_heads(q)  # (B, H, q_len, head_dim)
+            k = self._split_heads(k)  # (B, H, k_len, head_dim)
+            v = self._split_heads(v)  # (B, H, k_len, head_dim)
+
+            # 3. 缩放点积注意力分数
+            # scores: (B, H, q_len, k_len)
+            scores = q @ k.transpose(0, 1, 3, 2) / np.sqrt(self.head_dim)
+
+            # 4. 构建并合并 mask
+            mask = None
+
+            if attn_mask is not None:
+                if attn_mask.ndim == 2:
+                    # (q_len, k_len) -> (1, 1, q_len, k_len)
+                    mask = attn_mask[None, None, :, :]
+                elif attn_mask.ndim == 3:
+                    # (B, q_len, k_len) -> (B, 1, q_len, k_len)
+                    mask = attn_mask[:, None, :, :]
+                else:
+                    raise ValueError("attn_mask 的维度必须是 2 或 3")
+
+            if key_padding_mask is not None:
+                # (B, k_len) -> (B, 1, 1, k_len)
+                kpm = key_padding_mask[:, None, None, :]
+                if mask is None:
+                    mask = kpm
+                else:
+                    # 广播合并：两个 mask 都为 True 的位置才保留
+                    mask = mask & kpm
+
+            # 5. 带 mask 的 softmax，得到注意力权重
+            attn_weights = softmax_with_mask(scores, mask)  # (B, H, q_len, k_len)
+
+            # 6. 加权求和
+            attn_output = attn_weights @ v  # (B, H, q_len, head_dim)
+
+            # 7. 合并多头
+            attn_output = self._combine_heads(attn_output)  # (B, q_len, d_model)
+
+            # 8. 输出投影
+            output = attn_output @ self.W_o + self.b_o  # (B, q_len, d_model)
+
+            return output, attn_weights
+
+
+    # ================== 使用示例 ==================
+    if __name__ == "__main__":
+        B, q_len, k_len = 2, 5, 6
+        d_model, num_heads = 16, 4
+
+        # 随机输入
+        query = np.random.randn(B, q_len, d_model)
+        key   = np.random.randn(B, k_len, d_model)
+        value = np.random.randn(B, k_len, d_model)
+
+        mha = MultiHeadAttention(d_model, num_heads)
+
+        # 构造 causal mask: 下三角为 True（保留），上三角为 False（屏蔽）
+        # 这里 q_len=5, k_len=6，np.tril 会保留每行前 i+1 个位置
+        causal_mask = np.tril(np.ones((q_len, k_len), dtype=bool))
+
+        # 构造 key padding mask: (B, k_len)，True 保留，False 屏蔽
+        key_padding_mask = np.ones((B, k_len), dtype=bool)
+        key_padding_mask[0, -2:] = False  # 第 0 个样本最后两个 key 是 padding
+
+        output, attn = mha.forward(
+            query, key, value,
+            attn_mask=causal_mask,
+            key_padding_mask=key_padding_mask
+        )
+
+        print("output shape:", output.shape)   # (2, 5, 16)
+        print("attn shape:", attn.shape)       # (2, 4, 5, 6)
+
 
 计算复杂度
 ^^^^^^^^^^^^^^
@@ -100,6 +298,19 @@ Feed Forward Network
     \mathrm{FFN(x)} = \max(0, xW_1 + b_1)W_2 + b_2
 
 :math:`W_1` 将输入的维度扩展为 :math:`4d` ，:math:`W_2` 重新降回原来的维度 :math:`d` 。
+
+它的核心作用可以概括为：
+
+- 引入非线性，增强表达能力。自注意力主要做加权聚合，本质偏线性；FFN 通过激活函数引入非线性，使模型能拟合更复杂的函数。没有 FFN，Transformer 的表达能力会明显受限。
+
+- 进行特征维度上的“通道混合”。自注意力负责 token 之间的信息混合，即 “token mixing”；FFN 负责同一个 token 内部不同特征维度之间的混合，即 “channel mixing”。两者互补。
+
+- 升维—激活—降维，做深度特征变换。原版 Transformer 中，FFN 通常先把维度扩展到 4 倍，经过激活函数后再投影回原维度。这个过程让模型在高维空间中进行更丰富的特征组合和变换。
+
+- 提供大量参数容量，存储知识与模式。FFN 往往占据 Transformer 参数量的很大一部分。有研究把它看作一种 key-value memory，认为它存储了大量事实知识、语言模式和统计规律。
+
+- 逐位置独立，计算高效且可并行。FFN 对每个 token 独立处理，不改变序列长度，也不建模 token 间关系，因此可以高度并行。位置信息和上下文关系主要由注意力机制处理。
+
 
 CV 领域的应用
 -------------------------

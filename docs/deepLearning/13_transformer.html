@@ -171,6 +171,199 @@
 <p><span class="caption-text"><a class="reference external" href="https://jalammar.github.io/illustrated-transformer/">Self-Attention 示例</a></span><a class="headerlink" href="#id9" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Q 决定：我要关注谁；</p>
+<p>K 决定：我有多容易被关注；</p>
+<p>V 决定：被关注后我贡献什么信息。</p>
+</div>
+<div class="toggle docutils container">
+<div class="header docutils container">
+<p><span class="math notranslate nohighlight">\(\color{darkgreen}{Code}\)</span></p>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="linenos">  2</span>
+<span class="linenos">  3</span>
+<span class="linenos">  4</span><span class="k">def</span> <span class="nf">softmax_with_mask</span><span class="p">(</span><span class="n">scores</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="linenos">  5</span>    <span class="sd">&quot;&quot;&quot;</span>
+<span class="linenos">  6</span><span class="sd">    带 mask 的 softmax。</span>
+<span class="linenos">  7</span>
+<span class="linenos">  8</span><span class="sd">    参数:</span>
+<span class="linenos">  9</span><span class="sd">        scores: 形状 (..., L, S)，注意力分数</span>
+<span class="linenos"> 10</span><span class="sd">        mask:   形状可广播到 scores 的布尔数组，True 表示保留，False 表示屏蔽</span>
+<span class="linenos"> 11</span>
+<span class="linenos"> 12</span><span class="sd">    返回:</span>
+<span class="linenos"> 13</span><span class="sd">        attn: 形状同 scores，每行和为 1；如果某一行全被屏蔽，则该行全为 0</span>
+<span class="linenos"> 14</span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos"> 15</span>    <span class="k">if</span> <span class="n">mask</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos"> 16</span>        <span class="c1"># 被屏蔽的位置设为 -inf，这样 exp 后为 0</span>
+<span class="linenos"> 17</span>        <span class="n">scores</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="n">scores</span><span class="p">,</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">)</span>
+<span class="linenos"> 18</span>
+<span class="linenos"> 19</span>    <span class="c1"># 数值稳定：减去每行最大值</span>
+<span class="linenos"> 20</span>    <span class="n">max_scores</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">scores</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="linenos"> 21</span>
+<span class="linenos"> 22</span>    <span class="c1"># 如果某一行全部被 mask，max_scores 可能是 -inf，需要特殊处理</span>
+<span class="linenos"> 23</span>    <span class="n">all_masked</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">isneginf</span><span class="p">(</span><span class="n">max_scores</span><span class="p">)</span>
+<span class="linenos"> 24</span>    <span class="n">max_scores</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">all_masked</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">max_scores</span><span class="p">)</span>
+<span class="linenos"> 25</span>
+<span class="linenos"> 26</span>    <span class="n">exp_scores</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">scores</span> <span class="o">-</span> <span class="n">max_scores</span><span class="p">)</span>
+<span class="linenos"> 27</span>    <span class="n">sum_exp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">exp_scores</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="linenos"> 28</span>
+<span class="linenos"> 29</span>    <span class="c1"># 避免除零：全 masked 行 sum_exp 为 0，令其输出全 0</span>
+<span class="linenos"> 30</span>    <span class="n">sum_exp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">sum_exp</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">sum_exp</span><span class="p">)</span>
+<span class="linenos"> 31</span>    <span class="n">attn</span> <span class="o">=</span> <span class="n">exp_scores</span> <span class="o">/</span> <span class="n">sum_exp</span>
+<span class="linenos"> 32</span>    <span class="k">return</span> <span class="n">attn</span>
+<span class="linenos"> 33</span>
+<span class="linenos"> 34</span>
+<span class="linenos"> 35</span><span class="k">class</span> <span class="nc">MultiHeadAttention</span><span class="p">:</span>
+<span class="linenos"> 36</span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d_model</span><span class="p">,</span> <span class="n">num_heads</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="linenos"> 37</span>        <span class="sd">&quot;&quot;&quot;</span>
+<span class="linenos"> 38</span><span class="sd">        参数:</span>
+<span class="linenos"> 39</span><span class="sd">            d_model: 模型维度</span>
+<span class="linenos"> 40</span><span class="sd">            num_heads: 注意力头数</span>
+<span class="linenos"> 41</span><span class="sd">            seed: 随机种子</span>
+<span class="linenos"> 42</span><span class="sd">        &quot;&quot;&quot;</span>
+<span class="linenos"> 43</span>        <span class="k">assert</span> <span class="n">d_model</span> <span class="o">%</span> <span class="n">num_heads</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;d_model 必须能被 num_heads 整除&quot;</span>
+<span class="linenos"> 44</span>
+<span class="linenos"> 45</span>        <span class="bp">self</span><span class="o">.</span><span class="n">d_model</span> <span class="o">=</span> <span class="n">d_model</span>
+<span class="linenos"> 46</span>        <span class="bp">self</span><span class="o">.</span><span class="n">num_heads</span> <span class="o">=</span> <span class="n">num_heads</span>
+<span class="linenos"> 47</span>        <span class="bp">self</span><span class="o">.</span><span class="n">head_dim</span> <span class="o">=</span> <span class="n">d_model</span> <span class="o">//</span> <span class="n">num_heads</span>
+<span class="linenos"> 48</span>
+<span class="linenos"> 49</span>        <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+<span class="linenos"> 50</span>
+<span class="linenos"> 51</span>        <span class="c1"># Xavier/Glorot 初始化</span>
+<span class="linenos"> 52</span>        <span class="n">limit</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">6.0</span> <span class="o">/</span> <span class="p">(</span><span class="n">d_model</span> <span class="o">+</span> <span class="n">d_model</span><span class="p">))</span>
+<span class="linenos"> 53</span>        <span class="bp">self</span><span class="o">.</span><span class="n">W_q</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="n">limit</span><span class="p">,</span> <span class="n">limit</span><span class="p">,</span> <span class="p">(</span><span class="n">d_model</span><span class="p">,</span> <span class="n">d_model</span><span class="p">))</span>
+<span class="linenos"> 54</span>        <span class="bp">self</span><span class="o">.</span><span class="n">W_k</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="n">limit</span><span class="p">,</span> <span class="n">limit</span><span class="p">,</span> <span class="p">(</span><span class="n">d_model</span><span class="p">,</span> <span class="n">d_model</span><span class="p">))</span>
+<span class="linenos"> 55</span>        <span class="bp">self</span><span class="o">.</span><span class="n">W_v</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="n">limit</span><span class="p">,</span> <span class="n">limit</span><span class="p">,</span> <span class="p">(</span><span class="n">d_model</span><span class="p">,</span> <span class="n">d_model</span><span class="p">))</span>
+<span class="linenos"> 56</span>        <span class="bp">self</span><span class="o">.</span><span class="n">W_o</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="n">limit</span><span class="p">,</span> <span class="n">limit</span><span class="p">,</span> <span class="p">(</span><span class="n">d_model</span><span class="p">,</span> <span class="n">d_model</span><span class="p">))</span>
+<span class="linenos"> 57</span>
+<span class="linenos"> 58</span>        <span class="bp">self</span><span class="o">.</span><span class="n">b_q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">d_model</span><span class="p">)</span>
+<span class="linenos"> 59</span>        <span class="bp">self</span><span class="o">.</span><span class="n">b_k</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">d_model</span><span class="p">)</span>
+<span class="linenos"> 60</span>        <span class="bp">self</span><span class="o">.</span><span class="n">b_v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">d_model</span><span class="p">)</span>
+<span class="linenos"> 61</span>        <span class="bp">self</span><span class="o">.</span><span class="n">b_o</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">d_model</span><span class="p">)</span>
+<span class="linenos"> 62</span>
+<span class="linenos"> 63</span>    <span class="k">def</span> <span class="nf">_split_heads</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+<span class="linenos"> 64</span>        <span class="sd">&quot;&quot;&quot;</span>
+<span class="linenos"> 65</span><span class="sd">        将 (B, seq_len, d_model) 拆分为多头:</span>
+<span class="linenos"> 66</span><span class="sd">        (B, seq_len, num_heads, head_dim) -&gt; (B, num_heads, seq_len, head_dim)</span>
+<span class="linenos"> 67</span><span class="sd">        &quot;&quot;&quot;</span>
+<span class="linenos"> 68</span>        <span class="n">batch</span><span class="p">,</span> <span class="n">seq_len</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span>
+<span class="linenos"> 69</span>        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">batch</span><span class="p">,</span> <span class="n">seq_len</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_heads</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">head_dim</span><span class="p">)</span>
+<span class="linenos"> 70</span>        <span class="k">return</span> <span class="n">x</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="linenos"> 71</span>
+<span class="linenos"> 72</span>    <span class="k">def</span> <span class="nf">_combine_heads</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+<span class="linenos"> 73</span>        <span class="sd">&quot;&quot;&quot;</span>
+<span class="linenos"> 74</span><span class="sd">        将多头合并回 (B, seq_len, d_model)</span>
+<span class="linenos"> 75</span><span class="sd">        x: (B, num_heads, seq_len, head_dim)</span>
+<span class="linenos"> 76</span><span class="sd">        &quot;&quot;&quot;</span>
+<span class="linenos"> 77</span>        <span class="n">batch</span><span class="p">,</span> <span class="n">num_heads</span><span class="p">,</span> <span class="n">seq_len</span><span class="p">,</span> <span class="n">head_dim</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span>
+<span class="linenos"> 78</span>        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>  <span class="c1"># (B, seq_len, num_heads, head_dim)</span>
+<span class="linenos"> 79</span>        <span class="k">return</span> <span class="n">x</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">batch</span><span class="p">,</span> <span class="n">seq_len</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">d_model</span><span class="p">)</span>
+<span class="linenos"> 80</span>
+<span class="linenos"> 81</span>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">attn_mask</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">key_padding_mask</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="linenos"> 82</span>        <span class="sd">&quot;&quot;&quot;</span>
+<span class="linenos"> 83</span><span class="sd">        多头注意力前向计算。</span>
+<span class="linenos"> 84</span>
+<span class="linenos"> 85</span><span class="sd">        参数:</span>
+<span class="linenos"> 86</span><span class="sd">            query: (B, q_len, d_model)</span>
+<span class="linenos"> 87</span><span class="sd">            key:   (B, k_len, d_model)</span>
+<span class="linenos"> 88</span><span class="sd">            value: (B, k_len, d_model)</span>
+<span class="linenos"> 89</span><span class="sd">            attn_mask:</span>
+<span class="linenos"> 90</span><span class="sd">                - 形状 (q_len, k_len) 或 (B, q_len, k_len)</span>
+<span class="linenos"> 91</span><span class="sd">                - 布尔数组，True 表示保留，False 表示屏蔽</span>
+<span class="linenos"> 92</span><span class="sd">                - 常用于 causal mask（自回归时屏蔽未来位置）</span>
+<span class="linenos"> 93</span><span class="sd">            key_padding_mask:</span>
+<span class="linenos"> 94</span><span class="sd">                - 形状 (B, k_len)</span>
+<span class="linenos"> 95</span><span class="sd">                - 布尔数组，True 表示保留，False 表示屏蔽（即 padding 位置为 False）</span>
+<span class="linenos"> 96</span><span class="sd">                - 用于屏蔽 key/value 中的 padding token</span>
+<span class="linenos"> 97</span>
+<span class="linenos"> 98</span><span class="sd">        返回:</span>
+<span class="linenos"> 99</span><span class="sd">            output: (B, q_len, d_model)</span>
+<span class="linenos">100</span><span class="sd">            attn_weights: (B, num_heads, q_len, k_len)</span>
+<span class="linenos">101</span><span class="sd">        &quot;&quot;&quot;</span>
+<span class="linenos">102</span>        <span class="c1"># 1. 线性投影得到 Q, K, V</span>
+<span class="linenos">103</span>        <span class="n">q</span> <span class="o">=</span> <span class="n">query</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">W_q</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">b_q</span>  <span class="c1"># (B, q_len, d_model)</span>
+<span class="linenos">104</span>        <span class="n">k</span> <span class="o">=</span> <span class="n">key</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">W_k</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">b_k</span>    <span class="c1"># (B, k_len, d_model)</span>
+<span class="linenos">105</span>        <span class="n">v</span> <span class="o">=</span> <span class="n">value</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">W_v</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">b_v</span>  <span class="c1"># (B, k_len, d_model)</span>
+<span class="linenos">106</span>
+<span class="linenos">107</span>        <span class="c1"># 2. 分头</span>
+<span class="linenos">108</span>        <span class="n">q</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_split_heads</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>  <span class="c1"># (B, H, q_len, head_dim)</span>
+<span class="linenos">109</span>        <span class="n">k</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_split_heads</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>  <span class="c1"># (B, H, k_len, head_dim)</span>
+<span class="linenos">110</span>        <span class="n">v</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_split_heads</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>  <span class="c1"># (B, H, k_len, head_dim)</span>
+<span class="linenos">111</span>
+<span class="linenos">112</span>        <span class="c1"># 3. 缩放点积注意力分数</span>
+<span class="linenos">113</span>        <span class="c1"># scores: (B, H, q_len, k_len)</span>
+<span class="linenos">114</span>        <span class="n">scores</span> <span class="o">=</span> <span class="n">q</span> <span class="o">@</span> <span class="n">k</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">head_dim</span><span class="p">)</span>
+<span class="linenos">115</span>
+<span class="linenos">116</span>        <span class="c1"># 4. 构建并合并 mask</span>
+<span class="linenos">117</span>        <span class="n">mask</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos">118</span>
+<span class="linenos">119</span>        <span class="k">if</span> <span class="n">attn_mask</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">120</span>            <span class="k">if</span> <span class="n">attn_mask</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+<span class="linenos">121</span>                <span class="c1"># (q_len, k_len) -&gt; (1, 1, q_len, k_len)</span>
+<span class="linenos">122</span>                <span class="n">mask</span> <span class="o">=</span> <span class="n">attn_mask</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span>
+<span class="linenos">123</span>            <span class="k">elif</span> <span class="n">attn_mask</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+<span class="linenos">124</span>                <span class="c1"># (B, q_len, k_len) -&gt; (B, 1, q_len, k_len)</span>
+<span class="linenos">125</span>                <span class="n">mask</span> <span class="o">=</span> <span class="n">attn_mask</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span>
+<span class="linenos">126</span>            <span class="k">else</span><span class="p">:</span>
+<span class="linenos">127</span>                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;attn_mask 的维度必须是 2 或 3&quot;</span><span class="p">)</span>
+<span class="linenos">128</span>
+<span class="linenos">129</span>        <span class="k">if</span> <span class="n">key_padding_mask</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">130</span>            <span class="c1"># (B, k_len) -&gt; (B, 1, 1, k_len)</span>
+<span class="linenos">131</span>            <span class="n">kpm</span> <span class="o">=</span> <span class="n">key_padding_mask</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:]</span>
+<span class="linenos">132</span>            <span class="k">if</span> <span class="n">mask</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">133</span>                <span class="n">mask</span> <span class="o">=</span> <span class="n">kpm</span>
+<span class="linenos">134</span>            <span class="k">else</span><span class="p">:</span>
+<span class="linenos">135</span>                <span class="c1"># 广播合并：两个 mask 都为 True 的位置才保留</span>
+<span class="linenos">136</span>                <span class="n">mask</span> <span class="o">=</span> <span class="n">mask</span> <span class="o">&amp;</span> <span class="n">kpm</span>
+<span class="linenos">137</span>
+<span class="linenos">138</span>        <span class="c1"># 5. 带 mask 的 softmax，得到注意力权重</span>
+<span class="linenos">139</span>        <span class="n">attn_weights</span> <span class="o">=</span> <span class="n">softmax_with_mask</span><span class="p">(</span><span class="n">scores</span><span class="p">,</span> <span class="n">mask</span><span class="p">)</span>  <span class="c1"># (B, H, q_len, k_len)</span>
+<span class="linenos">140</span>
+<span class="linenos">141</span>        <span class="c1"># 6. 加权求和</span>
+<span class="linenos">142</span>        <span class="n">attn_output</span> <span class="o">=</span> <span class="n">attn_weights</span> <span class="o">@</span> <span class="n">v</span>  <span class="c1"># (B, H, q_len, head_dim)</span>
+<span class="linenos">143</span>
+<span class="linenos">144</span>        <span class="c1"># 7. 合并多头</span>
+<span class="linenos">145</span>        <span class="n">attn_output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_combine_heads</span><span class="p">(</span><span class="n">attn_output</span><span class="p">)</span>  <span class="c1"># (B, q_len, d_model)</span>
+<span class="linenos">146</span>
+<span class="linenos">147</span>        <span class="c1"># 8. 输出投影</span>
+<span class="linenos">148</span>        <span class="n">output</span> <span class="o">=</span> <span class="n">attn_output</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">W_o</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">b_o</span>  <span class="c1"># (B, q_len, d_model)</span>
+<span class="linenos">149</span>
+<span class="linenos">150</span>        <span class="k">return</span> <span class="n">output</span><span class="p">,</span> <span class="n">attn_weights</span>
+<span class="linenos">151</span>
+<span class="linenos">152</span>
+<span class="linenos">153</span><span class="c1"># ================== 使用示例 ==================</span>
+<span class="linenos">154</span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="linenos">155</span>    <span class="n">B</span><span class="p">,</span> <span class="n">q_len</span><span class="p">,</span> <span class="n">k_len</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span>
+<span class="linenos">156</span>    <span class="n">d_model</span><span class="p">,</span> <span class="n">num_heads</span> <span class="o">=</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">4</span>
+<span class="linenos">157</span>
+<span class="linenos">158</span>    <span class="c1"># 随机输入</span>
+<span class="linenos">159</span>    <span class="n">query</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">q_len</span><span class="p">,</span> <span class="n">d_model</span><span class="p">)</span>
+<span class="linenos">160</span>    <span class="n">key</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">k_len</span><span class="p">,</span> <span class="n">d_model</span><span class="p">)</span>
+<span class="linenos">161</span>    <span class="n">value</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">k_len</span><span class="p">,</span> <span class="n">d_model</span><span class="p">)</span>
+<span class="linenos">162</span>
+<span class="linenos">163</span>    <span class="n">mha</span> <span class="o">=</span> <span class="n">MultiHeadAttention</span><span class="p">(</span><span class="n">d_model</span><span class="p">,</span> <span class="n">num_heads</span><span class="p">)</span>
+<span class="linenos">164</span>
+<span class="linenos">165</span>    <span class="c1"># 构造 causal mask: 下三角为 True（保留），上三角为 False（屏蔽）</span>
+<span class="linenos">166</span>    <span class="c1"># 这里 q_len=5, k_len=6，np.tril 会保留每行前 i+1 个位置</span>
+<span class="linenos">167</span>    <span class="n">causal_mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tril</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">q_len</span><span class="p">,</span> <span class="n">k_len</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">))</span>
+<span class="linenos">168</span>
+<span class="linenos">169</span>    <span class="c1"># 构造 key padding mask: (B, k_len)，True 保留，False 屏蔽</span>
+<span class="linenos">170</span>    <span class="n">key_padding_mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">B</span><span class="p">,</span> <span class="n">k_len</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+<span class="linenos">171</span>    <span class="n">key_padding_mask</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">:]</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># 第 0 个样本最后两个 key 是 padding</span>
+<span class="linenos">172</span>
+<span class="linenos">173</span>    <span class="n">output</span><span class="p">,</span> <span class="n">attn</span> <span class="o">=</span> <span class="n">mha</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span>
+<span class="linenos">174</span>        <span class="n">query</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span>
+<span class="linenos">175</span>        <span class="n">attn_mask</span><span class="o">=</span><span class="n">causal_mask</span><span class="p">,</span>
+<span class="linenos">176</span>        <span class="n">key_padding_mask</span><span class="o">=</span><span class="n">key_padding_mask</span>
+<span class="linenos">177</span>    <span class="p">)</span>
+<span class="linenos">178</span>
+<span class="linenos">179</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;output shape:&quot;</span><span class="p">,</span> <span class="n">output</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>   <span class="c1"># (2, 5, 16)</span>
+<span class="linenos">180</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;attn shape:&quot;</span><span class="p">,</span> <span class="n">attn</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>       <span class="c1"># (2, 4, 5, 6)</span>
+</pre></div>
+</div>
+</div>
 <section id="id4">
 <h3>计算复杂度<a class="headerlink" href="#id4" title="Permalink to this headline"></a></h3>
 <p>假设序列长度为 <span class="math notranslate nohighlight">\(n\)</span> ， <span class="math notranslate nohighlight">\(Q,K,V \in \mathbb{R}^{n \times d}\)</span> 。
@@ -199,6 +392,14 @@ Multi-Head Attention时间复杂度也是 <span class="math notranslate nohighli
 <div class="math notranslate nohighlight">
 \[\mathrm{FFN(x)} = \max(0, xW_1 + b_1)W_2 + b_2\]</div>
 <p><span class="math notranslate nohighlight">\(W_1\)</span> 将输入的维度扩展为 <span class="math notranslate nohighlight">\(4d\)</span> ，<span class="math notranslate nohighlight">\(W_2\)</span> 重新降回原来的维度 <span class="math notranslate nohighlight">\(d\)</span> 。</p>
+<p>它的核心作用可以概括为：</p>
+<ul class="simple">
+<li><p>引入非线性，增强表达能力。自注意力主要做加权聚合，本质偏线性；FFN 通过激活函数引入非线性，使模型能拟合更复杂的函数。没有 FFN，Transformer 的表达能力会明显受限。</p></li>
+<li><p>进行特征维度上的“通道混合”。自注意力负责 token 之间的信息混合，即 “token mixing”；FFN 负责同一个 token 内部不同特征维度之间的混合，即 “channel mixing”。两者互补。</p></li>
+<li><p>升维—激活—降维，做深度特征变换。原版 Transformer 中，FFN 通常先把维度扩展到 4 倍，经过激活函数后再投影回原维度。这个过程让模型在高维空间中进行更丰富的特征组合和变换。</p></li>
+<li><p>提供大量参数容量，存储知识与模式。FFN 往往占据 Transformer 参数量的很大一部分。有研究把它看作一种 key-value memory，认为它存储了大量事实知识、语言模式和统计规律。</p></li>
+<li><p>逐位置独立，计算高效且可并行。FFN 对每个 token 独立处理，不改变序列长度，也不建模 token 间关系，因此可以高度并行。位置信息和上下文关系主要由注意力机制处理。</p></li>
+</ul>
 </section>
 <section id="cv">
 <h2><span class="section-number">13.7. </span>CV 领域的应用<a class="headerlink" href="#cv" title="Permalink to this headline"></a></h2>
