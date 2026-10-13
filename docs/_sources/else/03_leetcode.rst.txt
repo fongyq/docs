@@ -3608,7 +3608,7 @@ https://leetcode.com/problems/word-break
                 {
                     for(unsigned int j = 0; j < i; ++j)
                     {
-                        if(dp[j]) // 两段子串：[0, j-1], [j, i]
+                        if(dp[j]) // 两段子串：[0, j-1], [j, i)
                         {
                             string str = s.substr(j, i-j);
                             if(wordSet.find(str) != wordSet.end())
@@ -4296,7 +4296,7 @@ https://leetcode.com/problems/trapping-rain-water/
               int rightmax = height[right];
               while(left < right)
               {
-                  if(height[left] < height[right]) // 左低右高
+                  if(leftmax < rightmax) // 左低右高
                   {
                       if(height[left] <= leftmax)
                       {
