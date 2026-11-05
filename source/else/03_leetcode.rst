@@ -5448,6 +5448,38 @@ https://leetcode.com/problems/restore-the-array
                         ans += 1
                 return ans
 
+- [LeetCode] 合并区间。
+
+  https://leetcode.cn/problems/merge-intervals/description/?envType=study-plan-v2&envId=top-100-liked
+
+  .. container:: toggle
+
+      .. container:: header
+
+          :math:`\color{darkgreen}{Code}`
+
+      .. code-block:: python
+          :linenos:
+
+          class Solution:
+              def merge(self, intervals: list[list[int]]) -> list[list[int]]:
+                  a = sorted(intervals, key=lambda x: (x[0], x[1]))
+                  curr_e = -1
+                  curr_s = -1
+                  ans = []
+                  for s, e in a:
+                      if s > curr_e:
+                          if curr_s != -1:
+                              ans.append([curr_s, curr_e])
+                          curr_s = s
+                          curr_e = e
+                      else:
+                          curr_e = max(curr_e, e)
+                          curr_s = min(curr_s, s)
+                  ans.append([curr_s, curr_e])
+                  return ans
+
+
 - [LeetCode] Maximum Beauty of an Array After Applying Operation 数组最大美感（最大重叠区间个数）。
 
   https://leetcode.com/problems/maximum-beauty-of-an-array-after-applying-operation
