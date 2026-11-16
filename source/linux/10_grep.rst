@@ -30,7 +30,10 @@ grep（Global search Regular Expression and Print out the line）是一种强大
 --color    匹配到的关键词显示颜色，默认为 ``auto``
 --include=file_pattern    只查找匹配 file_pattern 的文件
 --exclude=file_pattern    跳过匹配 file_pattern 的文件和目录
-
+-A num, --after-context=num    在匹配行后面再打印 num 行
+-B num, --before-context=num    在匹配行前面再打印 num 行
+-C num, --context=num    在匹配行前后各打印 num 行
+--group-separator=sep    使用 -A、-B、-C 的时候，用 sep 分割各个匹配的 context，默认是 \-\-
 
 .. note::
 

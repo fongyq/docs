@@ -161,6 +161,18 @@
 <dt><kbd><span class="option">--exclude=<var>file_pattern</var></span></kbd></dt>
 <dd><p>跳过匹配 file_pattern 的文件和目录</p>
 </dd>
+<dt><kbd><span class="option">-A <var>num</var></span>, <span class="option">--after-context=<var>num</var></span></kbd></dt>
+<dd><p>在匹配行后面再打印 num 行</p>
+</dd>
+<dt><kbd><span class="option">-B <var>num</var></span>, <span class="option">--before-context=<var>num</var></span></kbd></dt>
+<dd><p>在匹配行前面再打印 num 行</p>
+</dd>
+<dt><kbd><span class="option">-C <var>num</var></span>, <span class="option">--context=<var>num</var></span></kbd></dt>
+<dd><p>在匹配行前后各打印 num 行</p>
+</dd>
+<dt><kbd><span class="option">--group-separator=<var>sep</var></span></kbd></dt>
+<dd><p>使用 -A、-B、-C 的时候，用 sep 分割各个匹配的 context，默认是 --</p>
+</dd>
 </dl>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
